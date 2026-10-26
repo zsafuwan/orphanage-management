@@ -1,0 +1,609 @@
+/* ==========================================================================
+   HopeHaven Orphanage Management Portal - Profile & Personnel Dossier
+   File: public/css/portal/profile.css
+   ========================================================================== */
+
+/* Profile Header Card */
+.profile-hero-card {
+    background: linear-gradient(135deg, rgba(255, 44, 90, 0.07) 0%, rgba(139, 92, 246, 0.06) 50%, rgba(20, 184, 166, 0.05) 100%), #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-hero-card::after {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 44, 90, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.profile-hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.profile-hero-left {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.profile-avatar-wrapper {
+    position: relative;
+}
+
+.profile-avatar-circle {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary) 0%, #ec4899 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    font-weight: 800;
+    box-shadow: 0 10px 25px rgba(255, 44, 90, 0.3);
+    border: 4px solid #ffffff;
+}
+
+.avatar-status-dot {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--success);
+    border: 3px solid #ffffff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.profile-hero-details h1 {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.profile-tag-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.tag-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.tag-badge.role-badge {
+    background: rgba(139, 92, 246, 0.12);
+    color: #8b5cf6;
+    border: 1px solid rgba(139, 92, 246, 0.25);
+}
+
+.tag-badge.username-badge {
+    background: rgba(20, 184, 166, 0.1);
+    color: #0f766e;
+    border: 1px solid rgba(20, 184, 166, 0.25);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+}
+
+.tag-badge.verified-badge {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.profile-affiliation-sub {
+    font-size: 13px;
+    color: var(--dark-muted);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 500;
+}
+
+.profile-hero-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Quick Stats Bar in Hero */
+.hero-stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.hero-stat-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.hero-stat-val {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Main Grid Layout */
+.profile-grid-layout {
+    display: grid;
+    grid-template-columns: 1.7fr 1.3fr;
+    gap: 28px;
+    align-items: start;
+}
+
+@media (max-width: 1080px) {
+    .profile-grid-layout {
+        grid-template-columns: 1fr;
+    }
+    .hero-stats-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Profile Card General */
+.profile-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 24px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+}
+
+.profile-card-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fafbfc;
+}
+
+.profile-card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-card-title i {
+    color: var(--primary);
+    font-size: 16px;
+}
+
+.profile-card-body {
+    padding: 24px;
+}
+
+/* Field Group List / Details Grid */
+.detail-fields-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 24px;
+}
+
+@media (max-width: 640px) {
+    .detail-fields-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.detail-field-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-field-item.full-width {
+    grid-column: 1 / -1;
+}
+
+.field-label {
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #64748b;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.field-value-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    font-size: 13.5px;
+    color: var(--dark);
+    font-weight: 600;
+    min-height: 44px;
+    transition: all 0.2s ease;
+}
+
+.field-value-box:hover {
+    border-color: #cbd5e1;
+    background: #ffffff;
+}
+
+.field-value-box.mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #0f172a;
+}
+
+.field-value-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 8px;
+}
+
+.field-action-btn {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 4px 6px;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+}
+
+.field-action-btn:hover {
+    color: var(--primary);
+    background: rgba(255, 44, 90, 0.08);
+}
+
+/* Password Display Special Box */
+.password-display-wrapper {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+}
+
+.password-row-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.password-hidden-dots {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    letter-spacing: 4px;
+    color: var(--dark);
+    font-weight: 800;
+}
+
+.password-actions-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-pill-small {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11.5px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    background: #ffffff;
+    color: var(--dark);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-pill-small:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.btn-pill-small.btn-primary-pill {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+}
+
+.btn-pill-small.btn-primary-pill:hover {
+    background: var(--primary-hover);
+}
+
+.password-meta-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e2e8f0;
+    font-size: 12px;
+    color: var(--dark-muted);
+}
+
+.strength-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    color: var(--success);
+}
+
+.strength-dots-bar {
+    display: inline-flex;
+    gap: 3px;
+}
+
+.strength-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--success);
+}
+
+/* Address Map Card Integration */
+.address-map-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: linear-gradient(to right, #f8fafc, #ffffff);
+}
+
+.address-map-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(20, 184, 166, 0.12);
+    color: var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.address-map-text h4 {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 2px;
+}
+
+.address-map-text p {
+    font-size: 12px;
+    color: var(--dark-muted);
+}
+
+/* Role Capabilities Scope List */
+.scope-check-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.scope-check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    background: #f8fafc;
+    border: 1px solid #f1f5f9;
+}
+
+.scope-icon-wrap {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: rgba(16, 185, 129, 0.12);
+    color: #10b981;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.scope-content h5 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 2px;
+}
+
+.scope-content p {
+    font-size: 11.5px;
+    color: var(--dark-muted);
+    line-height: 1.4;
+}
+
+/* Security Activity Timeline */
+.activity-timeline {
+    position: relative;
+    padding-left: 24px;
+}
+
+.activity-timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: #e2e8f0;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 18px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -24px;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3px solid var(--primary);
+}
+
+.timeline-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.timeline-time {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 2px;
+}
+
+/* Inline Edit Inputs */
+.editable-input {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1.5px solid var(--primary);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 13.5px;
+    color: var(--dark);
+    outline: none;
+    background: #ffffff;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 0 3px rgba(255, 44, 90, 0.12);
+}
+
+.edit-actions-panel {
+    display: none;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.field-actions-cluster {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.field-action-btn.edit-btn {
+    color: var(--primary);
+    background: rgba(255, 44, 90, 0.08);
+}
+
+.field-action-btn.edit-btn:hover {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+.input-prefix-group {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+}
+
+.input-prefix-addon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    background: #f1f5f9;
+    border: 1px solid var(--border-color);
+    border-right: none;
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    color: var(--dark-muted);
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.input-prefix-group .form-control,
+.input-prefix-group .editable-input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}

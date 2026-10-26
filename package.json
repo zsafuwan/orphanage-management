@@ -34,8 +34,8 @@
         "@vitejs/plugin-vue": "^6.0.0",
         "concurrently": "^10.0.3",
         "typescript": "^5.2.2",
-        "vite": "^8.0.0",
-        "vite-plus": "0.3.0",
+        "vite": "catalog:",
+        "vite-plus": "catalog:",
         "vue-tsc": "^2.2.4"
     },
     "optionalDependencies": {
@@ -46,5 +46,12 @@
         "@tailwindcss/oxide-win32-x64-msvc": "^4.0.1",
         "lightningcss-linux-x64-gnu": "^1.29.1",
         "lightningcss-win32-x64-msvc": "^1.29.1"
+    },
+    "devEngines": {
+        "packageManager": {
+            "name": "pnpm",
+            "version": "12.14.0",
+            "onFail": "download"
+        }
     }
 }

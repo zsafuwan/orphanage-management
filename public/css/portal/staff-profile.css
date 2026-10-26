@@ -1,0 +1,375 @@
+/* ==========================================================================
+   HopeHaven Orphanage Management Portal - Staff Profile & Duty Dossier
+   File: public/css/portal/staff-profile.css
+   ========================================================================== */
+
+/* Subsystem Badge */
+.staff-subsystem-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #059669;
+    color: #ffffff;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Staff Profile Hero Card */
+.staff-hero-card {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(5, 150, 105, 0.06) 50%, rgba(20, 184, 166, 0.07) 100%), #ffffff;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(5, 150, 105, 0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+.staff-hero-card::after {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.staff-avatar-circle {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    font-weight: 800;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.35);
+    border: 4px solid #ffffff;
+}
+
+.staff-duty-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(16, 185, 129, 0.15);
+    color: #047857;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 4px 11px;
+    border-radius: 20px;
+    font-size: 11.5px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.staff-pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: staffPulse 1.8s infinite;
+}
+
+@keyframes staffPulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+/* Tab Navigation Bar */
+.staff-profile-tabs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0;
+    overflow-x: auto;
+}
+
+.staff-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    position: relative;
+    bottom: -2px;
+}
+
+.staff-tab-btn i {
+    font-size: 14px;
+}
+
+.staff-tab-btn:hover {
+    color: #059669;
+}
+
+.staff-tab-btn.active {
+    color: #059669;
+    border-bottom-color: #059669;
+    font-weight: 700;
+}
+
+.staff-tab-btn .badge-pill {
+    padding: 2px 7px;
+    font-size: 10px;
+    border-radius: 10px;
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.staff-tab-btn.active .badge-pill {
+    background: rgba(16, 185, 129, 0.15);
+    color: #047857;
+}
+
+/* Tab Pane */
+.staff-tab-pane {
+    display: none;
+}
+
+.staff-tab-pane.active {
+    display: block;
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Duty Switcher Group */
+.shift-status-toggle-group {
+    display: inline-flex;
+    background: #f1f5f9;
+    padding: 3px;
+    border-radius: 8px;
+    gap: 2px;
+}
+
+.shift-status-toggle-btn {
+    border: none;
+    background: transparent;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.shift-status-toggle-btn.active {
+    background: #ffffff;
+    color: #047857;
+    font-weight: 700;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Accreditation Cards */
+.cert-card-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+}
+
+.cert-card-item:hover {
+    border-color: #cbd5e1;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.cert-icon-wrap {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+/* Responsive Grid for Profile Cards within Tabs */
+.tab-two-column-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 24px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .tab-two-column-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Ensure Field Containers Inside Two-Column Tab Cards Have Full Width */
+.tab-two-column-grid .detail-fields-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+/* Fix Text Container & Form Container Overlaps */
+.detail-field-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+}
+
+.view-mode-item {
+    display: flex;
+    width: 100%;
+}
+
+.edit-mode-item {
+    display: none;
+    width: 100%;
+}
+
+/* Mutually Exclusive Edit Mode Display: Clean Separation With Zero Overlap */
+#profile_inline_form.edit-mode-active .view-mode-item {
+    display: none !important;
+}
+
+#profile_inline_form.edit-mode-active .edit-mode-item {
+    display: flex !important;
+}
+
+#profile_inline_form.edit-mode-active input.edit-mode-item,
+#profile_inline_form.edit-mode-active textarea.edit-mode-item {
+    display: block !important;
+}
+
+#profile_inline_form.edit-mode-active .inline-actions-panel {
+    display: flex !important;
+}
+
+/* Field Value Box (Text Container) Structure */
+.field-value-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    font-size: 13.5px;
+    color: var(--dark);
+    font-weight: 600;
+    min-height: 44px;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 12px;
+    transition: all 0.2s ease;
+}
+
+.field-value-box:hover {
+    border-color: #cbd5e1;
+    background: #ffffff;
+}
+
+/* Text Container Ellipsis & Truncation Guarantee */
+.field-value-text {
+    flex: 1;
+    min-width: 0; /* CRITICAL: Enables proper CSS truncation and prevents pushing actions */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Multi-line Text Container for Longer Addresses */
+.field-value-box.multi-line {
+    min-height: auto;
+    align-items: flex-start;
+    padding: 12px 14px;
+}
+
+.field-value-box.multi-line .field-value-text {
+    white-space: normal;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+/* Actions Cluster & Badges Never Get Crushed */
+.field-actions-cluster {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.field-value-box .tag-badge {
+    flex-shrink: 0;
+}
+
+/* Form Container Inputs (Clean Box Sizing) */
+.editable-input {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 44px;
+    padding: 10px 14px;
+    border: 1.5px solid #059669;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 13.5px;
+    color: var(--dark);
+    outline: none;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+    transition: all 0.2s ease;
+}
+
+.editable-input:focus {
+    border-color: #047857;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+}
+
+.input-prefix-group {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input-prefix-group .editable-input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
