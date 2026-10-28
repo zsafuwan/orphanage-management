@@ -1,10 +1,10 @@
 @extends('layouts.portal')
 
-@section('title', 'Director Staff Registration & Provisioning')
+@section('title', 'Director Staff Registration & Account Setup')
 @section('breadcrumb', 'Access & Security / Register Staff')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/portal/director-register-staff.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/director-register-staff.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/director-register-staff.css')), 0, 12) }}">
 @endpush
 
 @section('content')
@@ -13,17 +13,17 @@
     <div class="dir-reg-hero">
         <div>
             <div class="dir-reg-hero-badge">
-                <i class="fas fa-crown"></i> Directorate of Personnel Governance · Statutory Onboarding
+                <i class="fas fa-crown"></i> Director of Staff & Volunteers Management · Statutory Onboarding
             </div>
             <h1 class="dir-reg-hero-title">Staff & Caregiver Registration Portal</h1>
             <p class="dir-reg-hero-sub">
-                Official employee and caregiver registration under the Child Act 2001 (Act 611). Only the Executive Director possesses the authority to issue permanent sanctuary credentials and assign ward custody duties.
+                Official employee and caregiver registration under the Child Act 2001 (Act 611). Only the Executive Director possesses the authority to issue permanent orphanage credentials and assign ward custody duties.
             </p>
         </div>
         <div class="dir-authorizer-badge">
             <div class="dir-authorizer-avatar">SS</div>
             <div class="dir-authorizer-meta">
-                <label><i class="fas fa-signature"></i> Authorizing Officer</label>
+                <label><i class="fas fa-signature"></i> Approving Admin</label>
                 <span>Sister Sarah Montgomery</span>
                 <div style="font-size: 11px; color: #c7d2fe;">Orphanage Executive Director</div>
             </div>
@@ -38,7 +38,7 @@
             </div>
             <div>
                 <div class="dir-reg-metric-val">8 Caregivers</div>
-                <div class="dir-reg-metric-lbl">Active Sanctuary Staff</div>
+                <div class="dir-reg-metric-lbl">Active Orphanage Staff</div>
             </div>
         </div>
 
@@ -68,7 +68,7 @@
             </div>
             <div>
                 <div class="dir-reg-metric-val">4 Wings</div>
-                <div class="dir-reg-metric-lbl">Sanctuary Ward Coverage</div>
+                <div class="dir-reg-metric-lbl">Orphanage Ward Coverage</div>
             </div>
         </div>
     </div>
@@ -108,13 +108,13 @@
                         </select>
                     </div>
                     <div class="dir-input-group">
-                        <label for="staff_wing_select">Assigned Sanctuary Wing / Ward *</label>
+                        <label for="staff_wing_select">Assigned Orphanage Wing / Ward *</label>
                         <select id="staff_wing_select" class="dir-select" required>
                             <option value="ward_alpha">Ward Alpha (Nursery & Toddlers)</option>
                             <option value="ward_beta">Ward Beta (Boys Dormitory)</option>
                             <option value="ward_gamma">Ward Gamma (Girls Dormitory)</option>
                             <option value="study_hall">Study Hall & Tuition Center</option>
-                            <option value="kitchen">Sanctuary Dining & Kitchen</option>
+                            <option value="kitchen">Orphanage Dining & Kitchen</option>
                         </select>
                     </div>
                 </div>
@@ -163,7 +163,7 @@
                 <div style="background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 8px; padding: 14px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px;">
                     <input type="checkbox" id="director_authorizer_check" checked style="width: 20px; height: 20px; accent-color: #4f46e5; cursor: pointer;">
                     <label for="director_authorizer_check" style="font-size: 12px; color: #312e81; font-weight: 600; cursor: pointer; line-height: 1.5;">
-                        I, <strong>Sister Sarah (Orphanage Director & Sole Signatory)</strong>, hereby certify that this applicant has passed child protection vetting and is officially authorized to join sanctuary operations.
+                        I, <strong>Sister Sarah (Orphanage Director & Sole Signatory)</strong>, hereby certify that this applicant has passed child protection vetting and is officially authorized to join orphanage operations.
                     </label>
                 </div>
 
@@ -183,7 +183,7 @@
                 <div class="staff-badge-header">
                     <div>
                         <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #fde047; font-weight: 700;">
-                            <i class="fas fa-heart"></i> HopeHaven Sanctuary Caregiver
+                            <i class="fas fa-heart"></i> HopeHaven Orphanage Caregiver
                         </div>
                     </div>
                     <div class="staff-badge-id" id="preview_id">HH-CARE-09</div>
@@ -205,7 +205,7 @@
             <!-- Recently Registered Staff by Director -->
             <div class="dir-reg-card">
                 <div class="dir-reg-card-head">
-                    <h2><i class="fas fa-clock-rotate-left"></i> Recently Registered Personnel</h2>
+                    <h2><i class="fas fa-clock-rotate-left"></i> Recently Registered Staff & Volunteers</h2>
                     <span style="font-size: 11px; color: #64748b;">Active Payroll</span>
                 </div>
                 <div id="recent_staff_list">
@@ -267,5 +267,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/portal/director-register-staff.js') }}"></script>
+    <script src="{{ asset('js/portal/director-register-staff.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/director-register-staff.js')), 0, 12) }}"></script>
 @endpush

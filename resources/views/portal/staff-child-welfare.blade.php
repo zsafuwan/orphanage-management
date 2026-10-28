@@ -2,10 +2,11 @@
 
 @section('title', 'Staff Child Welfare & Duty Dashboard')
 @section('breadcrumb', 'Workspace | Staff Child Welfare')
+@section('hide-workspace-footer', '1')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/portal/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/record-actions.css') }}?v={{ filemtime(public_path('css/portal/record-actions.css')) }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/dashboard.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/dashboard.css')), 0, 12) }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/record-actions.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/record-actions.css')), 0, 12) }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -14,7 +15,8 @@
 @section('content')
 
 <!-- Staff Duty Hero Section -->
-<section class="adminator-hero">
+<section class="adminator-hero portal-dashboard-hero">
+    <div class="portal-hero-copy">
     <div class="hero-text">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
             <span class="hero-date" id="heroLiveDate" style="margin-bottom: 0;">
@@ -29,13 +31,10 @@
             Welcome on duty, <span class="accent-name" style="color: #059669;">Nurse Mary</span> 👋
         </h1>
         <p class="hero-sub">
-            Assigned to <strong>Morning Shift (08:00 - 16:00)</strong> covering <strong>Residential Ward Alpha & Beta</strong>. 4 children currently in direct care with 2 scheduled medical & academic routines today.
+            Assigned to <strong>Morning Shift (08:00 - 16:00)</strong> covering <strong>Alpha & Beta Rooms</strong>. <span data-child-count>4</span> children in the shared care registry. Your updates appear across the workspace automatically.
         </p>
     </div>
     <div class="hero-actions">
-        <a href="{{ route('dashboard') }}" class="btn-outline btn-sm" title="Switch to high-level administrative overview">
-            <i class="fas fa-shield-alt" style="color: var(--primary);"></i> Admin View
-        </a>
         <button class="btn-outline btn-sm" onclick="openStaffModal('modal_handover_note')">
             <i class="fas fa-pen-alt"></i> Handover Log
         </button>
@@ -43,7 +42,11 @@
             <i class="fas fa-user-plus"></i> Add Child Ward
         </button>
     </div>
+    </div>
+    @include('portal.partials.workspace-art')
 </section>
+@include('portal.partials.care-shortcuts')
+
 
 <!-- Prettier Caregiver Shift Notifications & Priority Alerts Banner -->
 <section class="staff-duty-notifications" id="staff_notifications_widget">
@@ -66,10 +69,10 @@
         </div>
 
         <div class="duty-notif-filter-pills">
-            <button class="duty-filter-btn active" onclick="filterDutyAlerts('all', this)">All (3)</button>
-            <button class="duty-filter-btn" onclick="filterDutyAlerts('clinical', this)">Clinical & Dental (1)</button>
-            <button class="duty-filter-btn" onclick="filterDutyAlerts('medication', this)">Meds (1)</button>
-            <button class="duty-filter-btn" onclick="filterDutyAlerts('supplies', this)">Supplies (1)</button>
+            <button class="duty-filter-btn active" data-alert-filter="all" onclick="filterDutyAlerts('all', this)">All (3)</button>
+            <button class="duty-filter-btn" data-alert-filter="clinical" onclick="filterDutyAlerts('clinical', this)">Clinical & Dental (1)</button>
+            <button class="duty-filter-btn" data-alert-filter="medication" onclick="filterDutyAlerts('medication', this)">Meds (1)</button>
+            <button class="duty-filter-btn" data-alert-filter="supplies" onclick="filterDutyAlerts('supplies', this)">Supplies (1)</button>
         </div>
     </div>
 
@@ -84,7 +87,7 @@
                     <div>
                         <span class="duty-badge-tag">Clinical Escort Required</span>
                         <div class="duty-alert-title">Dental Review for Aminah (7 yrs)</div>
-                        <div class="duty-alert-desc">Scheduled extraction follow-up at Klinik Kesihatan Titiwangsa. Escorted by Volunteer Sarah. Sanctuary van departure 10:15 AM.</div>
+                        <div class="duty-alert-desc">Scheduled extraction follow-up at Klinik Kesihatan Titiwangsa. Escorted by Volunteer Sarah. orphanage van departure 10:15 AM.</div>
                     </div>
                 </div>
             </div>
@@ -106,7 +109,7 @@
                     <div>
                         <span class="duty-badge-tag">Medication Schedule</span>
                         <div class="duty-alert-title">Ahmad Daniel: Inhaler Protocol</div>
-                        <div class="duty-alert-desc">Pre-sports peak-flow inspection required at 14:00 PM. Inhaler canister stored in Clinic Cabinet #2. Check spacer clean.</div>
+                        <div class="duty-alert-desc">Pre-sports peak-flow inspection required at 14:00. Inhaler canister stored in Clinic Cabinet #2. Check spacer clean.</div>
                     </div>
                 </div>
             </div>
@@ -128,7 +131,7 @@
                     <div>
                         <span class="duty-badge-tag">Storeroom Dispatch</span>
                         <div class="duty-alert-title">Ward Alpha Restock Ready</div>
-                        <div class="duty-alert-desc">Package of baby wipes, Dettol antiseptic, and formula milk prepped by Storeroom Steward. Ready for collection at Bay 2.</div>
+                        <div class="duty-alert-desc">Package of baby wipes, Dettol antiseptic, and formula milk prepped by Storeroom Manager. Ready for collection at Bay 2.</div>
                     </div>
                 </div>
             </div>
@@ -170,7 +173,7 @@
                 <div class="kpi-icon primary">
                     <i class="fas fa-child"></i>
                 </div>
-                <div class="kpi-label">Wards in Care</div>
+                <div class="kpi-label">Children in Care</div>
             </div>
             <span class="kpi-pill info">
                 <i class="fas fa-check-circle"></i> 100% Present
@@ -178,7 +181,7 @@
         </div>
         <div class="kpi-value">4 Children</div>
         <div class="kpi-compare">
-            <i class="fas fa-school" style="color: #3b82f6;"></i> 2 in formal schooling <span class="sep">·</span> 2 in nursery care
+            <i class="fas fa-school" style="color: #3b82f6;"></i> <span data-schooling-summary>School and early childhood care</span>
         </div>
     </article>
 
@@ -195,7 +198,7 @@
                 <i class="fas fa-bell"></i> 1 Upcoming
             </span>
         </div>
-        <div class="kpi-value">2 / 3 Dispensed</div>
+        <div class="kpi-value">2 / 3 Given</div>
         <div class="kpi-compare">
             <i class="fas fa-check" style="color: #10b981;"></i> Morning vitamins done <span class="sep">·</span> 14:00 Inhaler review
         </div>
@@ -233,12 +236,12 @@
         </div>
     </div>
 
-    <a href="{{ route('child-welfare') }}" class="staff-action-card" style="text-decoration: none; color: inherit;">
+    <a href="{{ route('child-welfare', ['view' => 'staff']) }}" class="staff-action-card" style="text-decoration: none; color: inherit;">
         <div class="staff-action-icon blue" style="background: rgba(37, 99, 235, 0.12); color: #2563eb;">
             <i class="fas fa-graduation-cap"></i>
         </div>
         <div>
-            <div class="staff-action-title">Child Welfare & Edu</div>
+            <div class="staff-action-title">Child Care & Education</div>
             <div class="staff-action-sub">Add children & key in paper / med records</div>
         </div>
     </a>
@@ -274,10 +277,10 @@
     </div>
 </div>
 
-<!-- Main 2-Column Operational Grid -->
+<!-- Full-width Operational Grid -->
 <div class="adminator-grid">
     <!-- Left Column: Today's Routine Schedule + Wards under Direct Care -->
-    <div class="col-8">
+    <div class="col-12">
         <!-- Card 1: Today's Daily Care & Medication Timeline -->
         <section class="admin-card" style="margin-bottom: 24px;">
             <div class="admin-card-head">
@@ -285,8 +288,8 @@
                     <span class="eyebrow" style="color: #059669;">Daily Shift Execution</span>
                     <h2 class="card-title">Caregiving Routine & Timetable (Today)</h2>
                 </div>
-                <button class="table-action-btn" onclick="addNewRoutineTask()">
-                    <i class="fas fa-plus"></i> Add Routine Task
+                <button type="button" class="staff-routine-add-btn" onclick="addNewRoutineTask()">
+                    <span class="staff-routine-add-icon" aria-hidden="true"><i class="fas fa-plus"></i></span> Add Routine Task
                 </button>
             </div>
 
@@ -312,7 +315,7 @@
                             <i class="fas fa-check-circle" style="color: #10b981; margin-right: 4px;"></i>
                             Daily Pediatric Multivitamins & Iron Syrup
                         </div>
-                        <div class="sched-detail">Dispensed to Ahmad, Aminah, Kenji, Priya per Dr. Lee prescription.</div>
+                        <div class="sched-detail">Given to Ahmad, Aminah, Kenji, Priya per Dr. Lee prescription.</div>
                     </div>
                     <span class="sched-status-badge done">Completed</span>
                 </div>
@@ -325,7 +328,7 @@
                             <i class="fas fa-check-circle" style="color: #10b981; margin-right: 4px;"></i>
                             School Transport Departure for SK Convent Wards
                         </div>
-                        <div class="sched-detail">Kenji Chen escorted safely to sanctuary van driver Uncle Lim.</div>
+                        <div class="sched-detail">Kenji Chen escorted safely to orphanage van driver Uncle Lim.</div>
                     </div>
                     <span class="sched-status-badge done">Completed</span>
                 </div>
@@ -386,7 +389,7 @@
             <div class="admin-card-head" style="flex-wrap: wrap; gap: 12px;">
                 <div class="card-title-wrap">
                     <span class="eyebrow" style="color: #059669;">Staff Caregiver Operations & Records</span>
-                    <h2 class="card-title">Residential Wards & Child Welfare (<span id="staff_wards_count">4</span> Profiles)</h2>
+                    <h2 class="card-title">Children & Care Records (<span id="staff_wards_count">4</span> Profiles)</h2>
                     <p style="font-size: 12px; color: #64748b; margin-top: 2px;">
                         Insert new children, key in examination paper results, and record basic medical conditions directly on duty.
                     </p>
@@ -441,6 +444,8 @@
         </section>
     </div>
 
+
+</div>
 
 <!-- MODAL 1: LOG VITALS & HEALTH OBSERVATION (PREMIUM REDESIGN) -->
 <div id="modal_log_vitals" class="staff-duty-modal-backdrop">
@@ -547,7 +552,7 @@
                     <label class="staff-field-label">
                         <i class="fas fa-pen"></i> Handover Summary & Ward Status *
                     </label>
-                    <textarea id="modal_handover_text" class="staff-textarea-control" style="height: 110px;" placeholder="Document child behaviors, medicine dispensed, scheduled clinic visits, and items for next caregiver..." required></textarea>
+                    <textarea id="modal_handover_text" class="staff-textarea-control" style="height: 110px;" placeholder="Document child behaviors, medicine given, scheduled clinic visits, and items for next caregiver..." required></textarea>
                 </div>
 
                 <div class="staff-modal-footer-btns">
@@ -573,11 +578,11 @@
             </span>
             <h3 class="staff-modal-title">Caregiver Supply Request</h3>
             <p class="staff-modal-sub">
-                <i class="fas fa-paper-plane"></i> Requisition submitted to Sister Grace and Storeroom Steward
+                <i class="fas fa-paper-plane"></i> Request submitted to Sister Grace and Storeroom Manager
             </p>
         </div>
         <div class="staff-modal-body">
-            <form onsubmit="event.preventDefault(); closeStaffModal('modal_storeroom_request'); notifyStaff('Requisition Dispatched', 'Urgent supplies request sent to Storeroom Steward!', 'warning', 'fas fa-dolly');">
+            <form onsubmit="event.preventDefault(); closeStaffModal('modal_storeroom_request'); notifyStaff('Request Sent', 'Urgent supplies request sent to Storeroom Manager!', 'warning', 'fas fa-dolly');">
                 <div class="staff-field-group">
                     <label class="staff-field-label">
                         <i class="fas fa-tag"></i> Item Category
@@ -609,7 +614,7 @@
 
                 <div class="staff-modal-footer-btns">
                     <button type="submit" class="staff-btn-save supplies">
-                        <i class="fas fa-paper-plane"></i> Submit Requisition
+                        <i class="fas fa-paper-plane"></i> Submit Request
                     </button>
                     <button type="button" class="staff-btn-cancel" onclick="closeStaffModal('modal_storeroom_request')">
                         Cancel
@@ -628,17 +633,18 @@
 <div class="staff-duty-modal-backdrop" id="modal_staff_add_child">
     <div class="staff-duty-modal-card" style="max-width: 620px;">
         <div class="staff-modal-header intake">
-            <button type="button" class="staff-modal-close-btn" onclick="closeStaffModal('modal_staff_add_child')">&times;</button>
+            <button type="button" class="staff-modal-close-btn" aria-label="Close child admission form" onclick="closeStaffModal('modal_staff_add_child')">&times;</button>
             <span class="staff-modal-badge">
                 <i class="fas fa-user-plus"></i> Staff Caregiver Intake Entry
             </span>
-            <h3 class="staff-modal-title">Register New Residential Child</h3>
+            <h3 class="staff-modal-title">Add a Child</h3>
             <p class="staff-modal-sub">
                 <i class="fas fa-user-nurse"></i> Logged by Nurse Mary · Morning Shift (Ward Alpha & Beta)
             </p>
         </div>
         <div class="staff-modal-body" style="max-height: 80vh; overflow-y: auto;">
             <form onsubmit="handleStaffAddChildSubmit(event)">
+                @include('portal.partials.child-photo-upload')
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
                     <div class="staff-field-group">
                         <label class="staff-field-label">Full Legal Name *</label>
@@ -660,7 +666,7 @@
                     </div>
                     <div class="staff-field-group">
                         <label class="staff-field-label">Date of Birth</label>
-                        <input type="date" id="staff_add_dob" class="staff-input-control" value="2017-06-15" required>
+                        <input type="date" id="staff_add_dob" class="staff-input-control" value="2017-06-15" max="{{ now()->format('Y-m-d') }}" required>
                     </div>
                 </div>
 
@@ -744,7 +750,7 @@
         <div class="staff-modal-body" style="max-height: 80vh; overflow-y: auto;">
             <form onsubmit="handleStaffPaperSubmit(event)">
                 <div class="staff-field-group">
-                    <label class="staff-field-label">Select Resident Child Ward *</label>
+                    <label class="staff-field-label">Select Child *</label>
                     <select id="staff_paper_child_select" class="staff-input-control" required>
                         <!-- Populated dynamically -->
                     </select>
@@ -783,8 +789,8 @@
                         <label class="staff-field-label" style="margin: 0;">
                             <i class="fas fa-list-ol"></i> Subject Scores & Marks Breakdown
                         </label>
-                        <button type="button" class="table-action-btn" onclick="addStaffSubjectRow()" style="font-size: 11px;">
-                            <i class="fas fa-plus"></i> Add Subject
+                        <button type="button" class="staff-add-subject-btn" onclick="addStaffSubjectRow()">
+                            <span class="staff-add-subject-icon" aria-hidden="true"><i class="fas fa-plus"></i></span> Add Subject
                         </button>
                     </div>
 
@@ -883,21 +889,9 @@
                     <input type="text" id="staff_med_prescriptions" class="staff-input-control" placeholder="e.g. Salbutamol inhaler 100mcg as needed, Daily vitamins">
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-                    <div class="staff-field-group">
-                        <label class="staff-field-label">Next Scheduled Clinic Review</label>
-                        <input type="date" id="staff_med_clinic_date" class="staff-input-control" value="2026-11-20">
-                    </div>
-                    <div class="staff-field-group">
-                        <label class="staff-field-label">Examination Specialty</label>
-                        <select id="staff_med_specialty" class="staff-input-control">
-                            <option value="Pediatric Dental Screening & Extraction">Pediatric Dental Screening</option>
-                            <option value="General Pediatric Wellness Review">General Pediatric Wellness Review</option>
-                            <option value="Asthma Pulmonary Function Review">Asthma Pulmonary Review</option>
-                            <option value="Optometry & Vision Screening">Optometry & Vision Screening</option>
-                            <option value="Speech & Articulation Review">Speech & Articulation</option>
-                        </select>
-                    </div>
+                <div class="staff-field-group">
+                    <label class="staff-field-label">Next Scheduled Clinic Review</label>
+                    <input type="date" id="staff_med_clinic_date" class="staff-input-control" value="2026-11-20" data-open-picker>
                 </div>
 
                 <div class="staff-field-group">
@@ -906,7 +900,7 @@
                 </div>
 
                 <div class="staff-field-group">
-                    <label class="staff-field-label">Staff Duty Caregiver Instructions</label>
+                    <label class="staff-field-label">Staff Caregiver on Duty Instructions</label>
                     <textarea id="staff_med_notes" class="staff-input-control" rows="2" placeholder="Specific care instructions for shift staff..."></textarea>
                 </div>
 
@@ -938,7 +932,7 @@
         </div>
         <div class="staff-modal-body" style="max-height: 80vh; overflow-y: auto;">
             <div style="display: flex; gap: 16px; align-items: center; background: #f8fafc; padding: 14px; border-radius: 12px; margin-bottom: 16px; border: 1px solid #e2e8f0;">
-                <img id="staff_dossier_avatar" src="" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2px solid #cbd5e1;" alt="Avatar">
+                <img id="staff_dossier_avatar" src="{{ asset('favicon.svg') }}" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2px solid #cbd5e1;" alt="Child portrait">
                 <div>
                     <h4 style="font-size: 16px; font-weight: 800; color: #0f172a;" id="staff_dossier_name">Name</h4>
                     <div style="font-size: 12px; color: #64748b;" id="staff_dossier_meta">Age · Dorm</div>
@@ -946,12 +940,12 @@
             </div>
 
             <!-- Tab Buttons -->
-            <div style="display: flex; gap: 8px; border-bottom: 1px solid #e2e8f0; margin-bottom: 14px;">
-                <button type="button" class="dossier-tab-btn active" id="btn_staff_dos_tab_acad" onclick="switchStaffDossierTab('acad')">
-                    <i class="fas fa-graduation-cap"></i> Paper Results History
+            <div class="staff-dossier-tabs" role="group" aria-label="Child record sections">
+                <button type="button" class="dossier-tab-btn active" id="btn_staff_dos_tab_acad" aria-pressed="true" aria-controls="staff_dossier_pane_acad" onclick="switchStaffDossierTab('acad')">
+                    <span class="staff-dossier-tab-icon" aria-hidden="true"><i class="fas fa-graduation-cap"></i></span> Paper Results History
                 </button>
-                <button type="button" class="dossier-tab-btn" id="btn_staff_dos_tab_med" onclick="switchStaffDossierTab('med')">
-                    <i class="fas fa-heartbeat"></i> Medical Condition & Notes
+                <button type="button" class="dossier-tab-btn" id="btn_staff_dos_tab_med" aria-pressed="false" aria-controls="staff_dossier_pane_med" onclick="switchStaffDossierTab('med')">
+                    <span class="staff-dossier-tab-icon" aria-hidden="true"><i class="fas fa-heartbeat"></i></span> Medical Condition & Notes
                 </button>
             </div>
 
@@ -983,7 +977,6 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/portal/child-welfare.js') }}"></script>
 <script>
     // Pretty Toast & Duty Alert Feedback
     function notifyStaff(title, message, type, icon) {
@@ -1020,6 +1013,7 @@
 
     // Handle Action on a Duty Card
     function handleDutyCardAction(cardId, feedbackMsg) {
+        window.HopeHavenDuty.dismiss(cardId);
         var card = $('#' + cardId);
         card.css({
             'opacity': '0.5',
@@ -1058,6 +1052,7 @@
 
     // Mark task done
     function markTaskDone(taskId) {
+        window.HopeHavenDuty.complete(taskId);
         var task = $('#' + taskId);
         task.removeClass('in-progress upcoming').addClass('completed');
         task.find('.sched-status-badge')
@@ -1079,14 +1074,15 @@
             var newId = 'task_custom_' + Date.now();
             var html = 
                 '<div class="staff-schedule-item upcoming" id="' + newId + '">' +
-                    '<div class="sched-time">' + (time || '03:00 PM') + '</div>' +
+                    '<div class="sched-time">' + window.HopeHavenSync.escape(time || '03:00 PM') + '</div>' +
                     '<div class="sched-content">' +
-                        '<div class="sched-title">' + title + '</div>' +
+                        '<div class="sched-title">' + window.HopeHavenSync.escape(title) + '</div>' +
                         '<div class="sched-detail">Added by Nurse Mary · Morning Shift</div>' +
                     '</div>' +
                     '<button class="sched-status-badge pending" style="border:none; cursor:pointer;" onclick="markTaskDone(\'' + newId + '\')">Pending</button>' +
                 '</div>';
             $('#routine_schedule_list').append(html);
+            window.HopeHavenDuty.add({id:newId,title:title.trim(),time:time||'03:00 PM'});
             notifyStaff('Timetable Updated', 'Added "' + title + '" to today\'s caregiving schedule', 'info', 'fas fa-plus-circle');
         }
     }
@@ -1094,7 +1090,7 @@
     // Roll call confirmation
     function recordRollCall() {
         var count = window.HopeHavenChildStore ? window.HopeHavenChildStore.getAll().length : 4;
-        notifyStaff('Roll Call Complete', 'All ' + count + ' resident children verified physically present in sanctuary wards.', 'success', 'fas fa-user-check');
+        notifyStaff('Roll Call Complete', 'All ' + count + ' resident children verified physically present in children in Care.', 'success', 'fas fa-user-check');
     }
 
     // Quick log child vitals
@@ -1127,7 +1123,7 @@
         var dest = $('#quick_supply_ward').val();
         
         notifyStaff(
-            'Requisition Dispatched', 
+            'Request Dispatched',
             qty + 'x ' + item + ' dispatched to Storeroom Bay for ' + dest, 
             'warning', 
             'fas fa-dolly'
@@ -1185,7 +1181,7 @@
         
         notifyStaff(
             'Shift Handover Filed', 
-            'Official handover briefing logged and archived in sanctuary logs.', 
+            'Official handover briefing logged and archived in orphanage logs.',
             'info', 
             'fas fa-clipboard-check'
         );
@@ -1214,9 +1210,10 @@
     function renderStaffWardRegistry() {
         if (!window.HopeHavenChildStore) return;
         var children = window.HopeHavenChildStore.getAll();
-        if (!children || children.length === 0) return;
+        if (!children) return;
 
         $('#staff_wards_count').text(children.length);
+        children = children.map(child => window.HopeHavenSync.escapeRecord(child));
 
         // 1. Render Cards Grid
         var cardsHtml = '';
@@ -1440,7 +1437,11 @@
             }
         });
 
-        var overall = count > 0 ? Math.round(totalScore / count) : 85;
+        if (count === 0) {
+            showPortalToast('Add at least one subject before saving a paper result.', false);
+            return;
+        }
+        var overall = Math.round(totalScore / count);
 
         var paperData = {
             examName: examName,
@@ -1471,7 +1472,7 @@
         var child = childId ? window.HopeHavenChildStore.getById(childId) : window.HopeHavenChildStore.getAll()[0];
         if (!child) return;
 
-        $('#staff_med_child_select').val(child.id);
+        $('#staff_med_child_select').val(child.id).trigger('change');
         populateStaffMedFormFields(child);
         openStaffModal('modal_staff_record_med');
     }
@@ -1485,7 +1486,6 @@
         $('#staff_med_prescriptions').val(med.medications || 'None');
         $('#staff_med_immunization').val(med.immunization || 'Up to Date');
         $('#staff_med_clinic_date').val(med.nextClinicDate || '2026-11-20');
-        $('#staff_med_specialty').val(med.nextClinicSpecialty || 'General Pediatric Wellness Review');
         $('#staff_med_doctor').val(med.clinicDoctor || 'Dr. Angela Reyes');
         $('#staff_med_notes').val(med.medicalNotes || '');
     }
@@ -1504,7 +1504,6 @@
             medications: $('#staff_med_prescriptions').val().trim(),
             immunization: $('#staff_med_immunization').val(),
             nextClinicDate: $('#staff_med_clinic_date').val(),
-            nextClinicSpecialty: $('#staff_med_specialty').val(),
             clinicDoctor: $('#staff_med_doctor').val().trim(),
             medicalNotes: $('#staff_med_notes').val().trim()
         };
@@ -1524,6 +1523,7 @@
     // Handle Staff Add Child Submit
     function handleStaffAddChildSubmit(e) {
         e.preventDefault();
+        if (!window.HopeHavenChildPhoto.ready(e.target)) return;
         var name = $('#staff_add_name').val().trim();
         var preferred = $('#staff_add_callname').val().trim() || name.split(' ')[0];
         var gender = $('#staff_add_gender').val();
@@ -1548,6 +1548,7 @@
             condition: condition,
             allergies: allergies,
             medicalNotes: notes,
+            avatar: window.HopeHavenChildPhoto.get(e.target),
             caseWorker: 'Nurse Mary (Staff)'
         });
 
@@ -1620,6 +1621,8 @@
     }
 
     function switchStaffDossierTab(tab) {
+        $('#btn_staff_dos_tab_acad').attr('aria-pressed', tab === 'acad' ? 'true' : 'false');
+        $('#btn_staff_dos_tab_med').attr('aria-pressed', tab === 'med' ? 'true' : 'false');
         if (tab === 'acad') {
             $('#btn_staff_dos_tab_acad').addClass('active');
             $('#btn_staff_dos_tab_med').removeClass('active');
@@ -1660,11 +1663,8 @@
             }
         });
 
-        // Listen for updates from other tabs
-        $(window).on('storage', function(e) {
-            if (e.originalEvent.key === 'hopehaven_children_registry_v2') {
-                renderStaffWardRegistry();
-            }
+        window.HopeHavenSync.subscribe('hopehaven_children_registry_v2', function() {
+            window.HopeHavenSync.refreshView(renderStaffWardRegistry);
         });
     });
 </script>

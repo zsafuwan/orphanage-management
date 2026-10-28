@@ -6,7 +6,7 @@
         <div class="modal-header">
             <div>
                 <h3 class="modal-title">Edit Staff Profile Information</h3>
-                <p class="modal-sub">Update your personnel identification, assigned wards, and contact coordinates.</p>
+                <p class="modal-sub">Update your staff & Volunteers identification, assigned wards, and contact coordinates.</p>
             </div>
             <button type="button" class="modal-close-btn" onclick="closeModal('modal_edit_profile')">&times;</button>
         </div>
@@ -39,7 +39,7 @@
                     <label class="form-label" for="modal_input_affiliation">
                         <i class="fas fa-hospital-alt"></i> Organization Affiliation *
                     </label>
-                    <input type="text" id="modal_input_affiliation" class="form-control" placeholder="HopeHaven Sanctuary – Child Welfare Unit" required>
+                    <input type="text" id="modal_input_affiliation" class="form-control" placeholder="HopeHaven Orphanage – Child Welfare Unit" required>
                 </div>
 
                 <!-- Assigned Ward -->
@@ -74,7 +74,7 @@
                 <label class="form-label" for="modal_input_address">
                     <i class="fas fa-home"></i> Staff Residential Address & Quarters *
                 </label>
-                <textarea id="modal_input_address" class="form-control" rows="2" placeholder="HopeHaven Sanctuary Staff Quarters, Block B Room 204..." required></textarea>
+                <textarea id="modal_input_address" class="form-control" rows="2" placeholder="HopeHaven Orphanage Staff Quarters, Block B Room 204..." required></textarea>
             </div>
 
             <div class="modal-footer">
@@ -166,7 +166,7 @@
 <div id="modal_qr_id" class="portal-modal-backdrop">
     <div class="portal-modal" style="max-width: 400px; text-align: center;">
         <div class="modal-header" style="justify-content: center; position: relative;">
-            <h3 class="modal-title">Official Sanctuary Staff Pass</h3>
+            <h3 class="modal-title">Official Orphanage Staff Pass</h3>
             <button type="button" class="modal-close-btn" onclick="closeModal('modal_qr_id')" style="position: absolute; right: 0; top: 0;">&times;</button>
         </div>
 

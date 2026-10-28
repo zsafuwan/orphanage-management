@@ -1,0 +1,304 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* Calm workspaces with a distinct accent for each care role. */
+.care-workspace {
+    --role-tint: #eaf0df; --role-soft: #f4f7ec; --role-accent: #d9efad;
+    --role-ink: #364f34; --role-line: #dce5cf; --panel-line: #e5e6e0;
+    background: #f7f8f4;
+}
+.care-workspace[data-portal-role="director"] {
+    --role-tint: #eeebfa; --role-soft: #f7f5fc; --role-accent: #d7cdf5;
+    --role-ink: #625086; --role-line: #e0d8ef;
+}
+.care-workspace[data-portal-role="staff"] {
+    --role-tint: #f8ecdf; --role-soft: #fcf7f0; --role-accent: #f2d2ad;
+    --role-ink: #885631; --role-line: #eadbcb;
+}
+.care-workspace .portal-content { @apply tw:max-w-[1680px]; padding: 28px 32px 24px; }
+.care-workspace .portal-topbar { @apply tw:min-h-[78px]; padding-block: 16px; background: #ffffffeb; @apply tw:border-[#e8e9e2]; }
+.care-workspace .breadcrumb-tag { @apply tw:text-[11px]; }
+.care-workspace .breadcrumb-tag span.active { @apply tw:text-[#343b36]; @apply tw:font-bold; }
+.care-workspace .dashboard-view-switcher { @apply tw:rounded-[30px]; background: #f4f5f0; @apply tw:border-[#e7e8e0]; @apply tw:p-[4px]; }
+.care-workspace .dashboard-view-switcher a { @apply tw:rounded-[24px]; padding: 8px 11px; }
+.care-workspace .dashboard-view-switcher a.active { background: var(--role-tint) !important; color: var(--role-ink) !important; box-shadow: none; }
+.care-workspace .studio-jump-trigger { background: #f8f9f5; @apply tw:min-h-[37px]; @apply tw:border-[#e6e8df]; }
+.care-workspace .topbar-user-link { border: 1px solid #e8e9e2; background: #fff; @apply tw:rounded-[30px]; padding: 6px 12px 6px 6px; }
+.care-workspace .topbar-avatar { background: var(--role-tint) !important; color: var(--role-ink); }
+.care-workspace .topbar-bell-btn { @apply tw:w-[37px]; @apply tw:h-[37px]; @apply tw:border-[#e6e8df]; }
+
+/* Sidebar: soft role colours and clear, readable navigation. */
+.care-workspace .portal-sidebar { background: var(--role-soft); border-right: 1px solid var(--role-line); padding-inline: 16px; color: var(--role-ink); }
+.care-workspace .sidebar-brand { padding: 29px 9px 25px; }
+.care-workspace .brand-icon { transform: none; border-radius: 14px 14px 14px 5px; }
+.care-workspace .brand-name { @apply tw:text-[23px]; }
+.care-workspace .brand-sub { @apply tw:tracking-[1.5px]; }
+.care-workspace .brand-name { @apply tw:text-[#38443c]; }
+.care-workspace .brand-name span { color: var(--role-ink); }
+.care-workspace .brand-sub { @apply tw:text-[#75816f]; }
+.care-workspace .sidebar-brand { border-color: var(--role-line); }
+.care-workspace .brand-icon { background: var(--role-accent) !important; color: var(--role-ink); }
+.care-workspace .nav-section-title { @apply tw:text-[#7b8278]; @apply tw:text-[10px]; @apply tw:tracking-[1.5px]; @apply tw:mb-[13px]; }
+.care-workspace .nav-item { @apply tw:min-h-[49px]; margin-block: 5px; @apply tw:p-[13px]; @apply tw:text-[14px]; @apply tw:leading-[1.5]; @apply tw:text-[#596653]; }
+.care-workspace .nav-item i { color: var(--role-ink); @apply tw:text-[17px]; @apply tw:shrink-0; }
+.care-workspace .nav-item:hover { background: #ffffffb3; @apply tw:text-[#344632]; }
+.care-workspace .nav-item.active { background: var(--role-accent) !important; color: #293c2c !important; box-shadow: none; }
+.care-workspace .nav-item.active i { @apply tw:text-[#354635]; }
+.care-workspace .care-sidebar-note { background: #ffffffb3; border: 1px solid var(--role-line); @apply tw:p-[17px]; @apply tw:rounded-[16px]; }
+.care-workspace .care-note-icon { @apply tw:text-[19px]; color: var(--role-ink); }
+.care-workspace .care-sidebar-note strong { @apply tw:text-[#4a5943]; }
+.care-workspace .care-sidebar-note p { @apply tw:text-[#71806a]; }
+.care-workspace .care-sidebar-note a { color: var(--role-ink); }
+.care-workspace .user-profile-badge { border-color: var(--role-line); }
+.care-workspace .user-meta-name { @apply tw:text-[#42513e]; @apply tw:text-[13px]; }
+.care-workspace .user-meta-role { @apply tw:text-[#74816e]; @apply tw:text-[11px]; }
+.care-workspace .user-avatar { background: var(--role-accent) !important; color: var(--role-ink); }
+
+/* Dashboard welcome: editorial copy on the left, a role-specific art panel. */
+.care-workspace .portal-dashboard-hero {
+    @apply tw:grid; grid-template-columns: minmax(0,1fr) 270px; @apply tw:items-stretch;
+    @apply tw:gap-[0]; @apply tw:p-[0]; background: #fff !important; border: 1px solid var(--panel-line);
+    @apply tw:rounded-[24px]; box-shadow: 0 7px 24px #253a2805; @apply tw:overflow-hidden; @apply tw:mb-[25px];
+}
+.care-workspace .portal-dashboard-hero::after { @apply tw:hidden; }
+.care-workspace .portal-hero-copy { padding: 30px 32px; @apply tw:min-w-0; align-self: center; }
+.care-workspace .portal-hero-copy > .hero-text > div:first-child { @apply tw:flex-wrap; row-gap: 8px !important; }
+.care-workspace .portal-dashboard-hero :is(.hero-title,.director-hero-title) {
+    font-family: 'DM Sans',sans-serif; font-size: clamp(26px,2.35vw,37px);
+    @apply tw:font-bold; @apply tw:leading-[1.18]; letter-spacing: -1.4px !important; color: #27362d !important;
+    margin: 18px 0 0;
+}
+.care-workspace .portal-dashboard-hero .hero-title .accent-name { color: #27362d !important; }
+.care-workspace .portal-dashboard-hero :is(.hero-sub,.director-hero-subtitle) {
+    @apply tw:max-w-[660px]; color: #788176 !important; @apply tw:text-[12px]; @apply tw:leading-[1.9];
+    margin: 13px 0 0; @apply tw:pr-[10px];
+}
+.care-workspace .portal-dashboard-hero :is(.hero-date,.director-hero-badge) { @apply tw:text-[9px]; @apply tw:tracking-[.8px]; }
+.care-workspace .director-hero-badge { background: var(--role-soft); border: 1px solid var(--role-line); color: var(--role-ink); @apply tw:rounded-[30px]; }
+.care-workspace .portal-dashboard-hero :is(.hero-actions,.director-hero-actions) { @apply tw:flex; @apply tw:flex-wrap; @apply tw:gap-[9px]; @apply tw:mt-[22px]; }
+.care-workspace .portal-dashboard-hero :is(.btn-sm,.director-btn-light,.director-btn-outline) { @apply tw:min-h-[39px]; @apply tw:rounded-[11px]; padding: 10px 14px; @apply tw:text-[11px]; box-shadow: none; }
+.care-workspace .portal-dashboard-hero :is(.btn-outline,.director-btn-light) { background: #fff; @apply tw:text-[#40533e]; border: 1px solid #dce5d6; }
+.care-workspace .portal-dashboard-hero .director-btn-outline { background: #374d36; @apply tw:text-[#fff]; border: 1px solid #374d36; }
+.care-workspace .portal-hero-art { @apply tw:flex; @apply tw:flex-col; @apply tw:justify-between; @apply tw:p-[24px]; background: var(--role-tint); @apply tw:relative; border-left: 1px solid var(--role-line); @apply tw:min-h-[256px]; }
+.portal-art-caption { @apply tw:flex; @apply tw:items-center; @apply tw:gap-[7px]; color: var(--role-ink); @apply tw:text-[8px]; @apply tw:font-bold; @apply tw:tracking-[1px]; @apply tw:relative; @apply tw:z-[1]; }
+.portal-art-dot { @apply tw:w-[5px]; @apply tw:h-[5px]; background: currentColor; @apply tw:rounded-[50%]; @apply tw:shrink-0; }
+.portal-art-orbit { @apply tw:w-[140px]; @apply tw:h-[120px]; align-self: center; @apply tw:relative; margin-block: 8px; }
+.portal-orbit-ring { @apply tw:absolute; inset: 8px; border: 1px solid color-mix(in srgb,var(--role-ink) 23%,transparent); @apply tw:rounded-[50%]; }
+.portal-orbit-ring.ring-one { transform: rotate(-38deg) scaleY(.52); }
+.portal-orbit-ring.ring-two { transform: rotate(38deg) scaleY(.52); }
+.portal-orbit-center { @apply tw:absolute; inset: 29px 39px; @apply tw:grid; place-items: center; background: #ffffffcf; border: 1px solid #fff; @apply tw:rounded-[23px]; color: var(--role-ink); @apply tw:text-[25px]; transform: rotate(-9deg); box-shadow: 0 6px 15px #28362b08; }
+.portal-orbit-spark { @apply tw:absolute; @apply tw:left-[4px]; @apply tw:top-[18px]; color: var(--role-ink); @apply tw:text-[25px]; }
+.portal-orbit-heart { @apply tw:absolute; @apply tw:right-[0]; @apply tw:bottom-[20px]; color: var(--role-ink); @apply tw:text-[17px]; }
+.portal-art-message { @apply tw:grid; @apply tw:gap-[5px]; color: var(--role-ink); @apply tw:text-center; @apply tw:relative; @apply tw:z-[1]; }
+.portal-art-message strong { @apply tw:text-[17px]; @apply tw:font-bold; @apply tw:tracking-[-.5px]; }
+.portal-art-message > span { @apply tw:text-[10px]; @apply tw:leading-[1.5]; }
+
+/* Shared shortcuts and data cards feel like one considered collection. */
+.care-workspace .care-shortcuts { @apply tw:gap-[12px]; @apply tw:mb-[25px]; }
+.care-workspace .care-shortcuts-intro strong { @apply tw:text-[#354735]; @apply tw:text-[13px]; }
+.care-workspace .care-eyebrow { @apply tw:text-[#90998a]; @apply tw:text-[8px]; @apply tw:tracking-[1.4px]; }
+.care-workspace .care-shortcuts > a { border: 1px solid var(--panel-line); background: #fff; @apply tw:rounded-[15px]; padding: 17px 16px; box-shadow: none; }
+.care-workspace .care-shortcuts > a:hover { border-color: var(--role-line); background: var(--role-soft); box-shadow: 0 4px 12px #253a2806; }
+.care-workspace .care-shortcuts > a strong { @apply tw:text-[11px]; }
+.care-workspace .care-shortcuts > a small { @apply tw:text-[9px]; @apply tw:text-[#899181]; }
+.care-workspace .care-shortcut-icon { @apply tw:w-[34px]; @apply tw:h-[34px]; @apply tw:rounded-[12px]; @apply tw:text-[14px]; }
+.care-workspace :is(.kpi-grid,.director-kpi-grid) { @apply tw:gap-[17px]; }
+.care-workspace :is(.kpi-card,.director-kpi-card,.med-kpi-card,.stat-card) {
+    @apply tw:relative; @apply tw:p-[23px]; @apply tw:rounded-[20px]; border: 1px solid var(--panel-line);
+    background: #fff !important; box-shadow: 0 4px 15px #253a2804; @apply tw:min-w-0;
+}
+.care-workspace :is(.kpi-card,.director-kpi-card,.med-kpi-card,.stat-card):hover { border-color: var(--role-line); box-shadow: 0 8px 22px #253a2809; transform: translateY(-3px); }
+.care-workspace :is(.kpi-card,.director-kpi-card,.med-kpi-card,.stat-card)::after {
+    content: ''; @apply tw:absolute; @apply tw:w-[32px]; @apply tw:h-[3px]; background: var(--role-accent); @apply tw:rounded-[4px];
+    @apply tw:left-[23px]; @apply tw:bottom-[0]; @apply tw:pointer-events-none;
+}
+.care-workspace :is(.kpi-value,.stat-value) { font-size: clamp(25px,2.25vw,34px); @apply tw:tracking-[-1.2px]; @apply tw:font-bold; @apply tw:text-[#30432f]; @apply tw:leading-[1.25]; }
+.care-workspace :is(.kpi-title,.kpi-label) { @apply tw:text-[#788374]; @apply tw:text-[11px]; }
+.care-workspace :is(.kpi-header,.kpi-top) { @apply tw:mb-[18px]; }
+.care-workspace .kpi-grid > .kpi-card { @apply tw:grid; grid-template-rows: 48px minmax(42px,auto) 1fr; @apply tw:gap-[13px]; align-content: start; }
+.care-workspace .kpi-grid > .kpi-card .kpi-top { @apply tw:m-[0]; align-items: start; }
+.care-workspace .kpi-grid > .kpi-card .kpi-value { @apply tw:m-[0]; align-self: center; }
+.care-workspace .kpi-grid > .kpi-card .kpi-compare { @apply tw:block; @apply tw:m-[0]; border-top: 1px solid #edf0e7; @apply tw:pt-[12px]; @apply tw:leading-[1.8]; @apply tw:text-[#89917e]; @apply tw:text-[10px]; }
+.care-workspace .kpi-grid > .kpi-card .kpi-compare > i { @apply tw:mr-[4px]; }
+.care-workspace :is(.kpi-footer-note,.kpi-foot) { border-top: 1px solid #edf0e7; @apply tw:pt-[13px]; @apply tw:mt-[16px]; @apply tw:text-[#89917e]; @apply tw:text-[10px]; @apply tw:leading-[1.7]; }
+.care-workspace :is(.kpi-icon,.kpi-icon-box) { @apply tw:rounded-[13px]; @apply tw:w-[39px]; @apply tw:h-[39px]; }
+.care-workspace :is(.admin-card,.director-card,.portal-card,.staff-ward-card,.child-profile-card,.med-table-card,.edu-table-card,.inv-table-card,.dir-staff-table-card,.dir-don-table-card) { border: 1px solid var(--panel-line); box-shadow: 0 5px 20px #253a2804; @apply tw:rounded-[21px]; }
+.care-workspace :is(.admin-card-head,.director-card-head) { padding: 23px 24px; border-bottom: 1px solid #edf0e7; }
+.care-workspace :is(.card-title,.director-card-title) { @apply tw:text-[#344631]; @apply tw:font-bold; @apply tw:text-[16px]; @apply tw:tracking-[-.4px]; }
+.care-workspace :is(.section-label,.card-title-wrap .eyebrow) { @apply tw:text-[#909985]; @apply tw:text-[8px]; @apply tw:font-bold; @apply tw:tracking-[1.5px]; }
+
+/* Director reserve panel: restrained contrast with readable fund allocations. */
+.care-workspace .treasury-overview-card { background: var(--role-tint); border: 1px solid var(--role-line); @apply tw:rounded-[21px]; box-shadow: none; padding: 26px 28px; @apply tw:gap-[26px]; @apply tw:text-[#46513f]; }
+.care-workspace .treasury-label-tag { color: var(--role-ink); @apply tw:tracking-[1.5px]; @apply tw:text-[8px]; }
+.care-workspace .treasury-balance-amount { font-family: 'DM Sans',sans-serif; @apply tw:font-semibold; @apply tw:tracking-[-1.4px]; font-size: clamp(29px,3vw,42px); @apply tw:text-[#43513e]; }
+.care-workspace .treasury-main-balance { border-color: var(--role-line); }
+.care-workspace .treasury-sub-desc { @apply tw:text-[#737d6a]; @apply tw:text-[9px]; }
+.care-workspace .fund-pill-box { border: 1px solid var(--role-line); background: #ffffff9c; @apply tw:rounded-[13px]; @apply tw:p-[17px]; }
+.care-workspace .fund-pill-box .fund-pill-title { @apply tw:text-[#6b765f]; @apply tw:text-[8px]; @apply tw:tracking-[.6px]; }
+.care-workspace .fund-pill-box .fund-pill-amount { color: #4a5842 !important; @apply tw:font-semibold; @apply tw:text-[20px]; @apply tw:tracking-[-.6px]; }
+.care-workspace .fund-pill-box .fund-pill-note { @apply tw:text-[#77816e]; @apply tw:text-[9px]; }
+.care-workspace .treasury-sub-desc strong { @apply tw:text-[#566746]; }
+
+/* Working surfaces: quieter labels, comfortable inputs and confident actions. */
+.care-workspace .portal-content table > thead > tr > th { background: #f6f7f1; border-bottom: 1px solid #e7ebdf; @apply tw:text-[#6c785f]; padding-block: 16px; @apply tw:text-[9px]; @apply tw:tracking-[.6px]; }
+.care-workspace .portal-content table > tbody > tr > td { border-bottom-color: #eef0e7; @apply tw:pt-[19px]; @apply tw:pb-[19px]; }
+.care-workspace .portal-content tbody tr:hover { background: var(--role-soft); }
+.care-workspace :is(.portal-input,.form-control,.staff-input-control,.search-input,.portal-select,.filter-select,.staff-textarea-control) { @apply tw:border-[#dfe5d6]; @apply tw:rounded-[11px]; @apply tw:bg-[#fff]; }
+.care-workspace :is(.portal-input,.form-control,.staff-input-control,.search-input,.portal-select,.filter-select):focus { @apply tw:border-[#91aa7d]; box-shadow: 0 0 0 3px #91aa7d14; }
+.care-workspace :is(.btn-primary,.btn-outline,.btn-pill-primary,.staff-btn-save,.staff-receipt-btn) { @apply tw:rounded-[11px]; @apply tw:font-semibold; }
+.care-workspace :is(.tab-btn,.staff-tab-btn) { @apply tw:min-h-[38px]; padding-inline: 17px; @apply tw:text-[11px]; @apply tw:rounded-[11px]; }
+.care-workspace .tab-btn.active { background: #374d36 !important; box-shadow: 0 3px 8px #374d3612; }
+.care-workspace :is(.page-header-card,.staff-inv-hero,.staff-welfare-hero,.staff-donations-hero,.staff-hero-card) { background: var(--role-tint) !important; border-color: var(--role-line); box-shadow: none; padding: 28px 30px; }
+.care-workspace :is(.modal-header,.staff-modal-header) { background: var(--role-soft); border-bottom-color: var(--role-line); }
+.care-workspace :is(.modal-header,.staff-modal-header) h2 { @apply tw:text-[22px]; @apply tw:tracking-[-.6px]; }
+.care-workspace .staff-action-card { border-color: var(--panel-line); box-shadow: 0 3px 12px #253a2804; @apply tw:rounded-[17px]; }
+.care-workspace .staff-action-card:hover { border-color: var(--role-line); background: var(--role-soft); }
+.care-workspace .care-workspace-footer { @apply tw:text-[#96a08b]; @apply tw:border-[#e8ecdf]; }
+
+@media (max-width: 1250px) {
+    .care-workspace .portal-dashboard-hero { grid-template-columns: minmax(0,1fr) 220px; }
+    .care-workspace .portal-hero-copy { @apply tw:p-[25px]; }
+    .care-workspace .portal-hero-art { padding: 22px 18px; }
+    .care-workspace .treasury-overview-card { @apply tw:flex-wrap; }
+}
+@media (max-width: 1000px) {
+    .care-workspace .portal-content { @apply tw:p-[24px]; }
+    .care-workspace .portal-dashboard-hero { grid-template-columns: minmax(0,1fr) 200px; }
+    .care-workspace .portal-dashboard-hero :is(.hero-title,.director-hero-title) { @apply tw:text-[28px]; }
+    .care-workspace .portal-art-caption { @apply tw:text-[7px]; }
+    .care-workspace .portal-art-message strong { @apply tw:text-[15px]; }
+}
+@media (max-width: 650px) {
+    .care-workspace .portal-content { padding: 18px 14px; }
+    .care-workspace .portal-dashboard-hero { grid-template-columns: minmax(0,1fr); @apply tw:rounded-[20px]; }
+    .care-workspace .portal-hero-copy { @apply tw:p-[23px]; }
+    .care-workspace .portal-hero-art { @apply tw:min-h-[0]; border-left: 0; border-top: 1px solid var(--role-line); padding: 17px 23px; @apply tw:grid; grid-template-columns: minmax(0,1fr) 58px; @apply tw:gap-[8px]; @apply tw:items-center; }
+    .care-workspace .portal-art-caption { grid-column: 1; grid-row: 1; }
+    .care-workspace .portal-art-message { grid-column: 1; grid-row: 2; @apply tw:text-left; }
+    .care-workspace .portal-art-message > span { @apply tw:hidden; }
+    .care-workspace .portal-art-orbit { grid-column: 2; grid-row: 1 / 3; @apply tw:w-[58px]; @apply tw:h-[58px]; @apply tw:m-[0]; }
+    .care-workspace .portal-orbit-center { inset: 6px; @apply tw:rounded-[14px]; @apply tw:text-[20px]; }
+    .care-workspace :is(.portal-orbit-ring,.portal-orbit-spark,.portal-orbit-heart) { @apply tw:hidden; }
+    .care-workspace :is(.kpi-card,.director-kpi-card,.med-kpi-card,.stat-card) { @apply tw:p-[18px]; @apply tw:rounded-[17px]; }
+    .care-workspace :is(.kpi-value,.stat-value) { @apply tw:text-[26px]; }
+    .care-workspace :is(.page-header-card,.staff-inv-hero,.staff-welfare-hero,.staff-donations-hero,.staff-hero-card) { @apply tw:p-[23px]; }
+    .care-workspace .treasury-overview-card { @apply tw:p-[23px]; }
+    .care-workspace .treasury-fund-pills { @apply tw:w-full; @apply tw:flex-wrap; }
+    .care-workspace .fund-pill-box { flex: 1 1 140px; }
+    .care-workspace .topbar-user-link { @apply tw:p-[4px]; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .care-workspace :is(.kpi-card,.director-kpi-card,.med-kpi-card,.stat-card):hover { transform: none; }
+}
+
+/* Pastel actions and secondary panels replace the remaining ink surfaces. */
+.care-workspace[data-portal-role] :is(.btn-primary,.staff-btn-save,.btn-pill-primary,.btn-director-approve,.director-btn-outline,.btn-dossier,.btn-edu,.btn-sign,.btn-quick-app,.staff-routine-add-btn,.duty-action-btn-sm,.btn-save) {
+    background: var(--role-accent) !important; color: #364332 !important;
+    border: 1px solid var(--role-line) !important; box-shadow: none !important;
+}
+.care-workspace[data-portal-role] :is(.btn-primary,.staff-btn-save,.btn-pill-primary,.btn-director-approve,.director-btn-outline,.btn-dossier,.btn-edu,.btn-sign,.btn-quick-app,.staff-routine-add-btn,.duty-action-btn-sm,.btn-save):hover {
+    background: var(--role-tint) !important; color: #364332 !important;
+}
+.care-workspace[data-portal-role] :is(.btn-primary,.staff-btn-save,.btn-pill-primary,.director-btn-outline,.staff-routine-add-btn) :is(i,span) { color: inherit !important; }
+.care-workspace[data-portal-role] :is(.tab-btn,.staff-tab-btn,.med-tab-btn,.inv-tab-btn,.edu-tab-btn,.role-pill,.chart-toggle-btn).active,
+.care-workspace[data-portal-role] .staff-inventory-view-toggle .view-mode-btn.active {
+    background: var(--role-accent) !important; color: #364332 !important; border-color: var(--role-line) !important; box-shadow: none;
+}
+.care-workspace[data-portal-role] :is(.tab-btn,.staff-tab-btn,.med-tab-btn,.inv-tab-btn,.edu-tab-btn).active i { color: inherit; }
+.care-workspace[data-portal-role] :is(.admin-provision-hero,.dir-reg-hero,.staff-badge-preview) {
+    background: var(--role-tint) !important; border: 1px solid var(--role-line); color: #46523f !important;
+}
+.care-workspace[data-portal-role] :is(.admin-provision-hero,.dir-reg-hero,.staff-badge-preview) :is(h1,h2,h3,h4,p,span,strong,.hero-desc,.hero-main-title,.dir-reg-hero-sub) { color: #4d5b45 !important; }
+.care-workspace[data-portal-role] :is(.profile-avatar-circle,.hero-auth-avatar,.staff-avatar-circle,.dir-authorizer-avatar) { background: var(--role-accent) !important; color: var(--role-ink) !important; }
+.care-workspace[data-portal-role] .sidebar-nav { scrollbar-color: #c9d2c1 transparent; }
+.care-workspace[data-portal-role] .studio-jump-dialog::backdrop { background: #5e657340; }
+
+.care-workspace[data-portal-role] :is(.admin-donations-hero,.admin-welfare-hero) { background: var(--role-tint) !important; border: 1px solid var(--role-line); @apply tw:text-[#46523f]; box-shadow: none; }
+.care-workspace[data-portal-role] :is(.admin-donations-hero,.admin-welfare-hero) :is(h1,h2,h3,p,span,strong) { color: #4d5b45 !important; }
+.care-workspace[data-portal-role] :is(.admin-donations-hero,.admin-welfare-hero) .btn-outline { color: #4d5b45 !important; border-color: var(--role-line) !important; background: #ffffffb3 !important; }
+
+/* Give the appointment provider a readable two-line hierarchy. */
+.care-workspace .clinic-provider .clinic-provider-doctor { @apply tw:block; @apply tw:text-[15px]; @apply tw:leading-[1.5]; @apply tw:font-bold; @apply tw:text-[#405039]; }
+.care-workspace .clinic-provider .clinic-provider-location { @apply tw:block; @apply tw:mt-[4px]; @apply tw:text-[13px]; @apply tw:leading-[1.5]; @apply tw:text-[#717b69]; }
+.care-workspace .sickness-table > thead > tr > th:nth-child(3),
+.care-workspace .sickness-table > thead > tr > th:nth-child(4),
+.care-workspace .sickness-table > tbody > tr > td:nth-child(3),
+.care-workspace .sickness-table > tbody > tr > td:nth-child(4) {
+    @apply tw:text-center;
+    padding-inline: 24px;
+    vertical-align: middle;
+}
+.care-workspace .sickness-table > tbody > tr > td:nth-child(3),
+.care-workspace .sickness-table > tbody > tr > td:nth-child(4) {
+    @apply tw:text-[15px];
+    @apply tw:font-medium;
+    @apply tw:leading-[1.6];
+}
+.care-workspace .portal-content .donor-table > thead > tr > th {
+    @apply tw:text-[11px];
+    font-weight: 800 !important;
+    @apply tw:text-[#515f47];
+    @apply tw:leading-[1.5];
+}
+.care-workspace .portal-content .donor-table > thead > tr > th:nth-child(4),
+.care-workspace .portal-content .donor-table > tbody > tr > td:nth-child(4) {
+    @apply tw:text-center;
+    padding-inline: 24px;
+    vertical-align: middle;
+}
+.care-workspace .portal-content .donor-table > tbody > tr > td:nth-child(4) {
+    @apply tw:text-[15px];
+    @apply tw:font-medium;
+    @apply tw:leading-[1.6];
+}
+
+/* Optional admission photo, shared by admin and staff forms. */
+.care-workspace .child-photo-upload { @apply tw:relative; @apply tw:mb-[24px]; @apply tw:p-[18px]; border: 1px dashed var(--role-line); @apply tw:rounded-[16px]; background: var(--role-soft); }
+.care-workspace .child-photo-picker { @apply tw:flex; @apply tw:items-center; @apply tw:gap-[18px]; @apply tw:cursor-pointer; @apply tw:m-[0]; }
+.care-workspace .child-photo-input { @apply tw:absolute; @apply tw:w-[1px]; @apply tw:h-[1px]; @apply tw:p-[0]; @apply tw:overflow-hidden; clip-path: inset(50%); @apply tw:whitespace-nowrap; }
+.care-workspace .child-photo-upload:focus-within { outline: 3px solid #a79cc5; outline-offset: 3px; }
+.care-workspace .child-photo-preview { @apply tw:relative; @apply tw:grid; place-items: center; @apply tw:w-[78px]; @apply tw:h-[78px]; flex: 0 0 78px; @apply tw:rounded-[20px]; background: #fff; border: 1px solid var(--role-line); color: var(--role-ink); @apply tw:text-[25px]; }
+.care-workspace .child-photo-preview img { @apply tw:w-full; @apply tw:h-full; @apply tw:object-cover; border-radius: inherit; @apply tw:absolute; inset: 0; }
+.care-workspace .child-photo-preview img[hidden] { @apply tw:hidden; }
+.care-workspace .child-photo-upload-icon { @apply tw:absolute; @apply tw:grid; place-items: center; @apply tw:w-[27px]; @apply tw:h-[27px]; @apply tw:right-[-6px]; @apply tw:bottom-[-6px]; border: 2px solid #fff; @apply tw:rounded-[50%]; background: var(--role-accent); @apply tw:text-[#4e5d45]; @apply tw:text-[12px]; @apply tw:z-[1]; }
+.care-workspace .child-photo-copy { @apply tw:grid; @apply tw:gap-[5px]; @apply tw:min-w-0; }
+.care-workspace .child-photo-copy strong { @apply tw:text-[15px]; @apply tw:text-[#46553d]; }
+.care-workspace .child-photo-copy > span { @apply tw:text-[12px]; @apply tw:text-[#6e7b65]; }
+.care-workspace .child-photo-copy small { @apply tw:text-[10px]; @apply tw:text-[#7b8473]; @apply tw:leading-[1.5]; }
+.care-workspace .child-photo-remove { margin: 12px 0 0 96px; background: #fff; @apply tw:text-[#745750]; border: 1px solid #e4d8d2; @apply tw:rounded-[8px]; padding: 6px 10px; font: 600 11px 'DM Sans',sans-serif; @apply tw:cursor-pointer; }
+.care-workspace .child-photo-message { margin: 12px 0 0; @apply tw:text-[11px]; @apply tw:leading-[1.5]; @apply tw:text-[#66745e]; }
+.care-workspace .child-photo-message:empty { @apply tw:hidden; }
+.care-workspace .inventory-section-links { @apply tw:flex; @apply tw:flex-wrap; @apply tw:gap-[10px]; margin: 0 0 20px; }
+.care-workspace .inventory-section-links a { @apply tw:inline-flex; @apply tw:items-center; @apply tw:gap-[9px]; padding: 11px 16px; color: var(--role-ink); background: var(--role-soft); border: 1px solid var(--role-line); @apply tw:rounded-[12px]; @apply tw:no-underline; @apply tw:text-[12px]; @apply tw:font-semibold; }
+.care-workspace .inventory-panel { @apply tw:mb-[24px]; @apply tw:overflow-hidden; scroll-margin-top: 100px; }
+.care-workspace .inventory-panel-note { margin: 7px 0 0; @apply tw:text-[11px]; @apply tw:text-[#7a836f]; @apply tw:leading-[1.7]; }
+.care-workspace .inventory-panel-toolbar { padding: 18px 22px 0; @apply tw:mb-[18px]; @apply tw:flex-wrap; @apply tw:gap-[12px]; }
+.care-workspace .inventory-stock-toolbar { @apply tw:flex; @apply tw:gap-[16px]; padding: 18px 22px; @apply tw:items-center; @apply tw:flex-wrap; }
+.care-workspace .inventory-stock-toolbar .inv-search-input { flex: 1 1 240px; }
+.care-workspace .inventory-low-filter { @apply tw:flex; @apply tw:gap-[9px]; @apply tw:items-center; @apply tw:text-[12px]; @apply tw:text-[#657257]; }
+.care-workspace .inventory-low-filter input { accent-color: #a4b788; }
+.care-workspace .inventory-cell-sub { @apply tw:block; @apply tw:mt-[5px]; @apply tw:text-[#79866d]; @apply tw:text-[11px]; @apply tw:leading-[1.6]; @apply tw:max-w-[250px]; overflow-wrap: anywhere; }
+.care-workspace .inventory-review-actions { @apply tw:flex; @apply tw:gap-[7px]; @apply tw:items-center; @apply tw:justify-center; @apply tw:flex-wrap; }
+.care-workspace .inventory-status,.care-workspace .inventory-priority { @apply tw:inline-flex; padding: 5px 9px; border: 1px solid #e7e2d8; @apply tw:rounded-[8px]; @apply tw:text-[10px]; @apply tw:leading-[1.5]; @apply tw:text-[#8a7049]; background: #faf4e8; @apply tw:font-semibold; @apply tw:whitespace-nowrap; }
+.care-workspace .inventory-status.approved,.care-workspace .inventory-status.received { background: #edf5e4; @apply tw:text-[#627b45]; @apply tw:border-[#dfe9d0]; }
+.care-workspace .inventory-status.rejected,.care-workspace .inventory-status.low { background: #fbefeb; @apply tw:text-[#a16e5d]; @apply tw:border-[#eddbd3]; }
+.care-workspace .inventory-status.dispatched { background: #eeedf9; @apply tw:text-[#82709d]; @apply tw:border-[#e3dcef]; }
+.care-workspace .inventory-stock-number { @apply tw:text-[19px]; @apply tw:text-[#5b7148]; font-variant-numeric: tabular-nums; }
+.care-workspace .inventory-empty { padding: 30px !important; @apply tw:text-center; @apply tw:text-[12px]; @apply tw:leading-[1.8]; @apply tw:text-[#829073]; }
+.care-workspace .inventory-result-count { padding: 13px 23px; @apply tw:m-[0]; border-top: 1px solid #edf0e7; @apply tw:text-[#859178]; @apply tw:text-[10px]; }
+.care-workspace .inventory-director-page .inv-tab-btn.active { background: var(--role-accent) !important; color: var(--role-ink) !important; border-color: var(--role-line) !important; }
+.care-workspace :is(#modal_director_sign_req,#modal_director_reject_req) .director-modal-head { background: var(--role-soft); border-bottom: 1px solid var(--role-line); }
+.care-workspace :is(#modal_director_sign_req,#modal_director_reject_req) .director-modal-head h3 { color: var(--role-ink); @apply tw:text-[19px]; }
+.care-workspace :is(#modal_director_sign_req,#modal_director_reject_req) .director-modal-close { background: #fff; color: var(--role-ink); border: 1px solid var(--role-line); }
+.care-workspace .inventory-director-page .inv-table { @apply tw:min-w-[860px]; }
+@media (max-width: 700px) {
+    .care-workspace .inventory-director-page .inv-stats-row { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    .care-workspace .inventory-panel-toolbar,.care-workspace .inventory-stock-toolbar { padding-inline: 15px; }
+    .care-workspace .inventory-panel-toolbar .inv-search-input { @apply tw:w-full; }
+}
+@media (max-width: 480px) {
+    .care-workspace .child-photo-picker { @apply tw:gap-[13px]; }
+    .care-workspace .child-photo-upload { @apply tw:p-[14px]; }
+    .care-workspace .child-photo-preview { @apply tw:w-[62px]; @apply tw:h-[62px]; flex-basis: 62px; @apply tw:rounded-[16px]; }
+    .care-workspace .child-photo-remove { @apply tw:ml-[75px]; }
+}

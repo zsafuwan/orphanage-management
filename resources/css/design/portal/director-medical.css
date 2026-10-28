@@ -1,0 +1,432 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* Director Children Medical Records Stylesheet - HopeHaven */
+:root {
+    --clinical-emerald: #059669;
+    --clinical-emerald-light: #ecfdf5;
+    --clinical-amber: #d97706;
+    --clinical-rose: #e11d48;
+    --clinical-indigo: #4f46e5;
+}
+
+.med-header {
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-start;
+    @apply tw:mb-[24px];
+    @apply tw:flex-wrap;
+    @apply tw:gap-[16px];
+}
+
+.med-header-title h1 {
+    @apply tw:text-[24px];
+    @apply tw:font-extrabold;
+    color: var(--dark);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[10px];
+    @apply tw:mb-[4px];
+}
+
+.med-header-title p {
+    @apply tw:text-[14px];
+    color: var(--dark-muted);
+}
+
+/* Clinical KPI Counter Cards */
+.med-kpi-row {
+    @apply tw:grid;
+    grid-template-columns: repeat(4, 1fr);
+    @apply tw:gap-[18px];
+    @apply tw:mb-[24px];
+}
+
+.med-kpi-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[16px];
+    transition: transform 0.2s ease;
+}
+
+.med-kpi-card:hover {
+    transform: translateY(-2px);
+    @apply tw:border-[#cbd5e1];
+}
+
+.med-kpi-icon {
+    @apply tw:w-[44px];
+    @apply tw:h-[44px];
+    border-radius: var(--radius-md);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:text-[20px];
+    @apply tw:shrink-0;
+}
+
+.med-kpi-icon.emerald {
+    background: #ecfdf5;
+    @apply tw:text-[#059669];
+}
+
+.med-kpi-icon.rose {
+    background: #ffe4e6;
+    @apply tw:text-[#e11d48];
+}
+
+.med-kpi-icon.indigo {
+    background: #eef2ff;
+    @apply tw:text-[#4f46e5];
+}
+
+.med-kpi-icon.amber {
+    background: #fef3c7;
+    @apply tw:text-[#d97706];
+}
+
+.med-kpi-val {
+    @apply tw:text-[22px];
+    @apply tw:font-extrabold;
+    color: var(--dark);
+    @apply tw:leading-[1.2];
+}
+
+.med-kpi-lbl {
+    @apply tw:text-[12px];
+    @apply tw:font-semibold;
+    color: var(--dark-muted);
+}
+
+/* Medical Filter Toolbar */
+.med-toolbar {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    @apply tw:mb-[20px];
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-center;
+    @apply tw:flex-wrap;
+    @apply tw:gap-[14px];
+    box-shadow: var(--shadow-sm);
+}
+
+.med-filter-tabs {
+    @apply tw:flex;
+    @apply tw:gap-[8px];
+    @apply tw:flex-wrap;
+}
+
+.med-tab-btn {
+    border: none;
+    background: #f1f5f9;
+    @apply tw:text-[#475569];
+    @apply tw:font-semibold;
+    @apply tw:text-[13px];
+    padding: 7px 14px;
+    @apply tw:rounded-[20px];
+    @apply tw:cursor-pointer;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    transition: all 0.2s ease;
+}
+
+.med-tab-btn:hover {
+    background: #e2e8f0;
+    color: var(--dark);
+}
+
+.med-tab-btn.active {
+    background: var(--clinical-emerald);
+    @apply tw:text-[#ffffff];
+    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
+}
+
+.med-tab-badge {
+    background: rgba(255, 255, 255, 0.25);
+    padding: 1px 7px;
+    @apply tw:rounded-[10px];
+    @apply tw:text-[11px];
+}
+
+.med-tab-btn:not(.active) .med-tab-badge {
+    background: #e2e8f0;
+    @apply tw:text-[#475569];
+}
+
+.med-search-wrap {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[10px];
+}
+
+.med-search-input {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    @apply tw:rounded-[20px];
+    padding: 7px 16px;
+    @apply tw:text-[13px];
+    color: var(--dark);
+    @apply tw:min-w-[240px];
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.med-search-input:focus {
+    border-color: var(--clinical-emerald);
+    background: #ffffff;
+}
+
+/* Dossier Table */
+.med-table-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    @apply tw:overflow-hidden;
+}
+
+.med-table {
+    @apply tw:w-full;
+    @apply tw:border-collapse;
+    @apply tw:text-[13px];
+    @apply tw:text-left;
+}
+
+.med-table th {
+    background: #f8fafc;
+    @apply tw:text-[#475569];
+    @apply tw:font-bold;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border-color);
+    @apply tw:text-[12px];
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.5px];
+}
+
+.med-table td {
+    padding: 16px 18px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.med-table tr:hover td {
+    background: #fafbfc;
+}
+
+.med-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Child identity block */
+.child-profile-cell {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[12px];
+}
+
+.child-avatar-box {
+    @apply tw:w-[42px];
+    @apply tw:h-[42px];
+    @apply tw:rounded-[50%];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:font-bold;
+    @apply tw:text-[14px];
+    @apply tw:shrink-0;
+}
+
+.child-avatar-boy {
+    background: #e0f2fe;
+    @apply tw:text-[#0369a1];
+}
+
+.child-avatar-girl {
+    background: #fce7f3;
+    @apply tw:text-[#be185d];
+}
+
+.child-avatar-baby {
+    background: #fef3c7;
+    @apply tw:text-[#b45309];
+}
+
+.child-name {
+    @apply tw:font-bold;
+    color: var(--dark);
+    @apply tw:mb-[2px];
+}
+
+.child-meta {
+    @apply tw:text-[12px];
+    @apply tw:text-[#64748b];
+}
+
+/* Blood Type Badge */
+.blood-badge {
+    @apply tw:inline-block;
+    background: #fee2e2;
+    @apply tw:text-[#b91c1c];
+    @apply tw:text-[11px];
+    @apply tw:font-extrabold;
+    padding: 2px 7px;
+    @apply tw:rounded-[6px];
+    border: 1px solid #fca5a5;
+}
+
+/* Allergy Warning Tag */
+.allergy-tag {
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[4px];
+    background: #fff1f2;
+    @apply tw:text-[#e11d48];
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    padding: 2px 8px;
+    @apply tw:rounded-[4px];
+    border: 1px solid rgba(225, 29, 72, 0.25);
+}
+
+.allergy-none {
+    @apply tw:text-[#64748b];
+    @apply tw:text-[12px];
+}
+
+/* Condition Watchlist Pill */
+.condition-pill {
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[4px];
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    padding: 2px 8px;
+    @apply tw:rounded-[4px];
+}
+
+.condition-pill.active {
+    background: #fef3c7;
+    @apply tw:text-[#b45309];
+    border: 1px solid #fde68a;
+}
+
+.condition-pill.normal {
+    background: #ecfdf5;
+    @apply tw:text-[#047857];
+}
+
+/* Action button */
+.btn-dossier {
+    background: #059669;
+    @apply tw:text-[#ffffff];
+    border: none;
+    padding: 6px 12px;
+    @apply tw:rounded-[6px];
+    @apply tw:text-[12px];
+    @apply tw:font-semibold;
+    @apply tw:cursor-pointer;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    transition: background 0.2s;
+}
+
+.btn-dossier:hover {
+    background: #047857;
+}
+
+/* Dossier Modal styling */
+.dossier-grid {
+    @apply tw:grid;
+    grid-template-columns: repeat(3, 1fr);
+    @apply tw:gap-[14px];
+    @apply tw:mb-[20px];
+}
+
+.dossier-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+}
+
+.dossier-box-label {
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:text-[#64748b];
+    @apply tw:uppercase;
+    @apply tw:mb-[4px];
+}
+
+.dossier-box-value {
+    @apply tw:text-[14px];
+    @apply tw:font-bold;
+    color: var(--dark);
+}
+
+.dossier-timeline {
+    border-left: 2px solid #e2e8f0;
+    @apply tw:pl-[16px];
+    @apply tw:ml-[8px];
+    @apply tw:mb-[20px];
+}
+
+.timeline-item {
+    @apply tw:relative;
+    @apply tw:pb-[14px];
+}
+
+.timeline-dot {
+    @apply tw:absolute;
+    @apply tw:left-[-21px];
+    @apply tw:top-[4px];
+    @apply tw:w-[10px];
+    @apply tw:h-[10px];
+    @apply tw:rounded-[50%];
+    background: #059669;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 0 2px #059669;
+}
+
+.timeline-title {
+    @apply tw:text-[13px];
+    @apply tw:font-bold;
+    color: var(--dark);
+}
+
+.timeline-desc {
+    @apply tw:text-[12px];
+    @apply tw:text-[#64748b];
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+    .med-kpi-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .dossier-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .med-kpi-row {
+        grid-template-columns: 1fr;
+    }
+    .med-toolbar {
+        @apply tw:flex-col;
+        @apply tw:items-stretch;
+    }
+    .med-search-input {
+        @apply tw:w-full;
+    }
+}

@@ -1,0 +1,359 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* Director Register Staff Stylesheet */
+:root {
+    --dir-reg-indigo: #4f46e5;
+    --dir-reg-indigo-hover: #4338ca;
+    --dir-reg-indigo-light: #eef2ff;
+    --dir-reg-emerald: #059669;
+}
+
+/* Authorizing Hero Banner */
+.dir-reg-hero {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #4338ca 100%);
+    border-radius: var(--radius-lg);
+    padding: 28px 32px;
+    @apply tw:text-[#ffffff];
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-center;
+    @apply tw:relative;
+    @apply tw:overflow-hidden;
+    @apply tw:mb-[24px];
+    box-shadow: 0 10px 25px -5px rgba(30, 27, 75, 0.35);
+}
+
+.dir-reg-hero::after {
+    content: '';
+    @apply tw:absolute;
+    @apply tw:right-[-40px];
+    @apply tw:top-[-40px];
+    @apply tw:w-[240px];
+    @apply tw:h-[240px];
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
+    @apply tw:rounded-[50%];
+    @apply tw:pointer-events-none;
+}
+
+.dir-reg-hero-badge {
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 5px 14px;
+    @apply tw:rounded-[30px];
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:tracking-[0.5px];
+    @apply tw:uppercase;
+    @apply tw:mb-[10px];
+}
+
+.dir-reg-hero-title {
+    @apply tw:text-[24px];
+    @apply tw:font-extrabold;
+    @apply tw:mb-[6px];
+    @apply tw:tracking-[-0.5px];
+}
+
+.dir-reg-hero-sub {
+    @apply tw:text-[13px];
+    @apply tw:text-[#c7d2fe];
+    @apply tw:max-w-[620px];
+    @apply tw:leading-[1.6];
+}
+
+.dir-authorizer-badge {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[14px];
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 12px 18px;
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(6px);
+    @apply tw:relative;
+    @apply tw:z-[2];
+}
+
+.dir-authorizer-avatar {
+    @apply tw:w-[44px];
+    @apply tw:h-[44px];
+    @apply tw:rounded-[50%];
+    background: linear-gradient(135deg, #6366f1, #4338ca);
+    @apply tw:text-[#ffffff];
+    @apply tw:text-[15px];
+    @apply tw:font-extrabold;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.dir-authorizer-meta label {
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:text-[#fde047];
+    @apply tw:uppercase;
+    @apply tw:block;
+}
+
+.dir-authorizer-meta span {
+    @apply tw:text-[14px];
+    @apply tw:font-bold;
+    @apply tw:text-[#ffffff];
+}
+
+/* Metric Row */
+.dir-reg-metrics {
+    @apply tw:grid;
+    grid-template-columns: repeat(4, 1fr);
+    @apply tw:gap-[18px];
+    @apply tw:mb-[24px];
+}
+
+.dir-reg-metric-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[16px];
+    transition: transform 0.2s ease;
+}
+
+.dir-reg-metric-card:hover {
+    transform: translateY(-2px);
+    @apply tw:border-[#cbd5e1];
+}
+
+.dir-reg-metric-icon {
+    @apply tw:w-[44px];
+    @apply tw:h-[44px];
+    border-radius: var(--radius-md);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:text-[20px];
+    @apply tw:shrink-0;
+}
+
+.dir-reg-metric-val {
+    @apply tw:text-[20px];
+    @apply tw:font-extrabold;
+    color: var(--dark);
+    @apply tw:leading-[1.2];
+}
+
+.dir-reg-metric-lbl {
+    @apply tw:text-[12px];
+    @apply tw:font-semibold;
+    color: var(--dark-muted);
+}
+
+/* 2-Column Layout */
+.dir-reg-grid {
+    @apply tw:grid;
+    grid-template-columns: 7fr 5fr;
+    @apply tw:gap-[24px];
+    @apply tw:mb-[24px];
+}
+
+.dir-reg-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    @apply tw:overflow-hidden;
+}
+
+.dir-reg-card-head {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-color);
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-center;
+    background: #fafbfc;
+}
+
+.dir-reg-card-head h2 {
+    @apply tw:text-[16px];
+    @apply tw:font-extrabold;
+    color: var(--dark);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+}
+
+.dir-reg-form {
+    @apply tw:p-[24px];
+}
+
+.form-group-grid {
+    @apply tw:grid;
+    grid-template-columns: 1fr 1fr;
+    @apply tw:gap-[16px];
+    @apply tw:mb-[16px];
+}
+
+.dir-input-group {
+    @apply tw:mb-[16px];
+}
+
+.dir-input-group label {
+    @apply tw:block;
+    @apply tw:text-[12px];
+    @apply tw:font-bold;
+    @apply tw:text-[#475569];
+    @apply tw:mb-[6px];
+}
+
+.dir-input {
+    @apply tw:w-full;
+    border: 1px solid #cbd5e1;
+    @apply tw:rounded-[8px];
+    padding: 9px 14px;
+    @apply tw:text-[13px];
+    color: var(--dark);
+    @apply tw:font-[inherit];
+    outline: none;
+    transition: border-color 0.2s;
+    background: #ffffff;
+}
+
+.dir-input:focus {
+    border-color: var(--dir-reg-indigo);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.dir-select {
+    @apply tw:w-full;
+    border: 1px solid #cbd5e1;
+    @apply tw:rounded-[8px];
+    padding: 9px 14px;
+    @apply tw:text-[13px];
+    color: var(--dark);
+    @apply tw:font-[inherit];
+    outline: none;
+    background: #ffffff;
+    @apply tw:cursor-pointer;
+}
+
+/* Badge Live Preview Card */
+.staff-badge-preview {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+    border-radius: var(--radius-lg);
+    @apply tw:p-[24px];
+    @apply tw:text-[#ffffff];
+    @apply tw:relative;
+    @apply tw:overflow-hidden;
+    box-shadow: 0 10px 25px -5px rgba(30, 27, 75, 0.4);
+    @apply tw:mb-[24px];
+}
+
+.staff-badge-header {
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    @apply tw:pb-[12px];
+    @apply tw:mb-[16px];
+}
+
+.staff-badge-id {
+    font-family: 'JetBrains Mono', monospace;
+    @apply tw:text-[13px];
+    @apply tw:font-bold;
+    @apply tw:text-[#93c5fd];
+    background: rgba(255, 255, 255, 0.1);
+    padding: 3px 8px;
+    @apply tw:rounded-[4px];
+}
+
+.staff-badge-body {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[16px];
+    @apply tw:mb-[16px];
+}
+
+.staff-badge-avatar {
+    @apply tw:w-[58px];
+    @apply tw:h-[58px];
+    @apply tw:rounded-[50%];
+    background: linear-gradient(135deg, #10b981, #059669);
+    @apply tw:text-[#ffffff];
+    @apply tw:text-[20px];
+    @apply tw:font-extrabold;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    @apply tw:shrink-0;
+}
+
+.staff-badge-name {
+    @apply tw:text-[18px];
+    @apply tw:font-extrabold;
+    @apply tw:mb-[2px];
+}
+
+.staff-badge-role {
+    @apply tw:text-[13px];
+    @apply tw:text-[#c7d2fe];
+}
+
+.staff-badge-footer {
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:text-[11px];
+    @apply tw:text-[#a5b4fc];
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    @apply tw:pt-[10px];
+}
+
+/* Recent Staff List in Preview Column */
+.recent-staff-item {
+    padding: 14px 20px;
+    border-bottom: 1px solid #f1f5f9;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+    transition: background 0.15s ease;
+}
+
+.recent-staff-item:hover {
+    background: #f8fafc;
+}
+
+.recent-staff-item:last-child {
+    border-bottom: none;
+}
+
+@media (max-width: 1024px) {
+    .dir-reg-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .dir-reg-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .dir-reg-metrics {
+        grid-template-columns: 1fr;
+    }
+    .dir-reg-hero {
+        @apply tw:flex-col;
+        @apply tw:items-start;
+        @apply tw:gap-[18px];
+    }
+    .form-group-grid {
+        grid-template-columns: 1fr;
+    }
+}

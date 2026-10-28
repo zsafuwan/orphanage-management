@@ -1,55 +1,250 @@
-/* Focused action styles for requisitions and residential records. */
-.requisition-actions-panel { min-width: 0; }
-.requisition-actions-panel .director-card-head { flex-wrap: wrap; gap: 14px; }
-.requisition-actions-panel .director-card-body { display: grid; gap: 12px; padding: 20px; }
-.requisition-actions-panel .req-item-card { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px; border: 1px solid #e2e8f0; border-radius: 14px; background: #fafbff; }
-.requisition-actions-panel .req-left-info { display: flex; align-items: flex-start; gap: 12px; min-width: 0; }
-.requisition-actions-panel .req-avatar { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; flex-shrink: 0; background: #e8e7ff; color: #4f46a7; font-size: 12px; font-weight: 700; }
-.requisition-actions-panel .req-meta-title { font-size: 14px; font-weight: 600; line-height: 1.6; }
-.requisition-actions-panel .req-meta-sub { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 7px; font-size: 12px; color: #526176; }
-.requisition-actions-panel .req-priority-tag { padding: 3px 8px; border-radius: 6px; font-weight: 600; }
-.requisition-actions-panel .req-priority-critical { color: #a52a3b; background: #ffe8ed; }
-.requisition-actions-panel .req-priority-high { color: #88520a; background: #fff0cf; }
-.requisition-actions-panel .req-actions { flex-shrink: 0; }
-.requisition-actions-panel :is(.btn-director-approve,.director-link-action),
-.residential-actions-panel :is(.btn-primary,.btn-outline,.table-action-btn,.view-mode-btn) {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    min-height: 40px; padding: 9px 14px; border: 1px solid transparent;
-    border-radius: 11px; font-family: inherit; font-size: 13px; font-weight: 600;
-    line-height: 1.4; text-decoration: none; cursor: pointer;
-    transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+/*! tailwindcss v4.3.3 | MIT License | https://tailwindcss.com */
+@layer properties;
+.requisition-actions-panel {
+  min-width: 0px;
 }
-.requisition-actions-panel .btn-director-approve { color: #fff; background: linear-gradient(135deg,#6355dc,#44349f); border-color: #4a3da6; box-shadow: 0 3px 0 #332779,0 5px 12px rgb(68 52 159 / 12%); }
-.requisition-actions-panel .btn-director-approve > i { background: rgb(255 255 255 / 16%); padding: 6px; border-radius: 7px; }
-.requisition-actions-panel .director-link-action { background: #efedff; color: #493a99; border-color: #dbd5fa; }
-.residential-actions-panel .admin-card-head { flex-wrap: wrap; gap: 20px; }
-.residential-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; width: 100%; padding-top: 16px; border-top: 1px solid #e7ece7; }
-.residential-actions-panel .residential-toolbar .btn-primary { color: white; background: linear-gradient(135deg,#258361,#176047); border-color: #19664b; box-shadow: 0 3px 0 #104a35,0 5px 12px rgb(23 96 71 / 12%); }
-.residential-actions-panel [onclick^="openStaffKeyPaperModal"] { background: #eef2ff; border-color: #cbd5fa; color: #354f9d; }
-.residential-actions-panel [onclick^="openStaffRecordMedModal"] { background: #e8f6ef; border-color: #bedfce; color: #216448; }
-.residential-actions-panel [onclick^="openStaffDossierModal"] { background: #fff4df; border-color: #e8d3a7; color: #775319; }
-.residential-actions-panel :is(.btn-primary,.btn-outline,.table-action-btn) > i { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; background: rgb(110 130 150 / 10%); flex-shrink: 0; }
-.residential-actions-panel .residential-toolbar .view-mode-toggle { display: flex; flex-wrap: wrap; gap: 4px; margin-left: auto; padding: 4px; border: 1px solid #dce5e0; border-radius: 13px; background: #f0f4f1; }
-.residential-actions-panel .view-mode-btn { background: transparent; color: #506456; box-shadow: none; min-height: 34px; padding: 7px 11px; }
-.residential-actions-panel .view-mode-btn.active { background: #fff; color: #205e43; border-color: #d4e2d9; box-shadow: 0 2px 5px rgb(32 59 52 / 8%); }
-.residential-actions-panel .staff-ward-card :is(.table-action-btn,.btn-outline) { margin-top: 5px; font-size: 12px; padding: 7px 9px; min-height: 36px; }
-.residential-actions-panel .staff-ward-card > div:last-child > div { gap: 8px !important; }
-.residential-actions-panel .staff-ward-card > div:last-child > div > div { display: flex; flex-wrap: wrap; gap: 8px !important; }
-.residential-actions-panel #staff_ward_table_tbody td:last-child { white-space: normal !important; min-width: 160px; }
-.residential-actions-panel #staff_ward_table_tbody .table-action-btn { margin: 4px; }
-.requisition-actions-panel :is(.btn-director-approve,.director-link-action):hover:not(:disabled),
-.residential-actions-panel :is(.btn-primary,.btn-outline,.table-action-btn,.view-mode-btn):hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 14px rgb(30 50 60 / 14%); }
-.requisition-actions-panel :is(.btn-director-approve,.director-link-action):active,
-.residential-actions-panel :is(.btn-primary,.btn-outline,.table-action-btn,.view-mode-btn):active { transform: translateY(1px); box-shadow: none; }
-.requisition-actions-panel :is(a,button):focus-visible,
-.residential-actions-panel :is(a,button):focus-visible { outline: 3px solid #bc892b; outline-offset: 3px; }
-.requisition-actions-panel button:disabled,
-.residential-actions-panel button:disabled { cursor: not-allowed; opacity: .6; transform: none; box-shadow: none; }
-@media(max-width:600px) {
-    .requisition-actions-panel .req-item-card { flex-direction: column; align-items: stretch; }
-    .requisition-actions-panel .req-actions { align-self: flex-end; }
-    .residential-actions-panel .residential-toolbar .view-mode-toggle { margin-left: 0; }
+.requisition-actions-panel .director-card-head {
+  flex-wrap: wrap;
+  gap: 14px;
 }
-@media(prefers-reduced-motion:reduce) {
-    .requisition-actions-panel :is(a,button),.residential-actions-panel :is(a,button) { transition: none; transform: none !important; }
+.requisition-actions-panel .director-card-body {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+}
+.requisition-actions-panel .req-item-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #fafbff;
+}
+.requisition-actions-panel .req-left-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0px;
+}
+.requisition-actions-panel .req-avatar {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  background: #e8e7ff;
+  color: #4f46a7;
+  font-size: 12px;
+  --tw-font-weight: var(--tw-font-weight-bold, 700);
+  font-weight: var(--tw-font-weight-bold, 700);
+}
+.requisition-actions-panel .req-meta-title {
+  font-size: 14px;
+  --tw-font-weight: var(--tw-font-weight-semibold, 600);
+  font-weight: var(--tw-font-weight-semibold, 600);
+  --tw-leading: 1.6;
+  line-height: 1.6;
+}
+.requisition-actions-panel .req-meta-sub {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 7px;
+  font-size: 12px;
+  color: #526176;
+}
+.requisition-actions-panel .req-priority-tag {
+  padding: 3px 8px;
+  border-radius: 6px;
+  --tw-font-weight: var(--tw-font-weight-semibold, 600);
+  font-weight: var(--tw-font-weight-semibold, 600);
+}
+.requisition-actions-panel .req-priority-critical {
+  color: #a52a3b;
+  background: #ffe8ed;
+}
+.requisition-actions-panel .req-priority-high {
+  color: #88520a;
+  background: #fff0cf;
+}
+.requisition-actions-panel .req-actions {
+  flex-shrink: 0;
+}
+.requisition-actions-panel :is(.btn-director-approve,.director-link-action), .residential-actions-panel :is(.btn-primary,.btn-outline,.table-action-btn,.view-mode-btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 9px 14px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 13px;
+  --tw-font-weight: var(--tw-font-weight-semibold, 600);
+  font-weight: var(--tw-font-weight-semibold, 600);
+  --tw-leading: 1.4;
+  line-height: 1.4;
+  text-decoration-line: none;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+.requisition-actions-panel .btn-director-approve {
+  color: #fff;
+  background: linear-gradient(135deg,#6355dc,#44349f);
+  border-color: #4a3da6;
+  box-shadow: 0 3px 0 #332779,0 5px 12px rgb(68 52 159 / 12%);
+}
+.requisition-actions-panel .btn-director-approve > i {
+  background: rgb(255 255 255 / 16%);
+  padding: 6px;
+  border-radius: 7px;
+}
+.requisition-actions-panel .director-link-action {
+  background: #efedff;
+  color: #493a99;
+  border-color: #dbd5fa;
+}
+.residential-actions-panel .admin-card-head {
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.residential-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  padding-top: 16px;
+  border-top: 1px solid #e7ece7;
+}
+.residential-actions-panel .residential-toolbar .btn-primary {
+  color: white;
+  background: linear-gradient(135deg,#258361,#176047);
+  border-color: #19664b;
+  box-shadow: 0 3px 0 #104a35,0 5px 12px rgb(23 96 71 / 12%);
+}
+.residential-actions-panel [onclick^="openStaffKeyPaperModal"] {
+  background: #eef2ff;
+  border-color: #cbd5fa;
+  color: #354f9d;
+}
+.residential-actions-panel [onclick^="openStaffRecordMedModal"] {
+  background: #e8f6ef;
+  border-color: #bedfce;
+  color: #216448;
+}
+.residential-actions-panel [onclick^="openStaffDossierModal"] {
+  background: #fff4df;
+  border-color: #e8d3a7;
+  color: #775319;
+}
+.residential-actions-panel :is(.btn-primary,.btn-outline,.table-action-btn) > i {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  background: rgb(110 130 150 / 10%);
+  flex-shrink: 0;
+}
+.residential-actions-panel .residential-toolbar .view-mode-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-left: auto;
+  padding: 4px;
+  border: 1px solid #dce5e0;
+  border-radius: 13px;
+  background: #f0f4f1;
+}
+.residential-actions-panel .view-mode-btn {
+  background: transparent;
+  color: #506456;
+  box-shadow: none;
+  min-height: 34px;
+  padding: 7px 11px;
+}
+.residential-actions-panel .view-mode-btn.active {
+  background: #fff;
+  color: #205e43;
+  border-color: #d4e2d9;
+  box-shadow: 0 2px 5px rgb(32 59 52 / 8%);
+}
+.residential-actions-panel .staff-ward-card :is(.table-action-btn,.btn-outline) {
+  margin-top: 5px;
+  font-size: 12px;
+  padding: 7px 9px;
+  min-height: 36px;
+}
+.residential-actions-panel .staff-ward-card > div:last-child > div {
+  gap: 8px !important;
+}
+.residential-actions-panel .staff-ward-card > div:last-child > div > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px !important;
+}
+.residential-actions-panel #staff_ward_table_tbody td:last-child {
+  white-space: normal !important;
+  min-width: 160px;
+}
+.residential-actions-panel #staff_ward_table_tbody .table-action-btn {
+  margin: 4px;
+}
+.requisition-actions-panel :is(.btn-director-approve,.director-link-action):hover:not(:disabled), .residential-actions-panel :is(.btn-primary,.btn-outline,.table-action-btn,.view-mode-btn):hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgb(30 50 60 / 14%);
+}
+.requisition-actions-panel :is(.btn-director-approve,.director-link-action):active, .residential-actions-panel :is(.btn-primary,.btn-outline,.table-action-btn,.view-mode-btn):active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+.requisition-actions-panel :is(a,button):focus-visible, .residential-actions-panel :is(a,button):focus-visible {
+  outline: 3px solid #bc892b;
+  outline-offset: 3px;
+}
+.requisition-actions-panel button:disabled, .residential-actions-panel button:disabled {
+  cursor: not-allowed;
+  opacity: .6;
+  transform: none;
+  box-shadow: none;
+}
+@media (max-width:600px) {
+  .requisition-actions-panel .req-item-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .requisition-actions-panel .req-actions {
+    align-self: flex-end;
+  }
+  .residential-actions-panel .residential-toolbar .view-mode-toggle {
+    margin-left: 0;
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .requisition-actions-panel :is(a,button),.residential-actions-panel :is(a,button) {
+    transition: none;
+    transform: none !important;
+  }
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-leading {
+  syntax: "*";
+  inherits: false;
+}
+@layer properties {
+  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
+    *, ::before, ::after, ::backdrop {
+      --tw-font-weight: initial;
+      --tw-leading: initial;
+    }
+  }
 }

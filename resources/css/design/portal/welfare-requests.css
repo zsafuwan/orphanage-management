@@ -1,0 +1,102 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* ==========================================================================
+   HopeHaven Orphanage Management Portal - Welfare Requests & Approvals Stylesheet
+   File: public/css/portal/welfare-requests.css
+   ========================================================================== */
+
+/* Urgent Notice Callout Banner */
+.urgent-notice-banner {
+    background: rgba(239, 68, 68, 0.08);
+    border-left: 4px solid #ef4444;
+    border-radius: var(--radius-sm);
+    padding: 14px 20px;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+    @apply tw:mb-[24px];
+    @apply tw:gap-[14px];
+    box-shadow: var(--shadow-sm);
+}
+
+.urgent-notice-content {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[12px];
+    @apply tw:text-[13px];
+    @apply tw:text-[#1e293b];
+}
+
+/* Approval Decision Stamps */
+.decision-stamp {
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    padding: 4px 12px;
+    @apply tw:rounded-[20px];
+    @apply tw:text-[11.5px];
+    @apply tw:font-bold;
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.5px];
+}
+
+.stamp-approved {
+    background: rgba(16, 185, 129, 0.12);
+    @apply tw:text-[#059669];
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.stamp-rejected {
+    background: rgba(239, 68, 68, 0.12);
+    @apply tw:text-[#dc2626];
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.stamp-pending {
+    background: rgba(245, 158, 11, 0.12);
+    @apply tw:text-[#d97706];
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* Requisition Priority Badges */
+.priority-pill {
+    padding: 3px 8px;
+    @apply tw:rounded-[4px];
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:uppercase;
+}
+
+.priority-high { background: #fee2e2; @apply tw:text-[#b91c1c]; }
+.priority-medium { background: #fef3c7; @apply tw:text-[#b45309]; }
+.priority-routine { background: #f1f5f9; @apply tw:text-[#475569]; }
+
+/* Approval Audit Step Trail */
+.audit-timeline {
+    @apply tw:flex;
+    @apply tw:flex-col;
+    @apply tw:gap-[12px];
+    @apply tw:mt-[14px];
+}
+
+.audit-step-item {
+    background: #f8fafc;
+    border: 1px solid #f1f5f9;
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-center;
+}
+
+.audit-step-actor {
+    @apply tw:text-[13px];
+    @apply tw:font-bold;
+    color: var(--dark);
+}
+
+.audit-step-meta {
+    @apply tw:text-[11.5px];
+    color: var(--dark-muted);
+}

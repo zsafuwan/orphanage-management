@@ -1,10 +1,10 @@
 @extends('layouts.portal')
 
-@section('title', 'Executive Admin Dashboard')
+@section('title', 'Admin Dashboard')
 @section('breadcrumb', 'Workspace | Admin Dashboard')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/portal/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/dashboard.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/dashboard.css')), 0, 12) }}">
     <!-- Chart.js CDN for interactive Adminator Monthly Performance Chart -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,38 +14,40 @@
 
 @section('content')
 <!-- Adminator Hero Section -->
-<section class="adminator-hero">
+<section class="adminator-hero portal-dashboard-hero">
+    <div class="portal-hero-copy">
     <div class="hero-text">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
             <span class="hero-date" id="heroLiveDate" style="margin-bottom: 0;">
                 <i class="far fa-calendar-alt"></i> {{ now()->format('l · F j · Y') }}
             </span>
             <span style="background: rgba(255, 44, 90, 0.1); color: var(--primary); font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 20px; border: 1px solid rgba(255, 44, 90, 0.2); display: inline-flex; align-items: center; gap: 5px;">
-                <i class="fas fa-crown"></i> Executive Admin View
+                <i class="fas fa-crown"></i> Admin View
             </span>
         </div>
         <h1 class="hero-title">
             Welcome back, <span class="accent-name">Sister Grace</span> 👋
         </h1>
         <p class="hero-sub">
-            Sanctuary occupancy is at <strong>100% capacity</strong>, academic enrollment steady across all wards, and storeroom replenishment on schedule. All 5 operational subsystems and administrative governance controls are online.
+            Every detail is a little act of care. Here's your orphanage at a glance, from children's wellbeing to the people and supplies that support them.
         </p>
     </div>
     <div class="hero-actions">
-        <a href="{{ route('dashboard.staff') }}" class="btn-outline btn-sm" title="View caregiving and daily duty operations">
-            <i class="fas fa-clipboard-user" style="color: #059669;"></i> Staff View
-        </a>
-        <a href="{{ route('register') }}" class="btn-outline btn-sm" title="Provision a new sanctuary administrator">
-            <i class="fas fa-user-shield" style="color: var(--primary);"></i> Provision Admin
+        <a href="{{ route('register') }}" class="btn-outline btn-sm" title="Create a new admin account">
+            <i class="fas fa-user-shield" style="color: var(--primary);"></i> Create Admin
         </a>
         <button class="btn-primary btn-sm" onclick="exportSanctuaryReport()">
-            <i class="fas fa-download"></i> Export Audit
+            <i class="fas fa-download"></i> Download Report
         </button>
     </div>
+    </div>
+    @include('portal.partials.workspace-art')
 </section>
 
+@include('portal.partials.care-shortcuts')
+
 <!-- Adminator 4-Card KPI Metrics Grid -->
-<section class="kpi-grid" aria-label="Key sanctuary metrics">
+<section class="kpi-grid" aria-label="Key orphanage metrics">
     <!-- Metric 1: Total Visits / Children In Sanctuary (Success Theme) -->
     <article class="kpi-card c-success">
         <div class="kpi-top">
@@ -53,7 +55,7 @@
                 <div class="kpi-icon success">
                     <i class="fas fa-child"></i>
                 </div>
-                <div class="kpi-label">Sanctuary Wards</div>
+                <div class="kpi-label">Children in Care</div>
             </div>
             <span class="kpi-pill up">
                 <i class="fas fa-arrow-up"></i> +12%
@@ -65,24 +67,6 @@
         </div>
     </article>
 
-    <!-- Metric 2: Page Views / Stock Valuation (Danger Theme) -->
-    <article class="kpi-card c-danger">
-        <div class="kpi-top">
-            <div class="kpi-identity">
-                <div class="kpi-icon danger">
-                    <i class="fas fa-boxes"></i>
-                </div>
-                <div class="kpi-label">Storeroom Stock</div>
-            </div>
-            <span class="kpi-pill down">
-                <i class="fas fa-exclamation-triangle"></i> 2 Alert
-            </span>
-        </div>
-        <div class="kpi-value">$2,965 USD</div>
-        <div class="kpi-compare">
-            <i class="fas fa-arrow-down" style="color: #ef4444;"></i> 2 critical SKUs below reorder threshold <span class="sep">·</span> med kit
-        </div>
-    </article>
 
     <!-- Metric 3: Unique Visitors / Welfare Aid Pending (Purple Theme) -->
     <article class="kpi-card c-purple">
@@ -91,7 +75,7 @@
                 <div class="kpi-icon purple">
                     <i class="fas fa-file-medical-alt"></i>
                 </div>
-                <div class="kpi-label">Welfare Requisitions</div>
+                <div class="kpi-label">Welfare Requests</div>
             </div>
             <span class="kpi-pill flat">
                 <i class="fas fa-clock"></i> 1 Review
@@ -110,7 +94,7 @@
                 <div class="kpi-icon primary">
                     <i class="fas fa-hand-holding-usd"></i>
                 </div>
-                <div class="kpi-label">Donation Inflows</div>
+                <div class="kpi-label">Donations Received</div>
             </div>
             <span class="kpi-pill info">
                 <i class="fas fa-heart"></i> +28%
@@ -127,32 +111,25 @@
 <div style="margin-bottom: 28px;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
         <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #64748b;">
-            <i class="fas fa-th-large"></i> Integrated Subsystems Directory
+            <i class="fas fa-th-large"></i> Quick Links
         </span>
-        <span class="badge badge-success">5 Modules Connected</span>
+        <span class="badge badge-success">4 Sections</span>
     </div>
 
     <div class="subsystems-admin-grid">
         <a href="{{ route('child-welfare') }}" class="subsystem-admin-card s-welfare">
             <div>
                 <div class="s-num">Subsystem 01</div>
-                <div class="s-title">Child Welfare & Education</div>
+                <div class="s-title">Child Care & Education</div>
             </div>
             <div class="s-meta"><i class="fas fa-user-graduate"></i> 4 Active Profiles</div>
         </a>
 
-        <a href="{{ route('inventory') }}" class="subsystem-admin-card s-inventory">
-            <div>
-                <div class="s-num">Subsystem 02</div>
-                <div class="s-title">Inventory & Supplies</div>
-            </div>
-            <div class="s-meta"><i class="fas fa-boxes"></i> 6 Catalog SKUs</div>
-        </a>
 
         <a href="{{ route('welfare-requests') }}" class="subsystem-admin-card s-requests">
             <div>
                 <div class="s-num">Subsystem 03</div>
-                <div class="s-title">Welfare Requisitions</div>
+                <div class="s-title">Welfare Requests</div>
             </div>
             <div class="s-meta"><i class="fas fa-clipboard-check"></i> 1 Pending Review</div>
         </a>
@@ -162,7 +139,7 @@
                 <div class="s-num">Subsystem 04</div>
                 <div class="s-title">Staff & Volunteers</div>
             </div>
-            <div class="s-meta"><i class="fas fa-user-clock"></i> 5 Active Personnel</div>
+            <div class="s-meta"><i class="fas fa-user-clock"></i> 5 Staff & Volunteers</div>
         </a>
 
         <a href="{{ route('donations') }}" class="subsystem-admin-card s-donations">
@@ -182,53 +159,12 @@
         <div class="admin-card-head">
             <div class="card-title-wrap">
                 <span class="eyebrow">Operational Status</span>
-                <h2 class="card-title">Sanctuary Capacity & Resource Allocation</h2>
+                <h2 class="card-title">Staff Coverage</h2>
             </div>
-            <a class="card-action-link" href="{{ route('inventory') }}">
-                Detailed Audit <i class="fas fa-arrow-right"></i>
-            </a>
+            <a class="card-action-link" href="{{ route('staff-volunteers') }}">View Staff <i class="fas fa-arrow-right"></i></a>
         </div>
 
         <div class="sv-regions">
-            <!-- Region 1: Food & Kitchen Supplies -->
-            <div class="sv-region">
-                <div class="sv-region-row">
-                    <span class="sv-region-name">
-                        <span class="sv-marker" style="background: #10b981;"></span> Nutritional Food & Rice Stores
-                    </span>
-                    <span class="sv-region-val">48 Bags (25kg) <span class="sv-region-pct">82% Stocked</span></span>
-                </div>
-                <div class="sv-bar-track">
-                    <div class="sv-bar-fill" style="width: 82%; background: #10b981;"></div>
-                </div>
-            </div>
-
-            <!-- Region 2: First Aid & Clinic Medicines -->
-            <div class="sv-region">
-                <div class="sv-region-row">
-                    <span class="sv-region-name">
-                        <span class="sv-marker" style="background: #ef4444;"></span> Pediatric First Aid & Antibiotics
-                    </span>
-                    <span class="sv-region-val">8 Bottles Left <span class="sv-region-pct" style="color: #b91c1c; background: #fee2e2;">16% Critical</span></span>
-                </div>
-                <div class="sv-bar-track">
-                    <div class="sv-bar-fill" style="width: 16%; background: #ef4444;"></div>
-                </div>
-            </div>
-
-            <!-- Region 3: School Uniforms & Books -->
-            <div class="sv-region">
-                <div class="sv-region-row">
-                    <span class="sv-region-name">
-                        <span class="sv-marker" style="background: #3b82f6;"></span> School Textbooks & Stationery
-                    </span>
-                    <span class="sv-region-val">120 Units <span class="sv-region-pct">90% Equipped</span></span>
-                </div>
-                <div class="sv-bar-track">
-                    <div class="sv-bar-fill" style="width: 90%; background: #3b82f6;"></div>
-                </div>
-            </div>
-
             <!-- Region 4: Caregiver Duty Staffing -->
             <div class="sv-region">
                 <div class="sv-region-row">
@@ -269,7 +205,7 @@
                 </div>
                 <div class="radial-text">
                     <div class="radial-title">Budget Used</div>
-                    <div class="radial-caption">Q2 sanctuary</div>
+                    <div class="radial-caption">Q2 orphanage</div>
                 </div>
             </div>
 
@@ -293,11 +229,11 @@
     <section class="col-6 admin-card">
         <div class="admin-card-head">
             <div class="card-title-wrap">
-                <span class="eyebrow">Financial & Welfare Trends</span>
-                <h2 class="card-title">Monthly Contributions vs Aid Expenses</h2>
+                <span class="eyebrow">Donations & Support Trends</span>
+                <h2 class="card-title">Monthly Donations & Support Spending</h2>
             </div>
             <span style="font-size: 11.5px; font-weight: 700; color: #64748b; background: #f1f5f9; padding: 4px 10px; border-radius: 8px;">
-                2026 Fiscal Year
+                2026 Financial Year
             </span>
         </div>
 
@@ -314,19 +250,19 @@
                 </div>
             </div>
             <div class="stat-cell">
-                <div class="stat-cell-label">Apr Inflows</div>
+                <div class="stat-cell-label">April Donations</div>
                 <div class="stat-cell-value">
                     $10.2K <i class="fas fa-arrow-trend-up trend-up"></i>
                 </div>
             </div>
             <div class="stat-cell">
-                <div class="stat-cell-label">Direct Aid Paid</div>
+                <div class="stat-cell-label">Support Payments</div>
                 <div class="stat-cell-value">
                     $4.8K <i class="fas fa-arrow-trend-up trend-up"></i>
                 </div>
             </div>
             <div class="stat-cell">
-                <div class="stat-cell-label">Reserve Surplus</div>
+                <div class="stat-cell-label">Remaining Funds</div>
                 <div class="stat-cell-value">
                     $5.4K <i class="fas fa-arrow-trend-up trend-up"></i>
                 </div>
@@ -342,7 +278,7 @@
         <div class="admin-card-head">
             <div class="card-title-wrap">
                 <span class="eyebrow">Priority Tasks</span>
-                <h2 class="card-title">Sanctuary Operations Todo List</h2>
+                <h2 class="card-title">Orphanage Operations Todo List</h2>
             </div>
             <button class="btn-outline btn-sm" onclick="addNewTodoPrompt()" style="font-size: 11.5px; padding: 4px 10px;">
                 <i class="fas fa-plus"></i> Add Task
@@ -393,7 +329,7 @@
         <div class="admin-card-head">
             <div class="card-title-wrap">
                 <span class="eyebrow">Audit & Dispatch</span>
-                <h2 class="card-title">Recent Welfare Aid Dispatches</h2>
+                <h2 class="card-title">Recent Support Provided</h2>
             </div>
             <a class="card-action-link" href="{{ route('welfare-requests') }}">
                 View All <i class="fas fa-arrow-right"></i>
@@ -406,8 +342,8 @@
                     <tr>
                         <th>Item / Purpose</th>
                         <th>Status</th>
-                        <th>Target Child</th>
-                        <th style="text-align: right;">Valuation</th>
+                        <th>Child</th>
+                        <th style="text-align: right;">Value</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -453,8 +389,8 @@
     <section class="col-6 admin-card">
         <div class="admin-card-head">
             <div class="card-title-wrap">
-                <span class="eyebrow">Local Climate & Sanctuary Yard</span>
-                <h2 class="card-title">Sanctuary Weather Forecast</h2>
+                <span class="eyebrow">Local Climate & Orphanage Yard</span>
+                <h2 class="card-title">Orphanage Weather Forecast</h2>
             </div>
             <span style="font-size: 11px; font-weight: 700; color: #64748b;">
                 <i class="fas fa-location-dot" style="color: var(--primary);"></i> HopeHaven Campus
@@ -522,7 +458,7 @@
         <div class="admin-card-head">
             <div class="card-title-wrap">
                 <span class="eyebrow">Coordination Channel</span>
-                <h2 class="card-title">Staff Quick Dispatch Chat</h2>
+                <h2 class="card-title">Staff Chat</h2>
             </div>
             <span class="badge badge-success"><i class="fas fa-circle" style="font-size: 8px;"></i> 3 Online</span>
         </div>
@@ -661,7 +597,7 @@
 
     // Add new Task prompt simulation
     function addNewTodoPrompt() {
-        var taskText = prompt("Enter a new sanctuary operational task:");
+        var taskText = prompt("Enter a new orphanage operational task:");
         if (taskText && taskText.trim() !== "") {
             var newId = "td_" + Date.now();
             var newItemHtml = `
@@ -706,9 +642,9 @@
     // Export report simulation
     function exportSanctuaryReport() {
         var toast = $("#portal_toast");
-        toast.html('<i class="fas fa-file-excel" style="color:#10b981; font-size:16px;"></i> Generating Sanctuary 2026 Comprehensive Report (PDF/XLSX)...').css("display", "flex");
+        toast.html('<i class="fas fa-file-excel" style="color:#10b981; font-size:16px;"></i> Generating orphanage 2026 Comprehensive Report (PDF/XLSX)...').css("display", "flex");
         setTimeout(function() {
-            toast.html('<i class="fas fa-check-circle" style="color:#10b981; font-size:16px;"></i> Sanctuary Executive Audit exported successfully.');
+            toast.html('<i class="fas fa-check-circle" style="color:#10b981; font-size:16px;"></i> Orphanage Executive Audit exported successfully.');
             setTimeout(function() { toast.fadeOut(400); }, 3000);
         }, 1200);
     }

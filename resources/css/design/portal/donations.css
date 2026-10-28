@@ -1,0 +1,93 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* ==========================================================================
+   HopeHaven Orphanage Management Portal - Donations & Contributions Stylesheet
+   File: public/css/portal/donations.css
+   ========================================================================== */
+
+/* Donor Tier Recognition Badges */
+.donor-tier-pill {
+    padding: 4px 12px;
+    @apply tw:rounded-[20px];
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.5px];
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[5px];
+}
+
+.tier-guardian {
+    background: #fef3c7;
+    @apply tw:text-[#b45309];
+    border: 1px solid #fde68a;
+}
+
+.tier-champion {
+    background: #e0e7ff;
+    @apply tw:text-[#3730a3];
+    border: 1px solid #c7d2fe;
+}
+
+.tier-supporter {
+    background: #f1f5f9;
+    @apply tw:text-[#475569];
+    border: 1px solid #e2e8f0;
+}
+
+/* Payment / Contribution Method Badges */
+.method-badge {
+    padding: 3px 10px;
+    @apply tw:rounded-[12px];
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[5px];
+}
+
+.method-stripe { background: #e0e7ff; @apply tw:text-[#4338ca]; }
+.method-bank { background: #ecfdf5; @apply tw:text-[#047857]; }
+.method-inkind { background: #fef3c7; @apply tw:text-[#b45309]; }
+.method-cash { background: #f1f5f9; @apply tw:text-[#334155]; }
+
+/* Fund Allocation Tracking */
+.allocation-tracker {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    @apply tw:p-[22px];
+    box-shadow: var(--shadow-sm);
+    @apply tw:mb-[24px];
+}
+
+.allocation-meter-bar {
+    @apply tw:w-full;
+    @apply tw:h-[8px];
+    background: #e2e8f0;
+    @apply tw:rounded-[4px];
+    @apply tw:overflow-hidden;
+    margin: 8px 0;
+}
+
+.allocation-meter-fill {
+    @apply tw:h-full;
+    background: #14b8a6;
+    @apply tw:rounded-[4px];
+    transition: width 0.3s ease;
+}
+
+/* Receipt Generated Status */
+.receipt-status-pill {
+    background: rgba(16, 185, 129, 0.1);
+    @apply tw:text-[#059669];
+    padding: 3px 10px;
+    @apply tw:rounded-[12px];
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[5px];
+}

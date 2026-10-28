@@ -1,92 +1,12 @@
 @extends('layouts.portal')
 
-@section('title', 'Staff Welfare Requests & Requisitions')
-@section('breadcrumb', 'Workspace | Staff Welfare Requests')
+@section('title', 'Staff Support Requests & Requests')
+@section('breadcrumb', 'Workspace | Staff Support Requests')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/portal/welfare-requests.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/dashboard.css') }}">
-    <style>
-        .staff-welfare-hero {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 60%, #2563eb 100%);
-            color: #ffffff;
-            border-radius: var(--radius-md);
-            padding: 24px 28px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 18px rgba(30, 58, 138, 0.18);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .staff-welfare-hero::after {
-            content: '';
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .req-status-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 4px 10px;
-            border-radius: 14px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .status-pending-admin {
-            background: #fef3c7;
-            color: #b45309;
-            border: 1px solid #fde68a;
-        }
-
-        .status-approved-admin {
-            background: #d1fae5;
-            color: #065f46;
-            border: 1px solid #a7f3d0;
-        }
-
-        .status-rejected-admin {
-            background: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #fecaca;
-        }
-
-        .ticket-item-row {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 20px 24px;
-            box-shadow: var(--shadow-sm);
-            margin-bottom: 16px;
-            transition: all 0.2s ease;
-        }
-
-        .ticket-item-row:hover {
-            border-color: #cbd5e1;
-            box-shadow: var(--shadow-md);
-        }
-
-        .rbac-workflow-ribbon {
-            background: #eff6ff;
-            border: 1px solid #bfdbfe;
-            border-radius: 8px;
-            padding: 10px 16px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 12.5px;
-            color: #1e40af;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/portal/welfare-requests.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/welfare-requests.css')), 0, 12) }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/dashboard.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/dashboard.css')), 0, 12) }}">
+    <link rel="stylesheet" href="{{ asset('css/embedded/portal-staff-welfare-requests-1.css') }}?v={{ substr(hash_file('sha256', public_path('css/embedded/portal-staff-welfare-requests-1.css')), 0, 12) }}">
 @endpush
 
 @section('content')
@@ -96,13 +16,13 @@
     <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
         <div style="max-width: 680px;">
             <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.18); border: 1px solid rgba(255, 255, 255, 0.25); padding: 3px 12px; border-radius: 20px; font-size: 11.5px; font-weight: 700; margin-bottom: 10px; letter-spacing: 0.5px; text-transform: uppercase;">
-                <i class="fas fa-hand-holding-heart"></i> Staff Caregiver Requisition Portal · Subsystem 3
+                <i class="fas fa-hand-holding-heart"></i> Staff Caregiver Request Portal · Subsystem 3
             </div>
             <h1 style="font-size: 24px; font-weight: 800; margin: 0 0 8px 0; letter-spacing: -0.5px;">
-                Resident Child Welfare Assistance Requests
+                Child Support Requests
             </h1>
             <p style="font-size: 13.5px; opacity: 0.92; margin: 0; line-height: 1.5;">
-                Caregiver workspace to submit specialized medical, dental, schooling, and clothing aid requisitions for resident children. All submissions are automatically routed to Sister Grace for administrative approval.
+                Caregiver workspace to submit specialized medical, dental, schooling, and clothing aid requests for resident children. All submissions are automatically routed to Sister Grace for administrative approval.
             </p>
         </div>
 
@@ -110,9 +30,6 @@
             <button class="btn-primary" style="background: #ffffff; color: #1e40af; border-color: #ffffff; font-weight: 700;" onclick="openStaffWelfareModal('modal_staff_create_request')">
                 <i class="fas fa-plus"></i> Submit Welfare Request
             </button>
-            <a href="{{ route('welfare-requests') }}" class="btn-outline" style="background: rgba(255, 255, 255, 0.12); color: #ffffff; border-color: rgba(255, 255, 255, 0.3);" title="Switch to Admin Approvals Portal">
-                <i class="fas fa-user-shield"></i> Admin Approvals Desk
-            </a>
         </div>
     </div>
 </div>
@@ -122,9 +39,9 @@
     <div style="display: flex; align-items: center; gap: 10px;">
         <i class="fas fa-shield-alt" style="font-size: 18px; color: #2563eb;"></i>
         <div>
-            <strong>Clearance Protocol:</strong>
+            <strong>Approval Rules:</strong>
             Staff duty members originate welfare aid requests. 
-            <strong style="color: #059669;">Sister Grace (Sanctuary Executive Director)</strong> holds the exclusive authority to authorize funding disbursement or draw central warehouse inventory.
+            <strong style="color: #059669;">Sister Grace (Orphanage Executive Director)</strong> holds the exclusive authority to approve funding payment or draw central warehouse inventory.
         </div>
     </div>
     <span class="badge badge-info" style="font-size: 11px;">Viewing as Nurse Mary</span>
@@ -139,7 +56,7 @@
                 <i class="fas fa-file-invoice"></i>
             </div>
         </div>
-        <div class="metric-val" id="kpi_staff_total_requests">5 Requisitions</div>
+        <div class="metric-val" id="kpi_staff_total_requests">5 Requests</div>
         <div class="metric-sub">Logged across residential wards</div>
     </div>
 
@@ -194,14 +111,14 @@
 </div>
 
 <!-- Search & Urgency Filter Bar -->
-<div class="filter-bar" style="margin-bottom: 20px;">
+<div class="filter-bar staff-record-filters" style="margin-bottom: 20px;">
     <div class="search-box-wrapper">
-        <i class="fas fa-search search-icon"></i>
-        <input type="text" id="staff_req_search" class="search-input" placeholder="Search by ticket #, child recipient, or aid title..." oninput="renderStaffRequests()">
+        <i class="fas fa-search search-icon" aria-hidden="true"></i>
+        <input type="text" id="staff_req_search" class="search-input" aria-label="Search welfare requests" placeholder="Search by ticket #, child recipient, or aid title..." oninput="renderStaffRequests()">
     </div>
 
     <div class="filter-select-wrapper">
-        <select id="staff_req_urgency_filter" class="filter-select" onchange="renderStaffRequests()">
+        <select id="staff_req_urgency_filter" class="filter-select" aria-label="Filter by urgency" onchange="renderStaffRequests()">
             <option value="all">All Urgency Tiers</option>
             <option value="Emergency">Emergency (Immediate 24h)</option>
             <option value="High">High Urgency</option>
@@ -210,7 +127,7 @@
     </div>
 
     <div class="filter-select-wrapper">
-        <select id="staff_req_category_filter" class="filter-select" onchange="renderStaffRequests()">
+        <select id="staff_req_category_filter" class="filter-select" aria-label="Filter by category" onchange="renderStaffRequests()">
             <option value="all">All Categories</option>
             <option value="Medical / Surgical">Medical / Surgical</option>
             <option value="Education & Tuition">Education & Schooling</option>
@@ -232,8 +149,8 @@
     <div class="portal-modal" style="max-width: 620px;">
         <div class="modal-header">
             <div>
-                <h3 class="modal-title">Submit Child Welfare Requisition</h3>
-                <p class="modal-sub">Originates from shift caregiver for administrative financial authorization.</p>
+                <h3 class="modal-title">Submit Child Welfare Request</h3>
+                <p class="modal-sub">Originates from shift caregiver for administrative financial approval.</p>
             </div>
             <button class="modal-close-btn" onclick="closeStaffWelfareModal('modal_staff_create_request')">&times;</button>
         </div>
@@ -247,7 +164,7 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">Requisition Title *</label>
+                <label class="form-label">Request Title *</label>
                 <input type="text" id="req_title_input" class="form-control" placeholder="e.g. Specialized Vision Eyeglasses & Scratch-Resistant Lenses" required>
             </div>
 
@@ -292,7 +209,7 @@
                 </div>
 
                 <div style="display: flex; justify-content: space-between; align-items: center; background: #eff6ff; padding: 10px 14px; border-radius: 8px; border: 1px solid #bfdbfe; margin-top: 10px;">
-                    <span style="font-size: 12px; font-weight: 700; color: #1e40af;">Total Estimated Requisition Budget:</span>
+                    <span style="font-size: 12px; font-weight: 700; color: #1e40af;">Total Estimated Request Budget:</span>
                     <strong id="req_total_cost_preview" style="font-size: 16px; color: #2563eb;">$65.00 USD</strong>
                 </div>
             </div>
@@ -315,8 +232,6 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/portal/child-welfare.js') }}"></script>
-<script src="{{ asset('js/portal/welfare-store.js') }}"></script>
 <script>
     let activeFilterTab = 'all';
 
@@ -374,7 +289,7 @@
         $('#count_tab_approved').text(approvedCount);
         $('#count_tab_rejected').text(rejectedCount);
 
-        $('#kpi_staff_total_requests').text(all.length + ' Requisitions');
+        $('#kpi_staff_total_requests').text(all.length + ' Requests');
         $('#kpi_staff_pending_requests').text(pendingCount + ' Pending');
         $('#kpi_staff_approved_requests').text(approvedCount + ' Approved');
 
@@ -409,7 +324,7 @@
                     borderHighlight = 'border-left: 4px solid #f59e0b;';
                     decisionBanner = `
                         <div style="background: #fffbeb; border: 1px dashed #fcd34d; border-radius: 8px; padding: 10px 14px; margin-top: 14px; font-size: 12px; color: #92400e; display: flex; align-items: center; justify-content: space-between;">
-                            <span><i class="fas fa-info-circle"></i> In Admin Review Queue. <strong>Staff cannot approve</strong> &mdash; awaiting Sister Grace's authorization.</span>
+                            <span><i class="fas fa-info-circle"></i> In Admin Review Queue. <strong>Staff cannot approve</strong> &mdash; awaiting Sister Grace's approval.</span>
                             <span style="font-weight: 700;">Est. Decision: Today</span>
                         </div>
                     `;
@@ -423,8 +338,8 @@
                                 <strong><i class="fas fa-stamp"></i> Authorized by ${escapeHtml(dec.approvedBy || 'Sister Grace')}</strong>
                                 <span style="font-family: monospace; font-size: 11px;">Ref: ${dec.disbursementRef || 'DISB-2026'} &bull; ${dec.decisionDate || 'Approved'}</span>
                             </div>
-                            <div>Funding Allocated: <strong>${escapeHtml(dec.fundingSource || 'Sanctuary Endowment')}</strong></div>
-                            <div style="margin-top: 4px; font-style: italic;">"${escapeHtml(dec.remarks || 'Approved for disbursement.')}"</div>
+                            <div>Funding Allocated: <strong>${escapeHtml(dec.fundingSource || 'Orphanage Fund')}</strong></div>
+                            <div style="margin-top: 4px; font-style: italic;">"${escapeHtml(dec.remarks || 'Approved for payment.')}"</div>
                         </div>
                     `;
                 } else if (r.status === 'Rejected') {
@@ -532,8 +447,8 @@
         });
 
         if (lineItems.length === 0) {
-            lineItems.push({ item: title, cost: 50.00 });
-            totalCost = 50.00;
+            showPortalToast('Add at least one item and its actual cost before submitting.', false);
+            return;
         }
 
         const newRequest = window.HopeHavenWelfareStore.createRequest({
@@ -575,11 +490,8 @@
         populateChildSelect();
         renderStaffRequests();
 
-        // Listen for storage updates across tabs (e.g. when Admin approves in another tab)
-        $(window).on('storage', function(e) {
-            if (e.originalEvent.key === 'hopehaven_welfare_requests_v2') {
-                renderStaffRequests();
-            }
+        window.HopeHavenSync.subscribe('hopehaven_welfare_requests_v2', function() {
+            window.HopeHavenSync.refreshView(renderStaffRequests);
         });
     });
 </script>

@@ -1,0 +1,378 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* Director Children Education Stylesheet - HopeHaven */
+:root {
+    --edu-purple: #7c3aed;
+    --edu-purple-hover: #6d28d9;
+    --edu-purple-light: #f5f3ff;
+    --edu-indigo: #4f46e5;
+    --edu-emerald: #059669;
+}
+
+.edu-page-header {
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-start;
+    @apply tw:mb-[24px];
+    @apply tw:flex-wrap;
+    @apply tw:gap-[16px];
+}
+
+.edu-header-title h1 {
+    @apply tw:text-[24px];
+    @apply tw:font-extrabold;
+    color: var(--dark);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[10px];
+    @apply tw:mb-[4px];
+}
+
+.edu-header-title p {
+    @apply tw:text-[14px];
+    color: var(--dark-muted);
+}
+
+/* Academic KPI Metrics Row */
+.edu-kpi-row {
+    @apply tw:grid;
+    grid-template-columns: repeat(4, 1fr);
+    @apply tw:gap-[18px];
+    @apply tw:mb-[24px];
+}
+
+.edu-kpi-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[16px];
+    transition: transform 0.2s ease;
+}
+
+.edu-kpi-card:hover {
+    transform: translateY(-2px);
+    @apply tw:border-[#cbd5e1];
+}
+
+.edu-kpi-icon {
+    @apply tw:w-[44px];
+    @apply tw:h-[44px];
+    border-radius: var(--radius-md);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:text-[20px];
+    @apply tw:shrink-0;
+}
+
+.edu-kpi-icon.purple {
+    background: #f5f3ff;
+    @apply tw:text-[#7c3aed];
+}
+
+.edu-kpi-icon.indigo {
+    background: #eef2ff;
+    @apply tw:text-[#4f46e5];
+}
+
+.edu-kpi-icon.emerald {
+    background: #ecfdf5;
+    @apply tw:text-[#059669];
+}
+
+.edu-kpi-icon.amber {
+    background: #fef3c7;
+    @apply tw:text-[#d97706];
+}
+
+.edu-kpi-val {
+    @apply tw:text-[22px];
+    @apply tw:font-extrabold;
+    color: var(--dark);
+    @apply tw:leading-[1.2];
+}
+
+.edu-kpi-lbl {
+    @apply tw:text-[12px];
+    @apply tw:font-semibold;
+    color: var(--dark-muted);
+}
+
+/* Education Filter Toolbar */
+.edu-toolbar {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    @apply tw:mb-[20px];
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-center;
+    @apply tw:flex-wrap;
+    @apply tw:gap-[14px];
+    box-shadow: var(--shadow-sm);
+}
+
+.edu-filter-tabs {
+    @apply tw:flex;
+    @apply tw:gap-[8px];
+    @apply tw:flex-wrap;
+}
+
+.edu-tab-btn {
+    border: none;
+    background: #f1f5f9;
+    @apply tw:text-[#475569];
+    @apply tw:font-semibold;
+    @apply tw:text-[13px];
+    padding: 7px 14px;
+    @apply tw:rounded-[20px];
+    @apply tw:cursor-pointer;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    transition: all 0.2s ease;
+}
+
+.edu-tab-btn:hover {
+    background: #e2e8f0;
+    color: var(--dark);
+}
+
+.edu-tab-btn.active {
+    background: var(--edu-purple);
+    @apply tw:text-[#ffffff];
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+}
+
+.edu-tab-badge {
+    background: rgba(255, 255, 255, 0.25);
+    padding: 1px 7px;
+    @apply tw:rounded-[10px];
+    @apply tw:text-[11px];
+}
+
+.edu-tab-btn:not(.active) .edu-tab-badge {
+    background: #e2e8f0;
+    @apply tw:text-[#475569];
+}
+
+.edu-search-wrap {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[10px];
+}
+
+.edu-search-input {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    @apply tw:rounded-[20px];
+    padding: 7px 16px;
+    @apply tw:text-[13px];
+    color: var(--dark);
+    @apply tw:min-w-[240px];
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.edu-search-input:focus {
+    border-color: var(--edu-purple);
+    background: #ffffff;
+}
+
+/* Education Table */
+.edu-table-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    @apply tw:overflow-hidden;
+}
+
+.edu-table {
+    @apply tw:w-full;
+    @apply tw:border-collapse;
+    @apply tw:text-[13px];
+    @apply tw:text-left;
+}
+
+.edu-table th {
+    background: #f8fafc;
+    @apply tw:text-[#475569];
+    @apply tw:font-bold;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border-color);
+    @apply tw:text-[12px];
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.5px];
+}
+
+.edu-table td {
+    padding: 16px 18px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.edu-table tr:hover td {
+    background: #fafbfc;
+}
+
+.edu-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Student Profile Block */
+.student-cell {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[12px];
+}
+
+.student-avatar {
+    @apply tw:w-[42px];
+    @apply tw:h-[42px];
+    @apply tw:rounded-[50%];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:font-bold;
+    @apply tw:text-[14px];
+    @apply tw:shrink-0;
+}
+
+.student-avatar.primary {
+    background: #e0f2fe;
+    @apply tw:text-[#0369a1];
+}
+
+.student-avatar.secondary {
+    background: #f5f3ff;
+    @apply tw:text-[#6d28d9];
+}
+
+.student-name {
+    @apply tw:font-bold;
+    color: var(--dark);
+    @apply tw:mb-[2px];
+}
+
+.student-meta {
+    @apply tw:text-[12px];
+    @apply tw:text-[#64748b];
+}
+
+/* Grade badges */
+.grade-pill {
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[4px];
+    @apply tw:text-[12px];
+    @apply tw:font-extrabold;
+    padding: 3px 10px;
+    @apply tw:rounded-[20px];
+}
+
+.grade-pill.distinction {
+    background: #ecfdf5;
+    @apply tw:text-[#047857];
+    border: 1px solid #a7f3d0;
+}
+
+.grade-pill.credit {
+    background: #eef2ff;
+    @apply tw:text-[#4338ca];
+    border: 1px solid #c7d2fe;
+}
+
+.grade-pill.remedial {
+    background: #fffbeb;
+    @apply tw:text-[#b45309];
+    border: 1px solid #fde68a;
+}
+
+/* Subject miniature tags */
+.sub-tags-wrap {
+    @apply tw:flex;
+    @apply tw:gap-[6px];
+    @apply tw:flex-wrap;
+}
+
+.sub-tag {
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    background: #f1f5f9;
+    @apply tw:text-[#334155];
+    padding: 2px 6px;
+    @apply tw:rounded-[4px];
+}
+
+.sub-tag span {
+    @apply tw:text-[#7c3aed];
+    @apply tw:font-extrabold;
+}
+
+/* Action button */
+.btn-edu {
+    background: #7c3aed;
+    @apply tw:text-[#ffffff];
+    border: none;
+    padding: 6px 12px;
+    @apply tw:rounded-[6px];
+    @apply tw:text-[12px];
+    @apply tw:font-semibold;
+    @apply tw:cursor-pointer;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    transition: background 0.2s;
+}
+
+.btn-edu:hover {
+    background: #6d28d9;
+}
+
+/* Scorecard Table in Modal */
+.scorecard-table {
+    @apply tw:w-full;
+    @apply tw:border-collapse;
+    @apply tw:mb-[18px];
+    @apply tw:text-[13px];
+}
+
+.scorecard-table th {
+    background: #f8fafc;
+    padding: 8px 12px;
+    border-bottom: 1px solid #e2e8f0;
+    @apply tw:font-bold;
+    @apply tw:text-[#475569];
+}
+
+.scorecard-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+    .edu-kpi-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .edu-kpi-row {
+        grid-template-columns: 1fr;
+    }
+    .edu-toolbar {
+        @apply tw:flex-col;
+        @apply tw:items-stretch;
+    }
+    .edu-search-input {
+        @apply tw:w-full;
+    }
+}

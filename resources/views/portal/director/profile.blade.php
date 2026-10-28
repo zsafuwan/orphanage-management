@@ -1,10 +1,10 @@
 @extends('layouts.portal')
 
-@section('title', 'Director Profile & Credentials')
+@section('title', 'Director Profile & Account Details')
 @section('breadcrumb', 'Director Profile')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/portal/director-profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/director-profile.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/director-profile.css')), 0, 12) }}">
 @endpush
 
 @section('content')
@@ -23,7 +23,7 @@
                     </span>
                 </h1>
                 <div class="dir-profile-title">
-                    Executive Director & Chairperson · HopeHaven Sanctuary Board of Trustees
+                    Executive Director & Chairperson · HopeHaven Orphanage Board of Trustees
                 </div>
                 <div class="dir-badges-group">
                     <span class="dir-badge-pill indigo">
@@ -53,7 +53,7 @@
         <div class="director-card-head">
             <div class="director-card-title">
                 <i class="fas fa-id-card"></i>
-                <span>Executive Directorate Credentials & Institutional Governance</span>
+                <span>Executive Director Credentials & Institutional Management</span>
             </div>
             <span style="font-size: 12px; color: #059669; font-weight: 700;">
                 <i class="fas fa-shield-check"></i> Security Verified
@@ -65,7 +65,7 @@
                 <span>director@hopehaven.org.my</span>
             </div>
             <div class="dir-field-box">
-                <label>Direct Directorate Line</label>
+                <label>Direct Director Line</label>
                 <span>+60 3-4022 8891 (Office Suite A)</span>
             </div>
             <div class="dir-field-box">
@@ -73,12 +73,12 @@
                 <span>JKM / PAKK / WPKL / 2020-00812</span>
             </div>
             <div class="dir-field-box">
-                <label>Trustee Board Authorization</label>
+                <label>Trustee Board Approval</label>
                 <span>Section 44(6) Sole Financial Signatory</span>
             </div>
             <div class="dir-field-box">
                 <label>Office Headquarters</label>
-                <span>Directorate Suite, Level 2, HopeHaven Sanctuary, Kuala Lumpur</span>
+                <span>Director Suite, Level 2, HopeHaven Orphanage, Kuala Lumpur</span>
             </div>
             <div class="dir-field-box">
                 <label>Two-Factor Authentication (2FA)</label>
@@ -90,5 +90,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/portal/director-profile.js') }}"></script>
+    <script src="{{ asset('js/portal/director-profile.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/director-profile.js')), 0, 12) }}"></script>
 @endpush

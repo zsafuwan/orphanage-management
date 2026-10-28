@@ -4,7 +4,7 @@
 @section('breadcrumb', 'Inventory & Supplies')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/portal/inventory.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/inventory.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/inventory.css')), 0, 12) }}">
 @endpush
 
 @section('content')
@@ -29,9 +29,6 @@
         <button class="btn-outline" onclick="openModal('modal_add_supplier')">
             <i class="fas fa-truck"></i> Add Supplier
         </button>
-        <a href="{{ route('staff.inventory') }}" class="btn-outline" style="border-color: #10b981; color: #059669;" title="Switch to Staff Ward Supplies & Dispensation">
-            <i class="fas fa-user-nurse"></i> Staff Inventory
-        </a>
     </div>
 </div>
 
@@ -39,7 +36,7 @@
 <div class="metrics-grid">
     <div class="metric-card">
         <div class="metric-header">
-            <span class="metric-label">Estimated Stock Valuation</span>
+            <span class="metric-label">Estimated Stock Value</span>
             <div class="metric-icon" style="background: rgba(245, 158, 11, 0.12); color: #f59e0b;">
                 <i class="fas fa-warehouse"></i>
             </div>
@@ -486,7 +483,7 @@
                     <select class="form-control">
                         <option>St. Clare Cottage (Girls)</option>
                         <option>St. Francis Boys Hall</option>
-                        <option>Sanctuary Dining Hall / Kitchen</option>
+                        <option>Orphanage Dining Hall / Kitchen</option>
                         <option>Clinic Dispensary</option>
                     </select>
                 </div>
@@ -499,7 +496,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn-outline" onclick="closeModal('modal_stock_issue')">Cancel</button>
-                <button type="submit" class="btn-primary">Authorize Disbursement</button>
+                <button type="submit" class="btn-primary">Approve Payment</button>
             </div>
         </form>
     </div>

@@ -1,0 +1,159 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+
+        /* Staff Supplies Specific Styles */
+        .staff-inv-hero {
+            background: linear-gradient(135deg, #064e3b 0%, #065f46 60%, #047857 100%);
+            @apply tw:text-[#ffffff];
+            border-radius: var(--radius-md);
+            padding: 24px 28px;
+            @apply tw:mb-[24px];
+            box-shadow: 0 4px 18px rgba(6, 78, 59, 0.18);
+            @apply tw:relative;
+            @apply tw:overflow-hidden;
+        }
+
+        .staff-inv-hero::after {
+            content: '';
+            @apply tw:absolute;
+            @apply tw:top-[-20px];
+            @apply tw:right-[-20px];
+            @apply tw:w-[220px];
+            @apply tw:h-[220px];
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
+            @apply tw:rounded-[50%];
+            @apply tw:pointer-events-none;
+        }
+
+        .staff-inv-badge {
+            @apply tw:inline-flex;
+            @apply tw:items-center;
+            @apply tw:gap-[6px];
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 3px 12px;
+            @apply tw:rounded-[20px];
+            @apply tw:text-[11.5px];
+            @apply tw:font-bold;
+            @apply tw:mb-[10px];
+            @apply tw:tracking-[0.5px];
+            @apply tw:uppercase;
+        }
+
+        .staff-inv-grid {
+            @apply tw:grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            @apply tw:gap-[18px];
+            @apply tw:mb-[24px];
+        }
+
+        .ward-inv-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            @apply tw:p-[20px];
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+            @apply tw:flex;
+            @apply tw:flex-col;
+            @apply tw:justify-between;
+        }
+
+        .ward-inv-card:hover {
+            @apply tw:border-[#cbd5e1];
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .ward-inv-card.low-stock {
+            border-left: 4px solid #ef4444;
+            background: linear-gradient(180deg, #fff 0%, #fef2f2 100%);
+        }
+
+        .ward-inv-card.good-stock {
+            border-left: 4px solid #10b981;
+        }
+
+        .qty-badge {
+            @apply tw:text-[20px];
+            @apply tw:font-extrabold;
+            @apply tw:text-[#0f172a];
+            @apply tw:flex;
+            @apply tw:items-baseline;
+            @apply tw:gap-[4px];
+        }
+
+        .qty-badge small {
+            @apply tw:text-[12px];
+            @apply tw:font-semibold;
+            @apply tw:text-[#64748b];
+        }
+
+        .cabinet-loc-pill {
+            @apply tw:inline-flex;
+            @apply tw:items-center;
+            @apply tw:gap-[5px];
+            @apply tw:text-[11px];
+            @apply tw:text-[#475569];
+            background: #f1f5f9;
+            padding: 2px 8px;
+            @apply tw:rounded-[6px];
+            @apply tw:font-semibold;
+        }
+
+        .action-icon-btn {
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            @apply tw:text-[#475569];
+            padding: 6px 12px;
+            @apply tw:rounded-[6px];
+            @apply tw:text-[12px];
+            @apply tw:font-bold;
+            @apply tw:cursor-pointer;
+            transition: all 0.15s ease;
+            @apply tw:inline-flex;
+            @apply tw:items-center;
+            @apply tw:gap-[6px];
+        }
+
+        .action-icon-btn:hover {
+            background: #f8fafc;
+            @apply tw:border-[#cbd5e1];
+            @apply tw:text-[#0f172a];
+        }
+
+        .action-icon-btn.primary {
+            background: #10b981;
+            @apply tw:text-[#ffffff];
+            @apply tw:border-[#10b981];
+        }
+
+        .action-icon-btn.primary:hover {
+            background: #059669;
+        }
+
+        .action-icon-btn.req {
+            background: #f59e0b;
+            @apply tw:text-[#ffffff];
+            @apply tw:border-[#f59e0b];
+        }
+
+        .action-icon-btn.req:hover {
+            background: #d97706;
+        }
+
+        .req-status-pill {
+            padding: 3px 10px;
+            @apply tw:rounded-[12px];
+            @apply tw:text-[11px];
+            @apply tw:font-bold;
+            @apply tw:inline-flex;
+            @apply tw:items-center;
+            @apply tw:gap-[4px];
+        }
+
+        .req-pending { background: #fef3c7; @apply tw:text-[#b45309]; border: 1px solid #fde68a; }
+        .req-dispatched { background: #dbeafe; @apply tw:text-[#1e40af]; border: 1px solid #bfdbfe; }
+        .req-received { background: #d1fae5; @apply tw:text-[#065f46]; border: 1px solid #a7f3d0; }
+    

@@ -1,10 +1,10 @@
 @extends('layouts.portal')
 
-@section('title', 'Personnel Profile & Credentials')
-@section('breadcrumb', 'Personnel Profile')
+@section('title', 'My Profile & Account Details')
+@section('breadcrumb', 'Staff & Volunteers Profile')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/portal/profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/profile.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/profile.css')), 0, 12) }}">
 @endpush
 
 @section('content')
@@ -12,9 +12,9 @@
 <div class="page-header-card">
     <div>
         <div class="subsystem-pill" style="background: #8b5cf6;">
-            <i class="fas fa-id-card"></i> Personnel Identity & Credentials
+            <i class="fas fa-id-card"></i> Staff & Volunteers Identity & Credentials
         </div>
-        <h1 class="page-title">User Profile & Access Credentials</h1>
+        <h1 class="page-title">My Profile & Login Details</h1>
         <p class="page-desc">
             View and update your personal details including full name, username, affiliation, email, phone number, organization address, and password.
         </p>
@@ -46,7 +46,7 @@
             <div class="profile-hero-details">
                 <h1 id="hero_fullname_display">
                     Sister Grace Montgomery
-                    <span class="tag-badge verified-badge" title="Official Sanctuary Staff Accreditation">
+                    <span class="tag-badge verified-badge" title="Verified Orphanage Staff">
                         <i class="fas fa-check-circle"></i> Verified
                     </span>
                 </h1>
@@ -62,7 +62,7 @@
 
                 <div class="profile-affiliation-sub" id="hero_affiliation_display">
                     <i class="fas fa-building" style="color: var(--primary);"></i>
-                    <span id="hero_affiliation_text">HopeHaven Sanctuary – Child Welfare & Social Services Foundation</span>
+                    <span id="hero_affiliation_text">HopeHaven Orphanage – Child Welfare & Social Services Foundation</span>
                 </div>
             </div>
         </div>
@@ -186,7 +186,7 @@
                                 <i class="fas fa-hospital-alt"></i> Organization
                             </label>
                             <div class="view-mode-item field-value-box">
-                                <span class="field-value-text" id="display_affiliation">HopeHaven Sanctuary – Child Welfare & Social Services Foundation</span>
+                                <span class="field-value-text" id="display_affiliation">HopeHaven Orphanage – Child Welfare & Social Services Foundation</span>
                                 <div class="field-actions-cluster">
                                     <button type="button" class="field-action-btn edit-btn" onclick="openEditProfileModal('affiliation')" title="Edit Affiliation">
                                         <i class="fas fa-pen"></i>
@@ -196,7 +196,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <input type="text" id="inline_input_affiliation" class="edit-mode-item editable-input" style="display: none;" value="HopeHaven Sanctuary – Child Welfare & Social Services Foundation" required>
+                            <input type="text" id="inline_input_affiliation" class="edit-mode-item editable-input" style="display: none;" value="HopeHaven Orphanage – Child Welfare & Social Services Foundation" required>
                         </div>
                     </div>
                 </div>
@@ -256,7 +256,7 @@
                                 <i class="fas fa-home"></i> Organization Address
                             </label>
                             <div class="view-mode-item field-value-box">
-                                <span class="field-value-text" id="display_address">Plot 42 Hope Haven Sanctuary Blvd, Staff Residence Suite 3B, St. Jude Valley, CA 94103, United States</span>
+                                <span class="field-value-text" id="display_address">Plot 42 Hope Haven Orphanage Blvd, Staff Residence Suite 3B, St. Jude Valley, CA 94103, United States</span>
                                 <div class="field-actions-cluster">
                                     <button type="button" class="field-action-btn edit-btn" onclick="openEditProfileModal('address')" title="Edit Address">
                                         <i class="fas fa-pen"></i>
@@ -266,7 +266,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <textarea id="inline_input_address" class="edit-mode-item editable-input" rows="2" style="display: none;" required>Plot 42 Hope Haven Sanctuary Blvd, Staff Residence Suite 3B, St. Jude Valley, CA 94103, United States</textarea>
+                            <textarea id="inline_input_address" class="edit-mode-item editable-input" rows="2" style="display: none;" required>Plot 42 Hope Haven Orphanage Blvd, Staff Residence Suite 3B, St. Jude Valley, CA 94103, United States</textarea>
                         </div>
                     </div>
 
@@ -286,10 +286,10 @@
                             <i class="fas fa-compass"></i>
                         </div>
                         <div class="address-map-text">
-                            <h4>HopeHaven Central Complex – West Sanctuary Quarters</h4>
+                            <h4>HopeHaven Central Complex – West Orphanage Quarters</h4>
                             <p>Geographic Zone: District 4-A • Coordinates: 37.7749° N, 122.4194° W • On-site Emergency Response Team Hub</p>
                         </div>
-                        <button type="button" class="btn-pill-small" onclick="showPortalToast('Sanctuary site map coordinates copied to clipboard!', true)">
+                        <button type="button" class="btn-pill-small" onclick="showPortalToast('Orphanage map location copied to clipboard!', true)">
                             <i class="fas fa-location-arrow"></i> Locate
                         </button>
                     </div>
@@ -361,7 +361,7 @@
                         <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 12px 14px;">
                             <div style="display: flex; align-items: center; justify-content: space-between;">
                                 <div>
-                                    <div style="font-size: 12.5px; font-weight: 700; color: var(--dark);">Session Authorization</div>
+                                    <div style="font-size: 12.5px; font-weight: 700; color: var(--dark);">Session Approval</div>
                                     <div style="font-size: 11px; color: var(--dark-muted);">Auto-lock after 15 min idle</div>
                                 </div>
                                 <span class="tag-badge" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; font-size: 10px;">Enforced</span>
@@ -387,8 +387,8 @@
                     <div class="activity-timeline">
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
-                            <div class="timeline-title">Authenticated from Sanctuary Management Terminal</div>
-                            <div class="timeline-time">Today, 20:01 • IP: 192.168.1.14 (Sanctuary Admin Desk)</div>
+                            <div class="timeline-title">Authenticated from Orphanage Management Terminal</div>
+                            <div class="timeline-time">Today, 20:01 • IP: 192.168.1.14 (Orphanage Admin Desk)</div>
                         </div>
 
                         <div class="timeline-item">
@@ -423,7 +423,7 @@
         <div class="modal-header">
             <div>
                 <h3 class="modal-title">Edit Profile Information</h3>
-                <p class="modal-sub">Update your personnel identification, organizational affiliation and contact coordinates.</p>
+                <p class="modal-sub">Update your staff & Volunteers identification, organizational affiliation and contact coordinates.</p>
             </div>
             <button class="modal-close-btn" onclick="closeModal('modal_edit_profile')">&times;</button>
         </div>
@@ -455,7 +455,7 @@
                 <label class="form-label" for="modal_input_affiliation">
                     <i class="fas fa-hospital-alt"></i> Organizational Affiliation *
                 </label>
-                <input type="text" id="modal_input_affiliation" class="form-control" placeholder="HopeHaven Sanctuary – Child Welfare Foundation" required>
+                <input type="text" id="modal_input_affiliation" class="form-control" placeholder="HopeHaven Orphanage – Child Welfare Foundation" required>
             </div>
 
             <div class="form-row">
@@ -479,9 +479,9 @@
             <!-- Address -->
             <div class="form-group">
                 <label class="form-label" for="modal_input_address">
-                    <i class="fas fa-home"></i> Sanctuary Residential Address *
+                    <i class="fas fa-home"></i> Orphanage Residential Address *
                 </label>
-                <textarea id="modal_input_address" class="form-control" rows="3" placeholder="Plot 42 Hope Haven Sanctuary Blvd, Staff Residence Suite 3B..." required></textarea>
+                <textarea id="modal_input_address" class="form-control" rows="3" placeholder="Plot 42 Hope Haven Orphanage Blvd, Staff Residence Suite 3B..." required></textarea>
             </div>
 
             <div class="modal-footer">
@@ -573,7 +573,7 @@
 <div id="modal_qr_id" class="portal-modal-backdrop">
     <div class="portal-modal" style="max-width: 400px; text-align: center;">
         <div class="modal-header" style="justify-content: center; position: relative;">
-            <h3 class="modal-title">Official Sanctuary Digital Pass</h3>
+            <h3 class="modal-title">Official Orphanage Digital Pass</h3>
             <button class="modal-close-btn" onclick="closeModal('modal_qr_id')" style="position: absolute; right: 0; top: 0;">&times;</button>
         </div>
 
@@ -582,12 +582,12 @@
                 <i class="fas fa-qrcode" style="font-size: 110px; color: var(--dark);"></i>
             </div>
             <h4 style="font-size: 16px; font-weight: 800; color: var(--dark); margin-bottom: 4px;" id="modal_pass_name">Sister Grace Montgomery</h4>
-            <div style="font-size: 12px; font-weight: 700; color: #8b5cf6; margin-bottom: 8px;" id="modal_pass_role">Sanctuary Administrator</div>
+            <div style="font-size: 12px; font-weight: 700; color: #8b5cf6; margin-bottom: 8px;" id="modal_pass_role">Orphanage Admin</div>
             <div style="font-size: 11.5px; font-family: 'JetBrains Mono', monospace; color: var(--dark-muted);">ID: HH-ADM-2021-042 • Access Level 1</div>
         </div>
 
         <div class="modal-footer" style="justify-content: center;">
-            <button type="button" class="btn-primary" onclick="closeModal('modal_qr_id'); showPortalToast('Sanctuary Pass saved to Apple Wallet / Google Pay format!', true);">
+            <button type="button" class="btn-primary" onclick="closeModal('modal_qr_id'); showPortalToast('Orphanage Pass saved to Apple Wallet / Google Pay format!', true);">
                 <i class="fas fa-download"></i> Save to Wallet
             </button>
         </div>
@@ -601,10 +601,10 @@
     var profileData = {
         fullname: "Sister Grace Montgomery",
         username: "sister.grace",
-        affiliation: "HopeHaven Sanctuary – Child Welfare & Social Services Foundation",
+        affiliation: "HopeHaven Orphanage – Child Welfare & Social Services Foundation",
         email: "grace.montgomery@hopehaven.org",
         phone: "+1 (555) 234-8890",
-        address: "Plot 42 Hope Haven Sanctuary Blvd, Staff Residence Suite 3B, St. Jude Valley, CA 94103, United States"
+        address: "Plot 42 Hope Haven Orphanage Blvd, Staff Residence Suite 3B, St. Jude Valley, CA 94103, United States"
     };
 
     // 1. Open the dedicated edit profile modal and populate with latest values
@@ -727,7 +727,7 @@
 
         // 1. Full Name
         $('#display_fullname').text(fullname);
-        $('#hero_fullname_display').html(fullname + ' <span class="tag-badge verified-badge" title="Official Sanctuary Staff Accreditation"><i class="fas fa-check-circle"></i> Verified</span>');
+        $('#hero_fullname_display').html(fullname + ' <span class="tag-badge verified-badge" title="Verified Orphanage Staff"><i class="fas fa-check-circle"></i> Verified</span>');
         $('#modal_pass_name').text(fullname);
         $('#hero_avatar_display').text(initials);
         $('.user-avatar, .topbar-avatar').text(initials);
@@ -857,9 +857,9 @@
 
     // 11. Export PDF function
     function exportProfileDossier() {
-        showPortalToast('Generating encrypted personnel PDF (PDF format)...', true);
+        showPortalToast('Generating encrypted staff & Volunteers PDF (PDF format)...', true);
         setTimeout(function() {
-            showPortalToast('Personnel PDF PDF downloaded successfully!', true);
+            showPortalToast('Staff & Volunteers PDF PDF downloaded successfully!', true);
         }, 1200);
     }
 </script>

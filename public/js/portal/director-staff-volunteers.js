@@ -22,7 +22,7 @@ function closeDirectorModal(modalId) {
 function endorseCaregiverCredentials() {
     closeDirectorModal('modal_staff_safeguarding_dossier');
     if (typeof showPortalToast === 'function') {
-        showPortalToast(`Official Directorate Endorsement renewed for ${activeStaffName}.`, 'success');
+        showPortalToast(`Official Director Endorsement renewed for ${activeStaffName}.`, 'success');
     } else {
         alert(`Endorsement recorded for ${activeStaffName}.`);
     }

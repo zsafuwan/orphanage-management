@@ -1,11 +1,11 @@
 @extends('layouts.portal')
 
-@section('title', 'Staff Profile & Caregiver Credentials')
+@section('title', 'Staff Profile & Qualifications')
 @section('breadcrumb', 'Staff Profile')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/portal/profile.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/staff-profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/profile.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/profile.css')), 0, 12) }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/staff-profile.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/staff-profile.css')), 0, 12) }}">
 @endpush
 
 @section('content')
@@ -15,13 +15,13 @@
         <div class="staff-subsystem-pill">
             <i class="fas fa-user-nurse"></i> Staff Caregiver PDF & Duty Status
         </div>
-        <h1 class="page-title">Staff Profile & Caregiver Credentials</h1>
+        <h1 class="page-title">Staff Profile & Qualifications</h1>
         <p class="page-desc">
-            View and manage your personnel identification, assigned wards, duty shift status, and child safeguarding clearances.
+            View and manage your staff & Volunteers identification, assigned wards, duty shift status, and child safeguarding clearances.
         </p>
     </div>
     <div class="header-action-group">
-        <a href="{{ route('profile') }}" class="btn-outline" style="border-color: #8b5cf6; color: #7c3aed; font-weight: 600;" title="Switch to Sanctuary Administrator Profile">
+        <a href="{{ route('profile') }}" class="btn-outline" style="border-color: #8b5cf6; color: #7c3aed; font-weight: 600;" title="Switch to Orphanage Admin Profile">
             <i class="fas fa-shield-alt"></i> Admin Profile View
         </a>
         <button type="button" class="btn-outline" id="btn_toggle_inline_edit" onclick="toggleInlineEdit()">
@@ -47,7 +47,7 @@
             <div class="profile-hero-details">
                 <h1 id="hero_fullname_display">
                     Nurse Mary Jenkins
-                    <span class="tag-badge verified-badge" title="Official Sanctuary Staff Accreditation">
+                    <span class="tag-badge verified-badge" title="Verified Orphanage Staff">
                         <i class="fas fa-check-circle"></i> Verified Staff
                     </span>
                 </h1>
@@ -66,7 +66,7 @@
 
                 <div class="profile-affiliation-sub" id="hero_affiliation_display">
                     <i class="fas fa-hospital-alt" style="color: #059669;"></i>
-                    <span id="hero_affiliation_text">HopeHaven Sanctuary – Pediatric Ward & Child Welfare Unit</span>
+                    <span id="hero_affiliation_text">HopeHaven Orphanage – Pediatric Ward & Child Welfare Unit</span>
                 </div>
             </div>
         </div>
@@ -104,7 +104,7 @@
         <div class="hero-stat-item">
             <span class="hero-stat-label">Duty Shift Status</span>
             <span class="hero-stat-val" id="kpi_shift_status" style="color: #059669;">
-                <i class="fas fa-clock"></i> Active (07:00 – 15:30)
+                <i class="fas fa-clock"></i> Active (08:00 – 16:00)
             </span>
         </div>
     </div>
@@ -113,7 +113,7 @@
 <!-- Tab Navigation Header (Divided Sections) -->
 <div class="staff-profile-tabs">
     <button type="button" class="staff-tab-btn active" data-tab="tab_identity" onclick="switchStaffProfileTab('tab_identity', this)">
-        <i class="fas fa-id-card"></i> Personnel Details
+        <i class="fas fa-id-card"></i> Staff & Volunteers Details
     </button>
     <button type="button" class="staff-tab-btn" data-tab="tab_shift" onclick="switchStaffProfileTab('tab_shift', this)">
         <i class="fas fa-clock"></i> Shift & Operations
@@ -213,7 +213,7 @@
                                 <i class="fas fa-hospital-alt"></i> Organization Affiliation
                             </label>
                             <div class="view-mode-item field-value-box">
-                                <span class="field-value-text" id="display_affiliation">HopeHaven Sanctuary – Pediatric Ward & Child Welfare Unit</span>
+                                <span class="field-value-text" id="display_affiliation">HopeHaven Orphanage – Pediatric Ward & Child Welfare Unit</span>
                                 <div class="field-actions-cluster">
                                     <button type="button" class="field-action-btn edit-btn" onclick="openEditProfileModal('affiliation')" title="Edit Affiliation">
                                         <i class="fas fa-pen"></i>
@@ -223,7 +223,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <input type="text" id="inline_input_affiliation" class="edit-mode-item editable-input" style="display: none;" value="HopeHaven Sanctuary – Pediatric Ward & Child Welfare Unit" required>
+                            <input type="text" id="inline_input_affiliation" class="edit-mode-item editable-input" style="display: none;" value="HopeHaven Orphanage – Pediatric Ward & Child Welfare Unit" required>
                         </div>
 
                         <!-- Assigned Wards -->
@@ -302,7 +302,7 @@
                                 <i class="fas fa-home"></i> Staff Residential Address & Quarters
                             </label>
                             <div class="view-mode-item field-value-box multi-line">
-                                <span class="field-value-text" id="display_address">HopeHaven Sanctuary Staff Quarters, Block B Room 204, St. Jude Valley, CA 94103, United States</span>
+                                <span class="field-value-text" id="display_address">HopeHaven Orphanage Staff Quarters, Block B Room 204, St. Jude Valley, CA 94103, United States</span>
                                 <div class="field-actions-cluster">
                                     <button type="button" class="field-action-btn edit-btn" onclick="openEditProfileModal('address')" title="Edit Address">
                                         <i class="fas fa-pen"></i>
@@ -312,7 +312,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <textarea id="inline_input_address" class="edit-mode-item editable-input" rows="2" style="display: none;" required>HopeHaven Sanctuary Staff Quarters, Block B Room 204, St. Jude Valley, CA 94103, United States</textarea>
+                            <textarea id="inline_input_address" class="edit-mode-item editable-input" rows="2" style="display: none;" required>HopeHaven Orphanage Staff Quarters, Block B Room 204, St. Jude Valley, CA 94103, United States</textarea>
                         </div>
                     </div>
 
@@ -322,8 +322,8 @@
                             <i class="fas fa-compass"></i>
                         </div>
                         <div class="address-map-text">
-                            <h4>HopeHaven Sanctuary – Staff Residential Quarters (Block B)</h4>
-                            <p>Sector: East Sanctuary Wing • Room 204 • Direct Nursery Walkway & Emergency Intercom Line 4</p>
+                            <h4>HopeHaven Orphanage – Staff Residential Quarters (Block B)</h4>
+                            <p>Sector: East Orphanage Wing • Room 204 • Direct Nursery Walkway & Emergency Intercom Line 4</p>
                         </div>
                         <button type="button" class="btn-pill-small" onclick="showPortalToast('Staff Quarters emergency coordinates copied!', true)">
                             <i class="fas fa-location-arrow"></i> Locate Quarters
@@ -366,7 +366,7 @@
                             <span style="font-size: 12px; font-weight: 700; color: #047857; text-transform: uppercase; letter-spacing: 0.5px;">Current Duty Schedule</span>
                             <span class="tag-badge" style="background: #10b981; color: #ffffff; font-size: 10px;">Primary Roster</span>
                         </div>
-                        <div style="font-size: 15px; font-weight: 800; color: var(--dark);">Morning Shift (07:00 – 15:30)</div>
+                        <div style="font-size: 15px; font-weight: 800; color: var(--dark);">Morning Shift (08:00 – 16:00)</div>
                         <div style="font-size: 12px; color: var(--dark-muted); margin-top: 3px;">
                             Duty Station: Ward Alpha Caregiver Desk • Sector Nursery & Infancy Unit
                         </div>
@@ -376,7 +376,7 @@
                         <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 10px 12px;">
                             <div style="font-size: 11px; color: #64748b; font-weight: 700; text-transform: uppercase;">Reporting Supervisor</div>
                             <div style="font-size: 12.5px; font-weight: 700; color: var(--dark); margin-top: 2px;">Sister Grace Montgomery</div>
-                            <div style="font-size: 11px; color: #8b5cf6;">Sanctuary Administrator</div>
+                            <div style="font-size: 11px; color: #8b5cf6;">Orphanage Admin</div>
                         </div>
                         <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 10px 12px;">
                             <div style="font-size: 11px; color: #64748b; font-weight: 700; text-transform: uppercase;">Emergency Medical Lead</div>
@@ -472,7 +472,7 @@
                         </div>
                         <div style="flex: 1;">
                             <div style="display: flex; align-items: center; justify-content: space-between;">
-                                <div style="font-size: 13px; font-weight: 700; color: var(--dark);">Ward Medicine & Dispensation Access</div>
+                                <div style="font-size: 13px; font-weight: 700; color: var(--dark);">Ward Medicine & Supply Distribution Access</div>
                                 <span class="tag-badge" style="background: rgba(139, 92, 246, 0.12); color: #8b5cf6; font-size: 9.5px; padding: 2px 6px;">Authorized</span>
                             </div>
                             <div style="font-size: 11.5px; color: var(--dark-muted); margin-top: 2px;">
@@ -507,8 +507,8 @@
 
                         <div class="timeline-item">
                             <div class="timeline-dot" style="border-color: #0284c7;"></div>
-                            <div class="timeline-title">Dispensed Pediatric Formula & Nursery Supplies</div>
-                            <div class="timeline-time">Today, 09:15 • Storeroom Dispensation logged</div>
+                            <div class="timeline-title">Given Pediatric Formula & Nursery Supplies</div>
+                            <div class="timeline-time">Today, 09:15 • Storeroom Supply Distribution logged</div>
                         </div>
 
                         <div class="timeline-item">
@@ -613,7 +613,7 @@
                         <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 14px;">
                             <div style="display: flex; align-items: center; justify-content: space-between;">
                                 <div>
-                                    <div style="font-size: 13px; font-weight: 700; color: var(--dark);">Session Authorization & Ward Auto-lock</div>
+                                    <div style="font-size: 13px; font-weight: 700; color: var(--dark);">Session Approval & Ward Auto-lock</div>
                                     <div style="font-size: 11.5px; color: var(--dark-muted); margin-top: 2px;">Auto-lock after 10 min idle at ward caregiver station</div>
                                 </div>
                                 <span class="tag-badge" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; font-size: 10px;">Enforced</span>
@@ -623,7 +623,7 @@
                         <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 14px;">
                             <div style="display: flex; align-items: center; justify-content: space-between;">
                                 <div>
-                                    <div style="font-size: 13px; font-weight: 700; color: var(--dark);">Sanctuary Digital Pass</div>
+                                    <div style="font-size: 13px; font-weight: 700; color: var(--dark);">Orphanage Digital Pass</div>
                                     <div style="font-size: 11.5px; color: var(--dark-muted); margin-top: 2px;">Cryptographic Ward Entry NFC / QR Pass</div>
                                 </div>
                                 <button type="button" class="btn-pill-small" style="background: #059669; color: #ffffff;" onclick="openModal('modal_qr_id')">
@@ -644,5 +644,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/portal/staff-profile.js') }}"></script>
+    <script src="{{ asset('js/portal/staff-profile.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/staff-profile.js')), 0, 12) }}"></script>
 @endpush

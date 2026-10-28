@@ -1,0 +1,125 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* Director Profile Stylesheet */
+:root {
+    --dir-prof-indigo: #4f46e5;
+    --dir-prof-gradient: linear-gradient(135deg, #6366f1, #4338ca);
+}
+
+.dir-profile-hero {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    @apply tw:p-[28px];
+    @apply tw:mb-[24px];
+    box-shadow: var(--shadow-sm);
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-center;
+    @apply tw:flex-wrap;
+    @apply tw:gap-[20px];
+}
+
+.dir-profile-left {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[22px];
+}
+
+.dir-avatar-circle {
+    @apply tw:w-[84px];
+    @apply tw:h-[84px];
+    @apply tw:rounded-[50%];
+    background: var(--dir-prof-gradient);
+    @apply tw:text-[#ffffff];
+    @apply tw:text-[30px];
+    @apply tw:font-extrabold;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+    border: 4px solid #ffffff;
+}
+
+.dir-profile-name {
+    @apply tw:text-[22px];
+    @apply tw:font-extrabold;
+    color: var(--dark);
+    @apply tw:mb-[4px];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[10px];
+}
+
+.dir-profile-title {
+    @apply tw:text-[14px];
+    @apply tw:text-[#64748b];
+    @apply tw:mb-[8px];
+}
+
+.dir-badges-group {
+    @apply tw:flex;
+    @apply tw:gap-[8px];
+    @apply tw:flex-wrap;
+}
+
+.dir-badge-pill {
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    padding: 3px 10px;
+    @apply tw:rounded-[20px];
+}
+
+.dir-badge-pill.indigo {
+    background: #eef2ff;
+    @apply tw:text-[#4338ca];
+    border: 1px solid #c7d2fe;
+}
+
+.dir-badge-pill.emerald {
+    background: #ecfdf5;
+    @apply tw:text-[#047857];
+    border: 1px solid #a7f3d0;
+}
+
+.dir-info-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    @apply tw:overflow-hidden;
+    @apply tw:mb-[24px];
+}
+
+.dir-info-grid {
+    @apply tw:grid;
+    grid-template-columns: repeat(2, 1fr);
+    @apply tw:gap-[20px];
+    @apply tw:p-[24px];
+}
+
+.dir-field-box label {
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:text-[#64748b];
+    @apply tw:uppercase;
+    @apply tw:block;
+    @apply tw:mb-[4px];
+}
+
+.dir-field-box span {
+    @apply tw:text-[14px];
+    @apply tw:font-semibold;
+    color: var(--dark);
+}
+
+@media (max-width: 768px) {
+    .dir-profile-left {
+        @apply tw:flex-col;
+        @apply tw:items-start;
+    }
+    .dir-info-grid {
+        grid-template-columns: 1fr;
+    }
+}

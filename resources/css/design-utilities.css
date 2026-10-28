@@ -1,0 +1,5 @@
+/* Prefix keeps Tailwind's theme tokens separate from existing role/theme variables.
+   Preflight is deliberately omitted: the design already has its own base reset. */
+@import 'tailwindcss/theme.css' theme(static) prefix(tw);
+@import 'tailwindcss/utilities.css' prefix(tw);
+

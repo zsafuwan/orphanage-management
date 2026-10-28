@@ -1,126 +1,141 @@
-/* ==========================================================================
-   HopeHaven Orphanage Management Portal - Inventory & Supplies Stylesheet
-   File: public/css/portal/inventory.css
-   ========================================================================== */
-
-/* Category Badge Indicators */
+/*! tailwindcss v4.3.3 | MIT License | https://tailwindcss.com */
+@layer properties;
 .category-pill {
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 11px;
-    font-weight: 700;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  --tw-font-weight: var(--tw-font-weight-bold, 700);
+  font-weight: var(--tw-font-weight-bold, 700);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
 }
-
-.category-food { background: rgba(245, 158, 11, 0.12); color: #d97706; }
-.category-medical { background: rgba(239, 68, 68, 0.12); color: #dc2626; }
-.category-clothing { background: rgba(59, 130, 246, 0.12); color: #2563eb; }
-.category-education { background: rgba(139, 92, 246, 0.12); color: #7c3aed; }
-.category-hygiene { background: rgba(20, 184, 166, 0.12); color: #0d9488; }
-
-/* Stock Reorder & Threshold Warnings */
+.category-food {
+  background: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+}
+.category-medical {
+  background: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+}
+.category-clothing {
+  background: rgba(59, 130, 246, 0.12);
+  color: #2563eb;
+}
+.category-education {
+  background: rgba(139, 92, 246, 0.12);
+  color: #7c3aed;
+}
+.category-hygiene {
+  background: rgba(20, 184, 166, 0.12);
+  color: #0d9488;
+}
 .threshold-bar-container {
-    width: 100%;
-    height: 6px;
-    background: #e2e8f0;
-    border-radius: 3px;
-    overflow: hidden;
-    margin-top: 6px;
+  width: 100%;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 6px;
 }
-
 .threshold-bar-fill {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 0.3s ease;
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
 }
-
-.threshold-bar-fill.bar-ok { background: #10b981; }
-.threshold-bar-fill.bar-warning { background: #f59e0b; }
-.threshold-bar-fill.bar-danger { background: #ef4444; }
-
+.threshold-bar-fill.bar-ok {
+  background: #10b981;
+}
+.threshold-bar-fill.bar-warning {
+  background: #f59e0b;
+}
+.threshold-bar-fill.bar-danger {
+  background: #ef4444;
+}
 .stock-alert-box {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  --tw-font-weight: var(--tw-font-weight-bold, 700);
+  font-weight: var(--tw-font-weight-bold, 700);
 }
-
 .stock-alert-critical {
-    background: #fef2f2;
-    color: #b91c1c;
-    border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
 }
-
 .stock-alert-normal {
-    background: #f0fdf4;
-    color: #15803d;
-    border: 1px solid #bbf7d0;
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
 }
-
-/* Supplier Directory Cards */
 .suppliers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 18px;
-    margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
 }
-
 .supplier-card {
-    background: #ffffff;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    padding: 20px;
-    box-shadow: var(--shadow-sm);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: all 0.2s ease;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease;
 }
-
 .supplier-card:hover {
-    border-color: #cbd5e1;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
-
 .supplier-name {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--dark);
-    margin-bottom: 4px;
+  font-size: 15px;
+  --tw-font-weight: var(--tw-font-weight-bold, 700);
+  font-weight: var(--tw-font-weight-bold, 700);
+  color: var(--dark);
+  margin-bottom: 4px;
 }
-
 .supplier-meta {
-    font-size: 12px;
-    color: var(--dark-muted);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 3px;
+  font-size: 12px;
+  color: var(--dark-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
 }
-
-/* Distribution Traceability */
 .distribution-link-badge {
-    background: rgba(59, 130, 246, 0.08);
-    color: #2563eb;
-    border: 1px solid rgba(59, 130, 246, 0.2);
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 11.5px;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    text-decoration: none;
-    transition: all 0.2s ease;
+  background: rgba(59, 130, 246, 0.08);
+  color: #2563eb;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11.5px;
+  --tw-font-weight: var(--tw-font-weight-semibold, 600);
+  font-weight: var(--tw-font-weight-semibold, 600);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration-line: none;
+  transition: all 0.2s ease;
 }
-
 .distribution-link-badge:hover {
-    background: #2563eb;
-    color: #ffffff;
+  background: #2563eb;
+  color: #ffffff;
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@layer properties {
+  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
+    *, ::before, ::after, ::backdrop {
+      --tw-font-weight: initial;
+    }
+  }
 }

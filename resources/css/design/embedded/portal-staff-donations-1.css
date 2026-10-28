@@ -1,0 +1,55 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+
+        .staff-donations-hero {
+            background: linear-gradient(135deg, #065f46 0%, #047857 55%, #059669 100%);
+            @apply tw:text-[#ffffff];
+            border-radius: var(--radius-md);
+            padding: 24px 28px;
+            @apply tw:mb-[24px];
+            box-shadow: 0 4px 18px rgba(6, 95, 70, 0.18);
+            @apply tw:relative;
+            @apply tw:overflow-hidden;
+        }
+
+        .staff-donations-hero::after {
+            content: '';
+            @apply tw:absolute;
+            @apply tw:top-[-20px];
+            @apply tw:right-[-20px];
+            @apply tw:w-[220px];
+            @apply tw:h-[220px];
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            @apply tw:rounded-[50%];
+            @apply tw:pointer-events-none;
+        }
+
+        .fund-allocation-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 18px 20px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+
+        .fund-allocation-card:hover {
+            @apply tw:border-[#cbd5e1];
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .fund-progress-bar {
+            @apply tw:h-[8px];
+            background: #e2e8f0;
+            @apply tw:rounded-[4px];
+            @apply tw:overflow-hidden;
+            @apply tw:mt-[10px];
+        }
+
+        .fund-progress-fill {
+            @apply tw:h-full;
+            @apply tw:rounded-[4px];
+        }
+    

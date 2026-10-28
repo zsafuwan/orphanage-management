@@ -23,7 +23,7 @@
                     </tr>
                     <tr>
                         <td>Beneficiary:</td>
-                        <td>Pertubuhan Kebajikan HopeHaven Sanctuary</td>
+                        <td>Pertubuhan Kebajikan HopeHaven Orphanage</td>
                     </tr>
                     <tr>
                         <td>Trustee Account:</td>

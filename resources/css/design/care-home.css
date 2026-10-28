@@ -1,0 +1,63 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+/* Public sanctuary experience, sharing the workspace's evergreen identity. */
+.care-home { --primary: #306044; --primary-hover: #204a32; --primary-glow: rgb(48 96 68 / 15%); --primary-glow-strong: rgb(48 96 68 / 25%); --dark: #254331; --dark-muted: #7a8574; --light-bg: #f4f6ed; --font-main: 'DM Sans', sans-serif; background: #fafbf5; @apply tw:text-[#254331]; }
+.care-home :is(h1,h2,h3,#logo) { font-family: 'Manrope', sans-serif; }
+.care-home :is(a,button,input,textarea,select):focus-visible { outline: 3px solid #b58a40; outline-offset: 4px; }
+.care-home header { background: rgb(250 251 245 / 97%); border-bottom: 1px solid #e2e8d8; padding: 18px 5vw; box-shadow: none; }
+.care-home #logo { @apply tw:text-[27px]; @apply tw:font-extrabold; @apply tw:tracking-[-1.3px]; }
+.care-home #logo .logo-sub { font-family: 'DM Sans', sans-serif; @apply tw:tracking-[2px]; @apply tw:text-[#839072]; @apply tw:text-[9px]; }
+.care-home #navigation a { @apply tw:text-[12px]; @apply tw:font-medium; @apply tw:capitalize; }
+.care-home #navigation .nav-portal-link { @apply tw:text-[#3f6441]; background: #eaf0df; @apply tw:border-[#d4e1c5]; @apply tw:rounded-[10px]; }
+.care-home #navigation .nav-cta-btn { @apply tw:rounded-[10px]; background: #28583f; @apply tw:text-[#fff]; box-shadow: none; }
+.care-home #top_part { background: #f3f5e9; margin: 120px 3vw 0; @apply tw:w-[94vw]; border: 1px solid #e1e7d5; @apply tw:rounded-[32px]; padding: 45px 3vw; @apply tw:gap-[5vw]; @apply tw:items-stretch; }
+.care-home #about { @apply tw:p-[0]; @apply tw:min-h-[0]; }
+.care-home #rightImage { @apply tw:min-h-[540px]; background-image: linear-gradient(0deg, rgb(25 57 33 / 35%), transparent 75%), url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80'); border-radius: 22px 100px 22px 22px; box-shadow: none; }
+.care-home .hero-overlay-card { @apply tw:rounded-[14px]; @apply tw:p-[20px]; background: rgb(250 252 244 / 94%); box-shadow: none; }
+.care-home .hero-overlay-card h3 { @apply tw:text-[19px]; }
+.care-home .hero-overlay-card p { @apply tw:text-[12px]; }
+.care-home #rightMap { @apply tw:grid; grid-template-columns: 1fr 1.6fr; @apply tw:gap-[6vw]; @apply tw:items-center; @apply tw:w-[88vw]; margin: 70px auto 0; @apply tw:min-h-[0]; }
+.care-locations-intro h2 { font-size: clamp(28px,3vw,43px); @apply tw:tracking-[-1.8px]; @apply tw:leading-[1.2]; margin: 20px 0; }
+.care-locations-intro p { @apply tw:text-[#7a8572]; @apply tw:text-[14px]; @apply tw:leading-[1.9]; @apply tw:max-w-[360px]; }
+.care-home #about h1 { font-size: clamp(35px, 3.6vw, 58px); @apply tw:leading-[1.16]; @apply tw:tracking-[-2.7px]; @apply tw:font-extrabold; margin: 24px 0; }
+.care-home #about h1 span { @apply tw:text-[#658144]; }
+.care-home .hero-tag { background: #e4ebd5; border: 1px solid #d3dfbf; @apply tw:text-[#57733d]; @apply tw:rounded-[7px]; @apply tw:text-[10px]; @apply tw:tracking-[.5px]; box-shadow: none; }
+.care-home .hero-description { @apply tw:text-[#77806c]; @apply tw:text-[14px]; @apply tw:leading-[1.9]; }
+.care-home :is(.btn_one,.btn_two) { @apply tw:rounded-[10px]; padding: 14px 23px; @apply tw:text-[12px]; box-shadow: none; }
+.care-home .btn_one { background: #28583f; @apply tw:border-[#28583f]; @apply tw:text-[#fff]; }
+.care-home .btn_two { background: transparent; @apply tw:border-[#bccca8]; @apply tw:text-[#385b3b]; }
+.care-home .social { @apply tw:border-[#d9e3ca]; background: transparent; @apply tw:text-[#698451]; }
+.care-home .malaysia-map-card { background: #fff; @apply tw:rounded-[22px]; box-shadow: 0 16px 50px rgb(44 72 30 / 8%); border: 1px solid #dce5cf; transform: rotate(1deg); }
+.care-home .malaysia-map-card:hover { transform: rotate(0); }
+.care-home .state-tab { @apply tw:font-[inherit]; @apply tw:rounded-[7px]; @apply tw:text-[10px]; }
+.care-home .state-tab.active { background: #2f6145; color: white; @apply tw:border-[#2f6145]; }
+.care-home .map-live-tag { @apply tw:text-[#447447]; background: #edf3e3; @apply tw:border-[#d5e4c8]; }
+.care-home :is(.map-card-header,.map-nearest-bar) { background: #fafcf5; }
+.care-home :is(.program-card,.stat-item,.gallery-item) { @apply tw:rounded-[20px]; @apply tw:border-[#e1e7d6]; box-shadow: 0 5px 20px rgb(40 72 35 / 4%); }
+.care-home :is(#programs,#work,#bio,#contact) { @apply tw:pt-[80px]; @apply tw:pb-[80px]; }
+.care-home .section-title { @apply tw:tracking-[-1.3px]; @apply tw:text-[36px]; }
+.care-home :is(input,select,textarea) { @apply tw:font-[inherit]; @apply tw:rounded-[10px]; @apply tw:border-[#d8e2ca]; }
+.care-home footer { background: #1c3c32; @apply tw:text-[#d1decb]; }
+.care-home #loading { display: none !important; }
+.care-home .animated { animation: none !important; }
+@media (max-width: 1000px) {
+    .care-home #top_part { @apply tw:mt-[110px]; padding: 35px 5vw; @apply tw:flex-col; }
+    .care-home #about { @apply tw:w-full; }
+    .care-home #rightMap { display: grid !important; width: 88vw !important; grid-template-columns: minmax(0,1fr); @apply tw:gap-[30px]; }
+    .care-home #rightMap > * { @apply tw:min-w-0; @apply tw:w-full; }
+    .care-home .malaysia-map-card { transform: none; }
+    .care-home #navigation a { @apply tw:text-[11px]; }
+}
+@media (max-width: 600px) {
+    .care-home #top_part { @apply tw:rounded-[20px]; margin: 100px 14px 0; width: calc(100% - 28px); padding: 30px 20px; }
+    .care-home #about h1 { @apply tw:text-[36px]; @apply tw:tracking-[-1.6px]; }
+    .care-home .hero-description { @apply tw:text-[12px]; }
+    .care-home .hero-tag { @apply tw:text-[8px]; }
+    .care-home header { padding: 16px 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .care-home *, .care-home *::before, .care-home *::after { animation-duration: .01ms !important; animation-delay: 0ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}

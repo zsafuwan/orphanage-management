@@ -1,10 +1,10 @@
 @extends('layouts.portal')
 
-@section('title', 'Sanctuary Donations & Grants Governance')
+@section('title', 'Orphanage Donations & Grants Management')
 @section('breadcrumb', 'Donations & Grants')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/portal/director-donations.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/director-donations.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/director-donations.css')), 0, 12) }}">
 @endpush
 
 @section('content')
@@ -12,12 +12,14 @@
     <!-- Header -->
     <div class="dir-don-header">
         <div>
-            <h1><i class="fas fa-hand-holding-usd" style="color: #059669;"></i> Sanctuary Endowments, Grants & Financial Governance</h1>
-            <p>Executive governance of institutional grants, corporate CSR partnerships, and audited Section 44(6) tax-exempt funds.</p>
+            <h1><i class="fas fa-hand-holding-usd" style="color: #059669;"></i> Orphanage Endowments, Grants & Financial Management</h1>
+            <p>Executive management of institutional grants, corporate CSR partnerships, and audited Section 44(6) tax-exempt funds.</p>
         </div>
-        <div>
-            <button type="button" class="btn-director-review" onclick="showPortalToast('Sanctuary Financial Endowment Ledger (LHDN Form) exported.', 'info')">
-                <i class="fas fa-file-invoice-dollar"></i> Export Endowment Ledger (PDF)
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="button" class="btn-primary" onclick="openStaffDonationModal('modal_staff_record_donation')"><i class="fas fa-plus-circle"></i> Record Contribution</button>
+            <button type="button" class="btn-outline" onclick="openStaffDonationModal('modal_register_donor')"><i class="fas fa-user-plus"></i> Register Donor</button>
+            <button type="button" class="btn-director-review" onclick="showPortalToast('Orphanage Donation Records (LHDN Form) exported.', 'info')">
+                <i class="fas fa-file-invoice-dollar"></i> Export Fund Ledger (PDF)
             </button>
         </div>
     </div>
@@ -131,7 +133,7 @@
                         <strong>Sunway Group (Jeffrey Cheah Fdn)</strong><br>
                         <span style="font-size: 11px; color: #64748b;">Ref: JCF-SANCT-09</span>
                     </td>
-                    <td>Sanctuary Infrastructure & IT Lab<br><span style="font-size: 11px; color: #4f46e5;">High-speed broadband & laptops</span></td>
+                    <td>Orphanage Infrastructure & IT Lab<br><span style="font-size: 11px; color: #4f46e5;">High-speed broadband & laptops</span></td>
                     <td><strong style="color: #0f172a;">RM 30,000.00</strong></td>
                     <td><span style="color: #059669; font-weight: 700;">RM 20,000.00</span></td>
                     <td><span style="color: #4f46e5; font-weight: 800;">RM 10,000.00</span></td>
@@ -147,9 +149,13 @@
     </div>
 </div>
 
+@include('portal.partials.donation-entry-ledger')
+@include('portal.partials.donation-entry-modals')
+@include('portal.partials.donor-registration-modal')
 @include('portal.director.partials.donations-modals')
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/portal/director-donations.js') }}"></script>
+    <script src="{{ asset('js/portal/donation-entry.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/donation-entry.js')), 0, 12) }}"></script>
+    <script src="{{ asset('js/portal/director-donations.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/director-donations.js')), 0, 12) }}"></script>
 @endpush

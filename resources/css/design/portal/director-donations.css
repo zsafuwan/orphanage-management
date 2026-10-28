@@ -1,0 +1,133 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* Director Donations & Grants Governance Stylesheet */
+:root {
+    --dir-don-emerald: #059669;
+    --dir-don-indigo: #4f46e5;
+}
+
+.dir-don-header {
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-start;
+    @apply tw:mb-[24px];
+    @apply tw:flex-wrap;
+    @apply tw:gap-[16px];
+}
+
+.dir-don-header h1 {
+    @apply tw:text-[24px];
+    @apply tw:font-extrabold;
+    color: var(--dark);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[10px];
+    @apply tw:mb-[4px];
+}
+
+.dir-don-header p {
+    @apply tw:text-[14px];
+    color: var(--dark-muted);
+}
+
+.dir-don-kpis {
+    @apply tw:grid;
+    grid-template-columns: repeat(4, 1fr);
+    @apply tw:gap-[18px];
+    @apply tw:mb-[24px];
+}
+
+.dir-don-kpi-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[16px];
+    transition: transform 0.2s ease;
+}
+
+.dir-don-kpi-card:hover {
+    transform: translateY(-2px);
+    @apply tw:border-[#cbd5e1];
+}
+
+.dir-don-kpi-icon {
+    @apply tw:w-[44px];
+    @apply tw:h-[44px];
+    border-radius: var(--radius-md);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:text-[20px];
+    @apply tw:shrink-0;
+}
+
+.dir-don-kpi-val {
+    @apply tw:text-[22px];
+    @apply tw:font-extrabold;
+    color: var(--dark);
+    @apply tw:leading-[1.2];
+}
+
+.dir-don-kpi-lbl {
+    @apply tw:text-[12px];
+    @apply tw:font-semibold;
+    color: var(--dark-muted);
+}
+
+.dir-don-table-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    @apply tw:overflow-hidden;
+    @apply tw:mb-[24px];
+}
+
+.dir-don-table {
+    @apply tw:w-full;
+    @apply tw:border-collapse;
+    @apply tw:text-[13px];
+    @apply tw:text-left;
+}
+
+.dir-don-table th {
+    background: #f8fafc;
+    @apply tw:text-[#475569];
+    @apply tw:font-bold;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border-color);
+    @apply tw:text-[12px];
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.5px];
+}
+
+.dir-don-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.dir-don-table tr:hover td {
+    background: #fafbfc;
+}
+
+.dir-don-table tr:last-child td {
+    border-bottom: none;
+}
+
+@media (max-width: 1024px) {
+    .dir-don-kpis {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .dir-don-kpis {
+        grid-template-columns: 1fr;
+    }
+}

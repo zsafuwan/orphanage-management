@@ -60,7 +60,7 @@ function initSpendingChart() {
                         barThickness: 26
                     },
                     {
-                        label: 'Approved Sanctuary Budget (RM)',
+                        label: 'Approved Orphanage Budget (RM)',
                         data: monthlyBudgetData,
                         type: 'line',
                         borderColor: '#f59e0b',
@@ -316,7 +316,7 @@ function downloadOfficialTaxReceipt() {
 function acknowledgeDonationLetter() {
     closeDirectorModal('modal_donation_proof');
     if (typeof showPortalToast === 'function') {
-        showPortalToast(`Official Sanctuary Acknowledgment letter dispatched to ${activeProofDonor}.`, 'success');
+        showPortalToast(`Official Orphanage Acknowledgment letter dispatched to ${activeProofDonor}.`, 'success');
     } else {
         alert(`Acknowledgment dispatched to ${activeProofDonor}.`);
     }
@@ -326,7 +326,7 @@ function acknowledgeDonationLetter() {
  * Handle quick requisition approval from dashboard
  */
 function quickApproveRequisition(reqId, itemName, buttonEl) {
-    if (!confirm(`Confirm Director Approval for Requisition #${reqId} (${itemName})?\nFunds will be released from the Q4 Caregiver Supply Reserve.`)) {
+    if (!confirm(`Confirm Director Approval for Request #${reqId} (${itemName})?\nFunds will be released from the Q4 Caregiver Supply Reserve.`)) {
         return;
     }
 
@@ -355,9 +355,9 @@ function quickApproveRequisition(reqId, itemName, buttonEl) {
         }
 
         if (typeof showPortalToast === 'function') {
-            showPortalToast(`Requisition #${reqId} (${itemName}) successfully authorized and ledger updated.`, 'success');
+            showPortalToast(`Request #${reqId} (${itemName}) successfully authorized and ledger updated.`, 'success');
         } else {
-            alert(`Requisition #${reqId} successfully approved.`);
+            alert(`Request #${reqId} successfully approved.`);
         }
     }, 600);
 }
@@ -367,9 +367,9 @@ function quickApproveRequisition(reqId, itemName, buttonEl) {
  */
 function exportDirectorateReport() {
     if (typeof showPortalToast === 'function') {
-        showPortalToast('Generating Q4 2026 Executive Sanctuary Governance Audit (PDF)... Ready in seconds.', 'info');
+        showPortalToast('Generating Q4 2026 Executive Orphanage Management Audit (PDF)... Ready in seconds.', 'info');
     } else {
-        alert('Generating Q4 2026 Executive Directorate Report...');
+        alert('Generating Q4 2026 Executive Director Report...');
     }
 }
 

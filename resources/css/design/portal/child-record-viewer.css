@@ -1,0 +1,95 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* A calm, read-only home for each child's learning and care records. */
+.care-workspace #modal_child_dossier { background: #62667570; @apply tw:p-[22px]; }
+.care-workspace #modal_child_dossier .child-record-viewer { @apply tw:max-w-[820px]; @apply tw:p-[0]; border: 1px solid #fff; @apply tw:rounded-[27px]; background: #fff; @apply tw:flex; @apply tw:flex-col; @apply tw:overflow-hidden; max-height: 92dvh; box-shadow: 0 25px 100px #46503b24; scrollbar-width: thin; scrollbar-color: #d2dcc6 transparent; }
+.care-workspace #modal_child_dossier :is(h3,h4,strong,button) { font-family: 'DM Sans',sans-serif; }
+.care-workspace #modal_child_dossier .record-viewer-header { @apply tw:shrink-0; @apply tw:relative; background: #f1edf9; border-bottom: 1px solid #e8e1f1; padding: 20px 65px 18px 30px; }
+.care-workspace #modal_child_dossier .record-viewer-eyebrow { @apply tw:flex; @apply tw:items-center; @apply tw:gap-[8px]; @apply tw:text-[#76618e]; @apply tw:text-[9px]; @apply tw:font-bold; @apply tw:tracking-[1.3px]; }
+.care-workspace #modal_child_dossier .record-viewer-eyebrow > span { @apply tw:ml-[5px]; padding: 4px 7px; background: #ffffffa8; border: 1px solid #e2daed; @apply tw:rounded-[6px]; @apply tw:text-[8px]; @apply tw:tracking-[.6px]; }
+.care-workspace #modal_child_dossier #child-record-title { font-size: clamp(19px,2vw,24px); @apply tw:font-bold; @apply tw:text-[#374333]; @apply tw:tracking-[-.8px]; @apply tw:leading-[1.35]; margin: 10px 0 6px; overflow-wrap: anywhere; }
+.care-workspace #modal_child_dossier .record-title-divider { @apply tw:text-[#b4a5c8]; margin-inline: 4px; @apply tw:font-normal; }
+.care-workspace #modal_child_dossier #dossier_modal_meta { @apply tw:text-[#6e6d75]; @apply tw:text-[10px]; @apply tw:leading-[1.7]; @apply tw:m-[0]; }
+.care-workspace #modal_child_dossier .record-viewer-close { @apply tw:absolute; @apply tw:top-[23px]; @apply tw:right-[23px]; @apply tw:grid; place-items: center; @apply tw:w-[35px]; @apply tw:h-[35px]; @apply tw:p-[0]; border: 1px solid #e0d7ed; @apply tw:rounded-[50%]; @apply tw:text-[#76618e]; background: #fff; @apply tw:text-[25px]; @apply tw:leading-[1]; @apply tw:cursor-pointer; }
+.care-workspace #modal_child_dossier .record-viewer-close:hover { background: #e7dff4; }
+.care-workspace #modal_child_dossier .record-viewer-body { padding: 20px 26px 22px; @apply tw:overflow-y-auto; @apply tw:min-h-[0]; scrollbar-width: thin; scrollbar-color: #d6dfca transparent; }
+.care-workspace #modal_child_dossier .record-child-profile { @apply tw:flex; @apply tw:items-center; @apply tw:gap-[19px]; @apply tw:pb-[18px]; }
+.care-workspace #modal_child_dossier #dossier_modal_avatar { @apply tw:w-[66px]; @apply tw:h-[76px]; flex: 0 0 66px; @apply tw:rounded-[21px]; @apply tw:object-cover; border: 4px solid #f0f3e8; box-shadow: 0 2px 10px #5969430a; }
+.care-workspace #modal_child_dossier .record-child-identity { @apply tw:min-w-0; }
+.care-workspace #modal_child_dossier .record-small-label { @apply tw:text-[#6e7862]; @apply tw:text-[8px]; @apply tw:tracking-[1.4px]; @apply tw:font-bold; }
+.care-workspace #modal_child_dossier #dossier_modal_head_name { @apply tw:text-[20px]; @apply tw:tracking-[-.7px]; @apply tw:text-[#384733]; @apply tw:font-bold; margin: 5px 0 9px; @apply tw:leading-[1.3]; }
+.care-workspace #modal_child_dossier .record-profile-tags { @apply tw:flex; @apply tw:flex-wrap; @apply tw:gap-[5px]; }
+.care-workspace #modal_child_dossier .record-profile-tags > span { background: #f3f5ee; border: 1px solid #e9eddf; @apply tw:text-[#657157]; @apply tw:text-[9px]; padding: 3px 7px; @apply tw:rounded-[6px]; }
+.care-workspace #modal_child_dossier .record-child-home { @apply tw:flex; @apply tw:gap-[7px]; @apply tw:items-baseline; @apply tw:text-[#68765c]; @apply tw:text-[10px]; margin: 9px 0 0; }
+.care-workspace #modal_child_dossier .record-child-home i { @apply tw:text-[#a3b38f]; }
+.care-workspace #modal_child_dossier .dossier-nav-tabs { @apply tw:grid; grid-template-columns: repeat(3,minmax(0,1fr)); @apply tw:gap-[5px]; @apply tw:p-[5px]; @apply tw:mb-[18px]; background: #f3f5ef; border: 1px solid #e9eddf; @apply tw:rounded-[13px]; }
+.care-workspace #modal_child_dossier .dossier-tab-btn { @apply tw:flex; @apply tw:justify-center; @apply tw:items-center; @apply tw:gap-[8px]; @apply tw:min-h-[40px]; @apply tw:p-[9px]; @apply tw:text-[11px]; @apply tw:font-semibold; @apply tw:leading-[1.4]; background: transparent; @apply tw:text-[#68765c]; border: 1px solid transparent; @apply tw:rounded-[9px]; }
+.care-workspace #modal_child_dossier .dossier-tab-btn.active { @apply tw:text-[#4e663d]; background: #fff; @apply tw:border-[#e2e8d6]; box-shadow: 0 2px 5px #647a4b0a; }
+.care-workspace #modal_child_dossier .dossier-tab-btn:hover:not(.active) { background: #e9efdf; @apply tw:text-[#60774a]; }
+.care-workspace #modal_child_dossier .paper-history-card { border: 1px solid #e6eadf; @apply tw:rounded-[18px]; @apply tw:p-[21px]; background: #fff; box-shadow: 0 4px 18px #4c634004; margin: 0 0 17px; }
+.care-workspace #modal_child_dossier .paper-history-card:last-child { @apply tw:mb-[0]; }
+.care-workspace #modal_child_dossier .record-exam-head { @apply tw:flex; @apply tw:justify-between; @apply tw:items-center; @apply tw:gap-[20px]; @apply tw:mb-[20px]; }
+.care-workspace #modal_child_dossier .record-exam-type { @apply tw:flex; @apply tw:items-center; @apply tw:gap-[6px]; @apply tw:text-[#707b61]; @apply tw:text-[8px]; @apply tw:font-bold; @apply tw:tracking-[1.1px]; @apply tw:mb-[8px]; }
+.care-workspace #modal_child_dossier .record-exam-title { @apply tw:text-[#43533b]; @apply tw:text-[16px]; @apply tw:tracking-[-.4px]; @apply tw:font-bold; @apply tw:leading-[1.5]; margin: 0 0 5px; }
+.care-workspace #modal_child_dossier .record-exam-meta { @apply tw:text-[#6d7861]; @apply tw:text-[10px]; @apply tw:leading-[1.8]; }
+.care-workspace #modal_child_dossier .record-overall-score { @apply tw:grid; justify-items: center; @apply tw:gap-[5px]; padding: 13px 17px; background: #f0f6e5; border: 1px solid #e4edcf; @apply tw:rounded-[15px]; @apply tw:shrink-0; @apply tw:min-w-[104px]; }
+.care-workspace #modal_child_dossier .record-overall-score small { @apply tw:text-[#65774f]; @apply tw:text-[8px]; @apply tw:tracking-[1px]; @apply tw:font-bold; }
+.care-workspace #modal_child_dossier .record-overall-score strong { @apply tw:text-[#56733c]; @apply tw:text-[29px]; @apply tw:tracking-[-1.5px]; @apply tw:leading-[1.2]; @apply tw:font-bold; }
+.care-workspace #modal_child_dossier .record-overall-score span { @apply tw:text-[#63794e]; @apply tw:text-[9px]; @apply tw:font-semibold; @apply tw:max-w-[130px]; @apply tw:text-center; }
+.care-workspace #modal_child_dossier .record-subjects { @apply tw:grid; grid-template-columns: repeat(4,minmax(0,1fr)); @apply tw:gap-[10px]; }
+.care-workspace #modal_child_dossier .record-subject { @apply tw:p-[14px]; border: 1px solid #e9e4f2; @apply tw:rounded-[12px]; background: #f9f7fc; @apply tw:min-w-0; }
+.care-workspace #modal_child_dossier .record-subject:nth-child(2n) { background: #f7faf2; @apply tw:border-[#e6ecd9]; }
+.care-workspace #modal_child_dossier .record-subject-top { @apply tw:flex; @apply tw:justify-between; align-items: start; @apply tw:gap-[10px]; }
+.care-workspace #modal_child_dossier .record-subject-name { @apply tw:text-[#707164]; @apply tw:text-[11px]; @apply tw:leading-[1.5]; }
+.care-workspace #modal_child_dossier .record-subject-grade { @apply tw:grid; place-items: center; @apply tw:min-w-[25px]; @apply tw:min-h-[25px]; padding: 3px 5px; background: #ebe5f5; @apply tw:text-[#70598b]; @apply tw:rounded-[7px]; @apply tw:text-[10px]; @apply tw:font-bold; }
+.care-workspace #modal_child_dossier .record-subject-score { @apply tw:text-[21px]; @apply tw:font-semibold; @apply tw:text-[#62624f]; margin: 8px 0; @apply tw:tracking-[-.7px]; }
+.care-workspace #modal_child_dossier .record-subject-score small { @apply tw:ml-[5px]; @apply tw:text-[9px]; @apply tw:text-[#74785f]; @apply tw:font-normal; @apply tw:tracking-[0]; }
+.care-workspace #modal_child_dossier .record-score-track { background: #eae6f0; @apply tw:h-[4px]; @apply tw:rounded-[10px]; @apply tw:overflow-hidden; }
+.care-workspace #modal_child_dossier .record-score-track > span { @apply tw:block; @apply tw:h-full; border-radius: inherit; background: #c6b7df; }
+.care-workspace #modal_child_dossier .record-subject:nth-child(2n) .record-score-track { background: #e8eddc; }
+.care-workspace #modal_child_dossier .record-subject:nth-child(2n) .record-score-track > span { background: #bacc9b; }
+.care-workspace #modal_child_dossier .record-exam-note { @apply tw:flex; align-items: start; @apply tw:gap-[10px]; margin: 17px 0 0; padding: 13px 14px; @apply tw:rounded-[10px]; background: #fbf6ee; @apply tw:text-[#796a55]; @apply tw:text-[11px]; @apply tw:leading-[1.7]; }
+.care-workspace #modal_child_dossier .record-exam-note i { @apply tw:mt-[3px]; @apply tw:text-[#cfb990]; }
+.care-workspace #modal_child_dossier .record-overview-grid { @apply tw:grid; grid-template-columns: repeat(2,minmax(0,1fr)); @apply tw:gap-[14px]; }
+.care-workspace #modal_child_dossier .record-summary-panel { border: 1px solid #e6eadf; @apply tw:p-[20px]; @apply tw:rounded-[16px]; background: #fafbf7; }
+.care-workspace #modal_child_dossier .record-summary-panel h4 { @apply tw:text-[#63774d]; @apply tw:text-[17px]; margin: 0 0 17px; @apply tw:tracking-[-.3px]; }
+.care-workspace #modal_child_dossier .record-summary-panel h4 i { @apply tw:mr-[6px]; @apply tw:text-[#a5b58e]; }
+.care-workspace #modal_child_dossier .record-facts { @apply tw:grid; @apply tw:gap-[13px]; @apply tw:m-[0]; }
+.care-workspace #modal_child_dossier .record-facts dt { @apply tw:text-[#6d795f]; @apply tw:text-[12px]; @apply tw:mb-[5px]; }
+.care-workspace #modal_child_dossier .record-facts dd { @apply tw:m-[0]; @apply tw:text-[#5a6a4c]; @apply tw:text-[15px]; @apply tw:leading-[1.6]; overflow-wrap: anywhere; }
+.care-workspace #modal_child_dossier .record-health-facts { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px 24px; }
+.care-workspace #modal_child_dossier .record-care-notes { grid-column: 1 / -1; border-top: 1px solid #e5e9dd; @apply tw:pt-[16px]; }
+.care-workspace #modal_child_dossier .record-empty { @apply tw:text-center; @apply tw:p-[26px]; border: 1px dashed #dfe5d6; @apply tw:rounded-[15px]; background: #fafbf7; @apply tw:text-[#68765c]; @apply tw:text-[12px]; }
+.care-workspace #modal_child_dossier .record-viewer-footer { @apply tw:shrink-0; @apply tw:flex; @apply tw:justify-between; @apply tw:items-center; @apply tw:gap-[15px]; padding: 14px 26px; background: #fafbf7; border-top: 1px solid #ebeee5; }
+.care-workspace #modal_child_dossier .record-viewer-footer > span { @apply tw:text-[#707b65]; @apply tw:text-[10px]; }
+.care-workspace #modal_child_dossier .record-viewer-footer > span i { @apply tw:mr-[6px]; @apply tw:text-[#adba98]; }
+.care-workspace #modal_child_dossier .record-viewer-footer button { @apply tw:flex; @apply tw:items-center; @apply tw:gap-[15px]; padding: 11px 16px; border: 1px solid #dbe4cc; @apply tw:rounded-[10px]; background: #e9f0dc; @apply tw:text-[#60754b]; @apply tw:text-[11px]; @apply tw:font-semibold; @apply tw:cursor-pointer; }
+.care-workspace #modal_child_dossier .record-viewer-footer button:hover { background: #dfe9cc; }
+@media (max-width: 700px) {
+    .care-workspace #modal_child_dossier .record-subjects { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 600px) {
+    .care-workspace #modal_child_dossier { @apply tw:p-[12px]; }
+    .care-workspace #modal_child_dossier .child-record-viewer { @apply tw:rounded-[20px]; max-height: 94dvh; }
+    .care-workspace #modal_child_dossier .record-viewer-header { padding: 22px 53px 20px 21px; }
+    .care-workspace #modal_child_dossier .record-viewer-close { @apply tw:right-[14px]; @apply tw:top-[18px]; }
+    .care-workspace #modal_child_dossier .record-viewer-body { @apply tw:p-[20px]; }
+    .care-workspace #modal_child_dossier .record-child-profile { @apply tw:gap-[13px]; }
+    .care-workspace #modal_child_dossier #dossier_modal_avatar { @apply tw:w-[65px]; @apply tw:h-[76px]; flex-basis: 65px; @apply tw:rounded-[17px]; }
+    .care-workspace #modal_child_dossier #dossier_modal_head_name { @apply tw:text-[18px]; }
+    .care-workspace #modal_child_dossier .record-small-label { @apply tw:text-[7px]; }
+    .care-workspace #modal_child_dossier .dossier-nav-tabs { @apply tw:gap-[3px]; }
+    .care-workspace #modal_child_dossier .dossier-tab-btn { @apply tw:flex-col; @apply tw:gap-[5px]; @apply tw:text-[9px]; padding: 8px 4px; }
+    .care-workspace #modal_child_dossier .paper-history-card { @apply tw:p-[16px]; }
+    .care-workspace #modal_child_dossier .record-exam-head { @apply tw:gap-[12px]; align-items: start; }
+    .care-workspace #modal_child_dossier .record-exam-title { @apply tw:text-[14px]; }
+    .care-workspace #modal_child_dossier .record-overall-score { @apply tw:min-w-[80px]; @apply tw:p-[10px]; }
+    .care-workspace #modal_child_dossier .record-overall-score strong { @apply tw:text-[25px]; }
+    .care-workspace #modal_child_dossier .record-overview-grid { grid-template-columns: minmax(0,1fr); }
+    .care-workspace #modal_child_dossier .record-viewer-footer { padding: 15px 20px; }
+    .care-workspace #modal_child_dossier .record-viewer-footer > span { @apply tw:max-w-[150px]; @apply tw:text-[9px]; }
+}
+@media (max-width: 390px) {
+    .care-workspace #modal_child_dossier .record-subjects,.care-workspace #modal_child_dossier .record-health-facts { grid-template-columns: minmax(0,1fr); }
+}

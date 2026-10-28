@@ -4,11 +4,11 @@
     $isStaff = request()->routeIs('dashboard.staff') || request()->routeIs('staff.*') || request()->routeIs('*.staff') || request('view') === 'staff' || request('role') === 'staff';
 @endphp
 
-@section('title', $isStaff ? 'Caregiver Duty Rosters & Volunteers' : 'Staff & Volunteer Management')
-@section('breadcrumb', $isStaff ? 'Duty Roster & Volunteers' : 'Staff & Volunteers')
+@section('title', $isStaff ? 'Staff Schedules & Volunteers' : 'Staff & Volunteer Management')
+@section('breadcrumb', $isStaff ? 'Work Schedules & Volunteers' : 'Staff & Volunteers')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/portal/staff-volunteers.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/staff-volunteers.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/staff-volunteers.css')), 0, 12) }}">
 @endpush
 
 @section('content')
@@ -18,7 +18,7 @@
         <div class="subsystem-pill" style="background: {{ $isStaff ? '#10b981' : '#8b5cf6' }};">
             <i class="fas fa-users-cog"></i> {{ $isStaff ? 'Caregiver Operations · Duty Coordination' : 'Subsystem 4' }}
         </div>
-        <h1 class="page-title">{{ $isStaff ? 'Caregiver Duty Rosters & Volunteer Coordination' : 'Personnel, Training Credentials & Duty Rostering' }}</h1>
+        <h1 class="page-title">{{ $isStaff ? 'Staff Schedules & Volunteers' : 'Staff, Volunteers & Work Schedules' }}</h1>
         <p class="page-desc">
             {{ $isStaff 
                 ? 'Review your caregiving shifts, coordinate with on-duty staff across wings, log volunteer activity hours, and check daily shift handovers.' 
@@ -27,15 +27,12 @@
     </div>
     <div class="header-action-group">
         @if($isStaff)
-            <button class="btn-primary" style="background: #10b981;" onclick="openModal('modal_volunteer_hours')">
-                <i class="fas fa-clock"></i> Log Volunteer Hours
-            </button>
             <button class="btn-outline" onclick="openModal('modal_assign_shift')">
                 <i class="fas fa-exchange-alt"></i> Shift Handover Note
             </button>
         @else
             <button class="btn-primary" onclick="openModal('modal_register_personnel')">
-                <i class="fas fa-user-plus"></i> Register Personnel
+                <i class="fas fa-user-plus"></i> Add Staff or Volunteer
             </button>
             <button class="btn-outline" onclick="openModal('modal_volunteer_hours')">
                 <i class="fas fa-clock"></i> Log Volunteer Hours
@@ -97,10 +94,10 @@
 <!-- Tabs Navigation -->
 <div class="tabs-container">
     <button class="tab-btn active" data-tab="tab_directory">
-        <i class="fas fa-users"></i> Personnel Directory (5)
+        <i class="fas fa-users"></i> Staff & Volunteers Directory (5)
     </button>
     <button class="tab-btn" data-tab="tab_credentials">
-        <i class="fas fa-award"></i> Safeguarding & Training Credentials
+        <i class="fas fa-award"></i> Safeguarding & Training & Qualifications
     </button>
     <button class="tab-btn" data-tab="tab_roster">
         <i class="fas fa-calendar-check"></i> Duty & Shift Rostering
@@ -118,7 +115,7 @@
     </div>
     <div style="display: flex; gap: 10px;">
         <select class="portal-select category-filter" data-filter-target=".searchable-staff">
-            <option value="All">All Personnel Types</option>
+            <option value="All">All Staff Types</option>
             <option value="Staff">Permanent Staff</option>
             <option value="Volunteer">Active Volunteers</option>
         </select>
@@ -126,16 +123,15 @@
 </div>
 
 <!-- TAB 1: PERSONNEL DIRECTORY -->
-<div id="tab_directory" class="tab-pane">
+<div id="tab_directory" class="tab-pane personnel-directory">
     <div class="cards-grid-3">
         <!-- Person 1 -->
         <div class="searchable-staff" data-category="Staff">
             <div class="child-profile-card">
                 <div>
                     <div class="card-top-info">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80" class="avatar-large" alt="Sister Teresa">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&auto=format&fit=crop&crop=faces&q=85" class="avatar-large" alt="Sister Teresa">
                         <div style="text-align: right;">
-                            <span class="badge badge-purple">Permanent Staff</span>
                             <div style="margin-top: 4px;"><span class="badge badge-success">Cleared</span></div>
                         </div>
                     </div>
@@ -144,8 +140,8 @@
 
                     <div class="info-rows">
                         <div class="info-row">
-                            <span class="info-row-label"><i class="fas fa-building"></i> Dept:</span>
-                            <span class="info-row-val">Child Welfare & Protection</span>
+                            <span class="info-row-label"><i class="fas fa-building" aria-hidden="true"></i> Organization affiliation:</span>
+                            <span class="info-row-val">Not provided</span>
                         </div>
                         <div class="info-row">
                             <span class="info-row-label"><i class="fas fa-envelope"></i> Email:</span>
@@ -173,9 +169,8 @@
             <div class="child-profile-card">
                 <div>
                     <div class="card-top-info">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" class="avatar-large" alt="Brother Luke">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&auto=format&fit=crop&crop=faces&q=85" class="avatar-large" alt="Brother Luke">
                         <div style="text-align: right;">
-                            <span class="badge badge-purple">Permanent Staff</span>
                             <div style="margin-top: 4px;"><span class="badge badge-warning">CPR Renewal Due</span></div>
                         </div>
                     </div>
@@ -184,8 +179,8 @@
 
                     <div class="info-rows">
                         <div class="info-row">
-                            <span class="info-row-label"><i class="fas fa-building"></i> Dept:</span>
-                            <span class="info-row-val">Residential Operations</span>
+                            <span class="info-row-label"><i class="fas fa-building" aria-hidden="true"></i> Organization affiliation:</span>
+                            <span class="info-row-val">Not provided</span>
                         </div>
                         <div class="info-row">
                             <span class="info-row-label"><i class="fas fa-envelope"></i> Email:</span>
@@ -213,9 +208,8 @@
             <div class="child-profile-card">
                 <div>
                     <div class="card-top-info">
-                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80" class="avatar-large" alt="David Tan">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&auto=format&fit=crop&crop=faces&q=85" class="avatar-large" alt="David Tan">
                         <div style="text-align: right;">
-                            <span class="badge badge-purple">Permanent Staff</span>
                             <div style="margin-top: 4px;"><span class="badge badge-success">Cleared</span></div>
                         </div>
                     </div>
@@ -224,8 +218,8 @@
 
                     <div class="info-rows">
                         <div class="info-row">
-                            <span class="info-row-label"><i class="fas fa-building"></i> Dept:</span>
-                            <span class="info-row-val">Education & Tutoring</span>
+                            <span class="info-row-label"><i class="fas fa-building" aria-hidden="true"></i> Organization affiliation:</span>
+                            <span class="info-row-val">Not provided</span>
                         </div>
                         <div class="info-row">
                             <span class="info-row-label"><i class="fas fa-envelope"></i> Email:</span>
@@ -253,7 +247,7 @@
             <div class="child-profile-card">
                 <div>
                     <div class="card-top-info">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" class="avatar-large" alt="Elena Rostova">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&auto=format&fit=crop&crop=faces&q=85" class="avatar-large" alt="Elena Rostova">
                         <div style="text-align: right;">
                             <span class="badge badge-info" style="background: rgba(255, 44, 90, 0.12); color: var(--primary);">Active Volunteer</span>
                             <div style="margin-top: 4px;"><span class="badge badge-success">148 Hours</span></div>
@@ -264,8 +258,8 @@
 
                     <div class="info-rows">
                         <div class="info-row">
-                            <span class="info-row-label"><i class="fas fa-building"></i> Dept:</span>
-                            <span class="info-row-val">Education Support</span>
+                            <span class="info-row-label"><i class="fas fa-building" aria-hidden="true"></i> Organization affiliation:</span>
+                            <span class="info-row-val">Not provided</span>
                         </div>
                         <div class="info-row">
                             <span class="info-row-label"><i class="fas fa-clock"></i> Schedule:</span>
@@ -289,7 +283,7 @@
             <div class="child-profile-card">
                 <div>
                     <div class="card-top-info">
-                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=150&auto=format&fit=crop&q=80" class="avatar-large" alt="Dr. Kevin Zhao">
+                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&h=400&auto=format&fit=crop&crop=faces&q=85" class="avatar-large" alt="Dr. Kevin Zhao">
                         <div style="text-align: right;">
                             <span class="badge badge-info" style="background: rgba(255, 44, 90, 0.12); color: var(--primary);">Active Volunteer</span>
                             <div style="margin-top: 4px;"><span class="badge badge-success">84 Hours</span></div>
@@ -300,8 +294,8 @@
 
                     <div class="info-rows">
                         <div class="info-row">
-                            <span class="info-row-label"><i class="fas fa-building"></i> Dept:</span>
-                            <span class="info-row-val">Health & Medical Clinic</span>
+                            <span class="info-row-label"><i class="fas fa-building" aria-hidden="true"></i> Organization affiliation:</span>
+                            <span class="info-row-val">Not provided</span>
                         </div>
                         <div class="info-row">
                             <span class="info-row-label"><i class="fas fa-clock"></i> Schedule:</span>
@@ -329,7 +323,7 @@
             <table class="portal-table">
                 <thead>
                     <tr>
-                        <th>Personnel Member</th>
+                        <th>Staff Member</th>
                         <th>Certification / Qualification</th>
                         <th>Accreditation Authority</th>
                         <th>Issue Date</th>
@@ -421,7 +415,7 @@
             <h4 style="font-size: 15px; font-weight: 800;">Pediatric Oral Health Clinic Checkups</h4>
             <p style="font-size: 12px; color: #64748b; margin-top: 4px;">Assigned to: <strong>Dr. Kevin Zhao</strong> (Volunteer)</p>
             <div style="margin-top: 12px; font-size: 12px; background: #f8fafc; padding: 10px; border-radius: 6px;">
-                <div><i class="fas fa-map-marker-alt"></i> Location: Sanctuary Medical Clinic</div>
+                <div><i class="fas fa-map-marker-alt"></i> Location: Orphanage Medical Clinic</div>
                 <div><i class="fas fa-clock"></i> Alternate Fridays &bull; 02:00 PM - 05:00 PM</div>
             </div>
         </div>
@@ -472,7 +466,7 @@
         <div class="modal-header">
             <div>
                 <h3 class="modal-title">Register Staff or Volunteer</h3>
-                <p class="modal-sub">Add personnel to human resources directory.</p>
+                <p class="modal-sub">Add staff & Volunteers to human resources directory.</p>
             </div>
             <button class="modal-close-btn" onclick="closeModal('modal_register_personnel')">&times;</button>
         </div>
@@ -521,7 +515,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn-outline" onclick="closeModal('modal_register_personnel')">Cancel</button>
-                <button type="submit" class="btn-primary">Save Personnel</button>
+                <button type="submit" class="btn-primary">Save Staff Member</button>
             </div>
         </form>
     </div>
@@ -576,7 +570,7 @@
     <div class="portal-modal" style="max-width: 480px;">
         <div class="modal-header">
             <div>
-                <h3 class="modal-title">Schedule Duty Roster Shift</h3>
+                <h3 class="modal-title">Schedule a Shift</h3>
                 <p class="modal-sub">Assign caregiving, tutoring or kitchen shift.</p>
             </div>
             <button class="modal-close-btn" onclick="closeModal('modal_assign_shift')">&times;</button>
@@ -589,7 +583,7 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">Personnel</label>
+                <label class="form-label">Staff & Volunteers</label>
                 <select class="form-control">
                     <option>Sister Teresa Maria</option>
                     <option>Brother Luke Montgomery</option>
@@ -617,3 +611,36 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.personnel-directory .child-profile-card').forEach(function (card) {
+        const rows = card.querySelector('.info-rows');
+        if (!rows) return;
+        const name = card.querySelector('.profile-name').textContent.trim();
+        const details = document.createElement('details');
+        details.className = 'personnel-details';
+        const summary = document.createElement('summary');
+        summary.textContent = 'Contact & credentials';
+        summary.setAttribute('aria-label', 'Contact and credentials for ' + name);
+        details.appendChild(summary);
+        const body = document.createElement('div');
+        body.className = 'personnel-details-body';
+        Array.from(rows.children).slice(1).forEach(function (row) {
+            const value = row.querySelector('.info-row-val');
+            const label = row.querySelector('.info-row-label');
+            if (value && label && /Email:|Phone:/.test(label.textContent)) {
+                const link = document.createElement('a');
+                link.textContent = value.textContent.trim();
+                link.href = /Email:/.test(label.textContent) ? 'mailto:' + link.textContent : 'tel:' + link.textContent.replace(/[^+0-9]/g, '');
+                value.replaceChildren(link);
+            }
+            body.appendChild(row);
+        });
+        details.appendChild(body);
+        rows.after(details);
+    });
+});
+</script>
+@endpush

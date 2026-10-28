@@ -1,0 +1,73 @@
+@import 'tailwindcss/theme.css' reference prefix(tw);
+
+/* Shared card elevation. Controls, table dividers and focus outlines keep their borders. */
+:is(.care-workspace, .care-home) {
+    --card-floating-shadow: 0 12px 22px -12px rgb(40 54 44 / 24%), 0 5px 10px -6px rgb(40 54 44 / 12%);
+}
+:is(.care-workspace, .care-home) :is(
+    .address-map-card,
+    .admin-card,
+    .admin-ticket-card,
+    .card,
+    .child-profile-card,
+    .children-registry-table-card,
+    .dir-don-kpi-card,
+    .dir-don-table-card,
+    .dir-info-card,
+    .dir-reg-card,
+    .dir-reg-metric-card,
+    .dir-staff-kpi-card,
+    .dir-staff-table-card,
+    .director-card,
+    .director-hero-card,
+    .director-kpi-card,
+    .director-stat-card,
+    .duty-alert-card,
+    .edu-kpi-card,
+    .edu-table-card,
+    .fund-allocation-card,
+    .hero-overlay-card,
+    .inv-stat-card,
+    .inv-table-card,
+    .kpi-card,
+    .malaysia-map-card,
+    .med-kpi-card,
+    .med-table-card,
+    .metric-card,
+    .modal-card,
+    .orphanage-rank-card,
+    .page-header-card,
+    .paper-history-card,
+    .personnel-card,
+    .popup-sanctuary-card,
+    .portal-card,
+    .profile-card,
+    .profile-hero-card,
+    .program-card,
+    .protocol-card,
+    .prov-metric-card,
+    .provision-card,
+    .req-item-card,
+    .seal-card,
+    .slip-preview-card,
+    .staff-action-card,
+    .staff-duty-modal-card,
+    .staff-hero-card,
+    .staff-ward-card,
+    .stat-card,
+    .subsystem-admin-card,
+    .supplier-card,
+    .tier-card,
+    .treasury-overview-card,
+    .ward-inv-card,
+    .adminator-hero, .portal-dashboard-hero, .staff-inv-hero,
+    .staff-welfare-hero, .staff-donations-hero
+) {
+    border: 0 !important;
+    box-shadow: var(--card-floating-shadow) !important;
+}
+/* Remove decorative edge strips on dashboard metrics and public program cards. */
+.care-workspace :is(.kpi-card,.director-kpi-card,.med-kpi-card,.stat-card)::after,
+.care-home .program-card::before {
+    @apply tw:hidden;
+}

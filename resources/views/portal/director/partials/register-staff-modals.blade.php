@@ -2,7 +2,7 @@
 <div class="director-modal-overlay" id="modal_staff_onboarding_success">
     <div class="director-modal" style="max-width: 580px;">
         <div class="director-modal-head" style="background: #ecfdf5; border-bottom: 1px solid #a7f3d0;">
-            <h3><i class="fas fa-id-card-clip" style="color: #059669;"></i> Staff Registration & Credentials Issued</h3>
+            <h3><i class="fas fa-id-card-clip" style="color: #059669;"></i> Staff Account Created</h3>
             <button type="button" class="director-modal-close" onclick="closeDirectorModal('modal_staff_onboarding_success')">&times;</button>
         </div>
         <div class="director-modal-body">
@@ -21,7 +21,7 @@
                     <strong id="success_staff_id" style="font-family: monospace; color: #4f46e5; font-size: 14px;">HH-CARE-09</strong>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px;">
-                    <span style="color: #64748b;">Sanctuary Wing:</span>
+                    <span style="color: #64748b;">Orphanage Wing:</span>
                     <strong id="success_staff_wing">Ward Alpha (Nursery)</strong>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px;">

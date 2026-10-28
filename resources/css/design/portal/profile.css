@@ -1,0 +1,612 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* ==========================================================================
+   HopeHaven Orphanage Management Portal - Profile & Personnel Dossier
+   File: public/css/portal/profile.css
+   ========================================================================== */
+
+/* Profile Header Card */
+.profile-hero-card {
+    background: linear-gradient(135deg, rgba(255, 44, 90, 0.07) 0%, rgba(139, 92, 246, 0.06) 50%, rgba(20, 184, 166, 0.05) 100%), #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    @apply tw:p-[32px];
+    @apply tw:mb-[28px];
+    box-shadow: var(--shadow-sm);
+    @apply tw:relative;
+    @apply tw:overflow-hidden;
+}
+
+.profile-hero-card::after {
+    content: '';
+    @apply tw:absolute;
+    @apply tw:top-[-60px];
+    @apply tw:right-[-60px];
+    @apply tw:w-[220px];
+    @apply tw:h-[220px];
+    @apply tw:rounded-[50%];
+    background: radial-gradient(circle, rgba(255, 44, 90, 0.08) 0%, transparent 70%);
+    @apply tw:pointer-events-none;
+}
+
+.profile-hero-content {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+    @apply tw:flex-wrap;
+    @apply tw:gap-[24px];
+    @apply tw:relative;
+    @apply tw:z-[1];
+}
+
+.profile-hero-left {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[24px];
+    @apply tw:flex-wrap;
+}
+
+.profile-avatar-wrapper {
+    @apply tw:relative;
+}
+
+.profile-avatar-circle {
+    @apply tw:w-[96px];
+    @apply tw:h-[96px];
+    @apply tw:rounded-[50%];
+    background: linear-gradient(135deg, var(--primary) 0%, #ec4899 100%);
+    @apply tw:text-[#ffffff];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:text-[34px];
+    @apply tw:font-extrabold;
+    box-shadow: 0 10px 25px rgba(255, 44, 90, 0.3);
+    border: 4px solid #ffffff;
+}
+
+.avatar-status-dot {
+    @apply tw:absolute;
+    @apply tw:bottom-[4px];
+    @apply tw:right-[4px];
+    @apply tw:w-[20px];
+    @apply tw:h-[20px];
+    @apply tw:rounded-[50%];
+    background: var(--success);
+    border: 3px solid #ffffff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.profile-hero-details h1 {
+    @apply tw:text-[24px];
+    @apply tw:font-extrabold;
+    color: var(--dark);
+    @apply tw:tracking-[-0.5px];
+    @apply tw:mb-[6px];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[10px];
+    @apply tw:flex-wrap;
+}
+
+.profile-tag-group {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+    @apply tw:flex-wrap;
+    @apply tw:mb-[8px];
+}
+
+.tag-badge {
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    padding: 4px 10px;
+    @apply tw:rounded-[20px];
+    @apply tw:text-[11.5px];
+    @apply tw:font-bold;
+    @apply tw:tracking-[0.3px];
+}
+
+.tag-badge.role-badge {
+    background: rgba(139, 92, 246, 0.12);
+    @apply tw:text-[#8b5cf6];
+    border: 1px solid rgba(139, 92, 246, 0.25);
+}
+
+.tag-badge.username-badge {
+    background: rgba(20, 184, 166, 0.1);
+    @apply tw:text-[#0f766e];
+    border: 1px solid rgba(20, 184, 166, 0.25);
+    font-family: 'JetBrains Mono', monospace;
+    @apply tw:text-[11.5px];
+}
+
+.tag-badge.verified-badge {
+    background: rgba(16, 185, 129, 0.1);
+    @apply tw:text-[#10b981];
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.profile-affiliation-sub {
+    @apply tw:text-[13px];
+    color: var(--dark-muted);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[7px];
+    @apply tw:font-medium;
+}
+
+.profile-hero-right {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[10px];
+    @apply tw:flex-wrap;
+}
+
+/* Quick Stats Bar in Hero */
+.hero-stats-row {
+    @apply tw:grid;
+    grid-template-columns: repeat(4, 1fr);
+    @apply tw:gap-[16px];
+    @apply tw:mt-[24px];
+    @apply tw:pt-[20px];
+    border-top: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.hero-stat-item {
+    @apply tw:flex;
+    @apply tw:flex-col;
+}
+
+.hero-stat-label {
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:text-[#94a3b8];
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.5px];
+    @apply tw:mb-[2px];
+}
+
+.hero-stat-val {
+    @apply tw:text-[14px];
+    @apply tw:font-bold;
+    color: var(--dark);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+}
+
+/* Main Grid Layout */
+.profile-grid-layout {
+    @apply tw:grid;
+    grid-template-columns: 1.7fr 1.3fr;
+    @apply tw:gap-[28px];
+    align-items: start;
+}
+
+@media (max-width: 1080px) {
+    .profile-grid-layout {
+        grid-template-columns: 1fr;
+    }
+    .hero-stats-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Profile Card General */
+.profile-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    @apply tw:mb-[24px];
+    @apply tw:overflow-hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+}
+
+.profile-card-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #f1f5f9;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+    background: #fafbfc;
+}
+
+.profile-card-title {
+    @apply tw:text-[15px];
+    @apply tw:font-bold;
+    color: var(--dark);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[10px];
+}
+
+.profile-card-title i {
+    color: var(--primary);
+    @apply tw:text-[16px];
+}
+
+.profile-card-body {
+    @apply tw:p-[24px];
+}
+
+/* Field Group List / Details Grid */
+.detail-fields-grid {
+    @apply tw:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 24px;
+}
+
+@media (max-width: 640px) {
+    .detail-fields-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.detail-field-item {
+    @apply tw:flex;
+    @apply tw:flex-col;
+}
+
+.detail-field-item.full-width {
+    grid-column: 1 / -1;
+}
+
+.field-label {
+    @apply tw:text-[11.5px];
+    @apply tw:font-bold;
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.6px];
+    @apply tw:text-[#64748b];
+    @apply tw:mb-[6px];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+}
+
+.field-value-box {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    @apply tw:text-[13.5px];
+    color: var(--dark);
+    @apply tw:font-semibold;
+    @apply tw:min-h-[44px];
+    transition: all 0.2s ease;
+}
+
+.field-value-box:hover {
+    @apply tw:border-[#cbd5e1];
+    background: #ffffff;
+}
+
+.field-value-box.mono {
+    font-family: 'JetBrains Mono', monospace;
+    @apply tw:text-[13px];
+    @apply tw:text-[#0f172a];
+}
+
+.field-value-text {
+    @apply tw:overflow-hidden;
+    text-overflow: ellipsis;
+    @apply tw:whitespace-nowrap;
+    @apply tw:mr-[8px];
+}
+
+.field-action-btn {
+    background: none;
+    border: none;
+    @apply tw:text-[#94a3b8];
+    @apply tw:cursor-pointer;
+    @apply tw:text-[13px];
+    padding: 4px 6px;
+    @apply tw:rounded-[4px];
+    transition: all 0.15s ease;
+}
+
+.field-action-btn:hover {
+    color: var(--primary);
+    background: rgba(255, 44, 90, 0.08);
+}
+
+/* Password Display Special Box */
+.password-display-wrapper {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    @apply tw:mb-[14px];
+}
+
+.password-row-main {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+    @apply tw:gap-[12px];
+}
+
+.password-hidden-dots {
+    font-family: 'JetBrains Mono', monospace;
+    @apply tw:text-[18px];
+    @apply tw:tracking-[4px];
+    color: var(--dark);
+    @apply tw:font-extrabold;
+}
+
+.password-actions-group {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+}
+
+.btn-pill-small {
+    padding: 5px 12px;
+    @apply tw:rounded-[20px];
+    @apply tw:text-[11.5px];
+    @apply tw:font-bold;
+    @apply tw:cursor-pointer;
+    border: 1px solid var(--border-color);
+    background: #ffffff;
+    color: var(--dark);
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    transition: all 0.2s ease;
+}
+
+.btn-pill-small:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.btn-pill-small.btn-primary-pill {
+    background: var(--primary);
+    @apply tw:text-[#ffffff];
+    border-color: var(--primary);
+}
+
+.btn-pill-small.btn-primary-pill:hover {
+    background: var(--primary-hover);
+}
+
+.password-meta-info {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+    @apply tw:flex-wrap;
+    @apply tw:gap-[10px];
+    @apply tw:mt-[10px];
+    @apply tw:pt-[10px];
+    border-top: 1px solid #e2e8f0;
+    @apply tw:text-[12px];
+    color: var(--dark-muted);
+}
+
+.strength-indicator {
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    @apply tw:font-semibold;
+    color: var(--success);
+}
+
+.strength-dots-bar {
+    @apply tw:inline-flex;
+    @apply tw:gap-[3px];
+}
+
+.strength-dot {
+    @apply tw:w-[6px];
+    @apply tw:h-[6px];
+    @apply tw:rounded-[50%];
+    background: var(--success);
+}
+
+/* Address Map Card Integration */
+.address-map-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    @apply tw:p-[16px];
+    @apply tw:mt-[14px];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+    @apply tw:gap-[16px];
+    background: linear-gradient(to right, #f8fafc, #ffffff);
+}
+
+.address-map-icon {
+    @apply tw:w-[48px];
+    @apply tw:h-[48px];
+    @apply tw:rounded-[12px];
+    background: rgba(20, 184, 166, 0.12);
+    color: var(--teal);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:text-[20px];
+    @apply tw:shrink-0;
+}
+
+.address-map-text h4 {
+    @apply tw:text-[13.5px];
+    @apply tw:font-bold;
+    color: var(--dark);
+    @apply tw:mb-[2px];
+}
+
+.address-map-text p {
+    @apply tw:text-[12px];
+    color: var(--dark-muted);
+}
+
+/* Role Capabilities Scope List */
+.scope-check-list {
+    @apply tw:flex;
+    @apply tw:flex-col;
+    @apply tw:gap-[12px];
+}
+
+.scope-check-item {
+    @apply tw:flex;
+    @apply tw:items-start;
+    @apply tw:gap-[12px];
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    background: #f8fafc;
+    border: 1px solid #f1f5f9;
+}
+
+.scope-icon-wrap {
+    @apply tw:w-[28px];
+    @apply tw:h-[28px];
+    @apply tw:rounded-[6px];
+    background: rgba(16, 185, 129, 0.12);
+    @apply tw:text-[#10b981];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:text-[12px];
+    @apply tw:shrink-0;
+    @apply tw:mt-[2px];
+}
+
+.scope-content h5 {
+    @apply tw:text-[13px];
+    @apply tw:font-bold;
+    color: var(--dark);
+    @apply tw:mb-[2px];
+}
+
+.scope-content p {
+    @apply tw:text-[11.5px];
+    color: var(--dark-muted);
+    @apply tw:leading-[1.4];
+}
+
+/* Security Activity Timeline */
+.activity-timeline {
+    @apply tw:relative;
+    @apply tw:pl-[24px];
+}
+
+.activity-timeline::before {
+    content: '';
+    @apply tw:absolute;
+    @apply tw:left-[8px];
+    @apply tw:top-[6px];
+    @apply tw:bottom-[6px];
+    @apply tw:w-[2px];
+    background: #e2e8f0;
+}
+
+.timeline-item {
+    @apply tw:relative;
+    @apply tw:mb-[18px];
+}
+
+.timeline-item:last-child {
+    @apply tw:mb-[0];
+}
+
+.timeline-dot {
+    @apply tw:absolute;
+    @apply tw:left-[-24px];
+    @apply tw:top-[4px];
+    @apply tw:w-[18px];
+    @apply tw:h-[18px];
+    @apply tw:rounded-[50%];
+    background: #ffffff;
+    border: 3px solid var(--primary);
+}
+
+.timeline-title {
+    @apply tw:text-[12.5px];
+    @apply tw:font-bold;
+    color: var(--dark);
+}
+
+.timeline-time {
+    @apply tw:text-[11px];
+    @apply tw:text-[#94a3b8];
+    @apply tw:mt-[2px];
+}
+
+/* Inline Edit Inputs */
+.editable-input {
+    @apply tw:w-full;
+    padding: 9px 12px;
+    border: 1.5px solid var(--primary);
+    border-radius: var(--radius-sm);
+    @apply tw:font-[inherit];
+    @apply tw:text-[13.5px];
+    color: var(--dark);
+    outline: none;
+    background: #ffffff;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 0 3px rgba(255, 44, 90, 0.12);
+}
+
+.edit-actions-panel {
+    @apply tw:hidden;
+    @apply tw:items-center;
+    @apply tw:justify-end;
+    @apply tw:gap-[10px];
+    @apply tw:mt-[20px];
+    @apply tw:pt-[16px];
+    border-top: 1px solid #f1f5f9;
+}
+
+.field-actions-cluster {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[4px];
+}
+
+.field-action-btn.edit-btn {
+    color: var(--primary);
+    background: rgba(255, 44, 90, 0.08);
+}
+
+.field-action-btn.edit-btn:hover {
+    background: var(--primary);
+    @apply tw:text-[#ffffff];
+}
+
+.input-prefix-group {
+    @apply tw:flex;
+    @apply tw:items-stretch;
+    @apply tw:w-full;
+}
+
+.input-prefix-addon {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    padding: 0 12px;
+    background: #f1f5f9;
+    border: 1px solid var(--border-color);
+    border-right: none;
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    color: var(--dark-muted);
+    @apply tw:font-semibold;
+    @apply tw:text-[13px];
+}
+
+.input-prefix-group .form-control,
+.input-prefix-group .editable-input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}

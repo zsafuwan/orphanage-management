@@ -6,11 +6,11 @@
 var profileData = {
     fullname: "Nurse Mary Jenkins",
     username: "nurse.mary",
-    affiliation: "HopeHaven Sanctuary – Pediatric Ward & Child Welfare Unit",
+    affiliation: "HopeHaven Orphanage – Pediatric Ward & Child Welfare Unit",
     ward: "Ward Alpha (Infants) & Ward Beta Nursery",
     email: "mary.jenkins@hopehaven.org",
     phone: "+60 12-345 6789",
-    address: "HopeHaven Sanctuary Staff Quarters, Block B Room 204, St. Jude Valley, CA 94103, United States",
+    address: "HopeHaven Orphanage Staff Quarters, Block B Room 204, St. Jude Valley, CA 94103, United States",
     role: "Senior Caregiver & Clinical Custodian",
     shiftStatus: "On Duty"
 };
@@ -145,7 +145,7 @@ function updateProfileDOM(fullname, username, affiliation, ward, email, phone, a
 
     // 1. Full Name
     $('#display_fullname').text(fullname);
-    $('#hero_fullname_display').html(fullname + ' <span class="tag-badge verified-badge" title="Official Sanctuary Staff Accreditation"><i class="fas fa-check-circle"></i> Verified Staff</span>');
+    $('#hero_fullname_display').html(fullname + ' <span class="tag-badge verified-badge" title="Verified Orphanage Staff"><i class="fas fa-check-circle"></i> Verified Staff</span>');
     $('#modal_pass_name').text(fullname);
     $('#hero_avatar_display').text(initials);
     $('.user-avatar, .topbar-avatar').text(initials);
@@ -184,7 +184,7 @@ function setShiftStatus(status) {
         $('#btn_status_duty').addClass('active');
         $('#hero_duty_text').text('Morning Shift · On Duty');
         $('#hero_duty_pill').css({'background': 'rgba(16, 185, 129, 0.15)', 'color': '#047857', 'border-color': 'rgba(16, 185, 129, 0.3)'});
-        $('#kpi_shift_status').html('<i class="fas fa-clock"></i> Active (07:00 – 15:30)').css('color', '#059669');
+        $('#kpi_shift_status').html('<i class="fas fa-clock"></i> Active (08:00 – 16:00)').css('color', '#059669');
         showPortalToast('Duty status set to: Active On Duty (Ward Alpha)', true);
     } else if (status === 'On Break') {
         $('#btn_status_break').addClass('active');

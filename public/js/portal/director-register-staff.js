@@ -23,7 +23,7 @@ function initLivePreview() {
             document.getElementById('preview_name').innerText = val;
 
             // Generate initials
-            const words = val.split(' ');
+            const words = val.split(/\s+/);
             let initials = '';
             if (words.length >= 2) {
                 initials = (words[0][0] + words[1][0]).toUpperCase();
@@ -73,7 +73,7 @@ function submitStaffRegistration(e) {
     }
 
     if (authCheck && !authCheck.checked) {
-        alert('Director signature authorization declaration must be checked.');
+        alert('Director signature approval declaration must be checked.');
         return;
     }
 
@@ -111,7 +111,7 @@ function appendRecentStaff(name, role, id, wing) {
     const list = document.getElementById('recent_staff_list');
     if (!list) return;
 
-    const words = name.split(' ');
+    const words = name.trim().split(/\s+/);
     const initials = words.length >= 2 ? (words[0][0] + words[1][0]).toUpperCase() : name.substring(0, 2).toUpperCase();
 
     const div = document.createElement('div');
@@ -121,8 +121,8 @@ function appendRecentStaff(name, role, id, wing) {
         <div class="user-cell">
             <div class="user-cell-avatar" style="background:#10b981; color:#ffffff;">${initials}</div>
             <div>
-                <div class="user-cell-name">${name}</div>
-                <div class="user-cell-dept">${role} · ${id}</div>
+                <div class="user-cell-name">${window.HopeHavenSync.escape(name)}</div>
+                <div class="user-cell-dept">${window.HopeHavenSync.escape(role)} · ${window.HopeHavenSync.escape(id)}</div>
             </div>
         </div>
         <span class="vetted-badge" style="font-size: 11px;"><i class="fas fa-check-circle"></i> Just Onboarded</span>
@@ -136,7 +136,7 @@ function appendRecentStaff(name, role, id, wing) {
  */
 function copyStaffCredentials() {
     if (!lastRegisteredStaff) return;
-    const text = `HopeHaven Sanctuary Staff Credentials:\nName: ${lastRegisteredStaff.name}\nStaff ID: ${lastRegisteredStaff.id}\nWing: ${lastRegisteredStaff.wing}\nRole: ${lastRegisteredStaff.role}\nTemporary Password: ${lastRegisteredStaff.password}\nPortal URL: ${window.location.origin}/staff/child-welfare`;
+    const text = `HopeHaven Orphanage Staff Credentials:\nName: ${lastRegisteredStaff.name}\nStaff ID: ${lastRegisteredStaff.id}\nWing: ${lastRegisteredStaff.wing}\nRole: ${lastRegisteredStaff.role}\nTemporary Password: ${lastRegisteredStaff.password}\nPortal URL: ${window.location.origin}/staff/child-welfare`;
 
     if (navigator.clipboard) {
         navigator.clipboard.writeText(text).then(() => {
@@ -156,7 +156,7 @@ function copyStaffCredentials() {
  */
 function printStaffCredentialSlip() {
     if (typeof showPortalToast === 'function') {
-        showPortalToast('Printing official Directorate Staff Accreditation Slip (PDF)...', 'info');
+        showPortalToast('Printing official Director Staff Accreditation Slip (PDF)...', 'info');
     } else {
         alert('Printing Staff Credential Slip...');
     }

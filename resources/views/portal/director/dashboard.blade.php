@@ -1,24 +1,25 @@
 @extends('layouts.portal')
 
-@section('title', 'Director Executive Dashboard')
-@section('breadcrumb', 'Director Governance')
+@section('title', 'Director Dashboard')
+@section('breadcrumb', 'Director Portal')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/portal/director-dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/record-actions.css') }}?v={{ filemtime(public_path('css/portal/record-actions.css')) }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/director-dashboard.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/director-dashboard.css')), 0, 12) }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/record-actions.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/record-actions.css')), 0, 12) }}">
 @endpush
 
 @section('content')
 <div class="portal-container">
     <!-- Executive Welcome Banner -->
-    <div class="director-hero-card">
+    <div class="director-hero-card portal-dashboard-hero">
+        <div class="portal-hero-copy">
         <div>
             <div class="director-hero-badge">
-                <i class="fas fa-crown"></i> Directorate of Sanctuary Operations · Q4 2026
+                <i class="fas fa-crown"></i> Orphanage Management · Q4 2026
             </div>
             <h1 class="director-hero-title">Welcome, Sister Sarah</h1>
             <p class="director-hero-subtitle">
-                Executive sanctuary governance & financial oversight for HopeHaven. Track real-time treasury reserves, monthly spending patterns, authenticated donor contributions, and clinical student health.
+                A clearer view of the care that matters. Follow children's wellbeing, support your team, and keep our orphanage moving forward.
             </p>
         </div>
         <div class="director-hero-actions">
@@ -26,16 +27,20 @@
                 <i class="fas fa-bullhorn"></i> Broadcast Directive
             </button>
             <button type="button" class="director-btn-outline" onclick="exportDirectorateReport()">
-                <i class="fas fa-file-download"></i> Directorate Audit (PDF)
+                <i class="fas fa-file-download"></i> Download Report (PDF)
             </button>
         </div>
+        </div>
+        @include('portal.partials.workspace-art')
     </div>
+
+    @include('portal.partials.care-shortcuts')
 
     <!-- 1. Money Available & Sanctuary Treasury Reserves -->
     <div class="treasury-overview-card">
         <div class="treasury-main-balance">
             <span class="treasury-label-tag">
-                <i class="fas fa-vault"></i> Liquid Treasury Balance
+                <i class="fas fa-vault"></i> Available Funds
             </span>
             <div class="treasury-balance-amount">RM 148,350.00</div>
             <div class="treasury-sub-desc">
@@ -69,7 +74,7 @@
             <div class="fund-pill-box">
                 <div class="fund-pill-title">
                     <i class="fas fa-graduation-cap" style="color: #7c3aed;"></i>
-                    <span>Education Endowment</span>
+                    <span>Education Fund</span>
                 </div>
                 <div class="fund-pill-amount" style="color: #7c3aed;">RM 44,750.00</div>
                 <div class="fund-pill-note">Tuition & school grants</div>
@@ -155,7 +160,7 @@
             <div class="director-card-head">
                 <div class="director-card-title">
                     <i class="fas fa-chart-line"></i>
-                    <span>Monthly Expenditure & Sanctuary Budget Graph</span>
+                    <span>Monthly Spending & Budget</span>
                 </div>
                 <div class="chart-toggle-group">
                     <button type="button" class="chart-toggle-btn active" id="btn_chart_trend" onclick="toggleSpendingChart('trend')">
@@ -173,7 +178,7 @@
                         <span class="chart-stat-val" style="color: #4f46e5;">RM 24,680.00</span>
                     </div>
                     <div class="chart-stat-item">
-                        <span class="chart-stat-lbl">Approved Directorate Budget</span>
+                        <span class="chart-stat-lbl">Approved Director Budget</span>
                         <span class="chart-stat-val" style="color: #d97706;">RM 30,000.00</span>
                     </div>
                     <div class="chart-stat-item">
@@ -188,106 +193,9 @@
             </div>
         </div>
 
-        <!-- Right: Pending Staff Requisitions for Director Sign-off -->
         <div class="director-card requisition-actions-panel">
-            <div class="director-card-head">
-                <div class="director-card-title">
-                    <i class="fas fa-clipboard-check"></i>
-                    <span>Pending Staff Requisitions (4)</span>
-                </div>
-                <a href="{{ route('director.inventory-requests') }}" class="director-link-action">
-                    Review All <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            <div class="director-card-body">
-                <!-- Item 1: Pediatric Nebulizers -->
-                <div class="req-item-card">
-                    <div class="req-left-info">
-                        <div class="req-avatar">NM</div>
-                        <div>
-                            <div class="req-meta-title">Pediatric Nebulizers & Inhalers (2 units)</div>
-                            <div class="req-meta-sub">
-                                <span>Nurse Mary · Ward Alpha</span>
-                                <span>·</span>
-                                <span class="req-priority-tag req-priority-critical">Critical</span>
-                                <span>·</span>
-                                <strong>RM 680</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="req-actions">
-                        <button type="button" class="btn-director-approve btn-director-quick-approve" data-req-id="REQ-2026-104" data-req-item="Pediatric Nebulizers">
-                            <i class="fas fa-signature"></i> Sign
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Item 2: Secondary School Workbooks -->
-                <div class="req-item-card">
-                    <div class="req-left-info">
-                        <div class="req-avatar" style="background:#e0f2fe; color:#0369a1;">UH</div>
-                        <div>
-                            <div class="req-meta-title">Darjah 4-6 Mathematics & Science (30 sets)</div>
-                            <div class="req-meta-sub">
-                                <span>Ustaz Hakim · Study Hall</span>
-                                <span>·</span>
-                                <span class="req-priority-tag req-priority-high">High</span>
-                                <span>·</span>
-                                <strong>RM 1,240</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="req-actions">
-                        <button type="button" class="btn-director-approve btn-director-quick-approve" data-req-id="REQ-2026-102" data-req-item="Workbooks">
-                            <i class="fas fa-signature"></i> Sign
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Item 3: Hypoallergenic Formula -->
-                <div class="req-item-card">
-                    <div class="req-left-info">
-                        <div class="req-avatar" style="background:#fef3c7; color:#b45309;">CL</div>
-                        <div>
-                            <div class="req-meta-title">Lactose-Free Formula & Diapers Pack</div>
-                            <div class="req-meta-sub">
-                                <span>Caregiver Lisa · Nursery</span>
-                                <span>·</span>
-                                <span class="req-priority-tag req-priority-critical">Critical</span>
-                                <span>·</span>
-                                <strong>RM 820</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="req-actions">
-                        <button type="button" class="btn-director-approve btn-director-quick-approve" data-req-id="REQ-2026-098" data-req-item="Baby Formula">
-                            <i class="fas fa-signature"></i> Sign
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Item 4: Rice Cooker Element -->
-                <div class="req-item-card">
-                    <div class="req-left-info">
-                        <div class="req-avatar" style="background:#fce7f3; color:#be185d;">CR</div>
-                        <div>
-                            <div class="req-meta-title">Commercial 20L Rice Cooker Element</div>
-                            <div class="req-meta-sub">
-                                <span>Chef Razak · Kitchen</span>
-                                <span>·</span>
-                                <span class="req-priority-tag req-priority-high">High</span>
-                                <span>·</span>
-                                <strong>RM 680</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="req-actions">
-                        <button type="button" class="btn-director-approve btn-director-quick-approve" data-req-id="REQ-2026-095" data-req-item="Rice Cooker Element">
-                            <i class="fas fa-signature"></i> Sign
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <div class="director-card-head"><div><h2 class="director-card-title" id="director_inventory_pending_title">Staff Supply Requests</h2><p id="director_inventory_stock_note" class="inventory-panel-note"></p></div><a href="{{ route('director.inventory-requests') }}" class="director-link-action">View Inventory <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
+            <div class="director-card-body" id="director_inventory_pending_list" data-review-url="{{ route('director.inventory-requests') }}"></div>
         </div>
     </div>
 
@@ -296,11 +204,11 @@
         <div class="director-card-head">
             <div class="director-card-title">
                 <i class="fas fa-hospital-user" style="color: #e11d48;"></i>
-                <span>Monthly Students Sickness & Clinic Appointments (October 2026)</span>
+                <span class="sickness-table-caption">Children’s Wellbeing & Clinic Appointments</span>
             </div>
             <div class="chart-toggle-group">
                 <button type="button" class="chart-toggle-btn sickness-tab-btn active" data-sickness-filter="all">
-                    All Month Records (8)
+                    All Month Records (6)
                 </button>
                 <button type="button" class="chart-toggle-btn sickness-tab-btn" data-sickness-filter="sickness">
                     Active Sickness (5)
@@ -309,7 +217,7 @@
                     Upcoming Scheduled (2)
                 </button>
                 <button type="button" class="chart-toggle-btn sickness-tab-btn" data-sickness-filter="attended">
-                    Attended / Cleared (6)
+                    Attended / Cleared (4)
                 </button>
             </div>
         </div>
@@ -327,167 +235,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Student 1: Ahmad Danial (Active Asthma, Upcoming Appointment) -->
-                    <tr data-record-type="scheduled" data-has-sickness="true">
-                        <td>
-                            <div class="child-profile-cell">
-                                <div class="child-avatar-box child-avatar-boy">AD</div>
-                                <div>
-                                    <div class="child-name">Ahmad Danial Bin Razif</div>
-                                    <div class="child-meta">MyKid: 150823-10-6123</div>
-                                </div>
-                            </div>
-                        </td>
-                        
-                        
-                        <td>Dr. Raymond Lee<br><span style="font-size: 11px; color: #64748b;">HKL Pediatric Pulmonology</span></td>
-                        <td><strong>Oct 25, 2026</strong><br><span style="font-size: 11px; color: #d97706;">02:30 PM (This Friday)</span></td>
-                        <td>
-                            <span class="appt-status-tag scheduled">
-                                <i class="fas fa-clock"></i> Upcoming Appointment
-                            </span>
-                        </td>
-                        <td style="text-align: right;">
-                            <a href="{{ route('director.medical-records') }}" class="btn-director-review" style="padding: 10px 18px; font-size: 14px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
-                                <i class="fas fa-file-medical"></i> PDF
-                            </a>
-                        </td>
-                    </tr>
-
-                    <!-- Student 2: Aminah (Upcoming Dental & Penicillin Review) -->
-                    <tr data-record-type="scheduled" data-has-sickness="true">
-                        <td>
-                            <div class="child-profile-cell">
-                                <div class="child-avatar-box child-avatar-girl">AB</div>
-                                <div>
-                                    <div class="child-name">Aminah Binti Abdullah</div>
-                                    <div class="child-meta">MyKid: 160412-14-5582</div>
-                                </div>
-                            </div>
-                        </td>
-                        
-                        
-                        <td>Volunteer Dental Officer<br><span style="font-size: 11px; color: #64748b;">Klinik Kesihatan Titiwangsa</span></td>
-                        <td><strong>Oct 24, 2026</strong><br><span style="font-size: 11px; color: #d97706;">10:30 AM (Tomorrow)</span></td>
-                        <td>
-                            <span class="appt-status-tag scheduled">
-                                <i class="fas fa-clock"></i> Upcoming Appointment
-                            </span>
-                        </td>
-                        <td style="text-align: right;">
-                            <a href="{{ route('director.medical-records') }}" class="btn-director-review" style="padding: 10px 18px; font-size: 14px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
-                                <i class="fas fa-file-medical"></i> PDF
-                            </a>
-                        </td>
-                    </tr>
-
-                    <!-- Student 3: Rayyan Iskandar (Lactose Rash, Attended) -->
-                    <tr data-record-type="attended" data-has-sickness="true">
-                        <td>
-                            <div class="child-profile-cell">
-                                <div class="child-avatar-box child-avatar-baby">RI</div>
-                                <div>
-                                    <div class="child-name">Rayyan Iskandar</div>
-                                    <div class="child-meta">MyKid: 240219-14-1109</div>
-                                </div>
-                            </div>
-                        </td>
-                        
-                        
-                        <td>Dr. Norazlina<br><span style="font-size: 11px; color: #64748b;">Klinik Kesihatan Setapak</span></td>
-                        <td>Oct 18, 2026<br><span style="font-size: 11px; color: #64748b;">11:00 AM</span></td>
-                        <td>
-                            <span class="appt-status-tag attended">
-                                <i class="fas fa-check-circle"></i> Attended · Recovering
-                            </span>
-                        </td>
-                        <td style="text-align: right;">
-                            <a href="{{ route('director.medical-records') }}" class="btn-director-review" style="padding: 10px 18px; font-size: 14px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
-                                <i class="fas fa-file-medical"></i> PDF
-                            </a>
-                        </td>
-                    </tr>
-
-                    <!-- Student 4: Siti Nurhaliza (Eczema, Attended) -->
-                    <tr data-record-type="attended" data-has-sickness="true">
-                        <td>
-                            <div class="child-profile-cell">
-                                <div class="child-avatar-box child-avatar-girl">SN</div>
-                                <div>
-                                    <div class="child-name">Siti Nurhaliza Binti Yusof</div>
-                                    <div class="child-meta">MyKid: 110905-14-8840</div>
-                                </div>
-                            </div>
-                        </td>
-                        
-                        
-                        <td>Dr. Wong Siew May<br><span style="font-size: 11px; color: #64748b;">HKL Dermatology Clinic</span></td>
-                        <td>Oct 12, 2026<br><span style="font-size: 11px; color: #64748b;">03:00 PM</span></td>
-                        <td>
-                            <span class="appt-status-tag attended">
-                                <i class="fas fa-check-circle"></i> Attended · Controlled
-                            </span>
-                        </td>
-                        <td style="text-align: right;">
-                            <a href="{{ route('director.medical-records') }}" class="btn-director-review" style="padding: 10px 18px; font-size: 14px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
-                                <i class="fas fa-file-medical"></i> PDF
-                            </a>
-                        </td>
-                    </tr>
-
-                    <!-- Student 5: Daniel Arif (Viral Flu, Healed) -->
-                    <tr data-record-type="attended" data-has-sickness="true">
-                        <td>
-                            <div class="child-profile-cell">
-                                <div class="child-avatar-box child-avatar-boy">DA</div>
-                                <div>
-                                    <div class="child-name">Daniel Arif Bin Rosli</div>
-                                    <div class="child-meta">MyKid: 120401-14-7221</div>
-                                </div>
-                            </div>
-                        </td>
-                        
-                        
-                        <td>Medical Officer on Call<br><span style="font-size: 11px; color: #64748b;">Klinik Titiwangsa</span></td>
-                        <td>Oct 06, 2026<br><span style="font-size: 11px; color: #64748b;">09:00 AM</span></td>
-                        <td>
-                            <span class="appt-status-tag attended">
-                                <i class="fas fa-check-circle"></i> Attended · Cleared
-                            </span>
-                        </td>
-                        <td style="text-align: right;">
-                            <a href="{{ route('director.medical-records') }}" class="btn-director-review" style="padding: 10px 18px; font-size: 14px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
-                                <i class="fas fa-file-medical"></i> PDF
-                            </a>
-                        </td>
-                    </tr>
-
-                    <!-- Student 6: Adam Harith (Sports Sprain & Allergy, Attended) -->
-                    <tr data-record-type="attended" data-has-sickness="false">
-                        <td>
-                            <div class="child-profile-cell">
-                                <div class="child-avatar-box child-avatar-boy">AH</div>
-                                <div>
-                                    <div class="child-name">Adam Harith Bin Zulkifli</div>
-                                    <div class="child-meta">MyKid: 130310-10-4491</div>
-                                </div>
-                            </div>
-                        </td>
-                        
-                        
-                        <td>Physiotherapy Dept<br><span style="font-size: 11px; color: #64748b;">Hospital Kuala Lumpur</span></td>
-                        <td>Oct 03, 2026<br><span style="font-size: 11px; color: #64748b;">10:00 AM</span></td>
-                        <td>
-                            <span class="appt-status-tag attended">
-                                <i class="fas fa-check-circle"></i> Attended · Healed
-                            </span>
-                        </td>
-                        <td style="text-align: right;">
-                            <a href="{{ route('director.medical-records') }}" class="btn-director-review" style="padding: 10px 18px; font-size: 14px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
-                                <i class="fas fa-file-medical"></i> PDF
-                            </a>
-                        </td>
-                    </tr>
+                    <tr><td colspan="5">Loading shared child registry…</td></tr>
                 </tbody>
             </table>
         </div>
@@ -498,23 +246,20 @@
         <div class="director-card-head">
             <div class="director-card-title">
                 <i class="fas fa-receipt" style="color: #059669;"></i>
-                <span>Donator Proof of Donation & Audit Verification (October 2026)</span>
+                <span>Donation Receipts & Review (October 2026)</span>
             </div>
-            <a href="{{ route('donations') }}" class="director-link-action">
-                Full Donations Ledger <i class="fas fa-arrow-right"></i>
-            </a>
         </div>
-        <div>
+        <div class="table-responsive" tabindex="0" role="region" aria-label="Donation proofs and director audit">
             <table class="donor-table">
                 <thead>
                     <tr>
-                        <th>Donator Name / Entity</th>
+                        <th>Donor Name / Entity</th>
                         <th>Amount Contributed</th>
                         <th>Channel & Reference</th>
                         <th>Designated Purpose</th>
                         <th>Date & Time</th>
-                        <th>Proof of Transfer Slip</th>
-                        <th>Director Audit</th>
+                        <th>Payment Receipt</th>
+                        <th>Director Review</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -535,7 +280,7 @@
                         <td>19 Oct 2026<br><span style="font-size: 11px; color: #64748b;">02:22 PM</span></td>
                         <td>
                             <button type="button" class="proof-pill-btn" onclick="openDonationProofModal('Tan Sri Dr. Jeffrey Cheah', 'RM 10,000.00', 'Maybank Islamic Berhad', 'MBB-20261019-9821', '19 Oct 2026, 14:22:18 MYT', 'Emergency Pediatric Medical Care Fund', 'Verified')">
-                                <i class="fas fa-file-pdf"></i> View Proof Slip
+                                <i class="fas fa-file-pdf"></i> View Receipt
                             </button>
                         </td>
                         <td class="donor-status-cell">
@@ -562,7 +307,7 @@
                         <td>15 Oct 2026<br><span style="font-size: 11px; color: #64748b;">11:45 AM</span></td>
                         <td>
                             <button type="button" class="proof-pill-btn" onclick="openDonationProofModal('Yayasan Hasanah Grants', 'RM 8,000.00', 'Bank Islam Malaysia', 'HASANAH-GRT-26', '15 Oct 2026, 11:45:00 MYT', 'Secondary & SPM Exam Grants', 'Verified')">
-                                <i class="fas fa-file-pdf"></i> View Proof Slip
+                                <i class="fas fa-file-pdf"></i> View Receipt
                             </button>
                         </td>
                         <td class="donor-status-cell">
@@ -589,7 +334,7 @@
                         <td>14 Oct 2026<br><span style="font-size: 11px; color: #64748b;">09:15 AM</span></td>
                         <td>
                             <button type="button" class="proof-pill-btn" onclick="openDonationProofModal('Hajah Faridah Binti Mansor', 'RM 3,500.00', 'CIMB Clicks', 'DN-881920-KUL', '14 Oct 2026, 09:15:30 MYT', 'Study Hall Workbooks & Tutoring', 'Verified')">
-                                <i class="fas fa-file-pdf"></i> View Proof Slip
+                                <i class="fas fa-file-pdf"></i> View Receipt
                             </button>
                         </td>
                         <td class="donor-status-cell">
@@ -616,7 +361,7 @@
                         <td>10 Oct 2026<br><span style="font-size: 11px; color: #64748b;">04:10 PM</span></td>
                         <td>
                             <button type="button" class="proof-pill-btn" onclick="openDonationProofModal('Dr. Raymond Lee & Associates', 'RM 2,500.00', 'Maybank Berhad', 'MBB-CHK-00421', '10 Oct 2026, 16:10:00 MYT', 'Infant Formula & Pharmacy Stock', 'Verified')">
-                                <i class="fas fa-file-pdf"></i> View Proof Slip
+                                <i class="fas fa-file-pdf"></i> View Receipt
                             </button>
                         </td>
                         <td class="donor-status-cell">
@@ -643,7 +388,7 @@
                         <td>Yesterday<br><span style="font-size: 11px; color: #64748b;">06:40 PM</span></td>
                         <td>
                             <button type="button" class="proof-pill-btn" onclick="openDonationProofModal('Keluarga Haji Azman', 'RM 1,200.00', 'CIMB Bank', 'CIMB-991203-KUL', '22 Oct 2026, 18:40:12 MYT', 'Communal Friday Lunch & Provisions', 'Pending Review')">
-                                <i class="fas fa-file-pdf"></i> View Proof Slip
+                                <i class="fas fa-file-pdf"></i> View Receipt
                             </button>
                         </td>
                         <td class="donor-status-cell">
@@ -663,7 +408,8 @@
 @endsection
 
 @push('scripts')
+    <script src="{{ asset('js/portal/inventory-dashboard.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/inventory-dashboard.js')), 0, 12) }}"></script>
     <!-- Chart.js CDN for Interactive Monthly Spending Graph -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    <script src="{{ asset('js/portal/director-dashboard.js') }}"></script>
+    <script src="{{ asset('js/portal/director-dashboard.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/director-dashboard.js')), 0, 12) }}"></script>
 @endpush

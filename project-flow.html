@@ -1,0 +1,2150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HopeHaven Orphanage Management System — Architecture, Flows & System Blueprint</title>
+    <meta name="description" content="Comprehensive interactive project overview, system architecture, role blueprints, and end-to-end workflows for HopeHaven Orphanage & Child Care Sanctuary.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --primary-dark: #3730a3;
+            --primary-50: #eef2ff;
+            --primary-100: #e0e7ff;
+            --secondary: #0ea5e9;
+            --emerald: #10b981;
+            --emerald-bg: #ecfdf5;
+            --amber: #f59e0b;
+            --amber-bg: #fffbeb;
+            --rose: #f43f5e;
+            --rose-bg: #fff1f2;
+            --purple: #8b5cf6;
+            --purple-bg: #f5f3ff;
+            --slate-50: #f8fafc;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-300: #cbd5e1;
+            --slate-400: #94a3b8;
+            --slate-500: #64748b;
+            --slate-600: #475569;
+            --slate-700: #334155;
+            --slate-800: #1e293b;
+            --slate-900: #0f172a;
+            --bg-page: #f8fafc;
+            --bg-surface: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+        }
+
+        [data-theme="dark"] {
+            --bg-page: #0b0f19;
+            --bg-surface: #111827;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1f2937;
+            --slate-50: #111827;
+            --slate-100: #1f2937;
+            --slate-200: #374151;
+            --slate-800: #0f172a;
+            --primary-50: rgba(99, 102, 241, 0.1);
+            --emerald-bg: rgba(16, 185, 129, 0.1);
+            --amber-bg: rgba(245, 158, 11, 0.1);
+            --rose-bg: rgba(244, 63, 94, 0.1);
+            --purple-bg: rgba(139, 92, 246, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Top Sticky Presentation Bar */
+        .top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .brand-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-logo-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #6366f1, #4338ca);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .brand-text h1 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .brand-text span {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            display: block;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #f1f5f9;
+            padding: 0.45rem 0.85rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .nav-btn.primary {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+        }
+
+        .nav-btn.primary:hover {
+            background: var(--primary-light);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #311042 100%);
+            border-radius: var(--radius-xl);
+            padding: 3.5rem 2.5rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            color: #c7d2fe;
+            padding: 0.35rem 0.9rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            max-width: 850px;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-lead {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            max-width: 780px;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.25rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(8px);
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #ffffff;
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            align-items: baseline;
+            gap: 0.3rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            font-weight: 500;
+            margin-top: 0.2rem;
+        }
+
+        /* Navigation Jump Pills */
+        .jump-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            margin-bottom: 2.5rem;
+            scrollbar-width: thin;
+        }
+
+        .jump-link {
+            white-space: nowrap;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .jump-link:hover, .jump-link.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        /* Section Wrappers */
+        .section {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--primary);
+            margin-bottom: 0.35rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            max-width: 800px;
+        }
+
+        /* Flow Simulator Container */
+        .flow-card {
+            background: var(--slate-50);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            margin-bottom: 2rem;
+            transition: all 0.25s ease;
+        }
+
+        .flow-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .flow-card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .flow-card-meta {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-indigo { background: var(--primary-50); color: var(--primary); border: 1px solid var(--primary-100); }
+        .badge-emerald { background: var(--emerald-bg); color: #059669; border: 1px solid rgba(16, 185, 129, 0.2); }
+        .badge-amber { background: var(--amber-bg); color: #d97706; border: 1px solid rgba(245, 158, 11, 0.2); }
+        .badge-rose { background: var(--rose-bg); color: #e11d48; border: 1px solid rgba(244, 63, 94, 0.2); }
+        .badge-purple { background: var(--purple-bg); color: #7c3aed; border: 1px solid rgba(139, 92, 246, 0.2); }
+
+        /* Step Node Visual Flow */
+        .flow-steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            position: relative;
+            margin: 1.5rem 0;
+        }
+
+        .flow-step-box {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .flow-step-box:hover, .flow-step-box.active {
+            border-color: var(--primary);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .flow-step-box.active {
+            background: linear-gradient(to bottom, var(--primary-50), var(--bg-surface));
+            border-width: 2px;
+        }
+
+        .step-index-badge {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.6rem;
+        }
+
+        .step-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+            color: var(--text-main);
+        }
+
+        .step-actor {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .step-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        .step-trigger {
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px dashed var(--border);
+            font-size: 0.7rem;
+            color: #64748b;
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* Flow Interactive Details Panel */
+        .flow-detail-panel {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .flow-detail-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .flow-detail-content {
+            font-size: 0.88rem;
+            color: var(--text-main);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .detail-item strong {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.2rem;
+        }
+
+        /* Persona & Role Switcher */
+        .role-tabs {
+            display: flex;
+            gap: 0.75rem;
+            border-bottom: 2px solid var(--slate-200);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .role-tab-btn {
+            background: none;
+            border: none;
+            padding: 0.6rem 1.25rem;
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .role-tab-btn:hover {
+            color: var(--primary);
+            background: var(--slate-100);
+        }
+
+        .role-tab-btn.active {
+            color: white;
+            background: var(--primary);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .role-view-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .role-view-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .role-summary-card {
+            background: var(--slate-50);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 850px) {
+            .role-summary-card {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+        }
+
+        .role-card-profile {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .role-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .role-features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.85rem;
+        }
+
+        .feature-pill {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 0.85rem;
+        }
+
+        .feature-pill i {
+            color: var(--primary);
+            margin-top: 0.2rem;
+        }
+
+        /* Route Matrix Table */
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            background: var(--bg-surface);
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.88rem;
+        }
+
+        .custom-table th {
+            background: var(--slate-100);
+            padding: 0.85rem 1rem;
+            font-weight: 700;
+            color: var(--slate-700);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .custom-table td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-main);
+            vertical-align: middle;
+        }
+
+        .custom-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .custom-table tr:hover {
+            background: var(--slate-50);
+        }
+
+        .route-path {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: var(--primary-50);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* Mockup Preview Carousel */
+        .mockup-container {
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: var(--bg-surface);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mockup-header {
+            background: var(--slate-800);
+            color: white;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mockup-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #f59e0b; }
+        .dot-green { background: #10b981; }
+
+        .mockup-url-bar {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 4px;
+            padding: 0.25rem 1rem;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: #cbd5e1;
+            width: 50%;
+            text-align: center;
+        }
+
+        .mockup-body {
+            padding: 1.5rem;
+            background: var(--slate-50);
+            min-height: 380px;
+        }
+
+        /* Mockup Component Previews */
+        .mock-dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mock-kpi {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            padding: 1.25rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .mock-kpi-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .mock-kpi-val {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .mock-kpi-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* ERD Database Map */
+        .erd-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .erd-entity {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .erd-title {
+            background: var(--slate-800);
+            color: white;
+            padding: 0.6rem 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .erd-fields {
+            padding: 0.75rem 0.9rem;
+            list-style: none;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .erd-fields li {
+            display: flex;
+            justify-content: space-between;
+            color: var(--slate-700);
+            border-bottom: 1px dashed var(--slate-200);
+            padding-bottom: 0.2rem;
+        }
+
+        .erd-fields li:last-child {
+            border-bottom: none;
+        }
+
+        .erd-pk { color: #d97706; font-weight: 700; }
+        .erd-fk { color: var(--primary); font-weight: 600; }
+        .erd-type { color: var(--slate-400); font-size: 0.72rem; }
+
+        /* Floating Share Toast */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #0f172a;
+            color: white;
+            padding: 0.85rem 1.4rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-xl);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 2000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 1.5rem 4rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        /* Print formatting */
+        @media print {
+            .top-nav, .nav-actions, .jump-bar, .role-tabs, .mockup-header, .toast {
+                display: none !important;
+            }
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            .section, .hero {
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Top Navigation -->
+    <header class="top-nav">
+        <div class="brand-badge">
+            <div class="brand-logo-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="brand-text">
+                <h1>HopeHaven Project Blueprint</h1>
+                <span>Orphanage & Child Sanctuary Management System</span>
+            </div>
+        </div>
+
+        <div class="nav-actions">
+            <button class="nav-btn" onclick="toggleTheme()" id="theme_toggle_btn">
+                <i class="fas fa-moon"></i> Dark Mode
+            </button>
+            <button class="nav-btn" onclick="copyShareSummary()">
+                <i class="fas fa-share-nodes"></i> Share Summary
+            </button>
+            <button class="nav-btn primary" onclick="window.print()">
+                <i class="fas fa-file-pdf"></i> Save / Print PDF
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-tag">
+                <i class="fas fa-compass-drafting"></i> Comprehensive System Blueprint & Workflows
+            </div>
+            <h1 class="hero-title">HopeHaven Sanctuary: <span>End-to-End System Architecture</span> & Operational Flow</h1>
+            <p class="hero-lead">
+                A unified, role-based platform designed to manage residential child welfare, clinical healthcare appointments, education endowments, real-time inventory requisitions, treasury reserves, and volunteer duty rosters.
+            </p>
+
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-value">48 <span style="font-size: 0.9rem; color: #94a3b8;">children</span></div>
+                    <div class="stat-label">Active Wards Under Sanctuary Care</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">RM 148.3k</div>
+                    <div class="stat-label">Liquid Treasury & Operational Runway</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">4 <span style="font-size: 0.9rem; color: #94a3b8;">roles</span></div>
+                    <div class="stat-label">Director · Staff · Admin · Public</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">18+ <span style="font-size: 0.9rem; color: #94a3b8;">routes</span></div>
+                    <div class="stat-label">Connected Modular Subsystems</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Jump Navigation -->
+        <nav class="jump-bar">
+            <a href="#core-flows" class="jump-link active"><i class="fas fa-network-wired"></i> Core Operational Flows</a>
+            <a href="#role-matrix" class="jump-link"><i class="fas fa-users-gear"></i> Role Personas</a>
+            <a href="#screen-previews" class="jump-link"><i class="fas fa-laptop-code"></i> Live Interface Walkthrough</a>
+            <a href="#routes-sitemap" class="jump-link"><i class="fas fa-map-signs"></i> Route & Module Matrix</a>
+            <a href="#data-architecture" class="jump-link"><i class="fas fa-database"></i> Data Architecture (ERD)</a>
+            <a href="#tech-stack" class="jump-link"><i class="fas fa-microchip"></i> Technology Stack</a>
+        </nav>
+
+        <!-- SECTION 1: CORE OPERATIONAL FLOWS -->
+        <section class="section" id="core-flows">
+            <div class="section-header">
+                <div class="section-tag"><i class="fas fa-diagram-project"></i> Interactive Workflows</div>
+                <h2 class="section-title">End-to-End Operational Workflows</h2>
+                <p class="section-desc">
+                    Click through any step in the lifecycle flows below to inspect actors, triggers, verification policies, and database state transitions.
+                </p>
+            </div>
+
+            <!-- FLOW 1: Child Welfare & Healthcare Intake -->
+            <div class="flow-card">
+                <div class="flow-card-header">
+                    <div>
+                        <div class="flow-card-title">
+                            <i class="fas fa-child-reaching" style="color: #4f46e5;"></i>
+                            Flow 1: Child Admission, Healthcare & Educational Graduation
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
+                            Covers child intake verification, ward allocation, clinical tracking, and academic endowment sponsorship.
+                        </div>
+                    </div>
+                    <div class="flow-card-meta">
+                        <span class="badge badge-indigo"><i class="fas fa-user-nurse"></i> Staff Caregiver</span>
+                        <span class="badge badge-purple"><i class="fas fa-crown"></i> Director Oversight</span>
+                    </div>
+                </div>
+
+                <div class="flow-steps-grid" id="flow1_steps">
+                    <!-- Step 1 -->
+                    <div class="flow-step-box active" onclick="activateStep('flow1', 1, 'Child Admission & Legal Safeguarding', 'Social Welfare Dept (JKM) or Guardian', 'Birth certification, legal custody orders, biometric photo, and intake interview recorded.', 'Child Welfare Register', 'Status: PENDING_TRIAGE')">
+                        <span class="step-index-badge">1</span>
+                        <div class="step-title">Intake & Verification</div>
+                        <span class="step-actor">Legal / Welfare Intake</span>
+                        <p class="step-desc">Admission paperwork, police/JKM custody documents, guardian records registered.</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Route: /child-welfare</div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flow-step-box" onclick="activateStep('flow1', 2, 'Medical & Nutritional Screening', 'Nurse Mary / Medical Staff', 'Full clinical triage: vaccination status, allergies, dental, chronic conditions (e.g. Asthma), BMI check.', 'Medical Records Subsystem', 'Status: HEALTH_CLEARED')">
+                        <span class="step-index-badge">2</span>
+                        <div class="step-title">Medical Triage</div>
+                        <span class="step-actor">Caregiver Nurse</span>
+                        <p class="step-desc">Comprehensive health checkup, blood grouping, diet allergy logs, and medical card creation.</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Route: /director/medical-records</div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flow-step-box" onclick="activateStep('flow1', 3, 'Ward Allocation & School Enrollment', 'Sister Sarah / Orphanage Director', 'Dormitory room assignment (Ward A/B), local school placement (SK/SMK), uniform & textbook allocation.', 'Education Endowment Ledger', 'Status: ENROLLED')">
+                        <span class="step-index-badge">3</span>
+                        <div class="step-title">Dorm & School Placement</div>
+                        <span class="step-actor">Orphanage Director</span>
+                        <p class="step-desc">Allocation to residential ward and tuition sponsorship from education endowment reserve.</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Route: /director/children-education</div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="flow-step-box" onclick="activateStep('flow1', 4, 'Daily Wellbeing & Behavioral Growth', 'Assigned Shift Caregivers', 'Daily attendance, meal nutrition, emotional counseling logs, extracurricular milestones.', 'Child Welfare Activity Logs', 'Status: ACTIVE_CARE')">
+                        <span class="step-index-badge">4</span>
+                        <div class="step-title">Ongoing Sanctuary Care</div>
+                        <span class="step-actor">Caregiver Duty Staff</span>
+                        <p class="step-desc">Continuous welfare monitoring, academic term report cards, health follow-up appointments.</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Route: /staff/child-welfare</div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="flow-step-box" onclick="activateStep('flow1', 5, 'Adoption Transition or Tertiary Graduation', 'Director & Legal Board', 'Formal adoption finalization with court, or vocational/higher education scholarship graduation.', 'Sanctuary Alumni Archive', 'Status: GRADUATED / ADOPTED')">
+                        <span class="step-index-badge">5</span>
+                        <div class="step-title">Graduation / Adoption</div>
+                        <span class="step-actor">Board & Director</span>
+                        <p class="step-desc">Successful placement with vetted adoptive families or transition to independent adulthood.</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Status: COMPLETED</div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Step Details Box -->
+                <div class="flow-detail-panel" id="flow1_detail">
+                    <div class="flow-detail-header">
+                        <span><i class="fas fa-info-circle"></i> Step Inspector: <span id="flow1_title">Child Admission & Legal Safeguarding</span></span>
+                        <span id="flow1_status" class="badge badge-indigo">Status: PENDING_TRIAGE</span>
+                    </div>
+                    <div class="flow-detail-content">
+                        <div class="detail-item">
+                            <strong>Primary Responsible Actor</strong>
+                            <span id="flow1_actor">Social Welfare Dept (JKM) or Guardian</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>System Input & Verification</strong>
+                            <span id="flow1_action">Birth certification, legal custody orders, biometric photo, and intake interview recorded.</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Target Database / View</strong>
+                            <span id="flow1_target">Child Welfare Register (/child-welfare)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FLOW 2: Staff Inventory Requisition & Approval -->
+            <div class="flow-card">
+                <div class="flow-card-header">
+                    <div>
+                        <div class="flow-card-title">
+                            <i class="fas fa-boxes-packing" style="color: #059669;"></i>
+                            Flow 2: Staff Supply Requisition & Directorate Treasury Approval
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
+                            How caregivers request emergency medical supplies or pantry items, and how the Director authorizes treasury disbursement.
+                        </div>
+                    </div>
+                    <div class="flow-card-meta">
+                        <span class="badge badge-emerald"><i class="fas fa-check-circle"></i> Financial Governance</span>
+                        <span class="badge badge-amber"><i class="fas fa-bolt"></i> Urgent Triage</span>
+                    </div>
+                </div>
+
+                <div class="flow-steps-grid" id="flow2_steps">
+                    <div class="flow-step-box active" onclick="activateStep('flow2', 1, 'Shortage Detected & Logged', 'Nurse Mary / Staff Caregiver', 'Staff notices stock dipping below minimum threshold (e.g. Paracetamol, Milk Powder, Baby Diapers).', 'Staff Inventory Panel', 'Status: DRAFT_REQUISITION')">
+                        <span class="step-index-badge">1</span>
+                        <div class="step-title">Stock Audit</div>
+                        <span class="step-actor">Staff Caregiver</span>
+                        <p class="step-desc">Identifies depleted supply, quantity needed, and priority category (Routine vs Urgent Medical).</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Route: /staff/inventory</div>
+                    </div>
+
+                    <div class="flow-step-box" onclick="activateStep('flow2', 2, 'Requisition Submission', 'Staff Caregiver', 'Fills estimated cost (RM), urgency badge, justification reason, and required fulfillment date.', 'Requisitions Table', 'Status: PENDING_DIRECTOR')">
+                        <span class="step-index-badge">2</span>
+                        <div class="step-title">Submit Request</div>
+                        <span class="step-actor">Staff Portal</span>
+                        <p class="step-desc">Requisition dispatched to Director dashboard with instant priority notification.</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Action: Create Request</div>
+                    </div>
+
+                    <div class="flow-step-box" onclick="activateStep('flow2', 3, 'Treasury & Reserve Verification', 'Sister Sarah / Director', 'Director checks Maybank Liquid Treasury reserve (RM 148,350) and department fund allocation.', 'Directorate Dashboard', 'Status: UNDER_REVIEW')">
+                        <span class="step-index-badge">3</span>
+                        <div class="step-title">Director Audit</div>
+                        <span class="step-actor">Directorate Oversight</span>
+                        <p class="step-desc">Director evaluates necessity, quotes, and selects designated operational fund pool.</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Route: /director/inventory-requests</div>
+                    </div>
+
+                    <div class="flow-step-box" onclick="activateStep('flow2', 4, 'Formal Sign-off & Purchase Order', 'Sister Sarah / Finance Officer', 'Digital sign-off granted. Purchase Order issued to accredited medical or wholesale distributor.', 'Procurement Ledger', 'Status: APPROVED_DISPATCHED')">
+                        <span class="step-index-badge">4</span>
+                        <div class="step-title">Approval & PO</div>
+                        <span class="step-actor">Director Sign-off</span>
+                        <p class="step-desc">Requisition signed, payment dispatched, supplier delivery confirmation logged.</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Action: Authorize PO</div>
+                    </div>
+
+                    <div class="flow-step-box" onclick="activateStep('flow2', 5, 'Delivery & Stock Auto-Increment', 'Inventory Staff Officer', 'Shipment arrives at sanctuary store. Quantity received verified and stock levels automatically incremented.', 'Inventory Master', 'Status: RESTOCKED_CLOSED')">
+                        <span class="step-index-badge">5</span>
+                        <div class="step-title">Receipt & Restock</div>
+                        <span class="step-actor">Warehouse / Staff</span>
+                        <p class="step-desc">Goods checked against invoice, added to active inventory, and requisition closed.</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Status: COMPLETED</div>
+                    </div>
+                </div>
+
+                <!-- Step Details Box -->
+                <div class="flow-detail-panel" id="flow2_detail">
+                    <div class="flow-detail-header">
+                        <span><i class="fas fa-info-circle"></i> Step Inspector: <span id="flow2_title">Shortage Detected & Logged</span></span>
+                        <span id="flow2_status" class="badge badge-emerald">Status: DRAFT_REQUISITION</span>
+                    </div>
+                    <div class="flow-detail-content">
+                        <div class="detail-item">
+                            <strong>Primary Responsible Actor</strong>
+                            <span id="flow2_actor">Nurse Mary / Staff Caregiver</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>System Input & Verification</strong>
+                            <span id="flow2_action">Staff notices stock dipping below minimum threshold (e.g. Paracetamol, Milk Powder, Baby Diapers).</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Target Database / View</strong>
+                            <span id="flow2_target">Staff Inventory Panel (/staff/inventory)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FLOW 3: Donations & Philanthropy Tracking -->
+            <div class="flow-card">
+                <div class="flow-card-header">
+                    <div>
+                        <div class="flow-card-title">
+                            <i class="fas fa-hand-holding-dollar" style="color: #f59e0b;"></i>
+                            Flow 3: Donor Pledge, Fund Allocation & Tax-Exempt Receipts
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
+                            The full transaction journey from external donor payment to treasury fund allocation and automated receipting.
+                        </div>
+                    </div>
+                    <div class="flow-card-meta">
+                        <span class="badge badge-amber"><i class="fas fa-receipt"></i> Tax Compliant</span>
+                        <span class="badge badge-purple"><i class="fas fa-vault"></i> Endowment Pool</span>
+                    </div>
+                </div>
+
+                <div class="flow-steps-grid" id="flow3_steps">
+                    <div class="flow-step-box active" onclick="activateStep('flow3', 1, 'Donor Submits Contribution', 'Public Donor / Corporate Sponsor', 'Selects donation type (Cash, Food Hampers, Sponsorship), enters donor IC/Company registration for tax receipt.', 'Public Portal / Donations', 'Status: PAYMENT_INITIATED')">
+                        <span class="step-index-badge">1</span>
+                        <div class="step-title">Pledge & Payment</div>
+                        <span class="step-actor">Public Donor</span>
+                        <p class="step-desc">Online FPX bank transfer, credit card, or physical in-kind donation form submission.</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Route: / (Homepage CTA)</div>
+                    </div>
+
+                    <div class="flow-step-box" onclick="activateStep('flow3', 2, 'Transaction Verification', 'Staff Accounting Desk', 'Bank payment gateway confirmation or physical item inspection at sanctuary gatehouse.', 'Donations Processing Desk', 'Status: VERIFIED_RECEIVED')">
+                        <span class="step-index-badge">2</span>
+                        <div class="step-title">Staff Verification</div>
+                        <span class="step-actor">Staff Accounting</span>
+                        <p class="step-desc">Payment slip verified against Maybank trustee account bank statement.</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Route: /staff/donations</div>
+                    </div>
+
+                    <div class="flow-step-box" onclick="activateStep('flow3', 3, 'Treasury Fund Allocation', 'Orphanage Director', 'Funds distributed: Operations & Food (44%), Medical Clinical (26%), or Education Endowment (30%).', 'Director Treasury Ledger', 'Status: ALLOCATED')">
+                        <span class="step-index-badge">3</span>
+                        <div class="step-title">Fund Allocation</div>
+                        <span class="step-actor">Sister Sarah / Director</span>
+                        <p class="step-desc">Allocates gross amount into earmarked sanctuary funds for complete transparency.</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Route: /director/donations</div>
+                    </div>
+
+                    <div class="flow-step-box" onclick="activateStep('flow3', 4, 'Automated Tax Receipt & Impact', 'Automated Notification System', 'Official LHDN / Inland Revenue tax exemption e-receipt PDF and impact photo email sent to donor.', 'Donor Management DB', 'Status: RECEIPT_DELIVERED')">
+                        <span class="step-index-badge">4</span>
+                        <div class="step-title">Tax Receipt & Thanks</div>
+                        <span class="step-actor">System Mailer</span>
+                        <p class="step-desc">PDF tax receipt and thank-you letter dispatched with real-time audit record.</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Action: PDF Generation</div>
+                    </div>
+                </div>
+
+                <div class="flow-detail-panel" id="flow3_detail">
+                    <div class="flow-detail-header">
+                        <span><i class="fas fa-info-circle"></i> Step Inspector: <span id="flow3_title">Donor Submits Contribution</span></span>
+                        <span id="flow3_status" class="badge badge-amber">Status: PAYMENT_INITIATED</span>
+                    </div>
+                    <div class="flow-detail-content">
+                        <div class="detail-item">
+                            <strong>Primary Responsible Actor</strong>
+                            <span id="flow3_actor">Public Donor / Corporate Sponsor</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>System Input & Verification</strong>
+                            <span id="flow3_action">Selects donation type (Cash, Food Hampers, Sponsorship), enters donor IC/Company registration for tax receipt.</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Target Database / View</strong>
+                            <span id="flow3_target">Public Portal / Donations</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FLOW 4: Volunteer Onboarding & Duty Roster -->
+            <div class="flow-card">
+                <div class="flow-card-header">
+                    <div>
+                        <div class="flow-card-title">
+                            <i class="fas fa-users-cog" style="color: #8b5cf6;"></i>
+                            Flow 4: Volunteer Application, Vetting & Duty Roster Scheduling
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
+                            Safeguarding background checks, orientation scheduling, and ward activity roster assignments.
+                        </div>
+                    </div>
+                    <div class="flow-card-meta">
+                        <span class="badge badge-purple"><i class="fas fa-shield-halved"></i> Child Safeguarding</span>
+                    </div>
+                </div>
+
+                <div class="flow-steps-grid" id="flow4_steps">
+                    <div class="flow-step-box active" onclick="activateStep('flow4', 1, 'Volunteer Form Submission', 'External Volunteer Candidate', 'Fills expertise (Academic Tutoring, Healthcare, Kitchen), availability days, and emergency contacts.', 'Public Volunteer Portal', 'Status: PENDING_SCREENING')">
+                        <span class="step-index-badge">1</span>
+                        <div class="step-title">Online Application</div>
+                        <span class="step-actor">Volunteer Applicant</span>
+                        <p class="step-desc">Selects preferred role, skill sets, and submits police safeguarding clearance pledge.</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Route: /#contact</div>
+                    </div>
+
+                    <div class="flow-step-box" onclick="activateStep('flow4', 2, 'Screening & Safeguarding Check', 'Staff Volunteer Coordinator', 'Verifies identity, background check, references, and conducts child safeguarding orientation.', 'Volunteer Screening Log', 'Status: VETTED_APPROVED')">
+                        <span class="step-index-badge">2</span>
+                        <div class="step-title">Staff Screening</div>
+                        <span class="step-actor">Coordinator Staff</span>
+                        <p class="step-desc">Conducts in-person or virtual interview and verifies mandatory child safety compliance.</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Route: /staff/staff-volunteers</div>
+                    </div>
+
+                    <div class="flow-step-box" onclick="activateStep('flow4', 3, 'Duty Roster Assignment', 'Director & Lead Caregiver', 'Volunteer scheduled onto weekend tutoring roster or meal service shift alongside accredited staff.', 'Duty Roster Matrix', 'Status: ROSTERED')">
+                        <span class="step-index-badge">3</span>
+                        <div class="step-title">Roster Scheduling</div>
+                        <span class="step-actor">Duty Supervisor</span>
+                        <p class="step-desc">Pairs volunteer with senior caregiver and assigned ward group for maximum safety.</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Route: /director/staff-volunteers</div>
+                    </div>
+
+                    <div class="flow-step-box" onclick="activateStep('flow4', 4, 'Shift Completion & Feedback', 'Volunteer & Ward Lead', 'Shift hours logged for certification, volunteer logs children progress report, feedback saved.', 'Volunteer Hours Archive', 'Status: SHIFT_COMPLETED')">
+                        <span class="step-index-badge">4</span>
+                        <div class="step-title">Hour Log & Certificate</div>
+                        <span class="step-actor">Sanctuary Records</span>
+                        <p class="step-desc">Attendance verified, volunteer receives community service certificate of appreciation.</p>
+                        <div class="step-trigger"><i class="fas fa-bolt"></i> Action: Log Hours</div>
+                    </div>
+                </div>
+
+                <div class="flow-detail-panel" id="flow4_detail">
+                    <div class="flow-detail-header">
+                        <span><i class="fas fa-info-circle"></i> Step Inspector: <span id="flow4_title">Volunteer Form Submission</span></span>
+                        <span id="flow4_status" class="badge badge-purple">Status: PENDING_SCREENING</span>
+                    </div>
+                    <div class="flow-detail-content">
+                        <div class="detail-item">
+                            <strong>Primary Responsible Actor</strong>
+                            <span id="flow4_actor">External Volunteer Candidate</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>System Input & Verification</strong>
+                            <span id="flow4_action">Fills expertise (Academic Tutoring, Healthcare, Kitchen), availability days, and emergency contacts.</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Target Database / View</strong>
+                            <span id="flow4_target">Public Volunteer Portal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: ROLE PERSONAS & ACCESS MATRIX -->
+        <section class="section" id="role-matrix">
+            <div class="section-header">
+                <div class="section-tag"><i class="fas fa-id-card-clip"></i> Persona Perspectives</div>
+                <h2 class="section-title">Role-Based Access & Perspectives</h2>
+                <p class="section-desc">
+                    The HopeHaven system is strictly segmented into dedicated views optimized for each stakeholder's responsibilities.
+                </p>
+            </div>
+
+            <!-- Role Selector Tabs -->
+            <div class="role-tabs">
+                <button class="role-tab-btn active" onclick="switchRole('director')">
+                    <i class="fas fa-crown"></i> Orphanage Director (Executive)
+                </button>
+                <button class="role-tab-btn" onclick="switchRole('staff')">
+                    <i class="fas fa-user-nurse"></i> Staff Caregiver / Nurse
+                </button>
+                <button class="role-tab-btn" onclick="switchRole('admin')">
+                    <i class="fas fa-shield-alt"></i> Sanctuary Administrator
+                </button>
+                <button class="role-tab-btn" onclick="switchRole('public')">
+                    <i class="fas fa-heart"></i> Public / Donors & Volunteers
+                </button>
+            </div>
+
+            <!-- View: Director -->
+            <div class="role-view-content active" id="role_director">
+                <div class="role-summary-card">
+                    <div class="role-card-profile">
+                        <div class="role-avatar" style="background: linear-gradient(135deg, #4f46e5, #4338ca);">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.2rem; font-weight: 700;">Sister Sarah</h3>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Executive Director of Sanctuary Operations</span>
+                            <div style="margin-top: 0.5rem;">
+                                <span class="badge badge-purple"><i class="fas fa-shield-check"></i> Highest Authority</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--primary);">Primary Governance Responsibilities:</h4>
+                        <div class="role-features-list">
+                            <div class="feature-pill"><i class="fas fa-vault"></i> <span><strong>Treasury Oversight:</strong> Manage liquid bank reserves (RM 148,350) and 6.2 months operating runway.</span></div>
+                            <div class="feature-pill"><i class="fas fa-signature"></i> <span><strong>Requisition Authorization:</strong> Sign-off on staff inventory requisitions and emergency clinical purchases.</span></div>
+                            <div class="feature-pill"><i class="fas fa-hospital-user"></i> <span><strong>Medical Health Watch:</strong> Real-time clinical watch on active sickness, clinic trips, and allergies.</span></div>
+                            <div class="feature-pill"><i class="fas fa-graduation-cap"></i> <span><strong>Education Endowments:</strong> Track student GPA, school attendance, and tuition grant funding.</span></div>
+                            <div class="feature-pill"><i class="fas fa-user-plus"></i> <span><strong>Staff RBAC:</strong> Register new caregivers, assign wards, and manage personnel credentials.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View: Staff -->
+            <div class="role-view-content" id="role_staff">
+                <div class="role-summary-card">
+                    <div class="role-card-profile">
+                        <div class="role-avatar" style="background: linear-gradient(135deg, #10b981, #059669);">
+                            <i class="fas fa-user-nurse"></i>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.2rem; font-weight: 700;">Nurse Mary Jenkins</h3>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Senior Residential Caregiver & Clinical Lead</span>
+                            <div style="margin-top: 0.5rem;">
+                                <span class="badge badge-emerald"><i class="fas fa-stethoscope"></i> Verified Healthcare Staff</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; color: #059669;">Daily Operational Duties:</h4>
+                        <div class="role-features-list">
+                            <div class="feature-pill"><i class="fas fa-temperature-arrow-up"></i> <span><strong>Daily Clinical Triage:</strong> Log morning temperature checks, medication schedules, and dietary restrictions.</span></div>
+                            <div class="feature-pill"><i class="fas fa-cart-flatbed"></i> <span><strong>Supply Requisitions:</strong> Submit restock requests for children nutrition, diapers, and first-aid supplies.</span></div>
+                            <div class="feature-pill"><i class="fas fa-clipboard-user"></i> <span><strong>Ward Welfare Logs:</strong> Record incident reports, homework assistance, and bedtime roll-calls.</span></div>
+                            <div class="feature-pill"><i class="fas fa-hands-holding-child"></i> <span><strong>Duty Roster:</strong> Coordinate shift handovers and supervise volunteer activity groups.</span></div>
+                            <div class="feature-pill"><i class="fas fa-id-card"></i> <span><strong>Staff Profile:</strong> Manage personnel credentials, safeguarding certifications, and duty calendar.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View: Admin -->
+            <div class="role-view-content" id="role_admin">
+                <div class="role-summary-card">
+                    <div class="role-card-profile">
+                        <div class="role-avatar" style="background: linear-gradient(135deg, #0ea5e9, #0369a1);">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.2rem; font-weight: 700;">System Administrator</h3>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Central Operations & System Auditor</span>
+                            <div style="margin-top: 0.5rem;">
+                                <span class="badge badge-indigo"><i class="fas fa-server"></i> System Root</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; color: #0ea5e9;">System Management Responsibilities:</h4>
+                        <div class="role-features-list">
+                            <div class="feature-pill"><i class="fas fa-users-gear"></i> <span><strong>User Account Provisioning:</strong> Onboard staff, reset 2FA / passwords, and audit login sessions.</span></div>
+                            <div class="feature-pill"><i class="fas fa-file-shield"></i> <span><strong>Audit Logs & Compliance:</strong> Enforce child privacy compliance (PDPA / Child Act 2001).</span></div>
+                            <div class="feature-pill"><i class="fas fa-database"></i> <span><strong>Database Backups:</strong> Manage MySQL relational backups and cloud document store sync.</span></div>
+                            <div class="feature-pill"><i class="fas fa-sliders"></i> <span><strong>System Configuration:</strong> Set automated email triggers, SMS alerts, and donation gateway keys.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View: Public -->
+            <div class="role-view-content" id="role_public">
+                <div class="role-summary-card">
+                    <div class="role-card-profile">
+                        <div class="role-avatar" style="background: linear-gradient(135deg, #f43f5e, #be123c);">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.2rem; font-weight: 700;">Supporter / Volunteer</h3>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">External Philanthropist & Community Partner</span>
+                            <div style="margin-top: 0.5rem;">
+                                <span class="badge badge-rose"><i class="fas fa-heart"></i> Community Angel</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; color: #f43f5e;">Public Engagement Features:</h4>
+                        <div class="role-features-list">
+                            <div class="feature-pill"><i class="fas fa-globe"></i> <span><strong>Sanctuary Showcase:</strong> Explore HopeHaven's mission, residential facilities, and photo gallery.</span></div>
+                            <div class="feature-pill"><i class="fas fa-credit-card"></i> <span><strong>Secure Donations:</strong> Make one-off or recurring monthly contributions with instant tax receipts.</span></div>
+                            <div class="feature-pill"><i class="fas fa-calendar-check"></i> <span><strong>Volunteer Application:</strong> Apply for weekend reading programs, kitchen assistance, or sports coaching.</span></div>
+                            <div class="feature-pill"><i class="fas fa-newspaper"></i> <span><strong>Transparency Reports:</strong> Access published quarterly impact stories and audited welfare reports.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: LIVE SCREEN PREVIEWS & INTERFACE WALKTHROUGH -->
+        <section class="section" id="screen-previews">
+            <div class="section-header">
+                <div class="section-tag"><i class="fas fa-window-maximize"></i> Interface Walkthrough</div>
+                <h2 class="section-title">High-Fidelity Subsystem Previews</h2>
+                <p class="section-desc">
+                    Explore interactive previews of the key views implemented within the application.
+                </p>
+            </div>
+
+            <!-- Mockup Carousel Tabs -->
+            <div class="role-tabs" style="border-bottom: none; margin-bottom: 1rem;">
+                <button class="role-tab-btn active" onclick="switchMockup('director_mockup')">
+                    <i class="fas fa-chart-line"></i> Director Dashboard View
+                </button>
+                <button class="role-tab-btn" onclick="switchMockup('inventory_mockup')">
+                    <i class="fas fa-boxes-packing"></i> Staff Requisitions Desk
+                </button>
+                <button class="role-tab-btn" onclick="switchMockup('welfare_mockup')">
+                    <i class="fas fa-child-dress"></i> Child Welfare & Medical Triage
+                </button>
+                <button class="role-tab-btn" onclick="switchMockup('profile_mockup')">
+                    <i class="fas fa-id-badge"></i> Staff Caregiver Profile
+                </button>
+            </div>
+
+            <!-- Mockup Container -->
+            <div class="mockup-container">
+                <div class="mockup-header">
+                    <div class="mockup-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+                    <div class="mockup-url-bar" id="mockup_url">https://hopehaven.sanctuary/director/dashboard</div>
+                    <div style="font-size: 0.75rem; color: #94a3b8;"><i class="fas fa-lock" style="color: #10b981;"></i> SSL 256-bit</div>
+                </div>
+
+                <!-- Mockup 1: Director Dashboard -->
+                <div class="mockup-body mockup-tab-content active" id="mockup_director_mockup">
+                    <div style="background: linear-gradient(135deg, #1e1b4b, #311042); color: white; padding: 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                        <div>
+                            <span class="badge badge-purple" style="background: rgba(139, 92, 246, 0.3); color: white;"><i class="fas fa-crown"></i> Directorate Governance · Q4 2026</span>
+                            <h2 style="font-size: 1.4rem; margin-top: 0.4rem;">Welcome back, Sister Sarah</h2>
+                            <p style="font-size: 0.85rem; color: #cbd5e1;">Sanctuary operations running smoothly. 6.2 months liquid treasury runway active.</p>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="nav-btn primary" style="font-size: 0.78rem;"><i class="fas fa-bullhorn"></i> Broadcast Directive</button>
+                            <button class="nav-btn" style="font-size: 0.78rem;"><i class="fas fa-download"></i> Directorate Audit (PDF)</button>
+                        </div>
+                    </div>
+
+                    <!-- Treasury Card -->
+                    <div style="background: white; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+                            <div>
+                                <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--primary);"><i class="fas fa-vault"></i> Maybank Trustee Treasury</span>
+                                <div style="font-size: 2rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: #0f172a;">RM 148,350.00</div>
+                            </div>
+                            <span class="badge badge-emerald"><i class="fas fa-shield-check"></i> 6.2 Months Runway Guaranteed</span>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.85rem;">
+                            <div style="background: var(--slate-50); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+                                <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fas fa-house-chimney"></i> Operations & Food</span>
+                                <div style="font-size: 1.1rem; font-weight: 700; color: #4f46e5;">RM 65,400.00</div>
+                                <span style="font-size: 0.7rem; color: var(--text-muted);">44.1% of reserves</span>
+                            </div>
+                            <div style="background: var(--slate-50); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+                                <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fas fa-heart-pulse"></i> Medical Reserve</span>
+                                <div style="font-size: 1.1rem; font-weight: 700; color: #059669;">RM 38,200.00</div>
+                                <span style="font-size: 0.7rem; color: var(--text-muted);">Emergency clinic pool</span>
+                            </div>
+                            <div style="background: var(--slate-50); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+                                <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fas fa-graduation-cap"></i> Education Endowment</span>
+                                <div style="font-size: 1.1rem; font-weight: 700; color: #7c3aed;">RM 44,750.00</div>
+                                <span style="font-size: 0.7rem; color: var(--text-muted);">Tuition & school fees</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KPI Row -->
+                    <div class="mock-dashboard-grid">
+                        <div class="mock-kpi">
+                            <div class="mock-kpi-top">
+                                <span class="mock-kpi-label">Active Sickness</span>
+                                <span class="badge badge-rose">5 Students</span>
+                            </div>
+                            <div class="mock-kpi-val" style="color: #e11d48;">Asthma & Fever</div>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fas fa-notes-medical"></i> All stable under care</span>
+                        </div>
+
+                        <div class="mock-kpi">
+                            <div class="mock-kpi-top">
+                                <span class="mock-kpi-label">Inventory Requisitions</span>
+                                <span class="badge badge-amber">4 Pending</span>
+                            </div>
+                            <div class="mock-kpi-val" style="color: #d97706;">2 Urgent</div>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fas fa-clock"></i> Awaiting Director sign-off</span>
+                        </div>
+
+                        <div class="mock-kpi">
+                            <div class="mock-kpi-top">
+                                <span class="mock-kpi-label">School Attendance</span>
+                                <span class="badge badge-emerald">98.4%</span>
+                            </div>
+                            <div class="mock-kpi-val" style="color: #059669;">47 / 48 Attending</div>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fas fa-school"></i> 1 on medical leave</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mockup 2: Inventory Requisitions -->
+                <div class="mockup-body mockup-tab-content" id="mockup_inventory_mockup" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <div>
+                            <h3 style="font-size: 1.15rem; font-weight: 700;"><i class="fas fa-boxes-packing" style="color: #4f46e5;"></i> Requisitions Approval Desk</h3>
+                            <span style="font-size: 0.8rem; color: var(--text-muted);">Review and authorize staff purchase requests</span>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <span class="badge badge-amber"><i class="fas fa-hourglass-half"></i> 4 Pending Sign-off</span>
+                            <span class="badge badge-emerald"><i class="fas fa-circle-check"></i> 12 Approved (Q4)</span>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>Req ID</th>
+                                    <th>Item Requested</th>
+                                    <th>Department</th>
+                                    <th>Estimated Cost</th>
+                                    <th>Urgency</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="route-path">#REQ-8821</span></td>
+                                    <td><strong>Ventolin Inhalers (10x)</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">Chronic asthma stock replenishment</span></td>
+                                    <td>Clinical / Health</td>
+                                    <td><strong>RM 320.00</strong></td>
+                                    <td><span class="badge badge-rose"><i class="fas fa-bolt"></i> Urgent</span></td>
+                                    <td><span class="badge badge-amber">Pending Director</span></td>
+                                    <td><button class="nav-btn primary" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;"><i class="fas fa-check"></i> Sign-off</button></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="route-path">#REQ-8819</span></td>
+                                    <td><strong>Organic Baby Formula Milk (24 tins)</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">Ward A Nursery nutritional supply</span></td>
+                                    <td>Nutrition & Kitchen</td>
+                                    <td><strong>RM 1,440.00</strong></td>
+                                    <td><span class="badge badge-amber"><i class="fas fa-clock"></i> High Priority</span></td>
+                                    <td><span class="badge badge-amber">Pending Director</span></td>
+                                    <td><button class="nav-btn primary" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;"><i class="fas fa-check"></i> Sign-off</button></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="route-path">#REQ-8814</span></td>
+                                    <td><strong>Primary Math & Science Workbooks (30 sets)</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">Semester 2 preparation</span></td>
+                                    <td>Education</td>
+                                    <td><strong>RM 750.00</strong></td>
+                                    <td><span class="badge badge-indigo">Routine</span></td>
+                                    <td><span class="badge badge-emerald"><i class="fas fa-check"></i> Approved</span></td>
+                                    <td><span style="font-size: 0.75rem; color: #059669; font-weight: 600;">PO #552 Dispatched</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Mockup 3: Child Welfare -->
+                <div class="mockup-body mockup-tab-content" id="mockup_welfare_mockup" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <div>
+                            <h3 style="font-size: 1.15rem; font-weight: 700;"><i class="fas fa-child-reaching" style="color: #10b981;"></i> Active Child Welfare & Triage Roster</h3>
+                            <span style="font-size: 0.8rem; color: var(--text-muted);">48 Wards · Ward A (Junior) & Ward B (Senior)</span>
+                        </div>
+                        <input type="text" placeholder="Search child by name, ID or ward..." style="padding: 0.4rem 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border); font-size: 0.8rem; width: 240px;">
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>Child Profile</th>
+                                    <th>Age & Ward</th>
+                                    <th>Health Status</th>
+                                    <th>Schooling</th>
+                                    <th>Assigned Nurse</th>
+                                    <th>Clearance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 0.6rem;">
+                                            <div style="width: 32px; height: 32px; border-radius: 50%; background: #6366f1; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem;">AI</div>
+                                            <div>
+                                                <strong>Adam Iskandar</strong>
+                                                <div style="font-size: 0.72rem; color: var(--text-muted);">ID: HH-2022-041</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>10 yrs · Ward A (Bed 4)</td>
+                                    <td><span class="badge badge-rose"><i class="fas fa-head-side-cough"></i> Mild Asthma</span></td>
+                                    <td>SK Bukit Indah (Std 4)</td>
+                                    <td>Nurse Mary Jenkins</td>
+                                    <td><span class="badge badge-emerald">JKM Full Custody</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 0.6rem;">
+                                            <div style="width: 32px; height: 32px; border-radius: 50%; background: #f43f5e; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem;">SN</div>
+                                            <div>
+                                                <strong>Siti Nurhaliza</strong>
+                                                <div style="font-size: 0.72rem; color: var(--text-muted);">ID: HH-2023-018</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>7 yrs · Ward A (Bed 11)</td>
+                                    <td><span class="badge badge-emerald"><i class="fas fa-heart-pulse"></i> Perfect Health</span></td>
+                                    <td>SK Bukit Indah (Std 1)</td>
+                                    <td>Nurse Mary Jenkins</td>
+                                    <td><span class="badge badge-emerald">JKM Full Custody</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 0.6rem;">
+                                            <div style="width: 32px; height: 32px; border-radius: 50%; background: #8b5cf6; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem;">DT</div>
+                                            <div>
+                                                <strong>Daniel Tan</strong>
+                                                <div style="font-size: 0.72rem; color: var(--text-muted);">ID: HH-2021-089</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>14 yrs · Ward B (Bed 2)</td>
+                                    <td><span class="badge badge-amber"><i class="fas fa-glasses"></i> Eye Clinic Followup</span></td>
+                                    <td>SMK Damai (Form 2)</td>
+                                    <td>Caregiver Johan</td>
+                                    <td><span class="badge badge-emerald">JKM Full Custody</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Mockup 4: Staff Profile -->
+                <div class="mockup-body mockup-tab-content" id="mockup_profile_mockup" style="display: none;">
+                    <div style="background: white; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.5rem;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 1.25rem; margin-bottom: 1.25rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #10b981, #059669); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.3rem;">NM</div>
+                                <div>
+                                    <h3 style="font-size: 1.25rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem;">
+                                        Nurse Mary Jenkins
+                                        <span class="badge badge-emerald"><i class="fas fa-check-circle"></i> Verified Staff</span>
+                                    </h3>
+                                    <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fas fa-user-nurse"></i> Senior Caregiver & Clinical Lead · Staff ID: HH-STF-014</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button class="nav-btn" style="color: var(--text-main); font-size: 0.78rem;"><i class="fas fa-edit"></i> Edit Credentials</button>
+                                <button class="nav-btn" style="color: var(--text-main); font-size: 0.78rem;"><i class="fas fa-key"></i> 2FA Settings</button>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div>
+                                <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Shift Schedule</span>
+                                <div style="font-weight: 700; margin-top: 0.2rem;"><i class="fas fa-calendar-day" style="color: var(--primary);"></i> Morning Shift (07:00 - 15:30)</div>
+                            </div>
+                            <div>
+                                <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Assigned Ward</span>
+                                <div style="font-weight: 700; margin-top: 0.2rem;"><i class="fas fa-bed" style="color: #059669;"></i> Ward A (Junior Dormitory · 24 Children)</div>
+                            </div>
+                            <div>
+                                <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Safeguarding Clearance</span>
+                                <div style="font-weight: 700; margin-top: 0.2rem; color: #059669;"><i class="fas fa-certificate"></i> PDRM Vetted (Valid to 2028)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: ROUTE & MODULE MATRIX -->
+        <section class="section" id="routes-sitemap">
+            <div class="section-header">
+                <div class="section-tag"><i class="fas fa-sitemap"></i> Complete Route Directory</div>
+                <h2 class="section-title">Module & Route Architecture Matrix</h2>
+                <p class="section-desc">
+                    Comprehensive mapping of all registered Laravel routes, Blade view templates, and access permissions in the repository.
+                </p>
+            </div>
+
+            <div class="table-responsive">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Subsystem / Area</th>
+                            <th>Route URI</th>
+                            <th>Route Name</th>
+                            <th>Target Blade View</th>
+                            <th>Authorized Persona</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Public -->
+                        <tr>
+                            <td><span class="badge badge-rose"><i class="fas fa-globe"></i> Public Portal</span></td>
+                            <td><span class="route-path">/</span></td>
+                            <td><code>home</code></td>
+                            <td><code>resources/views/home.blade.php</code></td>
+                            <td>Public / Anonymous</td>
+                        </tr>
+                        <!-- Directorate -->
+                        <tr>
+                            <td><span class="badge badge-purple"><i class="fas fa-crown"></i> Director Governance</span></td>
+                            <td><span class="route-path">/director</span> or <span class="route-path">/director/dashboard</span></td>
+                            <td><code>director.dashboard</code></td>
+                            <td><code>portal/director/dashboard.blade.php</code></td>
+                            <td>Orphanage Director</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple"><i class="fas fa-crown"></i> Director Governance</span></td>
+                            <td><span class="route-path">/director/inventory-requests</span></td>
+                            <td><code>director.inventory-requests</code></td>
+                            <td><code>portal/director/inventory-requests.blade.php</code></td>
+                            <td>Orphanage Director</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple"><i class="fas fa-crown"></i> Director Governance</span></td>
+                            <td><span class="route-path">/director/medical-records</span></td>
+                            <td><code>director.medical-records</code></td>
+                            <td><code>portal/director/medical-records.blade.php</code></td>
+                            <td>Orphanage Director</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple"><i class="fas fa-crown"></i> Director Governance</span></td>
+                            <td><span class="route-path">/director/children-education</span></td>
+                            <td><code>director.children-education</code></td>
+                            <td><code>portal/director/children-education.blade.php</code></td>
+                            <td>Orphanage Director</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple"><i class="fas fa-crown"></i> Director Governance</span></td>
+                            <td><span class="route-path">/director/staff-volunteers</span></td>
+                            <td><code>director.staff-volunteers</code></td>
+                            <td><code>portal/director/staff-volunteers.blade.php</code></td>
+                            <td>Orphanage Director</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple"><i class="fas fa-crown"></i> Director Governance</span></td>
+                            <td><span class="route-path">/director/donations</span></td>
+                            <td><code>director.donations</code></td>
+                            <td><code>portal/director/donations.blade.php</code></td>
+                            <td>Orphanage Director</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple"><i class="fas fa-crown"></i> Director Governance</span></td>
+                            <td><span class="route-path">/director/register-staff</span></td>
+                            <td><code>director.register-staff</code></td>
+                            <td><code>portal/director/register-staff.blade.php</code></td>
+                            <td>Orphanage Director</td>
+                        </tr>
+                        <!-- Staff -->
+                        <tr>
+                            <td><span class="badge badge-emerald"><i class="fas fa-user-nurse"></i> Staff Operations</span></td>
+                            <td><span class="route-path">/staff/child-welfare</span></td>
+                            <td><code>staff.child-welfare</code></td>
+                            <td><code>portal/staff-child-welfare.blade.php</code></td>
+                            <td>Staff / Caregiver</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-emerald"><i class="fas fa-user-nurse"></i> Staff Operations</span></td>
+                            <td><span class="route-path">/staff/inventory</span></td>
+                            <td><code>staff.inventory</code></td>
+                            <td><code>portal/staff-inventory.blade.php</code></td>
+                            <td>Staff / Caregiver</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-emerald"><i class="fas fa-user-nurse"></i> Staff Operations</span></td>
+                            <td><span class="route-path">/staff/welfare-requests</span></td>
+                            <td><code>staff.welfare-requests</code></td>
+                            <td><code>portal/staff-welfare-requests.blade.php</code></td>
+                            <td>Staff / Caregiver</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-emerald"><i class="fas fa-user-nurse"></i> Staff Operations</span></td>
+                            <td><span class="route-path">/staff/profile</span></td>
+                            <td><code>staff.profile</code></td>
+                            <td><code>portal/staff-profile.blade.php</code></td>
+                            <td>Staff / Caregiver</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-emerald"><i class="fas fa-user-nurse"></i> Staff Operations</span></td>
+                            <td><span class="route-path">/staff/donations</span></td>
+                            <td><code>staff.donations</code></td>
+                            <td><code>portal/staff-donations.blade.php</code></td>
+                            <td>Staff / Caregiver</td>
+                        </tr>
+                        <!-- Admin / Portal -->
+                        <tr>
+                            <td><span class="badge badge-indigo"><i class="fas fa-shield-alt"></i> Management Portal</span></td>
+                            <td><span class="route-path">/dashboard</span></td>
+                            <td><code>dashboard</code></td>
+                            <td><code>portal/dashboard.blade.php</code></td>
+                            <td>Admin / Operations</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-indigo"><i class="fas fa-shield-alt"></i> Management Portal</span></td>
+                            <td><span class="route-path">/child-welfare</span></td>
+                            <td><code>child-welfare</code></td>
+                            <td><code>portal/child-welfare.blade.php</code></td>
+                            <td>Admin / Operations</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-indigo"><i class="fas fa-shield-alt"></i> Management Portal</span></td>
+                            <td><span class="route-path">/inventory</span></td>
+                            <td><code>inventory</code></td>
+                            <td><code>portal/inventory.blade.php</code></td>
+                            <td>Admin / Operations</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-indigo"><i class="fas fa-shield-alt"></i> Management Portal</span></td>
+                            <td><span class="route-path">/donations</span></td>
+                            <td><code>donations</code></td>
+                            <td><code>portal/donations.blade.php</code></td>
+                            <td>Admin / Operations</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 5: DATA ARCHITECTURE & ERD -->
+        <section class="section" id="data-architecture">
+            <div class="section-header">
+                <div class="section-tag"><i class="fas fa-database"></i> Relational Entities</div>
+                <h2 class="section-title">Database Architecture & Entity Relationships</h2>
+                <p class="section-desc">
+                    Normalized schema structure powering the sanctuary operations, requisitions, and welfare auditing.
+                </p>
+            </div>
+
+            <div class="erd-grid">
+                <!-- Entity: Children -->
+                <div class="erd-entity">
+                    <div class="erd-title">
+                        <span><i class="fas fa-child"></i> children</span>
+                        <span>Table</span>
+                    </div>
+                    <ul class="erd-fields">
+                        <li><span class="erd-pk">PK id</span> <span class="erd-type">bigint</span></li>
+                        <li><span>registration_number</span> <span class="erd-type">varchar(50)</span></li>
+                        <li><span>full_name</span> <span class="erd-type">varchar(255)</span></li>
+                        <li><span>birth_date</span> <span class="erd-type">date</span></li>
+                        <li><span>ward_dormitory</span> <span class="erd-type">enum(A, B)</span></li>
+                        <li><span>jkm_custody_ref</span> <span class="erd-type">varchar(100)</span></li>
+                        <li><span class="erd-fk">FK assigned_nurse_id</span> <span class="erd-type">bigint</span></li>
+                        <li><span>welfare_status</span> <span class="erd-type">varchar(50)</span></li>
+                    </ul>
+                </div>
+
+                <!-- Entity: Medical Records -->
+                <div class="erd-entity">
+                    <div class="erd-title">
+                        <span><i class="fas fa-heartbeat"></i> medical_records</span>
+                        <span>Table</span>
+                    </div>
+                    <ul class="erd-fields">
+                        <li><span class="erd-pk">PK id</span> <span class="erd-type">bigint</span></li>
+                        <li><span class="erd-fk">FK child_id</span> <span class="erd-type">bigint</span></li>
+                        <li><span>diagnosis</span> <span class="erd-type">varchar(255)</span></li>
+                        <li><span>allergies</span> <span class="erd-type">text</span></li>
+                        <li><span>appointment_date</span> <span class="erd-type">datetime</span></li>
+                        <li><span>hospital_clinic</span> <span class="erd-type">varchar(255)</span></li>
+                        <li><span>cost_estimate</span> <span class="erd-type">decimal(10,2)</span></li>
+                        <li><span>cleared_by_director</span> <span class="erd-type">boolean</span></li>
+                    </ul>
+                </div>
+
+                <!-- Entity: Inventory Requests -->
+                <div class="erd-entity">
+                    <div class="erd-title">
+                        <span><i class="fas fa-boxes-packing"></i> inventory_requests</span>
+                        <span>Table</span>
+                    </div>
+                    <ul class="erd-fields">
+                        <li><span class="erd-pk">PK id</span> <span class="erd-type">bigint</span></li>
+                        <li><span class="erd-fk">FK requested_by</span> <span class="erd-type">bigint</span></li>
+                        <li><span>item_name</span> <span class="erd-type">varchar(255)</span></li>
+                        <li><span>category</span> <span class="erd-type">varchar(100)</span></li>
+                        <li><span>quantity</span> <span class="erd-type">int</span></li>
+                        <li><span>estimated_total</span> <span class="erd-type">decimal(10,2)</span></li>
+                        <li><span>priority</span> <span class="erd-type">enum(routine, urgent)</span></li>
+                        <li><span>status</span> <span class="erd-type">enum(pending, approved)</span></li>
+                        <li><span class="erd-fk">FK authorized_by</span> <span class="erd-type">bigint</span></li>
+                    </ul>
+                </div>
+
+                <!-- Entity: Donations -->
+                <div class="erd-entity">
+                    <div class="erd-title">
+                        <span><i class="fas fa-hand-holding-usd"></i> donations</span>
+                        <span>Table</span>
+                    </div>
+                    <ul class="erd-fields">
+                        <li><span class="erd-pk">PK id</span> <span class="erd-type">bigint</span></li>
+                        <li><span>receipt_number</span> <span class="erd-type">varchar(50)</span></li>
+                        <li><span>donor_name</span> <span class="erd-type">varchar(255)</span></li>
+                        <li><span>donor_ic_ssn</span> <span class="erd-type">varchar(50)</span></li>
+                        <li><span>amount</span> <span class="erd-type">decimal(10,2)</span></li>
+                        <li><span>earmarked_fund</span> <span class="erd-type">varchar(100)</span></li>
+                        <li><span>payment_gateway_ref</span> <span class="erd-type">varchar(100)</span></li>
+                        <li><span>tax_exempt_sent</span> <span class="erd-type">boolean</span></li>
+                    </ul>
+                </div>
+
+                <!-- Entity: Users & Staff -->
+                <div class="erd-entity">
+                    <div class="erd-title">
+                        <span><i class="fas fa-users"></i> users</span>
+                        <span>Table</span>
+                    </div>
+                    <ul class="erd-fields">
+                        <li><span class="erd-pk">PK id</span> <span class="erd-type">bigint</span></li>
+                        <li><span>name</span> <span class="erd-type">varchar(255)</span></li>
+                        <li><span>email</span> <span class="erd-type">varchar(255)</span></li>
+                        <li><span>role</span> <span class="erd-type">enum(director, staff, admin)</span></li>
+                        <li><span>staff_id_code</span> <span class="erd-type">varchar(50)</span></li>
+                        <li><span>duty_shift</span> <span class="erd-type">varchar(50)</span></li>
+                        <li><span>two_factor_secret</span> <span class="erd-type">text</span></li>
+                        <li><span>active_status</span> <span class="erd-type">boolean</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: TECHNOLOGY STACK & SECURITY -->
+        <section class="section" id="tech-stack">
+            <div class="section-header">
+                <div class="section-tag"><i class="fas fa-code"></i> Engineering Standards</div>
+                <h2 class="section-title">Technology Stack & Compliance</h2>
+                <p class="section-desc">
+                    Architected for reliability, data security, and long-term maintainability.
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem;">
+                <div style="background: var(--slate-50); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
+                    <div style="font-size: 1.5rem; color: #f43f5e; margin-bottom: 0.5rem;"><i class="fab fa-laravel"></i></div>
+                    <h3 style="font-size: 1.05rem; font-weight: 700;">Laravel 11 & PHP 8.3</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem;">
+                        Robust MVC architecture, Eloquent ORM, middleware authentication guards, and high-performance routing.
+                    </p>
+                </div>
+
+                <div style="background: var(--slate-50); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
+                    <div style="font-size: 1.5rem; color: #4f46e5; margin-bottom: 0.5rem;"><i class="fas fa-layer-group"></i></div>
+                    <h3 style="font-size: 1.05rem; font-weight: 700;">Blade UI & Custom CSS</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem;">
+                        Ultra-fast server-rendered Blade component templates with custom responsive vanilla CSS tokens and zero bloated client bundles.
+                    </p>
+                </div>
+
+                <div style="background: var(--slate-50); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
+                    <div style="font-size: 1.5rem; color: #10b981; margin-bottom: 0.5rem;"><i class="fas fa-shield-halved"></i></div>
+                    <h3 style="font-size: 1.05rem; font-weight: 700;">Child Privacy & PDPA Compliance</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem;">
+                        Compliant with Child Act 2001 and Personal Data Protection Act. Sensitive medical and adoption data protected with role-based policies.
+                    </p>
+                </div>
+
+                <div style="background: var(--slate-50); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
+                    <div style="font-size: 1.5rem; color: #0ea5e9; margin-bottom: 0.5rem;"><i class="fas fa-file-contract"></i></div>
+                    <h3 style="font-size: 1.05rem; font-weight: 700;">Audit-Ready Reporting</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem;">
+                        One-click PDF generation for director audits, financial statements for the Board of Trustees, and donor tax deduction receipts.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p style="font-weight: 700; color: var(--text-main); margin-bottom: 0.3rem;">
+                HopeHaven Orphanage & Child Care Sanctuary Management System
+            </p>
+            <p>Generated Single-File Architecture & Flow Document · Ready for Board, Stakeholder & Technical Sharing</p>
+            <p style="margin-top: 0.75rem; font-size: 0.8rem;">
+                © 2026 HopeHaven Sanctuary Foundation. All rights reserved. Registered Welfare Organisation (PPM-014-10-18092012).
+            </p>
+        </footer>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle" style="color: #10b981;"></i>
+        <span id="toast_msg">Executive blueprint summary copied to clipboard!</span>
+    </div>
+
+    <script>
+        // Theme toggle
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.getElementById('theme_toggle_btn');
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                btn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                btn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+            }
+        }
+
+        // Flow step activator
+        function activateStep(flowId, stepNum, title, actor, action, target, status) {
+            // Highlight step box
+            const stepsContainer = document.getElementById(`${flowId}_steps`);
+            if (stepsContainer) {
+                const boxes = stepsContainer.querySelectorAll('.flow-step-box');
+                boxes.forEach((box, idx) => {
+                    if (idx + 1 === stepNum) {
+                        box.classList.add('active');
+                    } else {
+                        box.classList.remove('active');
+                    }
+                });
+            }
+
+            // Update details panel
+            const titleEl = document.getElementById(`${flowId}_title`);
+            const actorEl = document.getElementById(`${flowId}_actor`);
+            const actionEl = document.getElementById(`${flowId}_action`);
+            const targetEl = document.getElementById(`${flowId}_target`);
+            const statusEl = document.getElementById(`${flowId}_status`);
+
+            if (titleEl) titleEl.innerText = title;
+            if (actorEl) actorEl.innerText = actor;
+            if (actionEl) actionEl.innerText = action;
+            if (targetEl) targetEl.innerText = target;
+            if (statusEl) statusEl.innerText = status;
+        }
+
+        // Persona tab switcher
+        function switchRole(roleKey) {
+            // Update tabs
+            const tabs = document.querySelectorAll('.role-tabs button');
+            tabs.forEach(btn => {
+                if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(roleKey)) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Update content
+            const views = document.querySelectorAll('.role-view-content');
+            views.forEach(v => v.classList.remove('active'));
+
+            const target = document.getElementById(`role_${roleKey}`);
+            if (target) target.classList.add('active');
+        }
+
+        // Mockup Carousel Switcher
+        function switchMockup(mockupKey) {
+            const tabs = document.querySelectorAll('#screen-previews .role-tabs button');
+            tabs.forEach(btn => {
+                if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(mockupKey)) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            const mockups = document.querySelectorAll('.mockup-tab-content');
+            mockups.forEach(m => m.style.display = 'none');
+
+            const target = document.getElementById(`mockup_${mockupKey}`);
+            if (target) target.style.display = 'block';
+
+            // Update URL bar
+            const urlBar = document.getElementById('mockup_url');
+            if (mockupKey === 'director_mockup') urlBar.innerText = 'https://hopehaven.sanctuary/director/dashboard';
+            if (mockupKey === 'inventory_mockup') urlBar.innerText = 'https://hopehaven.sanctuary/director/inventory-requests';
+            if (mockupKey === 'welfare_mockup') urlBar.innerText = 'https://hopehaven.sanctuary/staff/child-welfare';
+            if (mockupKey === 'profile_mockup') urlBar.innerText = 'https://hopehaven.sanctuary/staff/profile';
+        }
+
+        // Copy Share Summary
+        function copyShareSummary() {
+            const summary = `HopeHaven Orphanage & Child Care Sanctuary Management System
+-------------------------------------------------------------
+A comprehensive platform managing 48 children, RM 148,350 treasury reserves, clinical medical records, education endowments, and staff inventory requisitions.
+
+Roles:
+- Orphanage Director (Executive Treasury & Requisition Approval)
+- Staff Caregivers (Child Welfare, Medical Triage, Shift Roster)
+- Sanctuary Administrator (User RBAC, Compliance & Audit)
+- Public / Donors (Pledges, Sponsorships, Volunteer Onboarding)
+
+Architecture: Laravel 11, Blade Components, Role-Based Access Control, PDPA Child Privacy Compliance.`;
+
+            navigator.clipboard.writeText(summary).then(() => {
+                showToast("System overview & project summary copied to clipboard!");
+            }).catch(() => {
+                showToast("Copied to clipboard!");
+            });
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toast_msg');
+            msgEl.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Smooth scroll for jump navigation
+        document.querySelectorAll('.jump-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetEl = document.querySelector(targetId);
+                if (targetEl) {
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.querySelectorAll('.jump-link').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

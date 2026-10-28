@@ -54,7 +54,7 @@ function filterEducationTable(levelFilter, standingFilter) {
         let matchesLevel = (currentLevel === 'all') || (rowLevel === currentLevel);
         let matchesStanding = (currentStanding === 'all') || (rowStanding === currentStanding);
 
-        if (matchesLevel && matchesStanding) {
+        if (matchesLevel && matchesStanding && row.textContent.toLowerCase().includes((document.getElementById('edu_search_input')?.value || '').toLowerCase().trim())) {
             row.style.display = '';
         } else {
             row.style.display = 'none';
@@ -67,21 +67,7 @@ function filterEducationTable(levelFilter, standingFilter) {
  */
 function initEducationSearch() {
     const searchInput = document.getElementById('edu_search_input');
-    if (!searchInput) return;
-
-    searchInput.addEventListener('input', function () {
-        const query = this.value.toLowerCase().trim();
-        const rows = document.querySelectorAll('.edu-table tbody tr');
-
-        rows.forEach(row => {
-            const text = row.innerText.toLowerCase();
-            if (query === '' || text.includes(query)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-    });
+    if (searchInput) searchInput.addEventListener('input', function () { filterEducationTable(null, null); });
 }
 
 /**
@@ -131,6 +117,17 @@ function saveStudentGradeUpdate() {
     const avg = document.getElementById('update_grade_average').value;
     const standing = document.getElementById('update_grade_standing').options[document.getElementById('update_grade_standing').selectedIndex].text;
     const remark = document.getElementById('director_edu_remark').value.trim() || 'Approved and endorsed by Sister Sarah.';
+    if (avg === '' || !Number.isFinite(Number(avg)) || Number(avg) < 0 || Number(avg) > 100) {
+        showPortalToast('Enter an average score between 0 and 100.', false);
+        return;
+    }
+    const record = window.HopeHavenChildStore?.getById(window.HopeHavenSelectedChildId);
+    if (record) {
+        window.HopeHavenChildStore.update(record.id, {
+            academic:{...record.academic,overallScore:Number(avg),academicStanding:standing,remarks:remark},
+            timeline:[{date:new Date().toISOString().slice(0,10),title:'Director academic review',category:'academic',detail:remark},...(record.timeline||[])]
+        });
+    }
 
     closeDirectorModal('modal_update_student_grades');
 

@@ -1,0 +1,129 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* ==========================================================================
+   HopeHaven Orphanage Management Portal - Inventory & Supplies Stylesheet
+   File: public/css/portal/inventory.css
+   ========================================================================== */
+
+/* Category Badge Indicators */
+.category-pill {
+    padding: 3px 10px;
+    @apply tw:rounded-[12px];
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[5px];
+}
+
+.category-food { background: rgba(245, 158, 11, 0.12); @apply tw:text-[#d97706]; }
+.category-medical { background: rgba(239, 68, 68, 0.12); @apply tw:text-[#dc2626]; }
+.category-clothing { background: rgba(59, 130, 246, 0.12); @apply tw:text-[#2563eb]; }
+.category-education { background: rgba(139, 92, 246, 0.12); @apply tw:text-[#7c3aed]; }
+.category-hygiene { background: rgba(20, 184, 166, 0.12); @apply tw:text-[#0d9488]; }
+
+/* Stock Reorder & Threshold Warnings */
+.threshold-bar-container {
+    @apply tw:w-full;
+    @apply tw:h-[6px];
+    background: #e2e8f0;
+    @apply tw:rounded-[3px];
+    @apply tw:overflow-hidden;
+    @apply tw:mt-[6px];
+}
+
+.threshold-bar-fill {
+    @apply tw:h-full;
+    @apply tw:rounded-[3px];
+    transition: width 0.3s ease;
+}
+
+.threshold-bar-fill.bar-ok { background: #10b981; }
+.threshold-bar-fill.bar-warning { background: #f59e0b; }
+.threshold-bar-fill.bar-danger { background: #ef4444; }
+
+.stock-alert-box {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    padding: 4px 10px;
+    @apply tw:rounded-[6px];
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+}
+
+.stock-alert-critical {
+    background: #fef2f2;
+    @apply tw:text-[#b91c1c];
+    border: 1px solid #fecaca;
+}
+
+.stock-alert-normal {
+    background: #f0fdf4;
+    @apply tw:text-[#15803d];
+    border: 1px solid #bbf7d0;
+}
+
+/* Supplier Directory Cards */
+.suppliers-grid {
+    @apply tw:grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    @apply tw:gap-[18px];
+    @apply tw:mb-[24px];
+}
+
+.supplier-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    @apply tw:p-[20px];
+    box-shadow: var(--shadow-sm);
+    @apply tw:flex;
+    @apply tw:flex-col;
+    @apply tw:justify-between;
+    transition: all 0.2s ease;
+}
+
+.supplier-card:hover {
+    @apply tw:border-[#cbd5e1];
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.supplier-name {
+    @apply tw:text-[15px];
+    @apply tw:font-bold;
+    color: var(--dark);
+    @apply tw:mb-[4px];
+}
+
+.supplier-meta {
+    @apply tw:text-[12px];
+    color: var(--dark-muted);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    @apply tw:mb-[3px];
+}
+
+/* Distribution Traceability */
+.distribution-link-badge {
+    background: rgba(59, 130, 246, 0.08);
+    @apply tw:text-[#2563eb];
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    padding: 4px 10px;
+    @apply tw:rounded-[12px];
+    @apply tw:text-[11.5px];
+    @apply tw:font-semibold;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    @apply tw:no-underline;
+    transition: all 0.2s ease;
+}
+
+.distribution-link-badge:hover {
+    background: #2563eb;
+    @apply tw:text-[#ffffff];
+}

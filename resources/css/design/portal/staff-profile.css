@@ -1,0 +1,378 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* ==========================================================================
+   HopeHaven Orphanage Management Portal - Staff Profile & Duty Dossier
+   File: public/css/portal/staff-profile.css
+   ========================================================================== */
+
+/* Subsystem Badge */
+.staff-subsystem-pill {
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+    background: #059669;
+    @apply tw:text-[#ffffff];
+    @apply tw:text-[11.5px];
+    @apply tw:font-bold;
+    padding: 4px 12px;
+    @apply tw:rounded-[20px];
+    @apply tw:mb-[10px];
+    @apply tw:tracking-[0.5px];
+    @apply tw:uppercase;
+}
+
+/* Staff Profile Hero Card */
+.staff-hero-card {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(5, 150, 105, 0.06) 50%, rgba(20, 184, 166, 0.07) 100%), #ffffff;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: var(--radius-lg);
+    @apply tw:p-[32px];
+    @apply tw:mb-[24px];
+    box-shadow: 0 4px 20px rgba(5, 150, 105, 0.06);
+    @apply tw:relative;
+    @apply tw:overflow-hidden;
+}
+
+.staff-hero-card::after {
+    content: '';
+    @apply tw:absolute;
+    @apply tw:top-[-60px];
+    @apply tw:right-[-60px];
+    @apply tw:w-[220px];
+    @apply tw:h-[220px];
+    @apply tw:rounded-[50%];
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
+    @apply tw:pointer-events-none;
+}
+
+.staff-avatar-circle {
+    @apply tw:w-[96px];
+    @apply tw:h-[96px];
+    @apply tw:rounded-[50%];
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    @apply tw:text-[#ffffff];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:text-[34px];
+    @apply tw:font-extrabold;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.35);
+    border: 4px solid #ffffff;
+}
+
+.staff-duty-pill {
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    background: rgba(16, 185, 129, 0.15);
+    @apply tw:text-[#047857];
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 4px 11px;
+    @apply tw:rounded-[20px];
+    @apply tw:text-[11.5px];
+    @apply tw:font-bold;
+    transition: all 0.2s ease;
+}
+
+.staff-pulse-dot {
+    @apply tw:w-[8px];
+    @apply tw:h-[8px];
+    background: #10b981;
+    @apply tw:rounded-[50%];
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: staffPulse 1.8s infinite;
+}
+
+@keyframes staffPulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+/* Tab Navigation Bar */
+.staff-profile-tabs {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+    @apply tw:mb-[24px];
+    border-bottom: 2px solid #e2e8f0;
+    @apply tw:pb-[0];
+    @apply tw:overflow-x-auto;
+}
+
+.staff-tab-btn {
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+    padding: 12px 20px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    @apply tw:text-[14px];
+    @apply tw:font-semibold;
+    @apply tw:text-[#64748b];
+    @apply tw:cursor-pointer;
+    transition: all 0.2s ease;
+    @apply tw:whitespace-nowrap;
+    @apply tw:relative;
+    @apply tw:bottom-[-2px];
+}
+
+.staff-tab-btn i {
+    @apply tw:text-[14px];
+}
+
+.staff-tab-btn:hover {
+    @apply tw:text-[#059669];
+}
+
+.staff-tab-btn.active {
+    @apply tw:text-[#059669];
+    border-bottom-color: #059669;
+    @apply tw:font-bold;
+}
+
+.staff-tab-btn .badge-pill {
+    padding: 2px 7px;
+    @apply tw:text-[10px];
+    @apply tw:rounded-[10px];
+    background: #e2e8f0;
+    @apply tw:text-[#475569];
+}
+
+.staff-tab-btn.active .badge-pill {
+    background: rgba(16, 185, 129, 0.15);
+    @apply tw:text-[#047857];
+}
+
+/* Tab Pane */
+.staff-tab-pane {
+    @apply tw:hidden;
+}
+
+.staff-tab-pane.active {
+    @apply tw:block;
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Duty Switcher Group */
+.shift-status-toggle-group {
+    @apply tw:inline-flex;
+    background: #f1f5f9;
+    @apply tw:p-[3px];
+    @apply tw:rounded-[8px];
+    @apply tw:gap-[2px];
+}
+
+.shift-status-toggle-btn {
+    border: none;
+    background: transparent;
+    padding: 6px 12px;
+    @apply tw:rounded-[6px];
+    @apply tw:text-[12px];
+    @apply tw:font-semibold;
+    @apply tw:text-[#64748b];
+    @apply tw:cursor-pointer;
+    transition: all 0.2s ease;
+}
+
+.shift-status-toggle-btn.active {
+    background: #ffffff;
+    @apply tw:text-[#047857];
+    @apply tw:font-bold;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Accreditation Cards */
+.cert-card-item {
+    @apply tw:flex;
+    @apply tw:items-start;
+    @apply tw:gap-[14px];
+    @apply tw:p-[16px];
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    @apply tw:mb-[12px];
+    transition: all 0.2s ease;
+}
+
+.cert-card-item:hover {
+    @apply tw:border-[#cbd5e1];
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.cert-icon-wrap {
+    @apply tw:w-[40px];
+    @apply tw:h-[40px];
+    @apply tw:rounded-[10px];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:text-[18px];
+    @apply tw:shrink-0;
+}
+
+/* Responsive Grid for Profile Cards within Tabs */
+.tab-two-column-grid {
+    @apply tw:grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    @apply tw:gap-[24px];
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .tab-two-column-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Ensure Field Containers Inside Two-Column Tab Cards Have Full Width */
+.tab-two-column-grid .detail-fields-grid {
+    @apply tw:grid;
+    grid-template-columns: 1fr;
+    @apply tw:gap-[16px];
+}
+
+/* Fix Text Container & Form Container Overlaps */
+.detail-field-item {
+    @apply tw:flex;
+    @apply tw:flex-col;
+    @apply tw:w-full;
+    @apply tw:relative;
+}
+
+.view-mode-item {
+    @apply tw:flex;
+    @apply tw:w-full;
+}
+
+.edit-mode-item {
+    @apply tw:hidden;
+    @apply tw:w-full;
+}
+
+/* Mutually Exclusive Edit Mode Display: Clean Separation With Zero Overlap */
+#profile_inline_form.edit-mode-active .view-mode-item {
+    display: none !important;
+}
+
+#profile_inline_form.edit-mode-active .edit-mode-item {
+    display: flex !important;
+}
+
+#profile_inline_form.edit-mode-active input.edit-mode-item,
+#profile_inline_form.edit-mode-active textarea.edit-mode-item {
+    display: block !important;
+}
+
+#profile_inline_form.edit-mode-active .inline-actions-panel {
+    display: flex !important;
+}
+
+/* Field Value Box (Text Container) Structure */
+.field-value-box {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    @apply tw:text-[13.5px];
+    color: var(--dark);
+    @apply tw:font-semibold;
+    @apply tw:min-h-[44px];
+    @apply tw:w-full;
+    @apply tw:box-border;
+    @apply tw:gap-[12px];
+    transition: all 0.2s ease;
+}
+
+.field-value-box:hover {
+    @apply tw:border-[#cbd5e1];
+    background: #ffffff;
+}
+
+/* Text Container Ellipsis & Truncation Guarantee */
+.field-value-text {
+    flex: 1;
+    @apply tw:min-w-0; /* CRITICAL: Enables proper CSS truncation and prevents pushing actions */
+    @apply tw:overflow-hidden;
+    text-overflow: ellipsis;
+    @apply tw:whitespace-nowrap;
+}
+
+/* Multi-line Text Container for Longer Addresses */
+.field-value-box.multi-line {
+    @apply tw:min-h-[auto];
+    @apply tw:items-start;
+    padding: 12px 14px;
+}
+
+.field-value-box.multi-line .field-value-text {
+    @apply tw:whitespace-normal;
+    @apply tw:leading-[1.5];
+    word-break: break-word;
+}
+
+/* Actions Cluster & Badges Never Get Crushed */
+.field-actions-cluster {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    @apply tw:shrink-0;
+}
+
+.field-value-box .tag-badge {
+    @apply tw:shrink-0;
+}
+
+/* Form Container Inputs (Clean Box Sizing) */
+.editable-input {
+    @apply tw:w-full;
+    @apply tw:box-border;
+    @apply tw:min-h-[44px];
+    padding: 10px 14px;
+    border: 1.5px solid #059669;
+    border-radius: var(--radius-sm);
+    @apply tw:font-[inherit];
+    @apply tw:text-[13.5px];
+    color: var(--dark);
+    outline: none;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+    transition: all 0.2s ease;
+}
+
+.editable-input:focus {
+    @apply tw:border-[#047857];
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+}
+
+.input-prefix-group {
+    @apply tw:flex;
+    @apply tw:items-stretch;
+    @apply tw:w-full;
+    @apply tw:box-border;
+}
+
+.input-prefix-group .editable-input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}

@@ -3,12 +3,14 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vp build",
-        "build:ssr": "vp build && vp build --ssr",
-        "dev": "vp dev",
+        "build": "node scripts/build-design.mjs && vp build",
+        "build:ssr": "node scripts/build-design.mjs && vp build && vp build --ssr",
+        "dev": "concurrently -k \"node scripts/build-design.mjs --watch\" \"vp dev\"",
         "check": "vp check",
         "check:fix": "vp check --fix",
-        "types:check": "vue-tsc --noEmit"
+        "types:check": "vue-tsc --noEmit",
+        "build:design": "node scripts/build-design.mjs",
+        "dev:design": "node scripts/build-design.mjs --watch"
     },
     "dependencies": {
         "@inertiajs/vite": "^3.0.0",
@@ -36,7 +38,8 @@
         "typescript": "^5.2.2",
         "vite": "catalog:",
         "vite-plus": "catalog:",
-        "vue-tsc": "^2.2.4"
+        "vue-tsc": "^2.2.4",
+        "@tailwindcss/oxide": "^4.1.11"
     },
     "optionalDependencies": {
         "@laravel/multiplex": "^0.4.1",

@@ -1,4 +1,4 @@
-// HopeHaven Orphanage Sanctuary - Child Welfare & Education Management
+// HopeHaven Orphanage Sanctuary - Child Care & Education Management
 // Dynamic Child Registry, Paper Result Entry, Medical Condition Tracking, and PDF Logic
 
 (function() {
@@ -61,7 +61,7 @@
             timeline: [
                 {
                     date: '2022-03-15',
-                    title: 'Sanctuary Admission & Guardian Intake',
+                    title: 'Orphanage Admission & Guardian Intake',
                     category: 'intake',
                     detail: 'Official admission into St. Clare Cottage under guardianship court order #SW-2022/88.'
                 },
@@ -137,7 +137,7 @@
             timeline: [
                 {
                     date: '2023-02-10',
-                    title: 'Sanctuary Residential Admission',
+                    title: 'Orphanage Residential Admission',
                     category: 'intake',
                     detail: 'Placed in St. Francis Boys Hall. General pediatric health baselines recorded.'
                 },
@@ -180,7 +180,7 @@
                 nextClinicDate: '2026-10-30',
                 nextClinicSpecialty: 'Adolescent Wellness & Optometry Review',
                 clinicDoctor: 'Dr. Kelvin Tan',
-                clinicLocation: 'Sanctuary Clinic Dispensary',
+                clinicLocation: 'Orphanage Clinic',
                 medicalNotes: 'Fit and active. Requires reminder to keep corrective lenses on during computer classes.'
             },
             academic: {
@@ -304,7 +304,7 @@
                 const raw = localStorage.getItem(STORAGE_KEY);
                 if (raw) {
                     const parsed = JSON.parse(raw);
-                    if (Array.isArray(parsed) && parsed.length > 0) {
+                    if (Array.isArray(parsed)) {
                         return parsed;
                     }
                 }
@@ -312,15 +312,17 @@
                 console.warn('Error reading from localStorage:', err);
             }
             // Fallback to default seeds and save
-            this.save(DEFAULT_CHILDREN);
-            return DEFAULT_CHILDREN;
+            const seeds = JSON.parse(JSON.stringify(DEFAULT_CHILDREN));
+            this.save(seeds);
+            return seeds;
         },
 
         save: function(children) {
             try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(children));
+                window.HopeHavenSync.write(STORAGE_KEY, JSON.stringify(children));
             } catch (err) {
                 console.error('Error saving to localStorage:', err);
+                throw err;
             }
         },
 
@@ -331,9 +333,11 @@
 
         add: function(childData) {
             const list = this.getAll();
-            const year = new Date().getFullYear();
-            const seqNum = String(list.length + 1).padStart(3, '0');
-            const id = childData.id || `CH-${year}-${seqNum}`;
+            if (childData.dob && (Number.isNaN(new Date(childData.dob).getTime()) || new Date(childData.dob) > new Date())) {
+                throw new Error('Date of birth must be a valid date in the past.');
+            }
+            const id = childData.id || window.HopeHavenSync.nextId(list, 'CH');
+            if (list.some(child => child.id === id)) throw new Error('This child ID is already in use.');
 
             const newChild = {
                 id: id,
@@ -360,7 +364,7 @@
                     nextClinicDate: childData.nextClinicDate || '2026-12-01',
                     nextClinicSpecialty: childData.nextClinicSpecialty || 'General Pediatric Wellness Review',
                     clinicDoctor: childData.clinicDoctor || 'Dr. Angela Reyes',
-                    clinicLocation: childData.clinicLocation || 'Sanctuary Clinic Dispensary',
+                    clinicLocation: childData.clinicLocation || 'Orphanage Clinic',
                     medicalNotes: childData.medicalNotes || 'Initial medical baseline recorded upon admission.'
                 },
                 academic: {
@@ -372,9 +376,9 @@
                 timeline: [
                     {
                         date: new Date().toISOString().split('T')[0],
-                        title: 'Sanctuary Admission & Ward Placement',
+                        title: 'Orphanage Admission & Ward Placement',
                         category: 'intake',
-                        detail: `Registered as residential ward in ${childData.dorm || 'Sanctuary Dorm'}.`
+                        detail: `Registered as residential ward in ${childData.dorm || 'Orphanage Dorm'}.`
                     }
                 ]
             };
@@ -434,19 +438,20 @@
             const list = this.getAll();
             const child = list.find(c => c.id === childId);
             if (!child) return null;
+            child.basicMedical = child.basicMedical || {};
 
             child.basicMedical = {
                 ...child.basicMedical,
                 bloodType: medData.bloodType || child.basicMedical.bloodType || 'O+',
                 condition: medData.condition || child.basicMedical.condition || 'Healthy',
-                allergies: medData.allergies || child.basicMedical.allergies || 'None',
-                medications: medData.medications || child.basicMedical.medications || 'None',
+                allergies: medData.allergies ?? child.basicMedical.allergies ?? 'None',
+                medications: medData.medications ?? child.basicMedical.medications ?? 'None',
                 immunization: medData.immunization || child.basicMedical.immunization || 'Up to Date',
-                nextClinicDate: medData.nextClinicDate || child.basicMedical.nextClinicDate,
+                nextClinicDate: medData.nextClinicDate ?? child.basicMedical.nextClinicDate,
                 nextClinicSpecialty: medData.nextClinicSpecialty || child.basicMedical.nextClinicSpecialty || 'General Checkup',
                 clinicDoctor: medData.clinicDoctor || child.basicMedical.clinicDoctor || 'Dr. Angela Reyes',
-                clinicLocation: medData.clinicLocation || child.basicMedical.clinicLocation || 'Sanctuary Clinic',
-                medicalNotes: medData.medicalNotes || child.basicMedical.medicalNotes || ''
+                clinicLocation: medData.clinicLocation || child.basicMedical.clinicLocation || 'Orphanage Clinic',
+                medicalNotes: medData.medicalNotes ?? child.basicMedical.medicalNotes ?? ''
             };
 
             // Push to timeline
@@ -477,7 +482,7 @@
             if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
                 age--;
             }
-            return isNaN(age) || age < 1 ? 8 : age;
+            return isNaN(age) || age < 0 ? null : age;
         },
 
         getDefaultAvatar: function(gender) {
@@ -492,6 +497,10 @@
     window.ChildWelfareUI = {
         currentViewMode: 'cards', // 'cards' or 'table'
         activeHistoryChildId: null,
+
+        isStaffEditor: function() {
+            return document.body?.dataset.portalRole === 'staff';
+        },
 
         init: function() {
             this.renderAll();
@@ -517,16 +526,19 @@
             // 2. Average School Attendance
             let totalAtt = 0;
             children.forEach(c => {
-                totalAtt += (c.academic && c.academic.attendance) ? Number(c.academic.attendance) : 95;
+                totalAtt += Number(c.academic?.attendance ?? 0);
             });
-            const avgAtt = children.length ? (totalAtt / children.length).toFixed(1) : 95.0;
+            const avgAtt = children.length ? (totalAtt / children.length).toFixed(1) : '0.0';
             $('#metric_school_attendance').text(`${avgAtt}%`);
 
-            // 3. Health Screenings Due (within next 45 days)
+            // 3. Health Screenings Due (within the next 45 calendar days)
             let upcomingCount = 0;
+            const start = new Date(); start.setHours(0,0,0,0);
+            const end = new Date(start); end.setDate(end.getDate()+45);
             children.forEach(c => {
                 if (c.basicMedical && c.basicMedical.nextClinicDate) {
-                    upcomingCount++;
+                    const date = new Date(c.basicMedical.nextClinicDate+'T12:00:00');
+                    if (date >= start && date <= end) upcomingCount++;
                 }
             });
             $('#metric_health_screenings').text(`${upcomingCount} Visits`);
@@ -597,21 +609,21 @@
                                 </div>
                             </div>
 
-                            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #f1f5f9; display: flex; flex-direction: column; gap: 8px;">
-                                <div style="display: flex; gap: 8px;">
-                                    <button class="btn-action-paper" style="flex: 1;" onclick="ChildWelfareUI.openKeyPaperModal('${c.id}')" title="Key in test/paper examination results for this child">
-                                        <i class="fas fa-pen-nib"></i> Key In Paper
+                            <div class="child-record-actions">
+                                <div class="child-record-actions-primary">
+                                    <button type="button" class="btn-action-paper" onclick="ChildWelfareUI.openKeyPaperModal('${c.id}')" title="${this.isStaffEditor() ? 'Enter exam results' : 'View exam results'}">
+                                        <i class="fas ${this.isStaffEditor() ? 'fa-pen-nib' : 'fa-file-lines'}" aria-hidden="true"></i><span>${this.isStaffEditor() ? 'Key In Paper' : 'View Exam Results'}</span>
                                     </button>
-                                    <button class="btn-action-med" style="flex: 1;" onclick="ChildWelfareUI.openRecordMedicalModal('${c.id}')" title="Record basic medical condition & health follow-up">
-                                        <i class="fas fa-stethoscope"></i> Medical Rec
+                                    <button type="button" class="btn-action-med" onclick="ChildWelfareUI.openRecordMedicalModal('${c.id}')" title="${this.isStaffEditor() ? 'Update medical record' : 'View medical record'}">
+                                        <i class="fas fa-stethoscope" aria-hidden="true"></i><span>${this.isStaffEditor() ? 'Medical Rec' : 'View Medical Record'}</span>
                                     </button>
                                 </div>
-                                <div style="display: flex; gap: 8px;">
-                                    <button class="btn-outline btn-sm" style="flex: 1;" onclick="ChildWelfareUI.openDossierModal('${c.id}')">
-                                        <i class="fas fa-id-card"></i> View Full PDF
+                                <div class="child-record-actions-secondary">
+                                    <button type="button" class="btn-outline btn-sm child-record-full" onclick="ChildWelfareUI.openDossierModal('${c.id}')">
+                                        <i class="fas fa-folder-open" aria-hidden="true"></i><span>View Full PDF</span><i class="fas fa-arrow-right" aria-hidden="true"></i>
                                     </button>
-                                    <button class="btn-outline btn-sm" style="color: #ef4444;" onclick="ChildWelfareUI.confirmDelete('${c.id}')" title="Archive / Remove child record">
-                                        <i class="fas fa-trash-alt"></i>
+                                    <button type="button" class="btn-outline btn-sm child-record-remove" onclick="ChildWelfareUI.confirmDelete('${c.id}')" title="Archive / Remove child record" aria-label="Remove ${this.escape(c.name)}">
+                                        <i class="fas fa-trash-alt" aria-hidden="true"></i>
                                     </button>
                                 </div>
                             </div>
@@ -669,11 +681,11 @@
                             <div style="font-size: 11px; color: #64748b;">${this.escape(med.nextClinicSpecialty || 'General')}</div>
                         </td>
                         <td style="text-align: right; white-space: nowrap;">
-                            <button class="btn-action-paper" onclick="ChildWelfareUI.openKeyPaperModal('${c.id}')" title="Key in paper examination results">
-                                <i class="fas fa-pen-nib"></i> Key Paper
+                            <button class="btn-action-paper" onclick="ChildWelfareUI.openKeyPaperModal('${c.id}')" title="${this.isStaffEditor() ? 'Enter exam results' : 'View exam results'}">
+                                <i class="fas ${this.isStaffEditor() ? 'fa-pen-nib' : 'fa-file-lines'}"></i> ${this.isStaffEditor() ? 'Key Paper' : 'View Results'}
                             </button>
-                            <button class="btn-action-med" onclick="ChildWelfareUI.openRecordMedicalModal('${c.id}')" title="Record medical condition">
-                                <i class="fas fa-stethoscope"></i> Medical
+                            <button class="btn-action-med" onclick="ChildWelfareUI.openRecordMedicalModal('${c.id}')" title="${this.isStaffEditor() ? 'Update medical record' : 'View medical record'}">
+                                <i class="fas fa-stethoscope"></i> ${this.isStaffEditor() ? 'Medical' : 'View Medical'}
                             </button>
                             <button class="btn-outline btn-sm" onclick="ChildWelfareUI.openDossierModal('${c.id}')" title="Official PDF">
                                 <i class="fas fa-id-card"></i>
@@ -747,8 +759,8 @@
                             <span class="badge ${statusBadgeClass}">${this.escape(standing)}</span>
                         </td>
                         <td style="text-align: right;">
-                            <button class="btn-action-paper" onclick="ChildWelfareUI.openKeyPaperModal('${c.id}')" title="Key in new exam/paper results for ${this.escape(c.name)}">
-                                <i class="fas fa-plus"></i> Key Paper Result
+                            <button class="btn-action-paper" onclick="ChildWelfareUI.openKeyPaperModal('${c.id}')" title="${this.isStaffEditor() ? 'Enter exam results' : 'View exam results'} for ${this.escape(c.name)}">
+                                <i class="fas ${this.isStaffEditor() ? 'fa-plus' : 'fa-file-lines'}"></i> ${this.isStaffEditor() ? 'Key Paper Result' : 'View Exam Results'}
                             </button>
                         </td>
                     </tr>
@@ -776,15 +788,15 @@
                                     <span style="font-size: 11px; color: #64748b;">Blood Type: <strong>${med.bloodType || 'O+'}</strong> &bull; Age ${c.age} &bull; ${c.gender}</span>
                                 </div>
                             </div>
-                            <button class="btn-action-med" onclick="ChildWelfareUI.openRecordMedicalModal('${c.id}')" title="Update child medical record">
-                                <i class="fas fa-pencil-alt"></i> Update Medical
+                            <button class="btn-action-med" onclick="ChildWelfareUI.openRecordMedicalModal('${c.id}')" title="${this.isStaffEditor() ? 'Update medical record' : 'View medical record'}">
+                                <i class="fas ${this.isStaffEditor() ? 'fa-pencil-alt' : 'fa-notes-medical'}"></i> ${this.isStaffEditor() ? 'Update Medical' : 'View Medical Record'}
                             </button>
                         </div>
 
                         <div style="background: #f8fafc; padding: 12px; border-radius: var(--radius-sm); margin: 12px 0; font-size: 12px;">
                             <div><span style="color: #64748b;">Primary Medical Condition:</span> <strong style="color: var(--dark);">${this.escape(med.condition || 'Healthy')}</strong></div>
                             <div style="margin-top: 4px;"><span style="color: #64748b;">Next Clinic Review:</span> <strong style="color: #ef4444;">${med.nextClinicDate || 'None'}</strong> &bull; ${this.escape(med.nextClinicSpecialty || 'General')}</div>
-                            <div style="margin-top: 4px; font-size: 11px; color: #64748b;">Doctor / Facility: <strong>${this.escape(med.clinicDoctor || 'Sanctuary Clinic')}</strong> (${this.escape(med.clinicLocation || 'Titiwangsa')})</div>
+                            <div style="margin-top: 4px; font-size: 11px; color: #64748b;">Doctor / Facility: <strong>${this.escape(med.clinicDoctor || 'Orphanage Clinic')}</strong> (${this.escape(med.clinicLocation || 'Titiwangsa')})</div>
                         </div>
 
                         <div style="font-size: 12px; display: flex; flex-direction: column; gap: 6px;">
@@ -915,6 +927,7 @@
 
         // Modal triggers
         openKeyPaperModal: function(childId) {
+            if (!this.isStaffEditor()) return this.openDossierModal(childId, 'dossier_tab_papers');
             const list = window.HopeHavenChildStore ? window.HopeHavenChildStore.getAll() : [];
             const targetId = childId || (list.length > 0 ? list[0].id : null);
             if (targetId) {
@@ -925,12 +938,13 @@
         },
 
         openRecordMedicalModal: function(childId) {
+            if (!this.isStaffEditor()) return this.openDossierModal(childId, 'dossier_tab_medical');
             if (!window.HopeHavenChildStore) return;
             const list = window.HopeHavenChildStore.getAll();
             const child = childId ? window.HopeHavenChildStore.getById(childId) : (list.length > 0 ? list[0] : null);
             if (!child) return;
 
-            $('#med_child_select').val(child.id);
+            $('#med_child_select').val(child.id).trigger('change');
             this.populateMedicalFormFields(child);
             openModal('modal_record_medical');
         },
@@ -944,12 +958,11 @@
             $('#med_prescriptions_input').val(med.medications || 'None');
             $('#med_immunization_select').val(med.immunization || 'Up to Date');
             $('#med_next_clinic_date').val(med.nextClinicDate || '2026-11-15');
-            $('#med_specialty_select').val(med.nextClinicSpecialty || 'General Pediatric Wellness Review');
             $('#med_doctor_input').val(med.clinicDoctor || 'Dr. Angela Reyes');
             $('#med_notes_input').val(med.medicalNotes || '');
         },
 
-        openDossierModal: function(childId) {
+        openDossierModal: function(childId, tabId) {
             const child = window.HopeHavenChildStore.getById(childId);
             if (!child) return;
 
@@ -961,7 +974,7 @@
             $('#dossier_modal_meta').text(`Code: ${child.id} · Admitted: ${child.admissionDate} · Case Worker: ${child.caseWorker}`);
             $('#dossier_modal_avatar').attr('src', child.avatar);
             $('#dossier_modal_head_name').text(child.name);
-            $('#dossier_modal_head_sub').text(`${child.age} Years Old · ${child.gender} · Blood Type ${med.bloodType || 'O+'} · Status: Active Ward`);
+            $('#dossier_modal_head_sub').html([`${child.age} years old`, child.gender, `Blood: ${med.bloodType || 'Not recorded'}`].map(value => `<span>${this.escape(value)}</span>`).join(''));
             $('#dossier_modal_head_dorm').text(`${child.dorm} (${child.room || 'Main Ward'})`);
 
             // Academic Card
@@ -980,42 +993,67 @@
             let papersHtml = '';
             if (papers.length > 0) {
                 papers.forEach(p => {
+                    const normalizedScore = value => value !== null && value !== undefined && value !== '' && Number.isFinite(Number(value)) ? Math.min(100, Math.max(0, Number(value))) : null;
+                    const overall = normalizedScore(p.overallScore);
                     let subs = '';
                     if (p.subjects && p.subjects.length > 0) {
                         p.subjects.forEach(s => {
-                            subs += `<span class="badge badge-info" style="margin-right: 5px;">${this.escape(s.name)}: ${s.score}% (${s.grade || 'A'})</span>`;
+                            const score = normalizedScore(s.score);
+                            const grade = s.grade || (score === null ? '—' : this.scoreToGrade(score));
+                            subs += `<article class="record-subject">
+                                <div class="record-subject-top"><span class="record-subject-name">${this.escape(s.name)}</span><span class="record-subject-grade">${this.escape(grade)}</span></div>
+                                <div class="record-subject-score">${score === null ? '—' : score}<small>${score === null ? 'Not recorded' : '/ 100 marks'}</small></div>
+                                ${score === null ? '' : `<div class="record-score-track" role="progressbar" aria-label="${this.escape(s.name)} score" aria-valuenow="${score}" aria-valuemin="0" aria-valuemax="100"><span style="width:${score}%;"></span></div>`}
+                            </article>`;
                         });
+                    } else {
+                        subs = '<p class="record-empty">No subject scores recorded for this exam.</p>';
                     }
                     papersHtml += `
-                        <div class="paper-history-card">
-                            <div class="paper-history-head">
+                        <article class="paper-history-card">
+                            <div class="record-exam-head">
                                 <div>
-                                    <strong style="color: var(--dark); font-size: 13.5px;">${this.escape(p.examName)}</strong>
-                                    <div style="font-size: 11.5px; color: #64748b;">${this.escape(p.term)} &bull; Exam Date: ${p.date}</div>
+                                    <div class="record-exam-type"><i class="fas fa-file-lines" aria-hidden="true"></i> EXAM SUMMARY</div>
+                                    <h4 class="record-exam-title">${this.escape(p.examName)}</h4>
+                                    <div class="record-exam-meta">${this.escape(p.term || 'Term not recorded')}<br><i class="far fa-calendar" aria-hidden="true"></i> ${this.escape(p.date || 'Date not recorded')}</div>
                                 </div>
-                                <span class="badge badge-success">${p.overallScore}% Overall &bull; ${p.status}</span>
+                                <div class="record-overall-score"><small>OVERALL</small><strong>${overall === null ? '—' : overall + '%'}</strong><span>${this.escape(p.status || 'No standing recorded')}</span></div>
                             </div>
-                            <div style="margin: 8px 0;">${subs}</div>
-                            <div style="font-size: 11.5px; color: #475569; font-style: italic;">"${this.escape(p.remarks || 'Standard examination record')}"</div>
-                        </div>
+                            <div class="record-subjects">${subs}</div>
+                            ${p.remarks ? `<div class="record-exam-note"><i class="fas fa-quote-left" aria-hidden="true"></i><span>${this.escape(p.remarks)}</span></div>` : ''}
+                        </article>
                     `;
                 });
             } else {
-                papersHtml = '<div style="padding: 16px; text-align: center; color: #94a3b8; font-style: italic;">No exam paper records logged yet for this child.</div>';
+                papersHtml = '<div class="record-empty"><i class="fas fa-book-open" aria-hidden="true"></i><p>No exam results recorded yet.</p><small>Saved results will appear here when they are added.</small></div>';
             }
             $('#dossier_paper_history_list').html(papersHtml);
 
             // Switch to first tab in PDF
-            this.switchDossierTab('dossier_tab_overview');
+            $('#dossier_record_label').text(tabId === 'dossier_tab_papers' ? 'Exam Results' : tabId === 'dossier_tab_medical' ? 'Medical Record' : 'Child Records');
+            $('#dossier_medical_immunization').text(med.immunization || 'Not recorded');
+            $('#dossier_medical_blood').text(med.bloodType || 'Not recorded');
+            $('#dossier_medical_clinic').text(med.clinicLocation || 'Not recorded');
+            $('#dossier_medical_doctor').text(med.clinicDoctor || 'Not assigned');
+            $('#dossier_medical_condition').text(med.condition || 'Not recorded');
+            $('#dossier_medical_allergies').text(med.allergies || 'None recorded');
+            $('#dossier_medical_medications').text(med.medications || 'None recorded');
+            $('#dossier_medical_review').text(med.nextClinicDate || 'Not scheduled');
+            $('#dossier_medical_notes').text(med.medicalNotes || 'No notes recorded');
+            this.switchDossierTab(tabId || 'dossier_tab_overview');
 
             openModal('modal_child_dossier');
         },
 
         switchDossierTab: function(tabId) {
-            $('.dossier-tab-btn').removeClass('active');
-            $(`.dossier-tab-btn[data-dossier-tab="${tabId}"]`).addClass('active');
-            $('.dossier-pane').hide();
-            $('#' + tabId).fadeIn(150);
+            const labels = {dossier_tab_overview: 'Child Records', dossier_tab_papers: 'Exam Results', dossier_tab_medical: 'Medical Record'};
+            if (!labels[tabId]) return;
+            const viewer = $('#modal_child_dossier');
+            viewer.find('.dossier-tab-btn').removeClass('active').attr('aria-pressed', 'false');
+            viewer.find(`.dossier-tab-btn[data-dossier-tab="${tabId}"]`).addClass('active').attr('aria-pressed', 'true');
+            viewer.find('.dossier-pane').stop(true, true).hide();
+            $('#' + tabId).show();
+            $('#dossier_record_label').text(labels[tabId]);
         },
 
         resetSubjectRows: function() {
@@ -1119,6 +1157,7 @@
     // Form Handlers
     window.handleRegisterNewChildForm = function(event) {
         event.preventDefault();
+        if (!window.HopeHavenChildPhoto.ready(event.target)) return;
 
         const name = $('#reg_child_name').val().trim();
         const preferred = $('#reg_child_callname').val().trim() || name.split(' ')[0];
@@ -1143,6 +1182,7 @@
             bloodType: bloodType,
             condition: condition,
             allergies: allergies,
+            avatar: window.HopeHavenChildPhoto.get(event.target),
             medicalNotes: notes
         });
 
@@ -1151,7 +1191,7 @@
         window.ChildWelfareUI.renderAll();
 
         showPortalToast(
-            `Child profile for ${name} (${newChild.id}) successfully added to sanctuary registry!`,
+            `Child profile for ${name} (${newChild.id}) successfully added to orphanage registry!`,
             true,
             'Child Ward Registered',
             'Child Welfare Registry'
@@ -1160,6 +1200,7 @@
 
     window.handleKeyPaperResultForm = function(event) {
         event.preventDefault();
+        if (!window.ChildWelfareUI.isStaffEditor()) return;
 
         const childId = $('#paper_child_select').val();
         const child = window.HopeHavenChildStore.getById(childId);
@@ -1215,6 +1256,7 @@
 
     window.handleRecordMedicalForm = function(event) {
         event.preventDefault();
+        if (!window.ChildWelfareUI.isStaffEditor()) return;
 
         const childId = $('#med_child_select').val();
         const child = window.HopeHavenChildStore.getById(childId);
@@ -1227,7 +1269,6 @@
             medications: $('#med_prescriptions_input').val().trim(),
             immunization: $('#med_immunization_select').val(),
             nextClinicDate: $('#med_next_clinic_date').val(),
-            nextClinicSpecialty: $('#med_specialty_select').val(),
             clinicDoctor: $('#med_doctor_input').val().trim(),
             medicalNotes: $('#med_notes_input').val().trim()
         };
@@ -1240,13 +1281,18 @@
             `Basic medical condition & healthcare PDF updated for ${child.name}!`,
             true,
             'Medical Condition Logged',
-            'Sanctuary Healthcare'
+            'Orphanage Healthcare'
         );
     };
 
     // Initialize upon DOM readiness
     $(document).ready(function() {
+        if (!document.getElementById('profiles_grid')) return;
         window.ChildWelfareUI.init();
+        window.HopeHavenSync.subscribe(STORAGE_KEY, function() {
+            window.HopeHavenSync.refreshView(() => window.ChildWelfareUI.renderAll());
+            $('.search-input[data-search-target]').trigger('keyup');
+        });
     });
 
 })();

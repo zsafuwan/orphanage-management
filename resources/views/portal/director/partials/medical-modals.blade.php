@@ -42,7 +42,7 @@
                 </div>
                 <div class="dossier-box">
                     <div class="dossier-box-label">Immunization Index</div>
-                    <div class="dossier-box-value" style="color: #059669;"><i class="fas fa-check-double"></i> 100% Up to Date</div>
+                    <div class="dossier-box-value" id="dossier_immunization" style="color: #059669;">Not recorded</div>
                 </div>
             </div>
 
@@ -93,7 +93,7 @@
 <div class="director-modal-overlay" id="modal_add_clinical_note">
     <div class="director-modal">
         <div class="director-modal-head">
-            <h3><i class="fas fa-stethoscope" style="color: #059669;"></i> Add Directorate Health Note</h3>
+            <h3><i class="fas fa-stethoscope" style="color: #059669;"></i> Add Director Health Note</h3>
             <button type="button" class="director-modal-close" onclick="closeDirectorModal('modal_add_clinical_note')">&times;</button>
         </div>
         <div class="director-modal-body">

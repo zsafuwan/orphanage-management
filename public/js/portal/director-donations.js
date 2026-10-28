@@ -22,8 +22,8 @@ function closeDirectorModal(modalId) {
 function confirmGrantRelease() {
     closeDirectorModal('modal_grant_release');
     if (typeof showPortalToast === 'function') {
-        showPortalToast(`Directorate disbursement approved for ${activeGrantor}. Funds released to sanctuary ledger.`, 'success');
+        showPortalToast(`Director payment approved for ${activeGrantor}. Funds released to orphanage ledger.`, 'success');
     } else {
-        alert(`Disbursement confirmed for ${activeGrantor}.`);
+        alert(`Payment confirmed for ${activeGrantor}.`);
     }
 }

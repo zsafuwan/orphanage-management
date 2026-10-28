@@ -1,0 +1,813 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* Director Dashboard Stylesheet - HopeHaven Sanctuary Governance */
+:root {
+    --director-primary: #4f46e5;
+    --director-primary-hover: #4338ca;
+    --director-primary-light: rgba(79, 70, 229, 0.08);
+    --director-primary-border: rgba(79, 70, 229, 0.2);
+    --director-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #8b5cf6 100%);
+    --director-card-shadow: 0 4px 20px -2px rgba(79, 70, 229, 0.08);
+}
+
+/* Executive Welcome Banner */
+.director-hero-card {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #4338ca 100%);
+    border-radius: var(--radius-lg);
+    padding: 30px 32px;
+    @apply tw:text-[#ffffff];
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-center;
+    @apply tw:relative;
+    @apply tw:overflow-hidden;
+    @apply tw:mb-[24px];
+    box-shadow: 0 10px 25px -5px rgba(30, 27, 75, 0.35);
+}
+
+.director-hero-card::after {
+    content: '';
+    @apply tw:absolute;
+    @apply tw:right-[-40px];
+    @apply tw:top-[-40px];
+    @apply tw:w-[260px];
+    @apply tw:h-[260px];
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
+    @apply tw:rounded-[50%];
+    @apply tw:pointer-events-none;
+}
+
+.director-hero-badge {
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 14px;
+    @apply tw:rounded-[30px];
+    @apply tw:text-[12px];
+    @apply tw:font-semibold;
+    @apply tw:tracking-[0.5px];
+    @apply tw:uppercase;
+    @apply tw:mb-[14px];
+}
+
+.director-hero-badge i {
+    @apply tw:text-[#fde047];
+}
+
+.director-hero-title {
+    @apply tw:text-[26px];
+    @apply tw:font-extrabold;
+    @apply tw:mb-[8px];
+    @apply tw:tracking-[-0.5px];
+}
+
+.director-hero-subtitle {
+    @apply tw:text-[14px];
+    @apply tw:text-[#c7d2fe];
+    @apply tw:max-w-[620px];
+    @apply tw:leading-[1.6];
+}
+
+.director-hero-actions {
+    @apply tw:flex;
+    @apply tw:gap-[12px];
+    @apply tw:relative;
+    @apply tw:z-[2];
+}
+
+.director-btn-light {
+    background: #ffffff;
+    @apply tw:text-[#312e81];
+    @apply tw:font-bold;
+    padding: 10px 18px;
+    border-radius: var(--radius-md);
+    @apply tw:no-underline;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+    @apply tw:text-[13px];
+    border: none;
+    @apply tw:cursor-pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+}
+
+.director-btn-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.director-btn-outline {
+    background: rgba(255, 255, 255, 0.1);
+    @apply tw:text-[#ffffff];
+    @apply tw:font-semibold;
+    padding: 10px 18px;
+    border-radius: var(--radius-md);
+    @apply tw:no-underline;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+    @apply tw:text-[13px];
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    @apply tw:cursor-pointer;
+    backdrop-filter: blur(4px);
+    transition: all 0.2s ease;
+}
+
+.director-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.2);
+    @apply tw:border-[#ffffff];
+}
+
+/* Strategic Directorate KPI Grid */
+.director-kpi-grid {
+    @apply tw:grid;
+    grid-template-columns: repeat(4, 1fr);
+    @apply tw:gap-[20px];
+    @apply tw:mb-[24px];
+}
+
+.director-kpi-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    @apply tw:p-[22px];
+    @apply tw:relative;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    @apply tw:flex;
+    @apply tw:flex-col;
+    @apply tw:justify-between;
+}
+
+.director-kpi-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--director-card-shadow);
+    border-color: var(--director-primary-border);
+}
+
+.kpi-header {
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-start;
+    @apply tw:mb-[14px];
+}
+
+.kpi-icon-box {
+    @apply tw:w-[48px];
+    @apply tw:h-[48px];
+    border-radius: var(--radius-md);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:text-[20px];
+}
+
+.kpi-icon-indigo {
+    background: rgba(79, 70, 229, 0.1);
+    @apply tw:text-[#4f46e5];
+}
+
+.kpi-icon-amber {
+    background: rgba(245, 158, 11, 0.12);
+    @apply tw:text-[#d97706];
+}
+
+.kpi-icon-emerald {
+    background: rgba(16, 185, 129, 0.12);
+    @apply tw:text-[#059669];
+}
+
+.kpi-icon-purple {
+    background: rgba(139, 92, 246, 0.12);
+    @apply tw:text-[#7c3aed];
+}
+
+.kpi-icon-rose {
+    background: rgba(244, 63, 94, 0.12);
+    @apply tw:text-[#e11d48];
+}
+
+.kpi-badge {
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    padding: 3px 8px;
+    @apply tw:rounded-[20px];
+}
+
+.kpi-badge-indigo {
+    background: #eef2ff;
+    @apply tw:text-[#4338ca];
+}
+
+.kpi-badge-amber {
+    background: #fef3c7;
+    @apply tw:text-[#b45309];
+}
+
+.kpi-badge-emerald {
+    background: #ecfdf5;
+    @apply tw:text-[#047857];
+}
+
+.kpi-badge-purple {
+    background: #f5f3ff;
+    @apply tw:text-[#6d28d9];
+}
+
+.kpi-badge-rose {
+    background: #ffe4e6;
+    @apply tw:text-[#be123c];
+}
+
+.kpi-value {
+    @apply tw:text-[26px];
+    @apply tw:font-extrabold;
+    color: var(--dark);
+    @apply tw:leading-[1.1];
+    @apply tw:mb-[4px];
+}
+
+.kpi-title {
+    @apply tw:text-[13px];
+    @apply tw:font-semibold;
+    color: var(--dark-muted);
+}
+
+.kpi-footer-note {
+    @apply tw:mt-[14px];
+    @apply tw:pt-[12px];
+    border-top: 1px dashed #e2e8f0;
+    @apply tw:text-[12px];
+    @apply tw:text-[#64748b];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+}
+
+/* Treasury & Money Available Hero Banner */
+.treasury-overview-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    @apply tw:mb-[24px];
+    box-shadow: var(--shadow-sm);
+    @apply tw:grid;
+    grid-template-columns: 1.2fr 2fr;
+    @apply tw:gap-[28px];
+    @apply tw:items-center;
+}
+
+.treasury-main-balance {
+    border-right: 1px solid #f1f5f9;
+    @apply tw:pr-[24px];
+}
+
+.treasury-label-tag {
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    @apply tw:text-[12px];
+    @apply tw:font-bold;
+    @apply tw:uppercase;
+    @apply tw:text-[#059669];
+    background: #ecfdf5;
+    padding: 4px 10px;
+    @apply tw:rounded-[20px];
+    @apply tw:mb-[10px];
+}
+
+.treasury-balance-amount {
+    @apply tw:text-[34px];
+    @apply tw:font-extrabold;
+    @apply tw:text-[#0f172a];
+    @apply tw:tracking-[-0.5px];
+    @apply tw:mb-[6px];
+}
+
+.treasury-sub-desc {
+    @apply tw:text-[13px];
+    @apply tw:text-[#64748b];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+}
+
+.treasury-fund-pills {
+    @apply tw:grid;
+    grid-template-columns: repeat(3, 1fr);
+    @apply tw:gap-[14px];
+}
+
+.fund-pill-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.fund-pill-box:hover {
+    transform: translateY(-2px);
+    @apply tw:border-[#cbd5e1];
+}
+
+.fund-pill-title {
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:text-[#64748b];
+    @apply tw:uppercase;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    @apply tw:mb-[4px];
+}
+
+.fund-pill-amount {
+    @apply tw:text-[18px];
+    @apply tw:font-extrabold;
+    @apply tw:text-[#1e293b];
+    @apply tw:mb-[2px];
+}
+
+.fund-pill-note {
+    @apply tw:text-[11px];
+    @apply tw:text-[#94a3b8];
+}
+
+/* Two Column Governance Layout */
+.director-two-col {
+    @apply tw:grid;
+    grid-template-columns: 7fr 5fr;
+    @apply tw:gap-[24px];
+    @apply tw:mb-[24px];
+}
+
+.director-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    @apply tw:overflow-hidden;
+}
+
+.director-card-head {
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--border-color);
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-center;
+    background: #fafbfc;
+}
+
+.director-card-title {
+    @apply tw:text-[15px];
+    @apply tw:font-bold;
+    color: var(--dark);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[10px];
+}
+
+.director-card-title i {
+    color: var(--director-primary);
+}
+
+.director-link-action {
+    @apply tw:text-[12px];
+    @apply tw:font-semibold;
+    color: var(--director-primary);
+    @apply tw:no-underline;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[5px];
+}
+
+.director-link-action:hover {
+    @apply tw:underline;
+}
+
+/* Spending Graph Area */
+.spending-chart-container {
+    @apply tw:p-[22px];
+    @apply tw:relative;
+}
+
+.chart-summary-strip {
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-center;
+    @apply tw:mb-[18px];
+    @apply tw:pb-[14px];
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.chart-stat-item {
+    @apply tw:flex;
+    @apply tw:flex-col;
+}
+
+.chart-stat-lbl {
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:text-[#64748b];
+    @apply tw:uppercase;
+}
+
+.chart-stat-val {
+    @apply tw:text-[18px];
+    @apply tw:font-extrabold;
+    @apply tw:text-[#0f172a];
+}
+
+.chart-toggle-group {
+    @apply tw:inline-flex;
+    background: #f1f5f9;
+    @apply tw:p-[3px];
+    @apply tw:rounded-[20px];
+}
+
+.chart-toggle-btn {
+    border: none;
+    background: transparent;
+    @apply tw:text-[12px];
+    @apply tw:font-bold;
+    padding: 5px 12px;
+    @apply tw:rounded-[16px];
+    @apply tw:text-[#64748b];
+    @apply tw:cursor-pointer;
+    transition: all 0.2s ease;
+}
+
+.chart-toggle-btn.active {
+    background: #ffffff;
+    @apply tw:text-[#4f46e5];
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.canvas-wrapper {
+    @apply tw:relative;
+    @apply tw:h-[270px];
+    @apply tw:w-full;
+}
+
+/* Sickness & Clinic Appointments Section */
+
+.sickness-table {
+    @apply tw:w-full;
+    @apply tw:border-collapse;
+    @apply tw:text-[13px];
+}
+
+.sickness-table th {
+    background: #f8fafc;
+    @apply tw:text-[#475569];
+    @apply tw:font-bold;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border-color);
+    @apply tw:text-[11px];
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.5px];
+}
+
+.sickness-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.sickness-table tr:hover td {
+    background: #fafbfc;
+}
+
+.sickness-table tr:last-child td {
+    border-bottom: none;
+}
+
+.illness-badge {
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[5px];
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    padding: 3px 8px;
+    @apply tw:rounded-[4px];
+}
+
+.illness-badge.active-fever {
+    background: #fee2e2;
+    @apply tw:text-[#b91c1c];
+}
+
+.illness-badge.active-asthma {
+    background: #fef3c7;
+    @apply tw:text-[#b45309];
+}
+
+.illness-badge.active-skin {
+    background: #eef2ff;
+    @apply tw:text-[#4338ca];
+}
+
+.illness-badge.cleared {
+    background: #ecfdf5;
+    @apply tw:text-[#047857];
+}
+
+.appt-status-tag {
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[5px];
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    padding: 3px 9px;
+    @apply tw:rounded-[20px];
+}
+
+.appt-status-tag.scheduled {
+    background: #fffbeb;
+    @apply tw:text-[#b45309];
+    border: 1px solid #fde68a;
+}
+
+.appt-status-tag.attended {
+    background: #ecfdf5;
+    @apply tw:text-[#047857];
+}
+
+/* Donator Proof of Donation Cards & Table */
+.donor-table {
+    @apply tw:w-full;
+    @apply tw:border-collapse;
+    @apply tw:text-[13px];
+}
+
+.donor-table th {
+    background: #f8fafc;
+    @apply tw:text-[#475569];
+    @apply tw:font-bold;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border-color);
+    @apply tw:text-[11px];
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.5px];
+}
+
+.donor-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.donor-table tr:hover td {
+    background: #fafbfc;
+}
+
+.donor-table tr:last-child td {
+    border-bottom: none;
+}
+
+.donor-avatar {
+    @apply tw:w-[38px];
+    @apply tw:h-[38px];
+    border-radius: var(--radius-md);
+    background: #ecfdf5;
+    @apply tw:text-[#059669];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:font-bold;
+    @apply tw:text-[13px];
+    @apply tw:shrink-0;
+}
+
+.proof-pill-btn {
+    background: #eef2ff;
+    @apply tw:text-[#4338ca];
+    border: 1px solid #c7d2fe;
+    padding: 5px 10px;
+    @apply tw:rounded-[6px];
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:cursor-pointer;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[5px];
+    transition: all 0.2s ease;
+}
+
+.proof-pill-btn:hover {
+    background: #4f46e5;
+    @apply tw:text-[#ffffff];
+    @apply tw:border-[#4f46e5];
+}
+
+.btn-verify-ack {
+    background: #ecfdf5;
+    @apply tw:text-[#059669];
+    border: 1px solid #a7f3d0;
+    padding: 5px 10px;
+    @apply tw:rounded-[6px];
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:cursor-pointer;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[4px];
+    transition: all 0.2s ease;
+}
+
+.btn-verify-ack:hover {
+    background: #10b981;
+    @apply tw:text-[#ffffff];
+}
+
+/* Modals */
+.director-modal-overlay {
+    @apply tw:hidden;
+    @apply tw:fixed;
+    @apply tw:top-[0];
+    @apply tw:left-[0];
+    @apply tw:right-[0];
+    @apply tw:bottom-[0];
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(4px);
+    @apply tw:z-[1050];
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:p-[20px];
+}
+
+.director-modal-overlay.active {
+    @apply tw:flex;
+}
+
+.director-modal {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    @apply tw:w-full;
+    @apply tw:max-w-[600px];
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    @apply tw:overflow-hidden;
+    animation: modalSlideUp 0.25s ease-out;
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.director-modal-head {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-color);
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-center;
+    background: #fafbfc;
+}
+
+.director-modal-head h3 {
+    @apply tw:text-[17px];
+    @apply tw:font-extrabold;
+    color: var(--dark);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+}
+
+.director-modal-close {
+    background: transparent;
+    border: none;
+    @apply tw:text-[#94a3b8];
+    @apply tw:text-[18px];
+    @apply tw:cursor-pointer;
+    @apply tw:p-[4px];
+    @apply tw:leading-[1];
+}
+
+.director-modal-close:hover {
+    color: var(--dark);
+}
+
+.director-modal-body {
+    @apply tw:p-[24px];
+    @apply tw:max-h-[75vh];
+    @apply tw:overflow-y-auto;
+}
+
+.director-modal-foot {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border-color);
+    @apply tw:flex;
+    @apply tw:justify-end;
+    @apply tw:gap-[10px];
+    background: #fafbfc;
+}
+
+/* Proof of Donation Slip Preview Card */
+.slip-preview-card {
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: var(--radius-md);
+    @apply tw:p-[20px];
+    @apply tw:text-center;
+    @apply tw:mb-[18px];
+}
+
+.slip-stamp-badge {
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    background: #ecfdf5;
+    @apply tw:text-[#047857];
+    border: 1px solid #a7f3d0;
+    padding: 4px 12px;
+    @apply tw:rounded-[20px];
+    @apply tw:text-[12px];
+    @apply tw:font-extrabold;
+    @apply tw:uppercase;
+    @apply tw:mb-[12px];
+}
+
+.slip-bank-header {
+    @apply tw:text-[16px];
+    @apply tw:font-extrabold;
+    @apply tw:text-[#0f172a];
+    @apply tw:mb-[4px];
+}
+
+.slip-amount-text {
+    @apply tw:text-[26px];
+    @apply tw:font-extrabold;
+    @apply tw:text-[#059669];
+    margin: 8px 0;
+}
+
+.slip-details-table {
+    @apply tw:w-full;
+    @apply tw:mt-[14px];
+    @apply tw:text-[12px];
+    @apply tw:text-left;
+    @apply tw:border-collapse;
+}
+
+.slip-details-table td {
+    padding: 6px 10px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.slip-details-table td:first-child {
+    @apply tw:text-[#64748b];
+    @apply tw:font-semibold;
+    @apply tw:w-[40%];
+}
+
+.slip-details-table td:last-child {
+    @apply tw:font-bold;
+    @apply tw:text-[#1e293b];
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1200px) {
+    .director-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .treasury-overview-card {
+        grid-template-columns: 1fr;
+    }
+    .treasury-main-balance {
+        border-right: none;
+        border-bottom: 1px solid #f1f5f9;
+        @apply tw:pr-[0];
+        @apply tw:pb-[18px];
+    }
+    .director-two-col {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .director-kpi-grid {
+        grid-template-columns: 1fr;
+    }
+    .treasury-fund-pills {
+        grid-template-columns: 1fr;
+    }
+    .director-hero-card {
+        @apply tw:flex-col;
+        @apply tw:items-start;
+        @apply tw:gap-[18px];
+        @apply tw:p-[22px];
+    }
+}

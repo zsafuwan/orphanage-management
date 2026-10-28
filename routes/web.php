@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+
+if (app()->environment('local')) {
+    Route::get('/__development/revision', \App\Http\Controllers\DevelopmentRevisionController::class)
+        ->name('development.revision');
+}
 
 Route::view('/', 'home')->name('home');
 
@@ -10,7 +14,6 @@ Route::view('/dashboard/admin', 'portal.dashboard')->name('dashboard.admin');
 Route::view('/dashboard/staff', 'portal.staff-child-welfare')->name('dashboard.staff');
 Route::view('/staff/child-welfare', 'portal.staff-child-welfare')->name('staff.child-welfare');
 Route::view('/child-welfare', 'portal.child-welfare')->name('child-welfare');
-Route::view('/inventory', 'portal.inventory')->name('inventory');
 Route::view('/staff/inventory', 'portal.staff-inventory')->name('staff.inventory');
 Route::view('/inventory/staff', 'portal.staff-inventory')->name('inventory.staff');
 Route::view('/welfare-requests', 'portal.welfare-requests')->name('welfare-requests');

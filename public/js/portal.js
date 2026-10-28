@@ -1,19 +1,104 @@
 // HopeHaven Orphanage Sanctuary - Portal Interactive Logic (HTML/CSS/JS)
 
 $(document).ready(function() {
+    // Center control columns and their headings, including newly synced rows.
+    function alignTableControls(table) {
+        if (!table.tHead || !table.tHead.rows.length) return;
+        const headers = [...table.tHead.rows[table.tHead.rows.length - 1].cells];
+        const rows = [...table.tBodies].flatMap(body => [...body.rows]);
+        headers.forEach(function(header, index) {
+            if (header.colSpan !== 1) return;
+            const cells = rows.map(row => row.cells[index]).filter(cell => cell && cell.colSpan === 1);
+            const controls = header.classList.contains('action-column') || cells.some(cell => cell.querySelector('button,a[class*="btn"],input[type="checkbox"]'));
+            header.classList.toggle('table-control-column', controls);
+            cells.forEach(function(cell) {
+                cell.classList.toggle('table-control-column', controls);
+                if (controls) [...cell.children].forEach(function(child) {
+                    if (child.tagName === 'DIV' && getComputedStyle(child).display === 'flex') child.classList.add('table-control-group');
+                });
+            });
+        });
+    }
+    const tableArea = document.querySelector('.portal-content');
+    if (tableArea) {
+        tableArea.querySelectorAll('table').forEach(alignTableControls);
+        const changedTables = new Set();
+        let alignmentFrame;
+        new MutationObserver(function(changes) {
+            changes.forEach(function(change) {
+                const table = change.target.closest?.('table');
+                if (table) changedTables.add(table);
+                change.addedNodes.forEach(function(node) {
+                    if (node.nodeType !== 1) return;
+                    if (node.matches('table')) changedTables.add(node);
+                    node.querySelectorAll('table').forEach(table => changedTables.add(table));
+                });
+            });
+            if (changedTables.size && !alignmentFrame) alignmentFrame = requestAnimationFrame(function() {
+                alignmentFrame = null;
+                changedTables.forEach(table => { if (table.isConnected) alignTableControls(table); });
+                changedTables.clear();
+            });
+        }).observe(tableArea, {childList:true,subtree:true});
+    }
+    document.querySelectorAll('.form-group,.staff-field-group').forEach(function(group) {
+        const label=group.querySelector('label'), field=group.querySelector('input[id],select[id],textarea[id]');
+        if(label && field && !label.htmlFor) label.htmlFor=field.id;
+    });
+    // Director dialogs share one accessible overlay behavior on every page.
+    const dialogTriggers = new WeakMap();
+    document.querySelectorAll('.director-modal-overlay').forEach(function(overlay, index) {
+        const heading = overlay.querySelector('h3');
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-hidden', overlay.classList.contains('active') ? 'false' : 'true');
+        overlay.setAttribute('tabindex', '-1');
+        if (heading) { heading.id = heading.id || 'care-dialog-heading-' + index; overlay.setAttribute('aria-labelledby', heading.id); }
+        overlay.querySelectorAll('.director-modal-close').forEach(button => button.setAttribute('aria-label', 'Close dialog'));
+        new MutationObserver(function() {
+            const open = overlay.classList.contains('active');
+            overlay.setAttribute('aria-hidden', open ? 'false' : 'true');
+            document.body.classList.toggle('has-care-dialog', !!document.querySelector('.director-modal-overlay.active'));
+            if (open) {
+                dialogTriggers.set(overlay, document.activeElement);
+                (overlay.querySelector('button,input,select,textarea,[tabindex="0"]') || overlay).focus();
+            } else dialogTriggers.get(overlay)?.focus?.({preventScroll:true});
+        }).observe(overlay, {attributes:true, attributeFilter:['class']});
+        overlay.addEventListener('click', event => { if (event.target === overlay) overlay.classList.remove('active'); });
+    });
+    document.addEventListener('keydown', function(event) {
+        const open = [...document.querySelectorAll('.director-modal-overlay.active')].at(-1);
+        if (!open) return;
+        if (event.key === 'Escape') { open.classList.remove('active'); return; }
+        if (event.key !== 'Tab') return;
+        const fields = [...open.querySelectorAll('button,input,select,textarea,a[href],[tabindex="0"]')].filter(field => !field.disabled && field.getClientRects().length);
+        const first = fields[0], last = fields.at(-1);
+        if (!first) { event.preventDefault(); open.focus(); }
+        else if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    });
     // 1. Mobile Sidebar Toggle
     $("#mobile_sidebar_toggle").on("click", function() {
         $(".portal-sidebar").toggleClass("open");
+        $(this).attr("aria-expanded", $(".portal-sidebar").hasClass("open") ? "true" : "false");
     });
 
     $(document).on("click", function(e) {
         if (!$(e.target).closest(".portal-sidebar, #mobile_sidebar_toggle").length) {
             $(".portal-sidebar").removeClass("open");
+            $("#mobile_sidebar_toggle").attr("aria-expanded", "false");
+        }
+    });
+
+    $(document).on("keydown", function(e) {
+        if (e.key === "Escape" && $(".portal-sidebar").hasClass("open")) {
+            $(".portal-sidebar").removeClass("open");
+            $("#mobile_sidebar_toggle").attr("aria-expanded", "false").trigger("focus");
         }
     });
 
     // 2. Generic Tab Switching Logic
-    $(".tab-btn").on("click", function() {
+    $(".tab-btn[data-tab]").on("click", function() {
         var targetTab = $(this).data("tab");
         var container = $(this).closest(".portal-content");
         
@@ -25,7 +110,7 @@ $(document).ready(function() {
     });
 
     // 3. Table and Card Search Filtering
-    $(".search-input").on("keyup", function() {
+    $(".search-input[data-search-target]").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         var targetSelector = $(this).data("search-target");
 
@@ -63,7 +148,7 @@ $(document).ready(function() {
 
     $(document).on("keydown", function(e) {
         if (e.key === "Escape") {
-            $(".portal-modal-backdrop").fadeOut(150);
+            $(".portal-modal-backdrop,.staff-duty-modal-backdrop,.modal-voucher-backdrop").fadeOut(150);
         }
     });
 });
@@ -79,6 +164,14 @@ function closeModal(id) {
 
 // Modern Toast & Notification System
 function showPortalToast(message, isSuccess, title, meta) {
+    if (typeof isSuccess === 'string') {
+        return showPrettyNotification({
+            message: message,
+            type: isSuccess === 'error' ? 'danger' : isSuccess,
+            title: title,
+            meta: meta
+        });
+    }
     var toast = $("#portal_toast");
     if (!toast.length) {
         $("body").append('<div id="portal_toast"></div>');
@@ -91,7 +184,7 @@ function showPortalToast(message, isSuccess, title, meta) {
         : '<i class="fas fa-check-circle"></i>';
 
     var displayTitle = title || (isSuccess === false ? 'Action Alert' : 'Duty Action Completed');
-    var displayMeta = meta || 'Just now · Sanctuary Management';
+    var displayMeta = meta || 'Just now · Orphanage Management';
 
     var borderColor = isSuccess === false ? '#ef4444' : '#10b981';
 
@@ -105,7 +198,7 @@ function showPortalToast(message, isSuccess, title, meta) {
                 <span>${displayTitle}</span>
                 <button class="toast-close-btn" onclick="$('#portal_toast').fadeOut(200);">&times;</button>
             </div>
-            <div class="toast-desc">${message}</div>
+            <div class="toast-desc">${window.HopeHavenSync.escape(message)}</div>
             <div class="toast-meta"><i class="fas fa-clock"></i> ${displayMeta}</div>
         </div>
         <div class="toast-progress-bar" style="background: ${borderColor};"></div>
@@ -161,7 +254,7 @@ function showPrettyNotification(options) {
                 <span>${options.title || 'Duty Alert'}</span>
                 <button class="toast-close-btn" onclick="$('#portal_toast').fadeOut(200);">&times;</button>
             </div>
-            <div class="toast-desc">${options.message}</div>
+            <div class="toast-desc">${window.HopeHavenSync.escape(options.message)}</div>
             <div class="toast-meta"><i class="fas fa-clock"></i> ${options.meta || 'Just now · Duty Staff Log'}</div>
         </div>
         <div class="toast-progress-bar" style="background: ${borderColor};"></div>
@@ -249,55 +342,6 @@ function simulateRole(roleName, element) {
     }
 }
 
-// Subsystem 1: Quick Register Child handler
-function handleNewChildSubmit(event) {
-    event.preventDefault();
-    var name = $("#child_name_input").val();
-    var dorm = $("#child_dorm_input").val();
-    var grade = $("#child_grade_input").val();
-
-    if (!name) return;
-
-    var newCardHtml = `
-        <div class="child-profile-card">
-            <div>
-                <div class="card-top-info">
-                    <img src="https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=150&auto=format&fit=crop&q=80" class="avatar-large" alt="${name}">
-                    <div style="text-align: right;">
-                        <span class="badge badge-secondary" style="font-family: monospace;">CH-2026-005</span>
-                        <div style="margin-top: 4px;"><span class="badge badge-success">Active Ward</span></div>
-                    </div>
-                </div>
-                <div class="profile-name">${name}</div>
-                <div class="profile-meta-line">Newly Registered Resident</div>
-
-                <div class="info-rows">
-                    <div class="info-row">
-                        <span class="info-row-label"><i class="fas fa-home"></i> Dormitory:</span>
-                        <span class="info-row-val">${dorm}</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-row-label"><i class="fas fa-graduation-cap"></i> School:</span>
-                        <span class="info-row-val">${grade}</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-row-label"><i class="fas fa-heartbeat"></i> Status:</span>
-                        <span class="info-row-val" style="color: #10b981;">Intake Completed</span>
-                    </div>
-                </div>
-            </div>
-            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #f1f5f9; display: flex; gap: 8px;">
-                <button class="btn-outline btn-sm" style="flex: 1;" onclick="showPortalToast('Viewing ${name} PDF', true)"><i class="fas fa-id-card"></i> View PDF</button>
-            </div>
-        </div>
-    `;
-
-    $("#profiles_grid").prepend(newCardHtml);
-    closeModal('modal_register_child');
-    showPortalToast("Child profile for " + name + " created successfully!", true);
-    event.target.reset();
-}
-
 // Subsystem 2: Quick Record Stock Movement
 function handleStockReceiptSubmit(event) {
     event.preventDefault();
@@ -321,13 +365,6 @@ function handleStockReceiptSubmit(event) {
     closeModal('modal_stock_receipt');
     showPortalToast("Inbound delivery of " + qty + " units recorded into stock!", true);
     event.target.reset();
-}
-
-// Subsystem 3: Quick Approve/Reject Welfare Request
-function updateRequestDecision(ticketId, newStatus) {
-    var badgeClass = newStatus === 'Approved' ? 'badge-success' : 'badge-danger';
-    $("#status_badge_" + ticketId).removeClass('badge-warning badge-success badge-danger badge-info').addClass(badgeClass).text(newStatus);
-    showPortalToast("Welfare Request #" + ticketId + " has been marked as " + newStatus + "!", true);
 }
 
 // Subsystem 4: Quick Log Volunteer Hours

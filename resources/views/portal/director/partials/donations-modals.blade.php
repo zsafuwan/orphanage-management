@@ -2,7 +2,7 @@
 <div class="director-modal-overlay" id="modal_grant_release">
     <div class="director-modal" style="max-width: 580px;">
         <div class="director-modal-head" style="background: #ecfdf5; border-bottom: 1px solid #a7f3d0;">
-            <h3><i class="fas fa-hand-holding-usd" style="color: #059669;"></i> Director Institutional Grant Release</h3>
+            <h3><i class="fas fa-hand-holding-usd" style="color: #059669;"></i> Approve Funding</h3>
             <button type="button" class="director-modal-close" onclick="closeDirectorModal('modal_grant_release')">&times;</button>
         </div>
         <div class="director-modal-body">
@@ -30,7 +30,7 @@
         <div class="director-modal-foot">
             <button type="button" class="btn-tab" style="background:#f1f5f9; border:none; padding:8px 16px; border-radius:6px; cursor:pointer;" onclick="closeDirectorModal('modal_grant_release')">Cancel</button>
             <button type="button" class="btn-sign" style="background: #059669;" onclick="confirmGrantRelease()">
-                <i class="fas fa-check-double"></i> Authorize Tranche Disbursement
+                <i class="fas fa-check-double"></i> Approve Tranche Payment
             </button>
         </div>
     </div>

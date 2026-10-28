@@ -1,10 +1,10 @@
 @extends('layouts.portal')
 
-@section('title', 'Staff & Volunteers Governance')
+@section('title', 'Staff & Volunteers Management')
 @section('breadcrumb', 'Staff & Volunteers')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/portal/director-staff-volunteers.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/director-staff-volunteers.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/director-staff-volunteers.css')), 0, 12) }}">
 @endpush
 
 @section('content')
@@ -12,8 +12,8 @@
     <!-- Header -->
     <div class="dir-staff-header">
         <div>
-            <h1><i class="fas fa-users-cog" style="color: #4f46e5;"></i> Personnel, Safeguarding & Duty Governance</h1>
-            <p>Directorate oversight of sanctuary staff, background vetting, safeguarding certifications, and volunteer deployment.</p>
+            <h1><i class="fas fa-users-cog" style="color: #4f46e5;"></i> Staff & Volunteers, Safeguarding & Duty Management</h1>
+            <p>Director Overview of orphanage staff, background vetting, safeguarding certifications, and volunteer deployment.</p>
         </div>
         <div style="display: flex; gap: 10px;">
             <a href="{{ route('director.register-staff') }}" class="btn-director-approve" style="text-decoration: none; padding: 8px 16px;">
@@ -33,7 +33,7 @@
             </div>
             <div>
                 <div class="dir-staff-kpi-val">8 Caregivers</div>
-                <div class="dir-staff-kpi-lbl">Sanctuary Staff on Payroll</div>
+                <div class="dir-staff-kpi-lbl">Orphanage Staff on Payroll</div>
             </div>
         </div>
 
@@ -73,7 +73,7 @@
         <div class="director-card-head">
             <div class="director-card-title">
                 <i class="fas fa-id-badge"></i>
-                <span>Sanctuary Permanent Staff & Caregiver Safeguarding</span>
+                <span>Orphanage Permanent Staff & Caregiver Safeguarding</span>
             </div>
             <span class="badge" style="background:#ecfdf5; color:#047857; font-weight:700; padding:4px 10px; border-radius:20px;">
                 <i class="fas fa-check"></i> All 8 Vetted & Certified
@@ -83,7 +83,7 @@
             <thead>
                 <tr>
                     <th>Staff Caregiver</th>
-                    <th>Sanctuary Role & Wing</th>
+                    <th>Orphanage Role & Wing</th>
                     <th>Child Safeguarding & Police Check</th>
                     <th>Medical & CPR Cert</th>
                     <th>Shift Status</th>
@@ -168,7 +168,7 @@
                             </div>
                         </div>
                     </td>
-                    <td>Head of Nutrition & Kitchen<br><span style="font-size: 11px; color: #64748b;">Sanctuary Dining Hall</span></td>
+                    <td>Head of Nutrition & Kitchen<br><span style="font-size: 11px; color: #64748b;">Orphanage Dining Hall</span></td>
                     <td><span class="vetted-badge"><i class="fas fa-shield-check"></i> PDRM Vetted (2026)</span></td>
                     <td>Typhoid & Food Hygiene Cert<br><span style="font-size: 11px; color: #10b981; font-weight: 700;">Grade A Certified</span></td>
                     <td><span class="status-pill" style="background:#ecfdf5; color:#047857; font-size:11px; font-weight:700;">On Duty · Kitchen</span></td>
@@ -196,10 +196,9 @@
                 <tr>
                     <th>Volunteer Name</th>
                     <th>Profession / Specialization</th>
-                    <th>Sanctuary Deployment</th>
+                    <th>Assigned Duties</th>
                     <th>Logged Hours (Oct)</th>
-                    <th>Director Audit</th>
-                    <th class="action-column" style="text-align: right;">Approval Action</th>
+                    <th>Director Review</th>
                 </tr>
             </thead>
             <tbody>
@@ -210,7 +209,6 @@
                     <td>Weekly Clinical Consultations (Sickbay)</td>
                     <td><strong style="color: #4f46e5;">18 Hours</strong></td>
                     <td><span class="status-pill" style="background:#ecfdf5; color:#047857; font-size:11px; font-weight:700;"><i class="fas fa-check-circle"></i> Hours Approved</span></td>
-                    <td style="text-align: right;"><span style="font-size: 11px; color: #64748b;">Verified</span></td>
                 </tr>
 
                 <!-- Volunteer 2: Brother David -->
@@ -220,7 +218,6 @@
                     <td>Saturday Math & Science Clinic (Darjah 4-6)</td>
                     <td><strong style="color: #4f46e5;">12 Hours</strong></td>
                     <td><span class="status-pill" style="background:#ecfdf5; color:#047857; font-size:11px; font-weight:700;"><i class="fas fa-check-circle"></i> Hours Approved</span></td>
-                    <td style="text-align: right;"><span style="font-size: 11px; color: #64748b;">Verified</span></td>
                 </tr>
 
                 <!-- Volunteer 3: Sarah Farhana -->
@@ -230,11 +227,6 @@
                     <td>Hospital Transport & Dental Escort</td>
                     <td><strong style="color: #d97706;">6 Hours</strong></td>
                     <td><span class="status-pill" style="background:#fef3c7; color:#b45309; font-size:11px; font-weight:700;"><i class="fas fa-clock"></i> Pending Sign-off</span></td>
-                    <td style="text-align: right;">
-                        <button type="button" class="btn-sign" style="padding: 4px 10px; font-size: 11px;" onclick="approveVolunteerHours('Sarah Farhana', '6', this)">
-                            <i class="fas fa-check"></i> Authorize
-                        </button>
-                    </td>
                 </tr>
             </tbody>
         </table>
@@ -245,5 +237,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/portal/director-staff-volunteers.js') }}"></script>
+    <script src="{{ asset('js/portal/director-staff-volunteers.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/director-staff-volunteers.js')), 0, 12) }}"></script>
 @endpush

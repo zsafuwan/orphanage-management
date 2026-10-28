@@ -1,10 +1,11 @@
 @extends('layouts.portal')
 
-@section('title', 'Child Welfare & Education Management')
-@section('breadcrumb', 'Child Welfare & Education')
+@section('title', 'Child Care & Education Management')
+@section('breadcrumb', 'Child Care & Education')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/portal/child-welfare.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/child-record-viewer.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/child-record-viewer.css')), 0, 12) }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/child-welfare.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/child-welfare.css')), 0, 12) }}">
 @endpush
 
 @section('content')
@@ -21,20 +22,6 @@
         <p class="page-desc">
             Staff workspace to register residential children, manage active child lists, key in examination paper results, and document basic medical conditions and healthcare follow-ups.
         </p>
-    </div>
-    <div class="header-action-group">
-        <button class="btn-primary" onclick="openModal('modal_register_child')">
-            <i class="fas fa-user-plus"></i> Add New Child
-        </button>
-        <button class="btn-outline" style="border-color: #2563eb; color: #2563eb;" onclick="ChildWelfareUI.openKeyPaperModal()">
-            <i class="fas fa-pen-nib"></i> Key in Paper Result
-        </button>
-        <button class="btn-outline" style="border-color: #059669; color: #059669;" onclick="ChildWelfareUI.openRecordMedicalModal()">
-            <i class="fas fa-stethoscope"></i> Record Medical
-        </button>
-        <button class="btn-outline" onclick="openModal('modal_health_appointment')">
-            <i class="fas fa-calendar-plus"></i> Clinic Visit
-        </button>
     </div>
 </div>
 
@@ -259,7 +246,7 @@
                         <!-- Options populated dynamically -->
                     </select>
                 </div>
-                <h3 style="font-size: 16px; font-weight: 800; color: var(--dark);" id="history_child_title">Child Institutional Lifecycle</h3>
+                <h3 style="font-size: 16px; font-weight: 800; color: var(--dark);" id="history_child_title">Child History</h3>
                 <p style="font-size: 12px; color: var(--dark-muted);">Subject to Role-Based Access Control (RBAC). Try switching roles at top of page.</p>
             </div>
             <span class="badge badge-secondary" style="font-family: monospace; font-size: 13px;" id="history_child_id_badge">CH-2024-001</span>
@@ -289,12 +276,13 @@
         <div class="modal-header">
             <div>
                 <h3 class="modal-title">Register New Child Admission</h3>
-                <p class="modal-sub">Add a child ward to sanctuary residential care, dorm placement, and medical registry.</p>
+                <p class="modal-sub">Add a child ward to orphanage residential care, dorm placement, and medical registry.</p>
             </div>
             <button class="modal-close-btn" onclick="closeModal('modal_register_child')">&times;</button>
         </div>
 
         <form onsubmit="handleRegisterNewChildForm(event)">
+            @include('portal.partials.child-photo-upload')
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label">Full Legal Name *</label>
@@ -316,7 +304,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Date of Birth</label>
-                    <input type="date" id="reg_child_dob" class="form-control" value="2017-06-15" required>
+                    <input type="date" id="reg_child_dob" class="form-control" value="2017-06-15" max="{{ now()->format('Y-m-d') }}" required>
                 </div>
             </div>
 
@@ -528,21 +516,9 @@
                 <input type="text" id="med_prescriptions_input" class="form-control" placeholder="e.g. Salbutamol inhaler 100mcg as needed, Daily multivitamins 5ml">
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="form-label">Next Scheduled Clinic Review Date</label>
-                    <input type="date" id="med_next_clinic_date" class="form-control" value="2026-11-20">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Examination Specialty</label>
-                    <select id="med_specialty_select" class="form-control">
-                        <option value="General Pediatric Wellness Review">General Pediatric Wellness Review</option>
-                        <option value="Pediatric Dental Screening & Extraction">Pediatric Dental Screening & Extraction</option>
-                        <option value="Asthma Pulmonary Function Review">Asthma Pulmonary Function Review</option>
-                        <option value="Optometry & Vision Screening">Optometry & Vision Screening</option>
-                        <option value="Speech & Articulation Review">Speech & Articulation Review</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label class="form-label">Next Scheduled Clinic Review Date</label>
+                <input type="date" id="med_next_clinic_date" class="form-control" value="2026-11-20" data-open-picker>
             </div>
 
             <div class="form-group">
@@ -565,88 +541,7 @@
     </div>
 </div>
 
-<!-- MODAL 4: COMPREHENSIVE CHILD PDF -->
-<div id="modal_child_dossier" class="portal-modal-backdrop">
-    <div class="portal-modal" style="max-width: 720px;">
-        <div class="modal-header">
-            <div>
-                <h3 class="modal-title">Official Child PDF: <span id="dossier_modal_name">Maya Cruz</span></h3>
-                <p class="modal-sub" id="dossier_modal_meta">Code: CH-2024-001 &bull; Admitted: March 15, 2022</p>
-            </div>
-            <button class="modal-close-btn" onclick="closeModal('modal_child_dossier')">&times;</button>
-        </div>
-
-        <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px; background: #f8fafc; padding: 16px; border-radius: var(--radius-sm); border: 1px solid #e2e8f0;">
-            <img id="dossier_modal_avatar" src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=150&auto=format&fit=crop&q=80" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid #cbd5e1;" alt="Child">
-            <div style="flex: 1;">
-                <h4 style="font-size: 17px; font-weight: 800; color: var(--dark);" id="dossier_modal_head_name">Maya Angelika Cruz</h4>
-                <div style="font-size: 12px; color: #64748b;" id="dossier_modal_head_sub">11 Years Old &bull; Female &bull; Blood Type O+</div>
-                <div style="font-size: 12px; margin-top: 4px;">Dormitory: <strong id="dossier_modal_head_dorm">St. Clare Cottage (Room 2B)</strong></div>
-            </div>
-        </div>
-
-        <!-- PDF Navigation Tabs -->
-        <div class="dossier-nav-tabs">
-            <button class="dossier-tab-btn active" data-dossier-tab="dossier_tab_overview" onclick="ChildWelfareUI.switchDossierTab('dossier_tab_overview')">
-                <i class="fas fa-id-card"></i> Overview Summary
-            </button>
-            <button class="dossier-tab-btn" data-dossier-tab="dossier_tab_papers" onclick="ChildWelfareUI.switchDossierTab('dossier_tab_papers')">
-                <i class="fas fa-file-invoice"></i> Paper Results History
-            </button>
-            <button class="dossier-tab-btn" data-dossier-tab="dossier_tab_medical" onclick="ChildWelfareUI.switchDossierTab('dossier_tab_medical')">
-                <i class="fas fa-heartbeat"></i> Medical Records
-            </button>
-        </div>
-
-        <!-- PDF Tab 1: Overview -->
-        <div id="dossier_tab_overview" class="dossier-pane">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 12.5px;">
-                <div style="border: 1px solid var(--border-color); padding: 14px; border-radius: 8px; background: #fafbfc;">
-                    <strong><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Academic Standing</strong>
-                    <div style="margin-top: 8px;">School: <span id="dossier_modal_school">St. Jude Elementary</span></div>
-                    <div>Grade: <strong id="dossier_modal_grade">Grade 5</strong></div>
-                    <div>GPA: <strong id="dossier_modal_gpa">3.85 (Distinction)</strong></div>
-                    <div>Attendance: <strong style="color: #10b981;" id="dossier_modal_attendance">96%</strong></div>
-                </div>
-
-                <div style="border: 1px solid var(--border-color); padding: 14px; border-radius: 8px; background: #fafbfc;">
-                    <strong><i class="fas fa-stethoscope" style="color: #ef4444;"></i> Health Profile</strong>
-                    <div style="margin-top: 8px;">Condition: <strong id="dossier_modal_condition">Mild Pediatric Asthma</strong></div>
-                    <div>Allergies: <span id="dossier_modal_allergies">Penicillin, Peanuts</span></div>
-                    <div>Prescriptions: <span id="dossier_modal_meds">Multivitamins</span></div>
-                    <div>Next Visit: <strong style="color: #ef4444;" id="dossier_modal_next_visit">Oct 25 (Dental)</strong></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PDF Tab 2: Paper Results History -->
-        <div id="dossier_tab_papers" class="dossier-pane" style="display: none;">
-            <div id="dossier_paper_history_list" style="max-height: 280px; overflow-y: auto; padding-right: 4px;">
-                <!-- Populated dynamically -->
-            </div>
-        </div>
-
-        <!-- PDF Tab 3: Medical Records -->
-        <div id="dossier_tab_medical" class="dossier-pane" style="display: none;">
-            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; font-size: 12.5px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px;">
-                    <span style="font-weight: 700; color: var(--dark);"><i class="fas fa-notes-medical" style="color: #10b981;"></i> Primary Sanctuary Health Baseline</span>
-                    <span class="badge badge-success">Verified Active</span>
-                </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                    <div><strong>Immunization:</strong> Up to Date (Ministry of Health Card)</div>
-                    <div><strong>Blood Group:</strong> O+ Rhesus Positive</div>
-                    <div><strong>Clinic Facility:</strong> Klinik Kesihatan Titiwangsa</div>
-                    <div><strong>Attending Physician:</strong> Dr. Angela Reyes</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal-footer" style="margin-top: 20px;">
-            <button type="button" class="btn-outline" onclick="closeModal('modal_child_dossier')">Close PDF</button>
-        </div>
-    </div>
-</div>
+@include('portal.partials.child-record-viewer')
 
 <!-- MODAL 5: SCHEDULE HEALTH APPOINTMENT -->
 <div id="modal_health_appointment" class="portal-modal-backdrop">
@@ -700,5 +595,4 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/portal/child-welfare.js') }}"></script>
 @endpush

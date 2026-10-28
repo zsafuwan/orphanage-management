@@ -1,11 +1,11 @@
 @extends('layouts.portal')
 
-@section('title', 'Admin Provisioning & Access Control')
+@section('title', 'Admin Accounts & Permissions')
 @section('breadcrumb', 'Access & Security / Register Admin')
 
 @push('styles')
     <!-- Registration / Provisioning CSS -->
-    <link rel="stylesheet" href="{{ asset('css/portal/auth.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/auth.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/auth.css')), 0, 12) }}">
 @endpush
 
 @section('content')
@@ -15,17 +15,17 @@
     <div>
         <div class="hero-main-title">
             <i class="fas fa-user-shield"></i>
-            <span>Administrator Provisioning & Authorization</span>
+            <span>Admin Accounts & Permissions</span>
         </div>
         <p class="hero-desc">
-            <strong>Restricted Access Protocol:</strong> In compliance with Institutional Child Protection & Data Privacy standards, public self-registration is strictly disabled. New administrators must be vetted and authorized by an active sanctuary administrator.
+            <strong>Account Registration Rules:</strong> To protect children and their information, public sign-up is disabled. An existing admin must review and approve each new admin account.
         </p>
     </div>
     <div class="hero-auth-badge">
         <div class="hero-auth-avatar">SG</div>
         <div class="hero-auth-meta">
             <div class="meta-label">
-                <i class="fas fa-lock"></i> Authorizing Officer
+                <i class="fas fa-lock"></i> Approving Admin
             </div>
             <div class="meta-name">Sister Grace</div>
             <div class="meta-id">ID: ADM-2026-001 · Super Admin</div>
@@ -41,7 +41,7 @@
         </div>
         <div class="prov-metric-info">
             <div class="m-label">Active Administrators</div>
-            <div class="m-val" id="stat_total_admins">4 Personnel</div>
+            <div class="m-val" id="stat_total_admins">4 Admins</div>
         </div>
     </div>
     <div class="prov-metric-card">
@@ -151,7 +151,7 @@
                         </div>
                         <div class="field-hint">
                             <span class="badge-admin-id" style="font-size: 10px; padding: 1px 6px;">ADM-YYYY-XXX</span> 
-                            Unique sanctuary identifier
+                            Unique orphanage identifier
                         </div>
                     </div>
                 </div>
@@ -159,7 +159,7 @@
                 <!-- 3. Official Email -->
                 <div class="form-group">
                     <label class="form-label" for="admin_email">
-                        Official Sanctuary Email <span style="color: var(--primary);">*</span>
+                        Work Email <span style="color: var(--primary);">*</span>
                     </label>
                     <div class="input-with-icon">
                         <i class="fas fa-envelope input-icon-left"></i>
@@ -261,14 +261,14 @@
                         <input type="radio" name="admin_tier" value="finance_admin">
                         <div>
                             <div class="tier-label-name">Financial Oversight Admin</div>
-                            <div class="tier-label-desc">Audits donation receipts, tax-deductible contributions, and disbursement tracking.</div>
+                            <div class="tier-label-desc">Audits donation receipts, tax-deductible contributions, and payment tracking.</div>
                         </div>
                     </label>
 
-                    <label class="admin-tier-option" onclick="selectAdminTier(this, 'Sanctuary Co-Director', 'Executive Sanctuary Directorship')">
+                    <label class="admin-tier-option" onclick="selectAdminTier(this, 'Orphanage Co-Director', 'Orphanage Management')">
                         <input type="radio" name="admin_tier" value="co_director">
                         <div>
-                            <div class="tier-label-name">Sanctuary Co-Director</div>
+                            <div class="tier-label-name">Orphanage Co-Director</div>
                             <div class="tier-label-desc">Executive sign-off authority across both operations, staffing, and external regulatory bodies.</div>
                         </div>
                     </label>
@@ -276,21 +276,17 @@
 
                 <!-- Section: Subsystems Permissions Checklist -->
                 <div class="form-section-divider">
-                    <i class="fas fa-key"></i> 3. Subsystem Access Authorization
+                    <i class="fas fa-key"></i> 3. Subsystem Access Approval
                 </div>
 
                 <div class="perms-checkbox-list">
                     <label class="perm-checkbox-item">
                         <input type="checkbox" name="permissions[]" value="child_welfare" checked>
-                        <span><i class="fas fa-graduation-cap" style="color: #3b82f6; width: 16px;"></i> Child Welfare & Edu</span>
-                    </label>
-                    <label class="perm-checkbox-item">
-                        <input type="checkbox" name="permissions[]" value="inventory" checked>
-                        <span><i class="fas fa-boxes" style="color: #10b981; width: 16px;"></i> Inventory & Supplies</span>
+                        <span><i class="fas fa-graduation-cap" style="color: #3b82f6; width: 16px;"></i> Child Care & Education</span>
                     </label>
                     <label class="perm-checkbox-item">
                         <input type="checkbox" name="permissions[]" value="welfare_requests" checked>
-                        <span><i class="fas fa-clipboard-check" style="color: #f59e0b; width: 16px;"></i> Welfare Requisitions</span>
+                        <span><i class="fas fa-clipboard-check" style="color: #f59e0b; width: 16px;"></i> Welfare Requests</span>
                     </label>
                     <label class="perm-checkbox-item">
                         <input type="checkbox" name="permissions[]" value="staff_volunteers" checked>
@@ -323,7 +319,7 @@
 
                 <!-- Submit Button -->
                 <button type="submit" id="btn_provision_submit" class="auth-submit-action">
-                    <i class="fas fa-user-shield"></i> Provision Administrator Credentials
+                    <i class="fas fa-user-shield"></i> Create Admin Account
                 </button>
             </form>
         </div>
@@ -335,7 +331,7 @@
         <div class="protocol-card">
             <h3 class="protocol-title">
                 <i class="fas fa-shield-virus" style="color: var(--primary);"></i>
-                Admin Governance Protocol
+                Admin Management Protocol
             </h3>
 
             <div class="protocol-step-item">
@@ -343,7 +339,7 @@
                 <div class="step-info">
                     <div class="step-heading">Zero Public Self-Signup</div>
                     <div class="step-text">
-                        Sanctuary databases contain sensitive child medical & legal records. Self-registration is permanently disabled.
+                        orphanage databases contain sensitive child medical & legal records. Self-registration is permanently disabled.
                     </div>
                 </div>
             </div>
@@ -363,7 +359,7 @@
                 <div class="step-info">
                     <div class="step-heading">Credential Slip Generation</div>
                     <div class="step-text">
-                        Upon provisioning, an official credentials voucher is produced. Share this securely with the appointed administrator.
+                        Upon account Setup, an official credentials voucher is produced. Share this securely with the appointed administrator.
                     </div>
                 </div>
             </div>
@@ -373,7 +369,7 @@
                 <div class="step-info">
                     <div class="step-heading">Dual Signatory Trail</div>
                     <div class="step-text">
-                        Every newly provisioned administrator account records the authorizing administrator's ID and timestamp.
+                        Each new admin account records who approved it and when.
                     </div>
                 </div>
             </div>
@@ -402,11 +398,11 @@
         <div>
             <h3 class="directory-toolbar-title">
                 <i class="fas fa-users-cog" style="color: var(--primary);"></i>
-                Active Sanctuary Administrators
+                Active Orphanage Admins
                 <span class="badge-count" id="admin_count_badge">4 Registered</span>
             </h3>
             <p style="font-size: 12.5px; color: var(--dark-muted); margin-top: 3px;">
-                Directory of personnel authorized with administrative clearance across HopeHaven subsystems.
+                Directory of staff & Volunteers authorized with administrative clearance across HopeHaven subsystems.
             </p>
         </div>
 
@@ -588,10 +584,10 @@
         <div class="voucher-header">
             <button class="voucher-close-btn" onclick="closeVoucherModal()">&times;</button>
             <span class="voucher-badge">
-                <i class="fas fa-check-circle"></i> Official Provisioning Record
+                <i class="fas fa-check-circle"></i> Account Creation Record
             </span>
-            <div class="voucher-title">Sanctuary Administrator Voucher</div>
-            <div class="voucher-sub">HopeHaven Child Care & Sanctuary Security Council</div>
+            <div class="voucher-title">Orphanage Admin Account Details</div>
+            <div class="voucher-sub">HopeHaven Orphanage & Child Care Security Council</div>
         </div>
 
         <div class="voucher-body">
@@ -615,7 +611,7 @@
 
                 <!-- Email Field -->
                 <div class="voucher-field">
-                    <div class="voucher-field-label">Official Sanctuary Email</div>
+                    <div class="voucher-field-label">Work Email</div>
                     <div class="voucher-field-value">
                         <span id="voucher_modal_email">d.kim@hopehaven.org</span>
                         <button class="voucher-copy-btn" onclick="copyText('voucher_modal_email', 'Email copied!')">
@@ -772,7 +768,7 @@
 
         var packageText = 
             "=========================================\n" +
-            "HOPEHAVEN SANCTUARY - ADMIN CREDENTIALS\n" +
+            "HOPEHAVEN ORPHANAGE - ADMIN CREDENTIALS\n" +
             "=========================================\n" +
             "AdminID   : " + id + "\n" +
             "Full Name : " + name + "\n" +
@@ -846,7 +842,7 @@
         var btn = $('#btn_provision_submit');
         var originalBtnHtml = btn.html();
 
-        btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Provisioning ' + adminId + ' Credentials...');
+        btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Creating account ' + adminId + '...');
 
         setTimeout(function() {
             btn.prop('disabled', false).html(originalBtnHtml);
@@ -883,14 +879,14 @@
             // Update stats
             nextIdNumber++;
             var totalAdmins = $('#admins_tbody tr').length;
-            $('#stat_total_admins').text(totalAdmins + ' Personnel');
+            $('#stat_total_admins').text(totalAdmins + ' Admins');
             $('#admin_count_badge').text(totalAdmins + ' Registered');
 
             var year = new Date().getFullYear();
             var nextFormatted = "ADM-" + year + "-" + String(nextIdNumber).padStart(3, '0');
             $('#stat_next_id').text(nextFormatted);
 
-            showToast("Success! Administrator " + fullName + " (" + adminId + ") provisioned.", true);
+            showToast("Success! Administrator " + fullName + " (" + adminId + ") created.", true);
 
             // Open Voucher Modal with real password
             viewCredentialsModal(adminId, fullName, email, selectedTierTitle, 'Sister Grace (ADM-2026-001)', password);

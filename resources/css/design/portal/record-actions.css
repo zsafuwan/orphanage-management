@@ -1,0 +1,58 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* Focused action styles for requisitions and residential records. */
+.requisition-actions-panel { @apply tw:min-w-0; }
+.requisition-actions-panel .director-card-head { @apply tw:flex-wrap; @apply tw:gap-[14px]; }
+.requisition-actions-panel .director-card-body { @apply tw:grid; @apply tw:gap-[12px]; @apply tw:p-[20px]; }
+.requisition-actions-panel .req-item-card { @apply tw:flex; @apply tw:items-center; @apply tw:justify-between; @apply tw:gap-[16px]; @apply tw:p-[16px]; border: 1px solid #e2e8f0; @apply tw:rounded-[14px]; background: #fafbff; }
+.requisition-actions-panel .req-left-info { @apply tw:flex; @apply tw:items-start; @apply tw:gap-[12px]; @apply tw:min-w-0; }
+.requisition-actions-panel .req-avatar { @apply tw:grid; place-items: center; @apply tw:w-[38px]; @apply tw:h-[38px]; @apply tw:rounded-[12px]; @apply tw:shrink-0; background: #e8e7ff; @apply tw:text-[#4f46a7]; @apply tw:text-[12px]; @apply tw:font-bold; }
+.requisition-actions-panel .req-meta-title { @apply tw:text-[14px]; @apply tw:font-semibold; @apply tw:leading-[1.6]; }
+.requisition-actions-panel .req-meta-sub { @apply tw:flex; @apply tw:flex-wrap; @apply tw:items-center; @apply tw:gap-[6px]; @apply tw:mt-[7px]; @apply tw:text-[12px]; @apply tw:text-[#526176]; }
+.requisition-actions-panel .req-priority-tag { padding: 3px 8px; @apply tw:rounded-[6px]; @apply tw:font-semibold; }
+.requisition-actions-panel .req-priority-critical { @apply tw:text-[#a52a3b]; background: #ffe8ed; }
+.requisition-actions-panel .req-priority-high { @apply tw:text-[#88520a]; background: #fff0cf; }
+.requisition-actions-panel .req-actions { @apply tw:shrink-0; }
+.requisition-actions-panel :is(.btn-director-approve,.director-link-action),
+.residential-actions-panel :is(.btn-primary,.btn-outline,.table-action-btn,.view-mode-btn) {
+    @apply tw:inline-flex; @apply tw:items-center; @apply tw:justify-center; @apply tw:gap-[8px];
+    @apply tw:min-h-[40px]; padding: 9px 14px; border: 1px solid transparent;
+    @apply tw:rounded-[11px]; @apply tw:font-[inherit]; @apply tw:text-[13px]; @apply tw:font-semibold;
+    @apply tw:leading-[1.4]; @apply tw:no-underline; @apply tw:cursor-pointer;
+    transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+.requisition-actions-panel .btn-director-approve { @apply tw:text-[#fff]; background: linear-gradient(135deg,#6355dc,#44349f); @apply tw:border-[#4a3da6]; box-shadow: 0 3px 0 #332779,0 5px 12px rgb(68 52 159 / 12%); }
+.requisition-actions-panel .btn-director-approve > i { background: rgb(255 255 255 / 16%); @apply tw:p-[6px]; @apply tw:rounded-[7px]; }
+.requisition-actions-panel .director-link-action { background: #efedff; @apply tw:text-[#493a99]; @apply tw:border-[#dbd5fa]; }
+.residential-actions-panel .admin-card-head { @apply tw:flex-wrap; @apply tw:gap-[20px]; }
+.residential-toolbar { @apply tw:flex; @apply tw:items-center; @apply tw:flex-wrap; @apply tw:gap-[10px]; @apply tw:w-full; @apply tw:pt-[16px]; border-top: 1px solid #e7ece7; }
+.residential-actions-panel .residential-toolbar .btn-primary { color: white; background: linear-gradient(135deg,#258361,#176047); @apply tw:border-[#19664b]; box-shadow: 0 3px 0 #104a35,0 5px 12px rgb(23 96 71 / 12%); }
+.residential-actions-panel [onclick^="openStaffKeyPaperModal"] { background: #eef2ff; @apply tw:border-[#cbd5fa]; @apply tw:text-[#354f9d]; }
+.residential-actions-panel [onclick^="openStaffRecordMedModal"] { background: #e8f6ef; @apply tw:border-[#bedfce]; @apply tw:text-[#216448]; }
+.residential-actions-panel [onclick^="openStaffDossierModal"] { background: #fff4df; @apply tw:border-[#e8d3a7]; @apply tw:text-[#775319]; }
+.residential-actions-panel :is(.btn-primary,.btn-outline,.table-action-btn) > i { @apply tw:grid; place-items: center; @apply tw:w-[24px]; @apply tw:h-[24px]; @apply tw:rounded-[7px]; background: rgb(110 130 150 / 10%); @apply tw:shrink-0; }
+.residential-actions-panel .residential-toolbar .view-mode-toggle { @apply tw:flex; @apply tw:flex-wrap; @apply tw:gap-[4px]; @apply tw:ml-[auto]; @apply tw:p-[4px]; border: 1px solid #dce5e0; @apply tw:rounded-[13px]; background: #f0f4f1; }
+.residential-actions-panel .view-mode-btn { background: transparent; @apply tw:text-[#506456]; box-shadow: none; @apply tw:min-h-[34px]; padding: 7px 11px; }
+.residential-actions-panel .view-mode-btn.active { background: #fff; @apply tw:text-[#205e43]; @apply tw:border-[#d4e2d9]; box-shadow: 0 2px 5px rgb(32 59 52 / 8%); }
+.residential-actions-panel .staff-ward-card :is(.table-action-btn,.btn-outline) { @apply tw:mt-[5px]; @apply tw:text-[12px]; padding: 7px 9px; @apply tw:min-h-[36px]; }
+.residential-actions-panel .staff-ward-card > div:last-child > div { gap: 8px !important; }
+.residential-actions-panel .staff-ward-card > div:last-child > div > div { @apply tw:flex; @apply tw:flex-wrap; gap: 8px !important; }
+.residential-actions-panel #staff_ward_table_tbody td:last-child { white-space: normal !important; @apply tw:min-w-[160px]; }
+.residential-actions-panel #staff_ward_table_tbody .table-action-btn { @apply tw:m-[4px]; }
+.requisition-actions-panel :is(.btn-director-approve,.director-link-action):hover:not(:disabled),
+.residential-actions-panel :is(.btn-primary,.btn-outline,.table-action-btn,.view-mode-btn):hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 14px rgb(30 50 60 / 14%); }
+.requisition-actions-panel :is(.btn-director-approve,.director-link-action):active,
+.residential-actions-panel :is(.btn-primary,.btn-outline,.table-action-btn,.view-mode-btn):active { transform: translateY(1px); box-shadow: none; }
+.requisition-actions-panel :is(a,button):focus-visible,
+.residential-actions-panel :is(a,button):focus-visible { outline: 3px solid #bc892b; outline-offset: 3px; }
+.requisition-actions-panel button:disabled,
+.residential-actions-panel button:disabled { @apply tw:cursor-not-allowed; @apply tw:opacity-[.6]; transform: none; box-shadow: none; }
+@media(max-width:600px) {
+    .requisition-actions-panel .req-item-card { @apply tw:flex-col; @apply tw:items-stretch; }
+    .requisition-actions-panel .req-actions { align-self: flex-end; }
+    .residential-actions-panel .residential-toolbar .view-mode-toggle { @apply tw:ml-[0]; }
+}
+@media(prefers-reduced-motion:reduce) {
+    .requisition-actions-panel :is(a,button),.residential-actions-panel :is(a,button) { transition: none; transform: none !important; }
+}

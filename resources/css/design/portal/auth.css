@@ -1,0 +1,1030 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* ==========================================================================
+   HopeHaven Orphanage Management Portal - Admin Provisioning Stylesheet
+   File: public/css/portal/auth.css
+   Author: Sister Grace / HopeHaven IT Security
+   ========================================================================== */
+
+/* Hero Banner & Authorizer Context */
+.admin-provision-hero {
+    background: linear-gradient(135deg, #1e2230 0%, #111827 100%);
+    border-radius: var(--radius-lg);
+    padding: 30px 32px;
+    @apply tw:text-[#ffffff];
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-center;
+    @apply tw:gap-[24px];
+    @apply tw:mb-[28px];
+    box-shadow: 0 10px 30px rgba(18, 20, 29, 0.15);
+    @apply tw:relative;
+    @apply tw:overflow-hidden;
+}
+
+.admin-provision-hero::before {
+    content: '';
+    @apply tw:absolute;
+    @apply tw:top-[-50px];
+    @apply tw:right-[-50px];
+    @apply tw:w-[200px];
+    @apply tw:h-[200px];
+    background: radial-gradient(circle, rgba(255, 44, 90, 0.25) 0%, transparent 70%);
+    @apply tw:rounded-[50%];
+    @apply tw:pointer-events-none;
+}
+
+.hero-main-title {
+    @apply tw:text-[24px];
+    @apply tw:font-extrabold;
+    @apply tw:tracking-[-0.5px];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[12px];
+    @apply tw:mb-[8px];
+}
+
+.hero-main-title i {
+    color: var(--primary);
+}
+
+.hero-desc {
+    @apply tw:text-[#94a3b8];
+    @apply tw:text-[13.5px];
+    @apply tw:max-w-[680px];
+    @apply tw:leading-[1.6];
+}
+
+.hero-auth-badge {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-md);
+    padding: 14px 20px;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[14px];
+    @apply tw:shrink-0;
+}
+
+.hero-auth-avatar {
+    @apply tw:w-[44px];
+    @apply tw:h-[44px];
+    @apply tw:rounded-[50%];
+    background: linear-gradient(135deg, var(--primary), #eb1e4b);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:font-bold;
+    @apply tw:text-[16px];
+    @apply tw:text-[#fff];
+    box-shadow: 0 4px 14px rgba(255, 44, 90, 0.4);
+}
+
+.hero-auth-meta .meta-label {
+    @apply tw:text-[11px];
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.5px];
+    @apply tw:text-[#38bdf8];
+    @apply tw:font-semibold;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[5px];
+}
+
+.hero-auth-meta .meta-name {
+    @apply tw:text-[15px];
+    @apply tw:font-bold;
+    @apply tw:text-[#ffffff];
+}
+
+.hero-auth-meta .meta-id {
+    font-family: 'JetBrains Mono', monospace;
+    @apply tw:text-[11.5px];
+    @apply tw:text-[#cbd5e1];
+}
+
+/* Quick Metrics Row */
+.provision-metrics-row {
+    @apply tw:grid;
+    grid-template-columns: repeat(4, 1fr);
+    @apply tw:gap-[18px];
+    @apply tw:mb-[28px];
+}
+
+.prov-metric-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[16px];
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.prov-metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.prov-metric-icon {
+    @apply tw:w-[46px];
+    @apply tw:h-[46px];
+    @apply tw:rounded-[12px];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:text-[19px];
+    @apply tw:shrink-0;
+}
+
+.prov-metric-icon.coral { background: rgba(255, 44, 90, 0.1); color: var(--primary); }
+.prov-metric-icon.blue { background: rgba(59, 130, 246, 0.1); @apply tw:text-[#3b82f6]; }
+.prov-metric-icon.green { background: rgba(16, 185, 129, 0.1); @apply tw:text-[#10b981]; }
+.prov-metric-icon.purple { background: rgba(139, 92, 246, 0.1); @apply tw:text-[#8b5cf6]; }
+
+.prov-metric-info .m-label {
+    @apply tw:text-[12px];
+    @apply tw:font-semibold;
+    color: var(--dark-muted);
+}
+
+.prov-metric-info .m-val {
+    @apply tw:text-[20px];
+    @apply tw:font-extrabold;
+    color: var(--dark);
+    @apply tw:mt-[2px];
+}
+
+/* 2-Column Workspace Grid */
+.provision-layout-grid {
+    @apply tw:grid;
+    grid-template-columns: 1.8fr 1.2fr;
+    @apply tw:gap-[26px];
+    @apply tw:mb-[34px];
+}
+
+/* Form Card */
+.provision-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    @apply tw:overflow-hidden;
+}
+
+.provision-card-header {
+    padding: 22px 28px;
+    border-bottom: 1px solid #f1f5f9;
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-center;
+    background: #fafafa;
+}
+
+.provision-card-title {
+    @apply tw:text-[17px];
+    @apply tw:font-bold;
+    color: var(--dark);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[10px];
+}
+
+.provision-card-subtitle {
+    @apply tw:text-[12.5px];
+    color: var(--dark-muted);
+    @apply tw:mt-[3px];
+}
+
+.provision-card-body {
+    @apply tw:p-[28px];
+}
+
+/* Form Group & Controls */
+.form-section-divider {
+    @apply tw:text-[12px];
+    @apply tw:font-bold;
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.6px];
+    color: var(--primary);
+    margin: 22px 0 14px 0;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+    @apply tw:pb-[6px];
+    border-bottom: 1px dashed #e2e8f0;
+}
+
+.form-section-divider:first-of-type {
+    @apply tw:mt-[0];
+}
+
+.form-grid-2 {
+    @apply tw:grid;
+    grid-template-columns: 1fr 1fr;
+    @apply tw:gap-[18px];
+}
+
+.form-group {
+    @apply tw:mb-[18px];
+}
+
+.form-label {
+    @apply tw:block;
+    @apply tw:text-[12.5px];
+    @apply tw:font-semibold;
+    @apply tw:text-[#334155];
+    @apply tw:mb-[6px];
+}
+
+.input-with-icon {
+    @apply tw:relative;
+    @apply tw:flex;
+    @apply tw:items-center;
+}
+
+.input-icon-left {
+    @apply tw:absolute;
+    @apply tw:left-[14px];
+    @apply tw:text-[#94a3b8];
+    @apply tw:text-[14px];
+    @apply tw:pointer-events-none;
+    @apply tw:z-[2];
+}
+
+.form-control {
+    @apply tw:w-full;
+    @apply tw:h-[44px];
+    padding: 0 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: var(--radius-sm);
+    @apply tw:font-[inherit];
+    @apply tw:text-[13.5px];
+    color: var(--dark);
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.input-with-icon .form-control {
+    @apply tw:pl-[38px];
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(255, 44, 90, 0.12);
+}
+
+.form-control.font-mono {
+    font-family: 'JetBrains Mono', monospace;
+    @apply tw:font-semibold;
+    @apply tw:tracking-[0.5px];
+}
+
+/* Input with inline action */
+.input-group-action {
+    @apply tw:flex;
+    @apply tw:gap-[8px];
+}
+
+.input-group-action .form-control {
+    flex: 1;
+}
+
+.btn-inline-action {
+    @apply tw:h-[44px];
+    padding: 0 14px;
+    background: #f1f5f9;
+    border: 1.5px solid #cbd5e1;
+    border-radius: var(--radius-sm);
+    @apply tw:text-[12px];
+    @apply tw:font-semibold;
+    @apply tw:text-[#475569];
+    @apply tw:cursor-pointer;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    @apply tw:whitespace-nowrap;
+    transition: all 0.2s ease;
+}
+
+.btn-inline-action:hover {
+    background: #e2e8f0;
+    color: var(--dark);
+    @apply tw:border-[#94a3b8];
+}
+
+/* Password Toggle Icon */
+.btn-toggle-eye {
+    @apply tw:absolute;
+    @apply tw:right-[12px];
+    background: none;
+    border: none;
+    @apply tw:text-[#94a3b8];
+    @apply tw:text-[14px];
+    @apply tw:cursor-pointer;
+    @apply tw:p-[4px];
+    @apply tw:z-[2];
+}
+
+.btn-toggle-eye:hover {
+    color: var(--dark);
+}
+
+.field-hint {
+    @apply tw:text-[11.5px];
+    @apply tw:text-[#64748b];
+    @apply tw:mt-[5px];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[5px];
+}
+
+/* Password Strength Bar */
+.pw-strength-bar {
+    @apply tw:h-[4px];
+    background: #e2e8f0;
+    @apply tw:rounded-[2px];
+    @apply tw:mt-[6px];
+    @apply tw:overflow-hidden;
+    @apply tw:relative;
+}
+
+.pw-strength-fill {
+    @apply tw:h-full;
+    @apply tw:w-[0%];
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.pw-strength-fill.weak { @apply tw:w-[33%]; background: #ef4444; }
+.pw-strength-fill.medium { @apply tw:w-[66%]; background: #f59e0b; }
+.pw-strength-fill.strong { @apply tw:w-full; background: #10b981; }
+
+/* Role Radios / Badges */
+.admin-tier-grid {
+    @apply tw:grid;
+    grid-template-columns: repeat(2, 1fr);
+    @apply tw:gap-[12px];
+    @apply tw:mb-[18px];
+}
+
+.admin-tier-option {
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    @apply tw:cursor-pointer;
+    transition: all 0.2s ease;
+    @apply tw:flex;
+    @apply tw:items-start;
+    @apply tw:gap-[10px];
+    background: #fff;
+}
+
+.admin-tier-option:hover {
+    @apply tw:border-[#cbd5e1];
+    background: #f8fafc;
+}
+
+.admin-tier-option.active {
+    border-color: var(--primary);
+    background: rgba(255, 44, 90, 0.03);
+}
+
+.admin-tier-option input[type="radio"] {
+    @apply tw:mt-[3px];
+    accent-color: var(--primary);
+}
+
+.tier-label-name {
+    @apply tw:text-[13px];
+    @apply tw:font-bold;
+    color: var(--dark);
+}
+
+.tier-label-desc {
+    @apply tw:text-[11px];
+    @apply tw:text-[#64748b];
+    @apply tw:mt-[2px];
+    @apply tw:leading-[1.4];
+}
+
+/* Permissions Checklist */
+.perms-checkbox-list {
+    @apply tw:grid;
+    grid-template-columns: repeat(2, 1fr);
+    @apply tw:gap-[10px];
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius-sm);
+    @apply tw:p-[14px];
+    @apply tw:mb-[20px];
+}
+
+.perm-checkbox-item {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+    @apply tw:text-[12.5px];
+    @apply tw:font-medium;
+    @apply tw:text-[#334155];
+    @apply tw:cursor-pointer;
+}
+
+.perm-checkbox-item input[type="checkbox"] {
+    accent-color: var(--primary);
+}
+
+/* Security Directives Checks */
+.security-directives-box {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    @apply tw:mb-[24px];
+}
+
+.security-directives-title {
+    @apply tw:text-[12px];
+    @apply tw:font-bold;
+    @apply tw:text-[#991b1b];
+    @apply tw:mb-[8px];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+}
+
+.security-directives-box label {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+    @apply tw:text-[12px];
+    @apply tw:text-[#7f1d1d];
+    @apply tw:cursor-pointer;
+    @apply tw:mb-[6px];
+}
+
+.security-directives-box label:last-child {
+    @apply tw:mb-[0];
+}
+
+.security-directives-box input[type="checkbox"] {
+    accent-color: #dc2626;
+}
+
+/* Submit Action Button */
+.auth-submit-action {
+    @apply tw:w-full;
+    @apply tw:h-[48px];
+    background: var(--primary);
+    @apply tw:text-[#ffffff];
+    border: none;
+    border-radius: var(--radius-sm);
+    @apply tw:text-[14px];
+    @apply tw:font-bold;
+    @apply tw:cursor-pointer;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:gap-[10px];
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(255, 44, 90, 0.3);
+}
+
+.auth-submit-action:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(255, 44, 90, 0.4);
+}
+
+.auth-submit-action:disabled {
+    @apply tw:opacity-[0.7];
+    @apply tw:cursor-not-allowed;
+    transform: none;
+}
+
+/* Right Side Panel / Protocol Guide */
+.protocol-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    @apply tw:p-[24px];
+    @apply tw:mb-[20px];
+}
+
+.protocol-title {
+    @apply tw:text-[15px];
+    @apply tw:font-bold;
+    color: var(--dark);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+    @apply tw:mb-[14px];
+    @apply tw:pb-[10px];
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.protocol-step-item {
+    @apply tw:flex;
+    @apply tw:gap-[12px];
+    @apply tw:mb-[16px];
+}
+
+.protocol-step-item:last-child {
+    @apply tw:mb-[0];
+}
+
+.step-num {
+    @apply tw:w-[26px];
+    @apply tw:h-[26px];
+    @apply tw:rounded-[50%];
+    background: #eff6ff;
+    @apply tw:text-[#2563eb];
+    @apply tw:text-[12px];
+    @apply tw:font-bold;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:shrink-0;
+}
+
+.step-info .step-heading {
+    @apply tw:text-[13px];
+    @apply tw:font-semibold;
+    color: var(--dark);
+}
+
+.step-info .step-text {
+    @apply tw:text-[12px];
+    @apply tw:text-[#64748b];
+    @apply tw:mt-[2px];
+    @apply tw:leading-[1.45];
+}
+
+/* Authorizer Seal Card */
+.seal-card {
+    background: linear-gradient(145deg, #f8fafc, #edf2f7);
+    border: 1.5px dashed #cbd5e1;
+    border-radius: var(--radius-lg);
+    @apply tw:p-[22px];
+    @apply tw:text-center;
+}
+
+.seal-icon {
+    @apply tw:w-[50px];
+    @apply tw:h-[50px];
+    margin: 0 auto 10px auto;
+    @apply tw:rounded-[50%];
+    background: rgba(16, 185, 129, 0.12);
+    @apply tw:text-[#10b981];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:text-[22px];
+}
+
+.seal-title {
+    @apply tw:text-[14px];
+    @apply tw:font-bold;
+    color: var(--dark);
+}
+
+.seal-sub {
+    @apply tw:text-[11.5px];
+    @apply tw:text-[#64748b];
+    @apply tw:mt-[4px];
+    @apply tw:leading-[1.4];
+}
+
+.seal-timestamp {
+    font-family: 'JetBrains Mono', monospace;
+    @apply tw:text-[11px];
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    @apply tw:rounded-[4px];
+    padding: 4px 8px;
+    @apply tw:mt-[12px];
+    @apply tw:inline-block;
+    @apply tw:text-[#475569];
+}
+
+/* Table Section: Registered Administrators Directory */
+.admin-directory-section {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    @apply tw:overflow-hidden;
+}
+
+.directory-toolbar {
+    padding: 20px 24px;
+    border-bottom: 1px solid #f1f5f9;
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-center;
+    @apply tw:gap-[16px];
+    @apply tw:flex-wrap;
+    background: #fafafa;
+}
+
+.directory-toolbar-title {
+    @apply tw:text-[17px];
+    @apply tw:font-bold;
+    color: var(--dark);
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[10px];
+}
+
+.directory-toolbar-title .badge-count {
+    background: #e2e8f0;
+    @apply tw:text-[#334155];
+    @apply tw:text-[12px];
+    padding: 2px 8px;
+    @apply tw:rounded-[12px];
+    @apply tw:font-semibold;
+}
+
+.directory-search-box {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[10px];
+}
+
+.directory-search-input {
+    @apply tw:h-[38px];
+    padding: 0 12px 0 34px;
+    border: 1px solid #cbd5e1;
+    border-radius: var(--radius-sm);
+    @apply tw:text-[12.5px];
+    @apply tw:w-[240px];
+}
+
+/* Admin Table */
+.admin-table-container {
+    @apply tw:w-full;
+    @apply tw:overflow-x-auto;
+}
+
+.admin-table {
+    @apply tw:w-full;
+    @apply tw:border-collapse;
+    @apply tw:text-[13px];
+    @apply tw:text-left;
+}
+
+.admin-table th {
+    background: #f8fafc;
+    @apply tw:text-[#475569];
+    @apply tw:font-semibold;
+    @apply tw:text-[11.5px];
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.5px];
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.admin-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.admin-table tr:hover td {
+    @apply tw:bg-[#fafbfc];
+}
+
+.admin-table tr.newly-added td {
+    background-color: rgba(16, 185, 129, 0.08);
+    animation: highlightRow 2.5s ease-out;
+}
+
+@keyframes highlightRow {
+    0% { background-color: rgba(16, 185, 129, 0.25); }
+    100% { background-color: transparent; }
+}
+
+.badge-admin-id {
+    font-family: 'JetBrains Mono', monospace;
+    @apply tw:font-bold;
+    @apply tw:text-[12px];
+    padding: 4px 9px;
+    @apply tw:rounded-[6px];
+    background: #eff6ff;
+    @apply tw:text-[#1d4ed8];
+    border: 1px solid #bfdbfe;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[5px];
+}
+
+.admin-profile-cell {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[12px];
+}
+
+.admin-avatar {
+    @apply tw:w-[38px];
+    @apply tw:h-[38px];
+    @apply tw:rounded-[50%];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:font-bold;
+    @apply tw:text-[13.5px];
+    @apply tw:text-[#ffffff];
+    @apply tw:shrink-0;
+}
+
+.admin-cell-name {
+    @apply tw:font-semibold;
+    color: var(--dark);
+}
+
+.admin-cell-email {
+    @apply tw:text-[11.5px];
+    @apply tw:text-[#64748b];
+}
+
+.badge-role {
+    padding: 3px 10px;
+    @apply tw:rounded-[12px];
+    @apply tw:text-[11px];
+    @apply tw:font-semibold;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[5px];
+}
+
+.badge-role.super { background: rgba(255, 44, 90, 0.1); color: var(--primary); }
+.badge-role.it { background: rgba(59, 130, 246, 0.1); @apply tw:text-[#2563eb]; }
+.badge-role.welfare { background: rgba(16, 185, 129, 0.1); @apply tw:text-[#059669]; }
+.badge-role.finance { background: rgba(139, 92, 246, 0.1); @apply tw:text-[#7c3aed]; }
+
+.status-indicator {
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    @apply tw:text-[12px];
+    @apply tw:font-semibold;
+}
+
+.status-indicator.active { @apply tw:text-[#059669]; }
+.status-indicator.suspended { @apply tw:text-[#dc2626]; }
+
+.status-dot {
+    @apply tw:w-[8px];
+    @apply tw:h-[8px];
+    @apply tw:rounded-[50%];
+    background: currentColor;
+}
+
+.status-indicator.active .status-dot {
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.table-action-btn {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    @apply tw:text-[#334155];
+    padding: 6px 12px;
+    @apply tw:rounded-[6px];
+    @apply tw:text-[11.5px];
+    @apply tw:font-semibold;
+    @apply tw:cursor-pointer;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[5px];
+    transition: all 0.2s ease;
+}
+
+.table-action-btn:hover {
+    background: #e2e8f0;
+    color: var(--dark);
+}
+
+/* Credential Slip Modal */
+.modal-voucher-backdrop {
+    @apply tw:hidden;
+    @apply tw:fixed;
+    @apply tw:top-[0];
+    @apply tw:left-[0];
+    @apply tw:right-[0];
+    @apply tw:bottom-[0];
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(4px);
+    @apply tw:z-[9999];
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:p-[20px];
+}
+
+.modal-voucher-content {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    @apply tw:w-full;
+    @apply tw:max-w-[560px];
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    @apply tw:overflow-hidden;
+    animation: modalSlideUp 0.3s ease-out;
+}
+
+@keyframes modalSlideUp {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.voucher-header {
+    background: linear-gradient(135deg, #1e2230, #0f172a);
+    @apply tw:text-[#ffffff];
+    padding: 24px 28px;
+    @apply tw:relative;
+    border-bottom: 3px solid var(--primary);
+}
+
+.voucher-badge {
+    background: rgba(16, 185, 129, 0.2);
+    @apply tw:text-[#34d399];
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:uppercase;
+    padding: 3px 8px;
+    @apply tw:rounded-[4px];
+    @apply tw:inline-block;
+    @apply tw:mb-[8px];
+}
+
+.voucher-title {
+    @apply tw:text-[20px];
+    @apply tw:font-extrabold;
+    @apply tw:tracking-[-0.5px];
+}
+
+.voucher-sub {
+    @apply tw:text-[12px];
+    @apply tw:text-[#94a3b8];
+    @apply tw:mt-[4px];
+}
+
+.voucher-close-btn {
+    @apply tw:absolute;
+    @apply tw:top-[20px];
+    @apply tw:right-[20px];
+    background: none;
+    border: none;
+    @apply tw:text-[#94a3b8];
+    @apply tw:text-[20px];
+    @apply tw:cursor-pointer;
+}
+
+.voucher-body {
+    @apply tw:p-[28px];
+}
+
+.voucher-card-box {
+    border: 1.5px dashed #cbd5e1;
+    border-radius: var(--radius-md);
+    background: #f8fafc;
+    @apply tw:p-[20px];
+    @apply tw:mb-[22px];
+    @apply tw:relative;
+}
+
+.voucher-field {
+    @apply tw:mb-[14px];
+}
+
+.voucher-field:last-child {
+    @apply tw:mb-[0];
+}
+
+.voucher-field-label {
+    @apply tw:text-[11px];
+    @apply tw:uppercase;
+    @apply tw:text-[#64748b];
+    @apply tw:font-bold;
+    @apply tw:tracking-[0.5px];
+}
+
+.voucher-field-value {
+    @apply tw:text-[15px];
+    @apply tw:font-bold;
+    color: var(--dark);
+    @apply tw:mt-[2px];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+}
+
+.voucher-admin-id-highlight {
+    font-family: 'JetBrains Mono', monospace;
+    @apply tw:text-[18px];
+    @apply tw:font-extrabold;
+    @apply tw:text-[#1d4ed8];
+    background: #dbeafe;
+    padding: 4px 10px;
+    @apply tw:rounded-[6px];
+    border: 1px solid #bfdbfe;
+}
+
+.voucher-password-highlight {
+    font-family: 'JetBrains Mono', monospace;
+    @apply tw:text-[15px];
+    @apply tw:font-bold;
+    @apply tw:text-[#0f172a];
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    padding: 4px 10px;
+    @apply tw:rounded-[6px];
+    @apply tw:tracking-[1px];
+}
+
+.voucher-copy-btn {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    @apply tw:text-[#475569];
+    padding: 4px 10px;
+    @apply tw:rounded-[4px];
+    @apply tw:text-[11px];
+    @apply tw:cursor-pointer;
+    @apply tw:font-semibold;
+    transition: all 0.2s ease;
+}
+
+.voucher-copy-btn:hover {
+    background: var(--primary);
+    @apply tw:text-[#ffffff];
+    border-color: var(--primary);
+}
+
+.voucher-footer {
+    @apply tw:flex;
+    @apply tw:gap-[12px];
+}
+
+.voucher-btn-primary {
+    flex: 1;
+    @apply tw:h-[42px];
+    background: var(--primary);
+    @apply tw:text-[#ffffff];
+    border: none;
+    border-radius: var(--radius-sm);
+    @apply tw:font-bold;
+    @apply tw:text-[13px];
+    @apply tw:cursor-pointer;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:gap-[8px];
+    transition: background 0.2s;
+}
+
+.voucher-btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+.voucher-btn-secondary {
+    @apply tw:h-[42px];
+    padding: 0 18px;
+    background: #f1f5f9;
+    @apply tw:text-[#334155];
+    border: 1px solid #cbd5e1;
+    border-radius: var(--radius-sm);
+    @apply tw:font-semibold;
+    @apply tw:text-[13px];
+    @apply tw:cursor-pointer;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+}
+
+.voucher-btn-secondary:hover {
+    background: #e2e8f0;
+}
+
+/* Responsive queries */
+@media (max-width: 992px) {
+    .admin-provision-hero {
+        @apply tw:flex-col;
+        @apply tw:items-start;
+    }
+    .provision-metrics-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .provision-layout-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .form-grid-2, .admin-tier-grid, .perms-checkbox-list, .provision-metrics-row {
+        grid-template-columns: 1fr;
+    }
+}

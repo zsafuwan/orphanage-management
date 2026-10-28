@@ -1,0 +1,129 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+
+        .admin-donations-hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f766e 100%);
+            @apply tw:text-[#ffffff];
+            border-radius: var(--radius-md);
+            padding: 24px 28px;
+            @apply tw:mb-[24px];
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.25);
+            @apply tw:relative;
+            @apply tw:overflow-hidden;
+        }
+
+        .admin-donations-hero::after {
+            content: '';
+            @apply tw:absolute;
+            @apply tw:top-[-30px];
+            @apply tw:right-[-30px];
+            @apply tw:w-[240px];
+            @apply tw:h-[240px];
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.25) 0%, transparent 70%);
+            @apply tw:rounded-[50%];
+            @apply tw:pointer-events-none;
+        }
+
+        .chart-timeframe-btn {
+            background: #f1f5f9;
+            @apply tw:text-[#475569];
+            border: 1px solid #cbd5e1;
+            padding: 6px 14px;
+            @apply tw:rounded-[6px];
+            @apply tw:text-[12px];
+            @apply tw:font-bold;
+            @apply tw:cursor-pointer;
+            transition: all 0.2s ease;
+        }
+
+        .chart-timeframe-btn:hover {
+            background: #e2e8f0;
+            @apply tw:text-[#1e293b];
+        }
+
+        .chart-timeframe-btn.active {
+            background: #0f766e;
+            @apply tw:text-[#ffffff];
+            @apply tw:border-[#0f766e];
+            box-shadow: 0 2px 8px rgba(15, 118, 110, 0.25);
+        }
+
+        .chart-view-btn {
+            background: transparent;
+            @apply tw:text-[#64748b];
+            border: 1px solid #e2e8f0;
+            padding: 5px 12px;
+            @apply tw:rounded-[6px];
+            @apply tw:text-[11.5px];
+            @apply tw:font-semibold;
+            @apply tw:cursor-pointer;
+            transition: all 0.2s ease;
+        }
+
+        .chart-view-btn.active {
+            background: #0284c7;
+            @apply tw:text-[#ffffff];
+            @apply tw:border-[#0284c7];
+        }
+
+        .orphanage-rank-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            padding: 18px 20px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+            @apply tw:relative;
+            @apply tw:overflow-hidden;
+        }
+
+        .orphanage-rank-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            @apply tw:border-[#cbd5e1];
+        }
+
+        .orphanage-rank-card.is-our-home {
+            border: 2px solid #0f766e;
+            background: linear-gradient(180deg, #ffffff 0%, #f0fdfa 100%);
+        }
+
+        .rank-number-badge {
+            @apply tw:inline-flex;
+            @apply tw:items-center;
+            @apply tw:justify-center;
+            @apply tw:w-[28px];
+            @apply tw:h-[28px];
+            @apply tw:rounded-[50%];
+            @apply tw:font-extrabold;
+            @apply tw:text-[12px];
+        }
+
+        .rank-gold { background: #fef3c7; @apply tw:text-[#b45309]; border: 1px solid #fde68a; }
+        .rank-silver { background: #f1f5f9; @apply tw:text-[#475569]; border: 1px solid #cbd5e1; }
+        .rank-bronze { background: #ffedd5; @apply tw:text-[#c2410c]; border: 1px solid #fed7aa; }
+        .rank-standard { background: #f8fafc; @apply tw:text-[#64748b]; border: 1px solid #e2e8f0; }
+
+        .benchmark-pill {
+            @apply tw:inline-flex;
+            @apply tw:items-center;
+            @apply tw:gap-[4px];
+            @apply tw:text-[11px];
+            @apply tw:font-bold;
+            padding: 2px 8px;
+            @apply tw:rounded-[12px];
+        }
+
+        .benchmark-pill.positive {
+            background: #ecfdf5;
+            @apply tw:text-[#059669];
+            border: 1px solid #a7f3d0;
+        }
+
+        .benchmark-pill.neutral {
+            background: #f1f5f9;
+            @apply tw:text-[#475569];
+            border: 1px solid #cbd5e1;
+        }
+    

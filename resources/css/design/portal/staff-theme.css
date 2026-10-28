@@ -1,0 +1,139 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* Staff screens use the workspace palette, including legacy inline controls.
+   Important declarations override those inline colors and existing modal rules;
+   warning, danger and medical status colors retain their meaning. */
+.care-staff :is(.staff-inv-hero,.staff-welfare-hero,.staff-donations-hero,.staff-hero-card) {
+    background: #e9efdf;
+    color: var(--dark);
+    border: 1px solid #dce5d1;
+    @apply tw:rounded-[21px];
+    padding: 30px 32px;
+    box-shadow: none;
+}
+.care-staff :is(.staff-inv-hero,.staff-welfare-hero,.staff-donations-hero,.staff-hero-card)::after {
+    background: none;
+    border: 30px solid rgb(129 159 99 / 8%);
+    @apply tw:pointer-events-none;
+}
+.care-staff :is(.staff-inv-hero,.staff-welfare-hero,.staff-donations-hero) h1 {
+    color: var(--dark);
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(25px,2.3vw,34px) !important;
+    letter-spacing: -1px !important;
+    @apply tw:leading-[1.3];
+}
+.care-staff :is(.staff-inv-hero,.staff-welfare-hero,.staff-donations-hero) p { @apply tw:text-[#65755e]; font-size: 12px !important; line-height: 1.8 !important; opacity: 1 !important; }
+.care-staff :is(.staff-inv-badge,.staff-subsystem-pill) { background: #f5f8ee; @apply tw:text-[#607a4e]; border: 1px solid #d5e0c7; @apply tw:rounded-[7px]; @apply tw:text-[9px]; padding: 5px 10px; @apply tw:tracking-[1px]; }
+.care-staff :is(.staff-welfare-hero,.staff-donations-hero) > div > div > div:first-child { background: #f5f8ee !important; @apply tw:text-[#607a4e]; border-color: #d5e0c7 !important; border-radius: 7px !important; font-size: 9px !important; }
+.care-staff :is(.staff-avatar-circle,.hero-auth-avatar,.dir-authorizer-avatar) { background: #66834e; box-shadow: none; @apply tw:text-[#fff]; }
+.care-staff :is(.hero-title .accent-name,.staff-hero-card h1,.hero-stat-val) { color: var(--dark) !important; }
+.care-staff :is(.btn-primary,.staff-btn-save,.staff-btn-save.handover,.staff-btn-save.supplies,.duty-action-btn-sm,.action-icon-btn.primary,.btn-pill-primary) {
+    background: var(--primary) !important;
+    color: #fff !important;
+    border-color: var(--primary) !important;
+    box-shadow: none;
+    @apply tw:font-[inherit];
+    @apply tw:font-semibold;
+    @apply tw:rounded-[10px];
+    @apply tw:min-h-[38px];
+}
+.care-staff :is(.btn-primary,.staff-btn-save,.duty-action-btn-sm,.action-icon-btn.primary):hover { background: var(--primary-hover) !important; border-color: var(--primary-hover) !important; box-shadow: 0 4px 12px rgb(25 75 52 / 10%); }
+.care-staff :is(.btn-outline,.staff-btn-cancel,.action-icon-btn.req) { background: #fff !important; color: var(--primary) !important; border: 1px solid var(--primary-border) !important; @apply tw:rounded-[10px]; @apply tw:min-h-[38px]; box-shadow: none; }
+.care-staff :is(.btn-outline,.staff-btn-cancel,.action-icon-btn.req):hover { background: var(--primary-light) !important; }
+.care-staff .btn-outline[onclick*="confirmDelete"] { color: #a64f43 !important; border-color: #e6c8bf !important; background: #fff6f2 !important; }
+.care-staff .rbac-workflow-ribbon { background: #edf3e5; @apply tw:border-[#d4e2c9]; @apply tw:text-[#526e42]; }
+.care-staff .rbac-workflow-ribbon :is(i,strong,span) { color: #526e42 !important; }
+.care-staff .rbac-workflow-ribbon > span { background: #e1ebd5 !important; }
+.care-staff .rbac-banner { @apply tw:flex; @apply tw:items-center; @apply tw:justify-between; @apply tw:flex-wrap; @apply tw:gap-[14px]; padding: 16px 20px; @apply tw:mb-[24px]; border: 1px solid var(--border-color); @apply tw:rounded-[14px]; background: #fff; }
+.care-staff .shift-status-toggle-btn.active { background: var(--primary); @apply tw:text-[#fff]; border-color: var(--primary); box-shadow: none; }
+.care-staff .staff-badge-preview { background: #214936; box-shadow: none; }
+.care-staff :is(.tab-btn,.staff-tab-btn,.duty-filter-btn,.view-mode-btn,.role-pill) { @apply tw:font-[inherit]; @apply tw:text-[11px]; @apply tw:font-semibold; }
+.care-staff :is(.tab-btn,.staff-tab-btn,.duty-filter-btn,.view-mode-btn,.role-pill).active { background: var(--primary-light); color: var(--primary); border-color: var(--primary-border); box-shadow: none; }
+.care-staff .staff-profile-tabs { border-bottom: 1px solid var(--border-color); @apply tw:gap-[5px]; }
+.care-staff .staff-tab-btn { border-radius: 10px 10px 0 0; padding: 12px 16px; }
+.care-staff .staff-tab-btn.active { border-bottom: 3px solid var(--primary); }
+.care-staff :is(.staff-tab-btn.active .badge-pill,.staff-duty-pill,.cabinet-loc-pill,.sched-status-badge.done) { background: var(--primary-light); border-color: var(--primary-border); color: var(--primary); }
+.care-staff :is(.duty-notif-section,.ward-inv-card,.staff-ward-card,.fund-allocation-card,.ticket-item-row,.cert-card-item,.profile-card,.staff-action-card) { border-color: var(--border-color); @apply tw:rounded-[17px]; @apply tw:bg-[#fff]; box-shadow: var(--shadow-sm); }
+.care-staff .ward-inv-card.good-stock { border-left: 3px solid #8fae70; }
+.care-staff .ward-inv-card.low-stock { border-left: 3px solid #cc8a67; background: #fffaf5; }
+.care-staff .metric-card { border-left: 1px solid var(--border-color) !important; background: #fff !important; }
+.care-staff .metric-card :is(.metric-label,.metric-val) { color: var(--dark) !important; }
+.care-staff .metric-card .metric-icon { background: #edf3e6 !important; color: #62814b !important; }
+.care-staff .metric-card .metric-icon:is([style*="#ef4444"],[style*="#dc2626"]) { background: #fff0e8 !important; color: #ad5946 !important; }
+.care-staff .metric-card .metric-icon[style*="#f59e0b"] { background: #fcf5df !important; color: #a67a2f !important; }
+.care-staff :is(.fund-progress-fill,.staff-pulse-dot) { background: #78985a; }
+.care-staff .staff-schedule-item { @apply tw:border-[#e5eadf]; @apply tw:rounded-[12px]; background: #fff; }
+.care-staff .staff-schedule-item.completed { border-left-color: #89a56f; @apply tw:opacity-[1]; }
+.care-staff .staff-schedule-item.upcoming { border-left-color: #b4c7a0; }
+.care-staff .staff-schedule-item.in-progress { border-left-color: #bd945c; background: #fcf8ee; }
+.care-staff .duty-alert-card { @apply tw:rounded-[15px]; box-shadow: none; }
+.care-staff .duty-alert-card.alert-clinical { background: #fff8f4; @apply tw:border-[#ead9ce]; }
+.care-staff .duty-alert-card.alert-medication { background: #fdfbf3; @apply tw:border-[#e9dfc1]; }
+.care-staff .duty-alert-card.alert-supplies { background: #f4f8ee; @apply tw:border-[#d9e5c9]; }
+.care-staff .staff-duty-modal-card { @apply tw:rounded-[20px]; box-shadow: 0 24px 90px rgb(20 48 31 / 22%); }
+.care-staff .staff-modal-header:is(.clinical,.handover,.supplies,.academic,.intake) { background: #e9efdf !important; border-bottom: 1px solid #d8e3ca; color: var(--dark) !important; }
+.care-staff :is(.staff-modal-title,.staff-modal-header h3) { color: var(--dark) !important; font-family: 'Manrope', sans-serif; }
+.care-staff .staff-modal-sub { color: #65755e !important; }
+.care-staff .staff-modal-badge { color: #607a4e !important; @apply tw:border-[#d5e0c7]; background: #f5f8ee; @apply tw:rounded-[7px]; @apply tw:text-[9px]; @apply tw:tracking-[1px]; }
+.care-staff .staff-modal-close-btn { @apply tw:w-[40px]; @apply tw:h-[40px]; @apply tw:p-[0]; background: #fff; color: var(--role-ink, #42513e) !important; border: 1px solid var(--primary-border); box-shadow: none; @apply tw:text-[28px]; @apply tw:font-medium; @apply tw:leading-[1]; }
+.care-staff .staff-modal-close-btn:hover { background: var(--role-tint, #edf4ec); transform: none; }
+.care-staff :is(.staff-input-control,.staff-textarea-control,.editable-input,.form-control,.search-input,.filter-select) { @apply tw:font-[inherit]; @apply tw:bg-[#fff]; color: var(--dark); border: 1px solid var(--border-color); @apply tw:rounded-[10px]; }
+.care-staff :is(.staff-input-control,.staff-textarea-control,.editable-input,.form-control):focus { border-color: #82a36b !important; box-shadow: 0 0 0 3px rgb(130 163 107 / 10%) !important; }
+.care-staff .staff-field-label i { color: #718a5b !important; }
+.care-staff :is(.profile-card-header,.modal-header) { background: #f7f9f2; border-bottom-color: var(--border-color); }
+.care-staff :is(.staff-field-label,.form-label) { @apply tw:text-[#6a7b60]; }
+.care-staff :is(.staff-modal-footer-btns,.modal-footer) { border-top-color: var(--border-color); }
+.care-staff .staff-receipt-btn { @apply tw:inline-flex; @apply tw:items-center; @apply tw:justify-center; @apply tw:gap-[9px]; @apply tw:min-h-[42px]; @apply tw:min-w-[120px]; padding: 9px 15px; border: 1px solid var(--primary-border); @apply tw:rounded-[10px]; background: var(--primary-light); color: var(--primary); @apply tw:font-[inherit]; @apply tw:text-[12px]; @apply tw:font-semibold; @apply tw:leading-[1.4]; @apply tw:cursor-pointer; transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease; }
+.care-staff .staff-receipt-btn > i { @apply tw:grid; place-items: center; @apply tw:w-[24px]; @apply tw:h-[24px]; @apply tw:rounded-[7px]; background: #e0ebd5; @apply tw:text-[13px]; }
+.care-staff .staff-receipt-btn:hover { background: #e1ecd8; @apply tw:border-[#98b489]; box-shadow: 0 3px 9px rgb(37 99 78 / 8%); }
+.care-staff .staff-receipt-btn:active { background: #d7e5cb; box-shadow: none; }
+.care-staff .staff-routine-add-btn { @apply tw:inline-flex; @apply tw:items-center; @apply tw:justify-center; @apply tw:gap-[9px]; @apply tw:min-h-[42px]; padding: 8px 15px 8px 9px; border: 1px solid var(--primary); @apply tw:rounded-[11px]; background: var(--primary); @apply tw:text-[#fff]; font: 600 12px/1.4 'DM Sans', sans-serif; @apply tw:whitespace-nowrap; @apply tw:cursor-pointer; box-shadow: 0 3px 8px rgb(37 99 78 / 10%); transition: background 160ms ease, box-shadow 160ms ease; }
+.care-staff .staff-routine-add-icon { @apply tw:grid; place-items: center; @apply tw:w-[26px]; @apply tw:h-[26px]; border: 1px solid rgb(255 255 255 / 18%); @apply tw:rounded-[8px]; background: rgb(255 255 255 / 12%); }
+.care-staff .staff-routine-add-btn:hover { background: var(--primary-hover); box-shadow: 0 5px 12px rgb(37 99 78 / 15%); }
+.care-staff .staff-routine-add-btn:active { box-shadow: none; }
+.care-staff .staff-add-subject-btn { @apply tw:inline-flex; @apply tw:items-center; @apply tw:justify-center; @apply tw:gap-[8px]; @apply tw:min-h-[40px]; padding: 7px 13px 7px 8px; border: 1px solid var(--primary-border); @apply tw:rounded-[10px]; background: var(--primary-light); color: var(--primary); font: 600 12px/1.4 'DM Sans', sans-serif; @apply tw:whitespace-nowrap; @apply tw:cursor-pointer; box-shadow: 0 2px 5px rgb(37 99 78 / 5%); transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease; }
+.care-staff .staff-add-subject-icon { @apply tw:grid; place-items: center; @apply tw:w-[24px]; @apply tw:h-[24px]; @apply tw:rounded-[7px]; background: #dfead3; @apply tw:text-[12px]; }
+.care-staff .staff-add-subject-btn:hover { background: #e1ecd8; @apply tw:border-[#98b489]; box-shadow: 0 3px 8px rgb(37 99 78 / 10%); }
+.care-staff .staff-add-subject-btn:active { background: #d7e5cb; box-shadow: none; }
+.care-staff .staff-dossier-tabs { @apply tw:flex; @apply tw:flex-wrap; @apply tw:gap-[6px]; @apply tw:p-[5px]; @apply tw:mb-[18px]; border: 1px solid #dce5d3; @apply tw:rounded-[14px]; background: #f0f4e9; }
+.care-staff .staff-dossier-tabs .dossier-tab-btn { @apply tw:inline-flex; flex: 1 1 220px; @apply tw:items-center; @apply tw:justify-center; @apply tw:gap-[10px]; @apply tw:min-h-[48px]; padding: 9px 13px; border: 1px solid transparent; @apply tw:rounded-[10px]; background: transparent; @apply tw:text-[#728267]; font: 600 12px/1.4 'DM Sans', sans-serif; @apply tw:cursor-pointer; transition: background 160ms ease, color 160ms ease, box-shadow 160ms ease; }
+.care-staff .staff-dossier-tab-icon { @apply tw:grid; place-items: center; @apply tw:shrink-0; @apply tw:w-[29px]; @apply tw:h-[29px]; @apply tw:rounded-[8px]; background: #e3ebd8; @apply tw:text-[#718b56]; @apply tw:text-[14px]; }
+.care-staff .staff-dossier-tabs .dossier-tab-btn:hover { background: #e5eddc; color: var(--primary); }
+.care-staff .staff-dossier-tabs .dossier-tab-btn.active { background: #fff; color: var(--primary); @apply tw:border-[#d5e2c9]; box-shadow: 0 2px 6px rgb(37 99 78 / 7%); }
+.care-staff .dossier-tab-btn.active .staff-dossier-tab-icon { background: var(--primary); @apply tw:text-[#fff]; }
+.care-staff.care-workspace .portal-content table > :is(thead,tbody) > tr > .staff-receipt-column:last-child { @apply tw:text-center; @apply tw:pl-[24px]; @apply tw:pr-[24px]; }
+.care-staff .staff-record-filters { @apply tw:flex; @apply tw:items-center; @apply tw:flex-wrap; @apply tw:gap-[14px]; }
+.care-staff .staff-record-filters .search-box-wrapper { @apply tw:relative; flex: 1 1 280px; @apply tw:min-w-0; }
+.care-staff .staff-record-filters .search-icon { @apply tw:absolute; @apply tw:left-[15px]; @apply tw:top-[50%]; transform: translateY(-50%); @apply tw:text-[#859579]; @apply tw:pointer-events-none; }
+.care-staff .staff-record-filters .search-input { @apply tw:block; @apply tw:w-full; @apply tw:min-h-[44px]; padding: 11px 15px 11px 42px; @apply tw:text-[12px]; }
+.care-staff .staff-record-filters .filter-select-wrapper { @apply tw:relative; flex: 0 1 240px; @apply tw:min-w-0; }
+.care-staff .staff-record-filters .filter-select-wrapper::after { content: ''; @apply tw:absolute; @apply tw:right-[17px]; top: calc(50% - 5px); @apply tw:w-[7px]; @apply tw:h-[7px]; border-right: 1.5px solid var(--primary); border-bottom: 1.5px solid var(--primary); transform: rotate(45deg); @apply tw:pointer-events-none; }
+.care-staff .staff-record-filters .filter-select { appearance: none; @apply tw:block; @apply tw:w-full; @apply tw:min-h-[44px]; padding: 11px 34px; @apply tw:text-center; text-align-last: center; @apply tw:text-[12px]; @apply tw:cursor-pointer; }
+@media(max-width:600px) {
+    .care-staff .staff-record-filters .filter-select-wrapper { flex: 1 1 200px; }
+    .care-staff :is(.staff-inv-hero,.staff-welfare-hero,.staff-donations-hero,.staff-hero-card) { padding: 24px 20px; @apply tw:rounded-[17px]; }
+    .care-staff .staff-inv-grid { grid-template-columns: minmax(0,1fr); }
+    .care-staff .staff-modal-header { padding: 22px 20px; }
+    .care-staff :is(.staff-modal-body,.profile-card-body) { @apply tw:p-[20px]; }
+    .care-staff .staff-tab-btn { padding: 11px 12px; }
+}
+
+/* Inventory display switch shares the filter row's spacing and theme. */
+.care-staff .staff-inventory-view-toggle {
+    @apply tw:inline-flex; @apply tw:items-center; @apply tw:gap-[4px]; @apply tw:p-[5px];
+    @apply tw:ml-[auto]; background: #e9efdf; border: 1px solid #dce5d3;
+    @apply tw:rounded-[14px]; @apply tw:shrink-0;
+}
+.care-staff .staff-inventory-view-toggle .view-mode-btn {
+    @apply tw:inline-flex; @apply tw:items-center; @apply tw:justify-center; @apply tw:gap-[8px];
+    @apply tw:min-h-[38px]; padding: 9px 15px; border: 0; @apply tw:rounded-[10px];
+    background: transparent; @apply tw:text-[#62775b]; font: inherit; @apply tw:text-[12px];
+    @apply tw:font-bold; @apply tw:cursor-pointer; transition: background .18s, color .18s, box-shadow .18s;
+}
+.care-staff .staff-inventory-view-toggle .view-mode-btn.active {
+    background: #25634e; @apply tw:text-[#fff]; box-shadow: 0 3px 8px #1c49331a;
+}
+.care-staff .staff-inventory-view-toggle .view-mode-btn:hover:not(.active) { background: #fff; @apply tw:text-[#25634e]; }
+.care-staff .staff-inventory-view-toggle .view-mode-btn:focus-visible { outline: 2px solid #b18b46; outline-offset: 2px; }

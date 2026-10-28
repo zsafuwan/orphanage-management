@@ -71,7 +71,7 @@
             adminDecision: {
                 approvedBy: 'Sister Grace (Executive Director)',
                 decisionDate: '2026-10-16 11:45 AM',
-                fundingSource: 'Sanctuary Emergency Healthcare Endowment',
+                fundingSource: 'Orphanage Emergency Healthcare Fund',
                 remarks: 'Approved unconditionally. Hospital escort assigned to Volunteer Sarah.',
                 disbursementRef: 'DISB-MED-2026-089'
             }
@@ -95,8 +95,8 @@
             status: 'Approved',
             adminDecision: {
                 approvedBy: 'Sister Grace (Executive Director)',
-                decisionDate: '2026-10-11 14:00 PM',
-                fundingSource: 'General Sanctuary Welfare Allocation',
+                decisionDate: '2026-10-11 14:00',
+                fundingSource: 'General Orphanage Welfare Allocation',
                 remarks: 'Approved with central storeroom stock drawing under Voucher VCH-882.',
                 disbursementRef: 'DISB-BED-2026-034'
             }
@@ -120,7 +120,7 @@
             status: 'Rejected',
             adminDecision: {
                 approvedBy: 'Sister Grace (Executive Director)',
-                decisionDate: '2026-09-29 16:20 PM',
+                decisionDate: '2026-09-29 16:20',
                 fundingSource: 'N/A',
                 remarks: 'Declined for external purchase. Please draw from the unissued orthopedic shoe inventory donated by Beacon Medical Logistics in Storeroom Bay 3 first.',
                 disbursementRef: null
@@ -133,20 +133,23 @@
             try {
                 const stored = localStorage.getItem(STORAGE_KEY);
                 if (stored) {
-                    return JSON.parse(stored);
+                    const parsed = JSON.parse(stored);
+                    if (Array.isArray(parsed)) return parsed;
                 }
             } catch (e) {
                 console.error('Error reading welfare store:', e);
             }
-            this.saveAll(SEED_REQUESTS);
-            return SEED_REQUESTS;
+            const seeds = JSON.parse(JSON.stringify(SEED_REQUESTS));
+            this.saveAll(seeds);
+            return seeds;
         },
 
         saveAll: function(list) {
             try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+                window.HopeHavenSync.write(STORAGE_KEY, JSON.stringify(list));
             } catch (e) {
                 console.error('Error saving welfare store:', e);
+                throw e;
             }
         },
 
@@ -158,21 +161,19 @@
         // STAFF-ONLY: Submit Requisition
         createRequest: function(data) {
             const list = this.getAll();
-            const year = new Date().getFullYear();
-            const seq = String(list.length + 1).padStart(3, '0');
-            const newId = `WR-${year}-${seq}`;
+            const newId = window.HopeHavenSync.nextId(list, 'WR');
 
             const newTicket = {
                 id: newId,
-                title: data.title || 'Welfare Assistance Requisition',
+                title: data.title || 'Welfare Assistance Request',
                 category: data.category || 'General Welfare',
                 beneficiaryName: data.beneficiaryName || 'Resident Ward',
                 beneficiaryId: data.beneficiaryId || 'CH-General',
-                dorm: data.dorm || 'Main Sanctuary Dorm',
+                dorm: data.dorm || 'Main Orphanage Dorm',
                 urgency: data.urgency || 'Standard',
                 cost: parseFloat(data.cost) || 0,
                 lineItems: data.lineItems || [],
-                justification: data.justification || 'Logged by duty caregiver.',
+                justification: data.justification || 'Logged by caregiver on Duty.',
                 requestedBy: data.requestedBy || 'Nurse Mary (Active Caregiver)',
                 requestedDate: 'Today · Just now',
                 status: 'Pending Admin Approval',
@@ -194,8 +195,8 @@
             ticket.adminDecision = {
                 approvedBy: adminName || 'Sister Grace (Executive Director)',
                 decisionDate: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ' · Authorized',
-                fundingSource: fundingSource || 'Sanctuary Emergency Healthcare Endowment',
-                remarks: remarks || 'Approved for full disbursement and procurement.',
+                fundingSource: fundingSource || 'Orphanage Emergency Healthcare Fund',
+                remarks: remarks || 'Approved for full payment and procurement.',
                 disbursementRef: `DISB-${Math.floor(1000 + Math.random() * 9000)}`
             };
 
@@ -214,7 +215,7 @@
                 approvedBy: adminName || 'Sister Grace (Executive Director)',
                 decisionDate: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ' · Declined',
                 fundingSource: 'N/A',
-                remarks: reason || 'Requisition denied after administrative assessment.',
+                remarks: reason || 'Request denied after administrative assessment.',
                 disbursementRef: null
             };
 

@@ -1,139 +1,14 @@
 @extends('layouts.portal')
 
-@section('title', 'Executive Philanthropy & Cash Flow Benchmark')
+@section('title', 'Executive Donations & Spending Overview')
 @section('breadcrumb', 'Workspace | Admin Donations & Cash Flow')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/portal/donations.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/donations.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/donations.css')), 0, 12) }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/dashboard.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/dashboard.css')), 0, 12) }}">
     <!-- Chart.js CDN for Multi-Orphanage Cash Flow Benchmark Visualization -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    <style>
-        .admin-donations-hero {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f766e 100%);
-            color: #ffffff;
-            border-radius: var(--radius-md);
-            padding: 24px 28px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.25);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .admin-donations-hero::after {
-            content: '';
-            position: absolute;
-            top: -30px;
-            right: -30px;
-            width: 240px;
-            height: 240px;
-            background: radial-gradient(circle, rgba(20, 184, 166, 0.25) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .chart-timeframe-btn {
-            background: #f1f5f9;
-            color: #475569;
-            border: 1px solid #cbd5e1;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .chart-timeframe-btn:hover {
-            background: #e2e8f0;
-            color: #1e293b;
-        }
-
-        .chart-timeframe-btn.active {
-            background: #0f766e;
-            color: #ffffff;
-            border-color: #0f766e;
-            box-shadow: 0 2px 8px rgba(15, 118, 110, 0.25);
-        }
-
-        .chart-view-btn {
-            background: transparent;
-            color: #64748b;
-            border: 1px solid #e2e8f0;
-            padding: 5px 12px;
-            border-radius: 6px;
-            font-size: 11.5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .chart-view-btn.active {
-            background: #0284c7;
-            color: #ffffff;
-            border-color: #0284c7;
-        }
-
-        .orphanage-rank-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: var(--radius-md);
-            padding: 18px 20px;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .orphanage-rank-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-            border-color: #cbd5e1;
-        }
-
-        .orphanage-rank-card.is-our-home {
-            border: 2px solid #0f766e;
-            background: linear-gradient(180deg, #ffffff 0%, #f0fdfa 100%);
-        }
-
-        .rank-number-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            font-weight: 800;
-            font-size: 12px;
-        }
-
-        .rank-gold { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
-        .rank-silver { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
-        .rank-bronze { background: #ffedd5; color: #c2410c; border: 1px solid #fed7aa; }
-        .rank-standard { background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; }
-
-        .benchmark-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 12px;
-        }
-
-        .benchmark-pill.positive {
-            background: #ecfdf5;
-            color: #059669;
-            border: 1px solid #a7f3d0;
-        }
-
-        .benchmark-pill.neutral {
-            background: #f1f5f9;
-            color: #475569;
-            border: 1px solid #cbd5e1;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/embedded/portal-donations-1.css') }}?v={{ substr(hash_file('sha256', public_path('css/embedded/portal-donations-1.css')), 0, 12) }}">
 @endpush
 
 @section('content')
@@ -154,15 +29,6 @@
         </div>
 
         <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-            <a href="{{ route('staff.donations') }}" class="btn-primary" style="background: #10b981; color: #ffffff; border-color: #059669; font-weight: 700; text-decoration: none;" title="Open Staff Donations & Front Desk View">
-                <i class="fas fa-user-clock"></i> Staff Donation View &rarr;
-            </a>
-            <button class="btn-outline" style="background: rgba(255, 255, 255, 0.15); color: #ffffff; border-color: rgba(255, 255, 255, 0.35); font-weight: 700;" onclick="openModal('modal_record_donation')">
-                <i class="fas fa-plus-circle"></i> Record Contribution
-            </button>
-            <button class="btn-outline" style="background: rgba(255, 255, 255, 0.15); color: #ffffff; border-color: rgba(255, 255, 255, 0.35); font-weight: 700;" onclick="openModal('modal_register_donor')">
-                <i class="fas fa-user-plus"></i> Register Donor
-            </button>
         </div>
     </div>
 </div>
@@ -194,7 +60,7 @@
         </div>
         <div class="metric-val" style="color: #0f766e; font-size: 26px; font-weight: 800;" id="kpi_top_inflow_val">$145,200.00</div>
         <div class="metric-sub" style="color: #0f766e; font-weight: 600;">
-            <i class="fas fa-home"></i> HopeHaven Sanctuary (Rank #1 Regional Leader)
+            <i class="fas fa-home"></i> HopeHaven Orphanage (Rank #1 Regional Leader)
         </div>
     </div>
 
@@ -249,7 +115,7 @@
         <i class="fas fa-users"></i> Donor Registry (4)
     </button>
     <button class="tab-btn" data-tab="tab_allocations">
-        <i class="fas fa-hands-helping"></i> Allocation to Sanctuary Needs
+        <i class="fas fa-hands-helping"></i> Allocation to Orphanage Needs
     </button>
     <button class="tab-btn" data-tab="tab_summaries">
         <i class="fas fa-chart-pie"></i> Financial Summaries & Reports
@@ -287,7 +153,7 @@
                         Q3 2026 (Quarterly)
                     </button>
                     <button class="chart-timeframe-btn" onclick="switchCashFlowTimeframe('ytd', this)">
-                        Fiscal 2026 (YTD)
+                        Financial 2026 (YTD)
                     </button>
                 </div>
 
@@ -348,13 +214,13 @@
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
             
-            <!-- 1. HopeHaven Sanctuary (Our Facility) -->
+            <!-- 1. HopeHaven Orphanage (Our Facility) -->
             <div class="orphanage-rank-card is-our-home">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <span class="rank-number-badge rank-gold">#1</span>
                         <div>
-                            <h4 style="font-size: 15px; font-weight: 800; margin: 0; color: #0f766e;">HopeHaven Sanctuary</h4>
+                            <h4 style="font-size: 15px; font-weight: 800; margin: 0; color: #0f766e;">HopeHaven Orphanage</h4>
                             <span style="font-size: 11px; color: #0f766e; font-weight: 700;">★ Our Facility (Selangor Division)</span>
                         </div>
                     </div>
@@ -556,7 +422,7 @@
                     <tr style="background: rgba(15, 118, 110, 0.04); font-weight: 600;">
                         <td><span class="rank-number-badge rank-gold">#1</span></td>
                         <td>
-                            <strong style="color: #0f766e;">HopeHaven Sanctuary</strong>
+                            <strong style="color: #0f766e;">HopeHaven Orphanage</strong>
                             <div style="font-size: 11px; color: #64748b;">Selangor · 48 Residents · Non-Profit ID #ORP-MY-104</div>
                         </td>
                         <td><strong style="color: #0f766e; font-size: 14px;">$145,200</strong></td>
@@ -728,7 +594,7 @@
                 Executive Treasury & Solvency Guidelines
             </h4>
             <p style="font-size: 12px; color: #64748b; margin-bottom: 16px;">
-                Sanctuary regulatory board policies for HopeHaven Administration.
+                orphanage regulatory board policies for HopeHaven Administration.
             </p>
 
             <div style="display: flex; flex-direction: column; gap: 12px; font-size: 12.5px;">
@@ -789,7 +655,7 @@
                         <th>Donor Entity</th>
                         <th>Type</th>
                         <th>Recognized Amount / Goods</th>
-                        <th>Sanctuary Need Allocation</th>
+                        <th>Orphanage Need Allocation</th>
                         <th>Date</th>
                         <th class="action-column" style="text-align: right;">Action</th>
                     </tr>
@@ -845,7 +711,7 @@
                         <td style="font-family: monospace; font-weight: 700;">RCP-2026-0883</td>
                         <td>
                             <strong>Dr. Gregory & Eleanor Vance</strong>
-                            <div style="font-size: 11px; color: #64748b;">Individual Benefactor</div>
+                            <div style="font-size: 11px; color: #64748b;">Individual Donor</div>
                         </td>
                         <td><span class="badge badge-success">Monetary</span></td>
                         <td>
@@ -890,7 +756,7 @@
                     <tr class="searchable-donation" data-category="Monetary">
                         <td style="font-family: monospace; font-weight: 700;">RCP-2026-0885</td>
                         <td>
-                            <strong>Anonymous Community Benefactor</strong>
+                            <strong>Anonymous Community Donor</strong>
                             <div style="font-size: 11px; color: #64748b;">Private Giving</div>
                         </td>
                         <td><span class="badge badge-success">Monetary</span></td>
@@ -899,7 +765,7 @@
                             <div style="font-size: 11px; color: #64748b;">Cheque</div>
                         </td>
                         <td>
-                            <strong>General Sanctuary Utilities & Solar</strong>
+                            <strong>General Orphanage Utilities & Solar</strong>
                             <div style="margin-top: 2px;"><span class="badge badge-secondary">General Reserve</span></div>
                         </td>
                         <td style="font-size: 12px; color: #64748b;">2026-10-18</td>
@@ -943,7 +809,7 @@
 
         <div class="portal-card" style="padding: 24px;">
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="badge badge-warning">Gold Benefactor</span>
+                <span class="badge badge-warning">Gold Donor</span>
                 <span style="font-family: monospace; font-size: 11px; color: #64748b;">DNR-1002</span>
             </div>
             <h4 style="font-size: 16px; font-weight: 800; margin-top: 10px;">Dr. Gregory & Eleanor Vance</h4>
@@ -964,7 +830,7 @@
 
         <div class="portal-card" style="padding: 24px;">
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span class="badge badge-warning">Gold Benefactor</span>
+                <span class="badge badge-warning">Gold Donor</span>
                 <span style="font-family: monospace; font-size: 11px; color: #64748b;">DNR-1003</span>
             </div>
             <h4 style="font-size: 16px; font-weight: 800; margin-top: 10px;">Evergreen Food Staples (CSR)</h4>
@@ -1045,7 +911,7 @@
 <div id="tab_summaries" class="tab-pane" style="display: none;">
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
         <div class="portal-card" style="padding: 26px;">
-            <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">HopeHaven Allocation by Sanctuary Need</h3>
+            <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">HopeHaven Allocation by Orphanage Need</h3>
             <p style="font-size: 12px; color: #64748b; margin-bottom: 20px;">Transparent deployment of philanthropic gifts.</p>
 
             <div style="display: flex; flex-direction: column; gap: 16px; font-size: 12px;">
@@ -1107,7 +973,7 @@
                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8fafc; border-radius: 8px;">
                     <div>
                         <strong>#2 Dr. Gregory & Eleanor Vance</strong>
-                        <div style="font-size: 11px; color: #64748b;">Gold Benefactor</div>
+                        <div style="font-size: 11px; color: #64748b;">Gold Donor</div>
                     </div>
                     <strong style="color: #10b981; font-size: 14px;">$18,500 USD</strong>
                 </div>
@@ -1150,13 +1016,13 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Amount ($ USD) or Valuation</label>
+                    <label class="form-label">Amount ($ USD) or Value</label>
                     <input type="number" id="don_amount_input" class="form-control" value="500" min="1" required>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="form-label">Allocated Sanctuary Need</label>
+                <label class="form-label">Allocated Orphanage Need</label>
                 <input type="text" id="don_need_input" class="form-control" placeholder="e.g. Higher Education Scholarship, Food Pantry">
             </div>
 
@@ -1178,7 +1044,7 @@
     <div class="portal-modal" style="max-width: 480px;">
         <div class="modal-header">
             <div>
-                <h3 class="modal-title">Register Benefactor Profile</h3>
+                <h3 class="modal-title">Register Donor Profile</h3>
                 <p class="modal-sub">Add individual, corporate or foundation patron.</p>
             </div>
             <button class="modal-close-btn" onclick="closeModal('modal_register_donor')">&times;</button>
@@ -1204,7 +1070,7 @@
                     <label class="form-label">Recognition Tier</label>
                     <select class="form-control">
                         <option>Platinum Patron</option>
-                        <option>Gold Benefactor</option>
+                        <option>Gold Donor</option>
                         <option>Silver Friend</option>
                         <option>Community Supporter</option>
                     </select>
@@ -1238,8 +1104,8 @@
         <div style="border: 2px dashed #cbd5e1; border-radius: 8px; padding: 24px; background: #fafbfc;">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 16px;">
                 <div>
-                    <h4 style="font-size: 16px; font-weight: 800; color: var(--primary);">HopeHaven Sanctuary</h4>
-                    <span style="font-size: 11px; color: #64748b;">501(c)(3) Tax-Exempt Non-Profit Sanctuary</span>
+                    <h4 style="font-size: 16px; font-weight: 800; color: var(--primary);">HopeHaven Orphanage</h4>
+                    <span style="font-size: 11px; color: #64748b;">501(c)(3) Tax-Exempt Non-Profit orphanage</span>
                 </div>
                 <div style="text-align: right; font-size: 12px;">
                     <div>Date: <strong>Oct 15, 2026</strong></div>
@@ -1251,11 +1117,11 @@
                 <div>Received from: <strong>The Meridian Heritage Foundation</strong></div>
                 <div>Amount Recognized: <strong style="font-size: 16px; color: #10b981;">$5,000.00 USD</strong></div>
                 <div>Payment Method: <strong>Bank Wire Transfer</strong></div>
-                <div>Allocated Sanctuary Purpose: <strong>Higher Education & STEM Tutoring Fund</strong></div>
+                <div>Allocated Orphanage Purpose: <strong>Higher Education & STEM Tutoring Fund</strong></div>
             </div>
 
             <div style="margin-top: 18px; padding-top: 12px; border-top: 1px solid #e2e8f0; font-size: 11px; color: #64748b; font-style: italic;">
-                "HopeHaven Sanctuary certifies that no goods or services were provided in exchange for this contribution other than intangible religious and charitable benefits."
+                "HopeHaven Orphanage certifies that no goods or services were provided in exchange for this contribution other than intangible religious and charitable benefits."
             </div>
         </div>
 
@@ -1277,7 +1143,7 @@
     const orphanageCashFlowData = {
         '30d': {
             labels: [
-                'HopeHaven Sanctuary (Our Facility)',
+                'HopeHaven Orphanage (Our Facility)',
                 'St. Jude Children\'s Home',
                 'Grace Orphan Care Centre',
                 'Darul Aitam Care Foundation',
@@ -1293,7 +1159,7 @@
         },
         'q3': {
             labels: [
-                'HopeHaven Sanctuary (Our Facility)',
+                'HopeHaven Orphanage (Our Facility)',
                 'St. Jude Children\'s Home',
                 'Grace Orphan Care Centre',
                 'Darul Aitam Care Foundation',
@@ -1309,7 +1175,7 @@
         },
         'ytd': {
             labels: [
-                'HopeHaven Sanctuary (Our Facility)',
+                'HopeHaven Orphanage (Our Facility)',
                 'St. Jude Children\'s Home',
                 'Grace Orphan Care Centre',
                 'Darul Aitam Care Foundation',

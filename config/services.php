@@ -14,6 +14,11 @@ return [
     |
     */
 
+    'google_maps' => [
+        'embed_key' => env('GOOGLE_MAPS_EMBED_API_KEY'),
+        'browser_key' => env('GOOGLE_MAPS_BROWSER_API_KEY'),
+    ],
+
     'postmark' => [
         'key' => env('POSTMARK_API_KEY'),
     ],

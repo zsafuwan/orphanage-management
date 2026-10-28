@@ -5,29 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>HopeHaven | Orphanage & Child Care Sanctuary</title>
+    <script src="{{ asset('js/malaysia-orphanages.js') }}?v={{ substr(hash_file('sha256', public_path('js/malaysia-orphanages.js')), 0, 12) }}" defer></script>
+    @env('local')
+        <meta name="development-revision" content="{{ route('development.revision') }}">
+    @endenv
+    <title>HopeHaven | Orphanage & Child Care</title>
     <meta name="description" content="HopeHaven Orphanage Management System - Providing shelter, education, healthcare, and loving guidance to vulnerable children.">
     
+    <link rel="stylesheet" href="{{ asset('css/design-utilities.css') }}?v={{ substr(hash_file('sha256', public_path('css/design-utilities.css')), 0, 12) }}">
     <!-- Animate.css for signature template 2 entrance animations -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Leaflet.js Interactive Live Map CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     
     <!-- Template 2 Stylesheet -->
-    <link rel="stylesheet" href="{{ asset('css/template2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/template2.css') }}?v={{ substr(hash_file('sha256', public_path('css/template2.css')), 0, 12) }}">
     
     <!-- jQuery for template 2 smooth scroll and dynamic interactions -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/care-home.css') }}?v={{ substr(hash_file('sha256', public_path('css/care-home.css')), 0, 12) }}">
+    <link rel="stylesheet" href="{{ asset('css/hopehaven-studio.css') }}?v={{ substr(hash_file('sha256', public_path('css/hopehaven-studio.css')), 0, 12) }}">
+    <link rel="stylesheet" href="{{ asset('css/floating-cards.css') }}?v={{ substr(hash_file('sha256', public_path('css/floating-cards.css')), 0, 12) }}">
 </head>
-<body>
+<body class="care-home" data-page="/">
     <!-- Preloader Spinner matching template 2 -->
     <div id="loading">
         <div id="spinner"></div>
-        <div id="loading-text">HOPEHAVEN SANCTUARY</div>
+        <div id="loading-text">HOPEHAVEN ORPHANAGE</div>
     </div>
 
     <!-- Image Magnify Modal Lightbox matching template 2 -->
@@ -44,7 +50,7 @@
                 <td id="logo">
                     <a href="#top_part" style="color: inherit; text-decoration: none;">
                         HopeHaven<span class="logo-dot">.</span>
-                        <span class="logo-sub">Child Care & Sanctuary</span>
+                        <span class="logo-sub">Orphanage & Child Care</span>
                     </a>
                 </td>
                 <td id="mobile_toggle_cell">
@@ -80,15 +86,15 @@
     <div id="top_part">
         <div id="about" class="animated slideInLeft" style="animation-delay: 1.4s;">
             <span class="hero-tag">
-                <i class="fas fa-hand-holding-heart"></i> Empowering Young Lives Since 2012
+                <i class="fas fa-hand-holding-heart"></i> Good humans. Real impact.
             </span>
-            <h1>Every child deserves a <span>safe home</span>, education, and bright future</h1>
+            <h1>Small acts.<br><span>Brighter futures.</span></h1>
             <p class="hero-description">
-                HopeHaven is a loving residential sanctuary that provides orphaned and vulnerable children with comprehensive nutrition, trauma-informed counseling, high-quality schooling, and lifelong mentorship.
+                A safe home. A chance to learn. Someone who cares. Together, we help children build the future they deserve.
             </p>
             <div class="hero-btn-group">
-                <a href="#programs" class="btn_one">Our Programs</a>
-                <a href="#contact" class="btn_two">Volunteer With Us</a>
+                <a href="#programs" class="btn_one">Explore our impact <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                <a href="#contact" class="btn_two">Be part of the good <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             </div>
 
             <table>
@@ -112,36 +118,41 @@
             </table>
         </div>
         <div id="rightImage" class="animated jackInTheBox" style="animation-delay: 1.6s;">
+            <span class="studio-photo-sticker" aria-hidden="true">A little care.<br>A lot of possibility. <i class="fas fa-asterisk"></i></span>
             <div class="hero-overlay-card">
                 <h3>148 Children in Active Care</h3>
-                <p>100% of public donations directly fund child healthcare, nutrition, and schooling programs with complete fiscal transparency.</p>
+                <p>100% of public donations directly fund child healthcare, nutrition, and schooling programs with clear records of how funds are used.</p>
             </div>
         </div>
-        <div id="rightMap" class="animated fadeInRight" style="animation-delay: 1.8s;">
+    </div>
+    <section id="rightMap" aria-labelledby="care-locations-heading">
+            <div class="care-locations-intro">
+                <span class="hero-tag"><i class="fas fa-location-dot" aria-hidden="true"></i> A COMMUNITY OF CARE</span>
+                <h2 id="care-locations-heading">Find a place.<br>Make a difference.</h2>
+                <p>Care starts close to home. Explore sanctuaries around Malaysia and discover where your time and kindness can help.</p>
+            </div>
             <div class="malaysia-map-card">
                 <div class="map-card-header">
                     <div class="map-title-wrap">
-                        <span class="map-live-tag"><span class="pulse-glow"></span> VERIFIED GOOGLE MAPS LOCATIONS</span>
-                        <h4 class="map-card-heading"><i class="fas fa-map-marked-alt"></i> Real Orphanages Around Malaysia</h4>
+                        <span class="map-live-tag"><span class="pulse-glow"></span> EXPLORE GOOGLE MAPS RESULTS</span>
+                        <h4 class="map-card-heading"><i class="fas fa-map-marked-alt"></i> Orphanages Around Malaysia</h4>
                     </div>
-                    <button type="button" id="btn_locate_user" class="btn-locate-gps" title="Find nearest sanctuary to your location">
+                    <button type="button" id="btn_locate_user" class="btn-locate-gps" title="Find nearest orphanage to your location">
                         <i class="fas fa-crosshairs"></i> <span id="locate_btn_text">Near Me</span>
                     </button>
                 </div>
 
-                <!-- State Quick Filter Tabs -->
+                <!-- Nationwide map reset -->
                 <div class="malaysia-state-tabs" id="state_filter_tabs">
-                    <button type="button" class="state-tab active" data-state="all">All Malaysia</button>
-                    <button type="button" class="state-tab" data-state="kl_selangor">KL & Selangor</button>
-                    <button type="button" class="state-tab" data-state="penang">Penang</button>
-                    <button type="button" class="state-tab" data-state="johor">Johor</button>
-                    <button type="button" class="state-tab" data-state="perak">Perak</button>
-                    <button type="button" class="state-tab" data-state="melaka">Melaka</button>
-                    <button type="button" class="state-tab" data-state="borneo">Sabah & Sarawak</button>
+                    <button type="button" class="state-tab active" data-region="Malaysia" aria-pressed="true">All Malaysia</button>
                 </div>
 
-                <!-- Leaflet Map Canvas -->
-                <div id="live_orphanage_map" class="live-map-canvas malaysia-map-height"></div>
+                <!-- Google Places map; search embed remains a clearly labelled fallback. -->
+                @if(config('services.google_maps.browser_key'))
+                    <div id="malaysia_places_map" class="live-map-canvas malaysia-map-height" data-api-key="{{ config('services.google_maps.browser_key') }}" style="width:100%;" aria-label="Orphanage locations across Malaysia"></div>
+                @endif
+                <iframe id="live_orphanage_map" @if(config('services.google_maps.browser_key')) hidden @endif class="live-map-canvas malaysia-map-height" title="Google Maps orphanage search in Malaysia" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen style="width:100%;border:0;" src="https://www.google.com/maps?q=orphanages%20in%20Malaysia&amp;output=embed&amp;ll=4.2,109.5&amp;z=5"></iframe>
+                <p id="orphanage_map_status" role="status" style="font-size:12px;color:#65765d;margin:12px 0;">Google search preview only. Nationwide location loading is not connected yet.</p>
 
                 <!-- Nearest / Selected Orphanage Info Bar -->
                 <div class="map-nearest-bar" id="nearest_orphanage_bar">
@@ -149,21 +160,21 @@
                         <i class="fas fa-map-pin"></i>
                     </div>
                     <div class="nearest-bar-content">
-                        <div class="nearest-bar-name" id="nearest_hub_name">Rumah Titian Kaseh</div>
+                        <div class="nearest-bar-name" id="nearest_hub_name">Orphanages in Malaysia</div>
                         <div class="nearest-bar-meta">
-                            <span id="nearest_hub_dist"><i class="fas fa-map-marker-alt"></i> Persiaran Titiwangsa, Kuala Lumpur</span>
+                            <span id="nearest_hub_dist"><i class="fas fa-map-marker-alt"></i> Search all Malaysia</span>
                             <span class="nearest-status-dot">•</span>
-                            <span id="nearest_hub_status" style="color: #10b981; font-weight: 700;">Open for visits</span>
+                            <span id="nearest_hub_status" style="color: #10b981; font-weight: 700;">Check details with each home</span>
                         </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Rumah+Titian+Kaseh+Titiwangsa+Kuala+Lumpur" id="nearest_hub_dir" target="_blank" class="nearest-dir-btn" title="Open in Google Maps">
+                    <a href="https://www.google.com/maps/search/?api=1&amp;query=orphanages+in+Malaysia" id="nearest_hub_dir" target="_blank" class="nearest-dir-btn" title="Open in Google Maps">
                         <i class="fas fa-directions"></i> Google Maps
                     </a>
                 </div>
             </div>
-        </div>
-    </div>
+    </section>
 
+    <div class="studio-values" aria-label="Our care priorities"><span>Care that shows up.</span><span><i class="fas fa-asterisk" aria-hidden="true"></i> A place to belong</span><span><i class="fas fa-asterisk" aria-hidden="true"></i> Room to grow</span><span><i class="fas fa-asterisk" aria-hidden="true"></i> People who care</span></div>
     <!-- Programs & Care Pillars Section -->
     <div id="programs">
         <div class="section-title-wrap">
@@ -265,7 +276,7 @@
                     Rather than a cold institutional setting, our campus is structured around small family-style cottages guided by trained house parents and certified child caregivers. We combine loving daily routines with specialized psychosocial therapy, medical care, and mentorship that carries our youths into university or rewarding careers.
                 </p>
                 <p>
-                    All operations are monitored by an independent advisory board, ensuring complete financial transparency, rigorous child protection protocols, and compassionate excellence.
+                    All operations are monitored by an independent advisory board, ensuring clear records of how funds are used, rigorous child protection protocols, and compassionate excellence.
                 </p>
             </div>
             <div class="bio-stats-grid">
@@ -321,7 +332,7 @@
                                 <td>
                                     <i class="fas fa-map-marker-alt"></i>
                                     <div id="address">
-                                        HopeHaven Sanctuary Campus,<br>
+                                        HopeHaven Orphanage Campus,<br>
                                         742 Blossom Lane, Haven Valley,<br>
                                         California, USA
                                     </div>
@@ -390,397 +401,66 @@
     </div>
 
     <!-- Template 2 Interaction JS -->
-    <script src="{{ asset('js/template2.js') }}" type="text/javascript"></script>
-
-    <!-- Leaflet.js Interactive Live Map Engine -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{{ asset('js/template2.js') }}?v={{ substr(hash_file('sha256', public_path('js/template2.js')), 0, 12) }}" type="text/javascript"></script>
 
     <script>
-        $(document).ready(function() {
-            // Real Malaysian Registered Orphanages & Welfare Homes Directory (Google Maps Data)
-            var malaysiaSanctuaries = [
-                {
-                    id: 1,
-                    name: "Rumah Titian Kaseh",
-                    stateKey: "kl_selangor",
-                    stateName: "Kuala Lumpur",
-                    tag: "Registered Welfare Home (JKM)",
-                    lat: 3.1788,
-                    lng: 101.7022,
-                    address: "No. 15, Jalan Persiaran Titiwangsa, Taman Tasik Titiwangsa, 53200 Kuala Lumpur",
-                    phone: "+60 3-4024 6470",
-                    children: 85,
-                    visiting: "Tue - Sun: 9:00 AM - 5:00 PM",
-                    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Rumah+Titian+Kaseh+Titiwangsa+Kuala+Lumpur"
-                },
-                {
-                    id: 2,
-                    name: "Yayasan Sunbeams Home",
-                    stateKey: "kl_selangor",
-                    stateName: "Kuala Lumpur / Ampang",
-                    tag: "Children Welfare Home",
-                    lat: 3.1470,
-                    lng: 101.7565,
-                    address: "No. 54, Jalan Bunga Melur 16A, Taman Mawar, 56100 Kuala Lumpur",
-                    phone: "+60 3-4295 4519",
-                    children: 62,
-                    visiting: "Mon - Sat: 9:00 AM - 5:00 PM",
-                    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Yayasan+Sunbeams+Home+Taman+Mawar+Kuala+Lumpur"
-                },
-                {
-                    id: 3,
-                    name: "Asrama Damai Kuang",
-                    stateKey: "kl_selangor",
-                    stateName: "Selangor",
-                    tag: "Rumah Anak-Anak Yatim Damai Kuang",
-                    lat: 3.2310,
-                    lng: 101.5430,
-                    address: "Lorong Teratai, Kampung Damai, 48050 Kuang, Rawang, Selangor",
-                    phone: "+60 3-6037 4004",
-                    children: 54,
-                    visiting: "Daily: 9:00 AM - 5:30 PM",
-                    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Asrama+Damai+Kuang+Rawang+Selangor"
-                },
-                {
-                    id: 4,
-                    name: "Pusat Jagaan Kasih Murni",
-                    stateKey: "kl_selangor",
-                    stateName: "Kuala Lumpur / Keramat",
-                    tag: "Pusat Kebajikan Anak Yatim",
-                    lat: 3.2093,
-                    lng: 101.6102,
-                    address: "No. 1, Jalan AU 2A/13, Taman Keramat, 54200 Kuala Lumpur",
-                    phone: "+60 3-4251 7712",
-                    children: 45,
-                    visiting: "Daily: 9:00 AM - 5:00 PM",
-                    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Pusat+Jagaan+Kasih+Murni+Taman+Keramat"
-                },
-                {
-                    id: 5,
-                    name: "The Salvation Army Penang Children's Home",
-                    stateKey: "penang",
-                    stateName: "Penang",
-                    tag: "Registered Children's Home",
-                    lat: 5.4168,
-                    lng: 100.3168,
-                    address: "8-A, Jalan Logan, 10400 George Town, Pulau Pinang",
-                    phone: "+60 4-227 0920",
-                    children: 38,
-                    visiting: "Mon - Sat: 9:00 AM - 5:00 PM",
-                    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=The+Salvation+Army+Penang+Children's+Home+Jalan+Logan"
-                },
-                {
-                    id: 6,
-                    name: "Pertubuhan Kebajikan Anak Yatim Johor (Rumah Barkat)",
-                    stateKey: "johor",
-                    stateName: "Johor",
-                    tag: "State Registered Orphanage (PKAYIJ)",
-                    lat: 1.4904,
-                    lng: 103.7524,
-                    address: "No. 118, Jalan Bukit Chagar, 80300 Johor Bahru, Johor",
-                    phone: "+60 7-222 3445",
-                    children: 76,
-                    visiting: "Daily: 9:00 AM - 5:00 PM",
-                    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Rumah+Barkat+Bukit+Chagar+Johor+Bahru"
-                },
-                {
-                    id: 7,
-                    name: "The Salvation Army Ipoh Children's Home",
-                    stateKey: "perak",
-                    stateName: "Perak",
-                    tag: "Rumah Kanak-Kanak Bala Keselamatan",
-                    lat: 4.5820,
-                    lng: 101.0985,
-                    address: "255, Jalan Kampar, 30250 Ipoh, Perak",
-                    phone: "+60 5-254 9767",
-                    children: 42,
-                    visiting: "Mon - Fri: 9:00 AM - 4:30 PM",
-                    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=The+Salvation+Army+Ipoh+Children's+Home+Jalan+Kampar"
-                },
-                {
-                    id: 8,
-                    name: "Kompleks Anak Yatim Fatimah Al-Zahrah (KAYFAZ)",
-                    stateKey: "melaka",
-                    stateName: "Melaka",
-                    tag: "Charity & Welfare Complex",
-                    lat: 2.2272,
-                    lng: 102.3025,
-                    address: "Lot 1120, Jalan Tebing Tinggi, 75450 Bukit Katil, Melaka",
-                    phone: "+60 6-232 5520",
-                    children: 50,
-                    visiting: "Daily: 9:00 AM - 5:00 PM",
-                    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Kompleks+Anak+Yatim+Fatimah+Al-Zahrah+Bukit+Katil+Melaka"
-                },
-                {
-                    id: 9,
-                    name: "Rumah Anak Yatim & Asnaf As-Sakinah",
-                    stateKey: "borneo",
-                    stateName: "Sabah",
-                    tag: "Registered Orphanage Home",
-                    lat: 5.8352,
-                    lng: 116.0418,
-                    address: "No. 503, Jalan Pandan, Taman Pantai Lok Kawi, 89600 Kinarut / Kota Kinabalu, Sabah",
-                    phone: "+60 88-751 220",
-                    children: 48,
-                    visiting: "Daily: 9:00 AM - 5:00 PM",
-                    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Rumah+Anak+Yatim+As-Sakinah+Lok+Kawi+Sabah"
-                },
-                {
-                    id: 10,
-                    name: "Kompleks Kebajikan Laila Taib (PERYATIM)",
-                    stateKey: "borneo",
-                    stateName: "Sarawak",
-                    tag: "Sarawak State Children's Home",
-                    lat: 1.6110,
-                    lng: 110.3520,
-                    address: "Lot 459, Block 14, Jalan Siol Kanan, Petra Jaya, 93050 Kuching, Sarawak",
-                    phone: "+60 82-440 052",
-                    children: 68,
-                    visiting: "Daily: 8:30 AM - 4:30 PM",
-                    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Kompleks+Kebajikan+Laila+Taib+Kuching+Sarawak"
-                }
-            ];
-
-            // Initialize Map Element
-            var mapElement = document.getElementById('live_orphanage_map');
-            if (!mapElement) return;
-
-            // Center on Malaysia (Peninsular overview by default)
-            var defaultCenter = [3.8, 102.0];
-            var map = L.map('live_orphanage_map', {
-                center: defaultCenter,
-                zoom: 7,
-                zoomControl: true,
-                attributionControl: false
-            });
-
-            // OpenStreetMap tile layer (clean & fast)
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 18,
-                attribution: '&copy; OpenStreetMap contributors'
-            }).addTo(map);
-
-            // Custom Malaysia Sanctuary Map Marker Pin
-            var sanctuaryIcon = L.divIcon({
-                className: 'custom-sanctuary-pin-wrapper',
-                html: '<div class="custom-sanctuary-pin"><i class="fas fa-home"></i></div>',
-                iconSize: [32, 32],
-                iconAnchor: [16, 32],
-                popupAnchor: [0, -30]
-            });
-
-            var userMarkerIcon = L.divIcon({
-                className: 'custom-user-pin-wrapper',
-                html: '<div class="custom-user-pin"></div>',
-                iconSize: [22, 22],
-                iconAnchor: [11, 11]
-            });
-
-            var markersGroup = L.featureGroup().addTo(map);
-            var markerMap = {};
-            var userMarker = null;
-            var routeLine = null;
-
-            // Plot sanctuary markers (supports state filter)
-            function renderSanctuaryMarkers(stateFilter) {
-                markersGroup.clearLayers();
-                markerMap = {};
-
-                var filtered = (stateFilter && stateFilter !== 'all')
-                    ? malaysiaSanctuaries.filter(function(s) { return s.stateKey === stateFilter; })
-                    : malaysiaSanctuaries;
-
-                filtered.forEach(function(s) {
-                    var popupHtml = '<div class="popup-sanctuary-card">' +
-                        '<span class="popup-tag">' + s.tag + ' • ' + s.stateName + '</span>' +
-                        '<div class="popup-title">' + s.name + '</div>' +
-                        '<div class="popup-desc"><i class="fas fa-map-marker-alt" style="color:var(--primary);"></i> ' + s.address + '<br>' +
-                        '<i class="fas fa-phone-alt" style="color:#3b82f6;"></i> ' + s.phone + '<br>' +
-                        '<i class="fas fa-users" style="color:#10b981;"></i> <strong>' + s.children + ' children</strong> supported<br>' +
-                        '<i class="fas fa-clock" style="color:#8b5cf6;"></i> ' + s.visiting + '</div>' +
-                        '<div style="display:flex; gap:6px; margin-top:8px;">' +
-                        '<a href="' + s.googleMapsUrl + '" target="_blank" class="popup-btn" style="flex:1; text-align:center;">' +
-                        '<i class="fas fa-external-link-alt"></i> Google Maps</a>' +
-                        '<a href="https://www.google.com/maps/dir/?api=1&destination=' + s.lat + ',' + s.lng + '" target="_blank" class="popup-btn" style="flex:1; text-align:center; background:#10b981;">' +
-                        '<i class="fas fa-directions"></i> Route</a>' +
-                        '</div>' +
-                        '</div>';
-
-                    var marker = L.marker([s.lat, s.lng], { icon: sanctuaryIcon })
-                        .bindPopup(popupHtml)
-                        .on('click', function() {
-                            selectOrphanage(s);
-                        });
-
-                    markersGroup.addLayer(marker);
-                    markerMap[s.id] = marker;
+    document.addEventListener('DOMContentLoaded', function () {
+        if (document.getElementById('malaysia_places_map')) return;
+        const frame = document.getElementById('live_orphanage_map');
+        const status = document.getElementById('orphanage_map_status');
+        const embedKey = @json(config('services.google_maps.embed_key'));
+        function search(query, label, center) {
+            const url = embedKey
+                ? new URL('https://www.google.com/maps/embed/v1/search')
+                : new URL('https://www.google.com/maps');
+            url.searchParams.set('q', query);
+            if (embedKey) {
+                url.searchParams.set('key', embedKey);
+                url.searchParams.set('region', 'MY');
+                url.searchParams.set('center', center || '4.2,109.5');
+                url.searchParams.set('zoom', center ? '12' : '5');
+            } else {
+                url.searchParams.set('output', 'embed');
+                url.searchParams.set('ll', center || '4.2,109.5');
+                url.searchParams.set('z', center ? '12' : '5');
+            }
+            frame.src = url.toString();
+            frame.title = 'Google Maps: ' + label;
+            document.getElementById('nearest_hub_name').textContent = label;
+            document.getElementById('nearest_hub_dist').textContent = 'Explore listings, contact details and directions';
+            document.getElementById('nearest_hub_dir').href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query);
+        }
+        document.querySelectorAll('#state_filter_tabs .state-tab').forEach(function (button) {
+            button.addEventListener('click', function () {
+                document.querySelectorAll('#state_filter_tabs .state-tab').forEach(function (tab) {
+                    tab.classList.toggle('active', tab === button);
+                    tab.setAttribute('aria-pressed', String(tab === button));
                 });
-            }
-
-            renderSanctuaryMarkers('all');
-
-            // Set initial selected hub to Rumah Titian Kaseh (Kuala Lumpur)
-            selectOrphanage(malaysiaSanctuaries[0], "Persiaran Titiwangsa, Kuala Lumpur");
-
-            function selectOrphanage(s, customDist) {
-                $('#nearest_hub_name').text(s.name);
-                if (customDist) {
-                    $('#nearest_hub_dist').html('<i class="fas fa-map-marker-alt"></i> ' + customDist);
-                } else {
-                    $('#nearest_hub_dist').html('<i class="fas fa-map-marker-alt"></i> ' + s.address);
-                }
-                $('#nearest_hub_dir').attr('href', s.googleMapsUrl || ('https://www.google.com/maps/dir/?api=1&destination=' + s.lat + ',' + s.lng));
-            }
-
-            // Quick State Filter Tabs
-            $('.state-tab').on('click', function() {
-                var btn = $(this);
-                $('.state-tab').removeClass('active');
-                btn.addClass('active');
-
-                var state = btn.data('state');
-                renderSanctuaryMarkers(state);
-
-                if (state === 'all') {
-                    map.setView([3.8, 102.0], 7);
-                    selectOrphanage(malaysiaSanctuaries[0], "All Real Registered Orphanages in Malaysia");
-                } else if (state === 'kl_selangor') {
-                    map.setView([3.1788, 101.68], 11);
-                    selectOrphanage(malaysiaSanctuaries[0]);
-                    if (markerMap[1]) markerMap[1].openPopup();
-                } else if (state === 'penang') {
-                    map.setView([5.4168, 100.3168], 13);
-                    selectOrphanage(malaysiaSanctuaries[4]);
-                    if (markerMap[5]) markerMap[5].openPopup();
-                } else if (state === 'johor') {
-                    map.setView([1.4904, 103.7524], 13);
-                    selectOrphanage(malaysiaSanctuaries[5]);
-                    if (markerMap[6]) markerMap[6].openPopup();
-                } else if (state === 'perak') {
-                    map.setView([4.5820, 101.0985], 13);
-                    selectOrphanage(malaysiaSanctuaries[6]);
-                    if (markerMap[7]) markerMap[7].openPopup();
-                } else if (state === 'melaka') {
-                    map.setView([2.2272, 102.3025], 13);
-                    selectOrphanage(malaysiaSanctuaries[7]);
-                    if (markerMap[8]) markerMap[8].openPopup();
-                } else if (state === 'borneo') {
-                    map.setView([4.0, 114.0], 7);
-                    selectOrphanage(malaysiaSanctuaries[8]);
-                    if (markerMap[9]) markerMap[9].openPopup();
-                }
-            });
-
-            // Haversine distance formula in kilometers
-            function calculateDistanceKm(lat1, lon1, lat2, lon2) {
-                var R = 6371; // Earth radius in km
-                var dLat = (lat2 - lat1) * Math.PI / 180;
-                var dLon = (lon2 - lon1) * Math.PI / 180;
-                var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                        Math.sin(dLon/2) * Math.sin(dLon/2);
-                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-                return R * c;
-            }
-
-            // Live GPS "Near Me" detection
-            $('#btn_locate_user').on('click', function() {
-                var btn = $(this);
-                var origText = $('#locate_btn_text').text();
-                btn.prop('disabled', true);
-                $('#locate_btn_text').html('<i class="fas fa-spinner fa-spin"></i> Locating...');
-
-                if (!navigator.geolocation) {
-                    btn.prop('disabled', false);
-                    $('#locate_btn_text').text(origText);
-                    showToastMsg("Geolocation is not supported by your browser.");
-                    return;
-                }
-
-                navigator.geolocation.getCurrentPosition(
-                    function(position) {
-                        var userLat = position.coords.latitude;
-                        var userLng = position.coords.longitude;
-
-                        // Check distance to closest sanctuary in Malaysia
-                        var nearest = null;
-                        var minDistance = Infinity;
-
-                        malaysiaSanctuaries.forEach(function(s) {
-                            var d = calculateDistanceKm(userLat, userLng, s.lat, s.lng);
-                            if (d < minDistance) {
-                                minDistance = d;
-                                nearest = s;
-                            }
-                        });
-
-                        // Add or move user marker
-                        if (userMarker) {
-                            userMarker.setLatLng([userLat, userLng]);
-                        } else {
-                            userMarker = L.marker([userLat, userLng], { icon: userMarkerIcon })
-                                .bindPopup('<strong><i class="fas fa-user-circle"></i> You Are Here</strong><br><span style="font-size:11px; color:#64748b;">Live GPS Location</span>')
-                                .addTo(map);
-                        }
-
-                        // Draw dashed route line to nearest Malaysian sanctuary
-                        if (routeLine) {
-                            map.removeLayer(routeLine);
-                        }
-                        routeLine = L.polyline([[userLat, userLng], [nearest.lat, nearest.lng]], {
-                            color: '#ff2c5a',
-                            weight: 3,
-                            dashArray: '6, 8',
-                            opacity: 0.85
-                        }).addTo(map);
-
-                        // Fit map bounds to show both user and nearest sanctuary
-                        var bounds = L.latLngBounds([
-                            [userLat, userLng],
-                            [nearest.lat, nearest.lng]
-                        ]);
-                        map.fitBounds(bounds, { padding: [40, 40], maxZoom: 14 });
-
-                        // Update UI info bar
-                        var distFormatted = minDistance < 1 
-                            ? Math.round(minDistance * 1000) + ' meters away' 
-                            : minDistance.toFixed(1) + ' km away';
-                            
-                        selectOrphanage(nearest, distFormatted);
-                        if (markerMap[nearest.id]) {
-                            markerMap[nearest.id].openPopup();
-                        }
-
-                        btn.prop('disabled', false);
-                        $('#locate_btn_text').text('Near Me');
-                        btn.css({ 'background': '#10b981', 'color': '#ffffff', 'border-color': '#10b981' });
-
-                        showToastMsg("Nearest Orphanage: " + nearest.name + " (" + distFormatted + ")");
-                    },
-                    function(error) {
-                        btn.prop('disabled', false);
-                        $('#locate_btn_text').text(origText);
-                        
-                        // Fallback gracefully on permission denial
-                        var fallback = malaysiaSanctuaries[0];
-                        selectOrphanage(fallback, "Rumah Titian Kaseh (Titiwangsa, Kuala Lumpur)");
-                        map.setView([fallback.lat, fallback.lng], 13);
-                        if (markerMap[fallback.id]) markerMap[fallback.id].openPopup();
-                        showToastMsg("Displaying Rumah Titian Kaseh (Kuala Lumpur).");
-                    },
-                    { timeout: 10000, enableHighAccuracy: true }
-                );
-            });
-
-            // Re-invalidate map size when hero animation completes and on window resize
-            setTimeout(function() {
-                map.invalidateSize();
-            }, 600);
-
-            $(window).on('resize', function() {
-                map.invalidateSize();
+                const region = button.dataset.region;
+                search('orphanages in ' + region + (region === 'Malaysia' ? '' : ', Malaysia'), 'Orphanages in ' + region);
+                status.textContent = 'Google Maps results for ' + region + '. Zoom and move the map to explore; listings are not an exhaustive registry.';
             });
         });
+        document.getElementById('btn_locate_user').addEventListener('click', function () {
+            const button = this;
+            if (!navigator.geolocation) { status.textContent = 'Location is unavailable. Use All Malaysia instead.'; return; }
+            button.disabled = true;
+            document.getElementById('locate_btn_text').textContent = 'Locating…';
+            navigator.geolocation.getCurrentPosition(function (position) {
+                const coordinates = position.coords.latitude + ',' + position.coords.longitude;
+                search('orphanages near ' + coordinates + ' Malaysia', 'Orphanages near your location', coordinates);
+                document.querySelectorAll('#state_filter_tabs .state-tab').forEach(function (tab) { tab.classList.remove('active'); tab.setAttribute('aria-pressed', 'false'); });
+                status.textContent = 'Showing Google Maps results near your location. Confirm visiting arrangements directly with the home.';
+                finish();
+            }, function () { status.textContent = 'Could not access your location. Use All Malaysia instead.'; finish(); }, {timeout: 10000});
+            function finish() { button.disabled = false; document.getElementById('locate_btn_text').textContent = 'Near Me'; }
+        });
+        search('orphanages in Malaysia', 'Orphanages in Malaysia');
+    });
     </script>
+    @env('local')
+        <script src="{{ asset('js/development-refresh.js') }}?v={{ substr(hash_file('sha256', public_path('js/development-refresh.js')), 0, 12) }}"></script>
+    @endenv
+    <script src="{{ asset('js/hopehaven-studio.js') }}?v={{ substr(hash_file('sha256', public_path('js/hopehaven-studio.js')), 0, 12) }}" defer></script>
 </body>
 </html>

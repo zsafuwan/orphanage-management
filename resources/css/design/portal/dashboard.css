@@ -1,0 +1,1575 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* ==========================================================================
+   Adminator 2026 Styled Dashboard Theme
+   File: public/css/portal/dashboard.css
+   ========================================================================== */
+
+/* Hero Banner in Adminator Style */
+.adminator-hero {
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-start;
+    @apply tw:flex-wrap;
+    @apply tw:gap-[18px];
+    @apply tw:mb-[28px];
+    background: transparent;
+    @apply tw:p-[0];
+}
+
+.adminator-hero .hero-date {
+    @apply tw:block;
+    @apply tw:text-[11.5px];
+    @apply tw:font-bold;
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.8px];
+    @apply tw:text-[#64748b];
+    @apply tw:mb-[6px];
+}
+
+.adminator-hero .hero-title {
+    @apply tw:text-[28px];
+    @apply tw:font-extrabold;
+    @apply tw:text-[#0f172a];
+    @apply tw:tracking-[-0.6px];
+    @apply tw:leading-[1.2];
+    @apply tw:mb-[8px];
+}
+
+.adminator-hero .hero-title .accent-name {
+    color: var(--primary);
+    @apply tw:relative;
+}
+
+.adminator-hero .hero-sub {
+    @apply tw:text-[13.5px];
+    @apply tw:text-[#475569];
+    @apply tw:max-w-[680px];
+    @apply tw:leading-[1.55];
+}
+
+.adminator-hero .hero-actions {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[10px];
+}
+
+/* KPI Cards Grid - Matching Adminator 4-column KPI style */
+.kpi-grid {
+    @apply tw:grid;
+    grid-template-columns: repeat(3, 1fr);
+    @apply tw:gap-[20px];
+    @apply tw:mb-[28px];
+}
+
+.kpi-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    @apply tw:rounded-[14px];
+    padding: 22px 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    @apply tw:flex;
+    @apply tw:flex-col;
+    @apply tw:justify-between;
+    @apply tw:relative;
+}
+
+.kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.kpi-card.c-success { border-bottom: 3px solid #10b981; }
+.kpi-card.c-danger { border-bottom: 3px solid #ef4444; }
+.kpi-card.c-purple { border-bottom: 3px solid #8b5cf6; }
+.kpi-card.c-primary { border-bottom: 3px solid #3b82f6; }
+
+.kpi-top {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+    @apply tw:mb-[12px];
+}
+
+.kpi-identity {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[10px];
+}
+
+.kpi-icon {
+    @apply tw:w-[38px];
+    @apply tw:h-[38px];
+    @apply tw:rounded-[10px];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:text-[16px];
+}
+
+.kpi-icon.success { background: rgba(16, 185, 129, 0.12); @apply tw:text-[#10b981]; }
+.kpi-icon.danger { background: rgba(239, 68, 68, 0.12); @apply tw:text-[#ef4444]; }
+.kpi-icon.purple { background: rgba(139, 92, 246, 0.12); @apply tw:text-[#8b5cf6]; }
+.kpi-icon.primary { background: rgba(59, 130, 246, 0.12); @apply tw:text-[#3b82f6]; }
+
+.kpi-label {
+    @apply tw:text-[12.5px];
+    @apply tw:font-semibold;
+    @apply tw:text-[#64748b];
+    @apply tw:capitalize;
+}
+
+.kpi-pill {
+    padding: 3px 8px;
+    @apply tw:rounded-[20px];
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[4px];
+}
+
+.kpi-pill.up { background: #dcfce7; @apply tw:text-[#15803d]; }
+.kpi-pill.down { background: #fee2e2; @apply tw:text-[#b91c1c]; }
+.kpi-pill.flat { background: #ede9fe; @apply tw:text-[#6d28d9]; }
+.kpi-pill.info { background: #e0f2fe; @apply tw:text-[#0369a1]; }
+
+.kpi-value {
+    font-family:'oswald';
+    @apply tw:text-[32px];
+    @apply tw:font-extrabold;
+    @apply tw:text-[#0f172a];
+    @apply tw:tracking-[1px];
+    @apply tw:leading-[1.1];
+    @apply tw:mb-[6px];
+    /*font-feature-settings: "tnum";*/ /* bagi font selari*/
+}
+
+
+.kpi-compare {
+    @apply tw:text-[12px];
+    @apply tw:text-[#64748b];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[5px];
+}
+
+.kpi-compare strong {
+    @apply tw:text-[#1e293b];
+}
+
+.kpi-compare .sep {
+    @apply tw:opacity-[0.5];
+}
+
+/* Two-column and Full-width Grid like Adminator */
+.adminator-grid {
+    @apply tw:grid;
+    grid-template-columns: repeat(12, 1fr);
+    @apply tw:gap-[24px];
+    @apply tw:mb-[28px];
+}
+
+.col-12 { grid-column: span 12; }
+.col-8 { grid-column: span 8; }
+.col-6 { grid-column: span 6; }
+.col-4 { grid-column: span 4; }
+
+/* Adminator Clean Cards */
+.admin-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    @apply tw:rounded-[14px];
+    @apply tw:p-[24px];
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.admin-card-head {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+    @apply tw:mb-[20px];
+    @apply tw:pb-[14px];
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.card-title-wrap .eyebrow {
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.6px];
+    @apply tw:text-[#94a3b8];
+    @apply tw:block;
+    @apply tw:mb-[2px];
+}
+
+.card-title-wrap .card-title {
+    @apply tw:text-[18px];
+    @apply tw:font-extrabold;
+    @apply tw:text-[#0f172a];
+    @apply tw:tracking-[-0.3px];
+    @apply tw:m-[0];
+}
+
+.card-action-link {
+    @apply tw:text-[12.5px];
+    @apply tw:font-semibold;
+    color: var(--primary);
+    @apply tw:no-underline;
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[5px];
+    transition: all 0.2s ease;
+}
+
+.card-action-link:hover {
+    color: var(--primary-hover);
+    transform: translateX(2px);
+}
+
+/* Subsystem Summary Progress Bars - Adminator Geography/Regional Style */
+.sv-regions {
+    @apply tw:flex;
+    @apply tw:flex-col;
+    @apply tw:gap-[16px];
+}
+
+.sv-region {
+    @apply tw:flex;
+    @apply tw:flex-col;
+    @apply tw:gap-[6px];
+}
+
+.sv-region-row {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+    @apply tw:text-[13.5px];
+}
+
+.sv-region-name {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+    @apply tw:font-semibold;
+    @apply tw:text-[#1e293b];
+}
+
+.sv-marker {
+    @apply tw:w-[9px];
+    @apply tw:h-[9px];
+    @apply tw:rounded-[50%];
+}
+
+.sv-region-val {
+    @apply tw:font-bold;
+    @apply tw:text-[#0f172a];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+}
+
+.sv-region-pct {
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:text-[#64748b];
+    background: #f1f5f9;
+    padding: 2px 7px;
+    @apply tw:rounded-[10px];
+}
+
+.sv-bar-track {
+    @apply tw:w-full;
+    @apply tw:h-[7px];
+    background: #f1f5f9;
+    @apply tw:rounded-[4px];
+    @apply tw:overflow-hidden;
+}
+
+.sv-bar-fill {
+    @apply tw:h-full;
+    @apply tw:rounded-[4px];
+    transition: width 0.4s ease;
+}
+
+/* Radial Circular Meters (Adminator Site Visits) */
+.sv-radials-row {
+    @apply tw:grid;
+    grid-template-columns: repeat(3, 1fr);
+    @apply tw:gap-[16px];
+    @apply tw:pt-[20px];
+    border-top: 1px solid #f1f5f9;
+    @apply tw:mt-[20px];
+    @apply tw:text-center;
+}
+
+.sv-radial-box {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:gap-[14px];
+}
+
+.sv-radial-circle {
+    @apply tw:relative;
+    @apply tw:w-[62px];
+    @apply tw:h-[62px];
+}
+
+.sv-radial-circle svg {
+    transform: rotate(-90deg);
+    @apply tw:w-[62px];
+    @apply tw:h-[62px];
+}
+
+.radial-track {
+    fill: none;
+    stroke: #e2e8f0;
+    stroke-width: 6;
+}
+
+.radial-fill {
+    fill: none;
+    stroke-width: 6;
+    stroke-linecap: round;
+}
+
+.radial-fill.emerald { stroke: #10b981; }
+.radial-fill.amber { stroke: #f59e0b; }
+.radial-fill.blue { stroke: #3b82f6; }
+
+.radial-pct {
+    @apply tw:absolute;
+    @apply tw:top-[50%];
+    @apply tw:left-[50%];
+    transform: translate(-50%, -50%);
+    @apply tw:text-[13px];
+    @apply tw:font-extrabold;
+    @apply tw:text-[#0f172a];
+}
+
+.radial-text {
+    @apply tw:text-left;
+}
+
+.radial-title {
+    @apply tw:text-[13.5px];
+    @apply tw:font-bold;
+    @apply tw:text-[#0f172a];
+}
+
+.radial-caption {
+    @apply tw:text-[11px];
+    @apply tw:text-[#64748b];
+}
+
+/* Monthly Stats Bottom Strip (Adminator Monthly Sales Footer) */
+.monthly-strip {
+    @apply tw:grid;
+    grid-template-columns: repeat(4, 1fr);
+    @apply tw:gap-[12px];
+    @apply tw:pt-[18px];
+    @apply tw:mt-[18px];
+    border-top: 1px solid #f1f5f9;
+}
+
+.stat-cell {
+    background: #f8fafc;
+    border: 1px solid #f1f5f9;
+    padding: 10px 14px;
+    @apply tw:rounded-[8px];
+}
+
+.stat-cell-label {
+    @apply tw:text-[11px];
+    @apply tw:text-[#64748b];
+    @apply tw:font-semibold;
+    @apply tw:mb-[2px];
+}
+
+.stat-cell-value {
+    @apply tw:text-[15px];
+    @apply tw:font-extrabold;
+    @apply tw:text-[#0f172a];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[4px];
+}
+
+.stat-cell-value .trend-up {
+    @apply tw:text-[#10b981];
+    @apply tw:text-[11px];
+}
+
+/* Adminator Todo List Widget */
+.adminator-todo-list {
+    @apply tw:list-none;
+    @apply tw:p-[0];
+    @apply tw:m-[0];
+    @apply tw:flex;
+    @apply tw:flex-col;
+    @apply tw:gap-[8px];
+}
+
+.adminator-todo-item {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+    padding: 11px 14px;
+    @apply tw:rounded-[8px];
+    background: #f8fafc;
+    border: 1px solid #f1f5f9;
+    transition: all 0.2s ease;
+}
+
+.adminator-todo-item:hover {
+    background: #f1f5f9;
+}
+
+.todo-left {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[12px];
+}
+
+.todo-checkbox {
+    @apply tw:w-[17px];
+    @apply tw:h-[17px];
+    @apply tw:rounded-[4px];
+    @apply tw:cursor-pointer;
+    accent-color: var(--primary);
+}
+
+.todo-text {
+    @apply tw:text-[13.5px];
+    @apply tw:font-medium;
+    @apply tw:text-[#1e293b];
+    @apply tw:cursor-pointer;
+}
+
+.adminator-todo-item.is-done .todo-text {
+    text-decoration: line-through;
+    @apply tw:text-[#94a3b8];
+}
+
+.todo-pill {
+    @apply tw:text-[10.5px];
+    @apply tw:font-bold;
+    padding: 3px 8px;
+    @apply tw:rounded-[6px];
+    @apply tw:tracking-[0.4px];
+    @apply tw:uppercase;
+}
+
+.todo-pill.urgent { background: #fee2e2; @apply tw:text-[#b91c1c]; }
+.todo-pill.upcoming { background: #e0f2fe; @apply tw:text-[#0369a1]; }
+.todo-pill.warn { background: #fef3c7; @apply tw:text-[#b45309]; }
+.todo-pill.done { background: #dcfce7; @apply tw:text-[#15803d]; }
+.todo-pill.low { background: #f1f5f9; @apply tw:text-[#64748b]; }
+
+/* Adminator Clean Commerce/Audit Table */
+.adminator-table {
+    @apply tw:w-full;
+    @apply tw:border-collapse;
+}
+
+.adminator-table th {
+    @apply tw:text-left;
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:text-[#64748b];
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.6px];
+    padding: 10px 14px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.adminator-table td {
+    padding: 13px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    @apply tw:text-[13px];
+    @apply tw:text-[#1e293b];
+    vertical-align: middle;
+}
+
+.adminator-table tr:hover td {
+    background: #fafbfc;
+}
+
+.adminator-tag {
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    padding: 3px 8px;
+    @apply tw:rounded-[12px];
+    @apply tw:inline-block;
+}
+
+.adminator-tag.tag-new { background: #dcfce7; @apply tw:text-[#15803d]; }
+.adminator-tag.tag-used { background: #fef3c7; @apply tw:text-[#b45309]; }
+.adminator-tag.tag-unavail { background: #fee2e2; @apply tw:text-[#b91c1c]; }
+.adminator-tag.tag-info { background: #e0f2fe; @apply tw:text-[#0284c7]; }
+
+/* Adminator Weather Widget */
+.adminator-wx-hero {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+    @apply tw:rounded-[12px];
+    border: 1px solid #e2e8f0;
+    @apply tw:mb-[16px];
+}
+
+.wx-temp-wrap {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[16px];
+}
+
+.wx-icon-box {
+    @apply tw:text-[38px];
+    @apply tw:text-[#f59e0b];
+}
+
+.wx-temp-number {
+    @apply tw:text-[36px];
+    @apply tw:font-extrabold;
+    @apply tw:text-[#0f172a];
+    @apply tw:leading-[1];
+}
+
+.wx-condition-desc {
+    @apply tw:text-[12px];
+    @apply tw:text-[#64748b];
+    @apply tw:mt-[4px];
+}
+
+.wx-location-date {
+    @apply tw:text-right;
+}
+
+.wx-location-date h5 {
+    @apply tw:text-[16px];
+    @apply tw:font-extrabold;
+    @apply tw:text-[#0f172a];
+    @apply tw:mb-[2px];
+}
+
+.wx-location-date p {
+    @apply tw:text-[11.5px];
+    @apply tw:font-semibold;
+    @apply tw:text-[#94a3b8];
+}
+
+.wx-week-forecast {
+    @apply tw:grid;
+    grid-template-columns: repeat(7, 1fr);
+    @apply tw:gap-[6px];
+    @apply tw:text-center;
+    @apply tw:pt-[12px];
+    border-top: 1px solid #f1f5f9;
+}
+
+.wx-day-cell {
+    padding: 8px 4px;
+    @apply tw:rounded-[8px];
+    background: #f8fafc;
+    border: 1px solid #f1f5f9;
+}
+
+.wx-day-cell.is-today {
+    background: #e0f2fe;
+    @apply tw:border-[#bae6fd];
+}
+
+.wx-day-name {
+    @apply tw:text-[10.5px];
+    @apply tw:font-bold;
+    @apply tw:text-[#64748b];
+    @apply tw:mb-[4px];
+}
+
+.wx-day-icon {
+    @apply tw:text-[14px];
+    @apply tw:mb-[4px];
+    @apply tw:text-[#f59e0b];
+}
+
+.wx-day-temp {
+    @apply tw:text-[12px];
+    @apply tw:font-bold;
+    @apply tw:text-[#0f172a];
+}
+
+/* Quick Messenger Chat Box (Adminator Chat Style) */
+.adminator-chat {
+    @apply tw:flex;
+    @apply tw:flex-col;
+    @apply tw:gap-[14px];
+}
+
+.chat-message-stream {
+    @apply tw:flex;
+    @apply tw:flex-col;
+    @apply tw:gap-[12px];
+    @apply tw:max-h-[240px];
+    @apply tw:overflow-y-auto;
+    @apply tw:pr-[6px];
+}
+
+.chat-bubble-row {
+    @apply tw:flex;
+    @apply tw:items-start;
+    @apply tw:gap-[10px];
+}
+
+.chat-bubble-row.is-me {
+    @apply tw:flex-row-reverse;
+}
+
+.chat-avatar-pill {
+    @apply tw:w-[32px];
+    @apply tw:h-[32px];
+    @apply tw:rounded-[50%];
+    background: #64748b;
+    @apply tw:text-[#ffffff];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:shrink-0;
+}
+
+.chat-avatar-pill.me {
+    background: var(--primary);
+}
+
+.chat-bubble-stack {
+    @apply tw:max-w-[75%];
+}
+
+.chat-bubble {
+    background: #f1f5f9;
+    @apply tw:text-[#1e293b];
+    padding: 9px 14px;
+    @apply tw:rounded-[12px];
+    @apply tw:text-[12.8px];
+    @apply tw:leading-[1.4];
+    @apply tw:mb-[4px];
+}
+
+.chat-bubble-row.is-me .chat-bubble {
+    background: var(--primary);
+    @apply tw:text-[#ffffff];
+}
+
+.chat-timestamp {
+    @apply tw:text-[10px];
+    @apply tw:text-[#94a3b8];
+    @apply tw:mt-[2px];
+}
+
+.chat-input-bar {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+    @apply tw:pt-[12px];
+    border-top: 1px solid #f1f5f9;
+}
+
+.chat-input-bar input {
+    flex: 1;
+    @apply tw:h-[40px];
+    border: 1px solid #e2e8f0;
+    @apply tw:rounded-[8px];
+    padding: 0 14px;
+    @apply tw:text-[13px];
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.chat-input-bar input:focus {
+    border-color: var(--primary);
+}
+
+.chat-send-btn {
+    @apply tw:w-[40px];
+    @apply tw:h-[40px];
+    @apply tw:rounded-[8px];
+    background: var(--primary);
+    @apply tw:text-[#fff];
+    border: none;
+    @apply tw:cursor-pointer;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:text-[14px];
+    transition: all 0.2s;
+}
+
+.chat-send-btn:hover {
+    background: var(--primary-hover);
+}
+
+/* 5 Subsystem Quick Cards Carousel */
+.subsystems-admin-grid {
+    @apply tw:grid;
+    grid-template-columns: repeat(4, 1fr);
+    @apply tw:gap-[14px];
+    @apply tw:mb-[28px];
+}
+
+.subsystem-admin-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    @apply tw:rounded-[10px];
+    @apply tw:p-[16px];
+    @apply tw:no-underline;
+    @apply tw:flex;
+    @apply tw:flex-col;
+    @apply tw:justify-between;
+    transition: all 0.2s ease;
+    border-left: 4px solid #10b981;
+}
+
+.subsystem-admin-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    @apply tw:border-[#cbd5e1];
+}
+
+.subsystem-admin-card.s-welfare { border-left-color: #10b981; }
+.subsystem-admin-card.s-inventory { border-left-color: #f59e0b; }
+.subsystem-admin-card.s-requests { border-left-color: #3b82f6; }
+.subsystem-admin-card.s-staff { border-left-color: #8b5cf6; }
+.subsystem-admin-card.s-donations { border-left-color: #14b8a6; }
+
+.subsystem-admin-card .s-num {
+    @apply tw:text-[10px];
+    @apply tw:font-bold;
+    @apply tw:uppercase;
+    @apply tw:text-[#94a3b8];
+    @apply tw:mb-[4px];
+}
+
+.subsystem-admin-card .s-title {
+    @apply tw:text-[13.5px];
+    @apply tw:font-extrabold;
+    @apply tw:text-[#0f172a];
+    @apply tw:leading-[1.3];
+    @apply tw:mb-[6px];
+}
+
+.subsystem-admin-card .s-meta {
+    @apply tw:text-[11px];
+    @apply tw:text-[#64748b];
+    @apply tw:font-semibold;
+}
+
+/* ==========================================================================
+   Staff & Caregiver Dashboard Additions
+   ========================================================================== */
+.staff-quick-actions-bar {
+    @apply tw:grid;
+    grid-template-columns: repeat(4, 1fr);
+    @apply tw:gap-[14px];
+    @apply tw:mb-[28px];
+}
+
+.staff-action-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    @apply tw:rounded-[12px];
+    padding: 16px 18px;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[14px];
+    @apply tw:cursor-pointer;
+    transition: all 0.2s ease;
+    @apply tw:no-underline;
+    color: inherit;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+
+.staff-action-card:hover {
+    @apply tw:border-[#cbd5e1];
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+.staff-action-icon {
+    @apply tw:w-[42px];
+    @apply tw:h-[42px];
+    @apply tw:rounded-[10px];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:text-[18px];
+    @apply tw:shrink-0;
+}
+
+.staff-action-icon.green { background: rgba(16, 185, 129, 0.12); @apply tw:text-[#10b981]; }
+.staff-action-icon.blue { background: rgba(59, 130, 246, 0.12); @apply tw:text-[#3b82f6]; }
+.staff-action-icon.amber { background: rgba(245, 158, 11, 0.12); @apply tw:text-[#f59e0b]; }
+.staff-action-icon.purple { background: rgba(139, 92, 246, 0.12); @apply tw:text-[#8b5cf6]; }
+
+.staff-action-title {
+    @apply tw:text-[13.5px];
+    @apply tw:font-bold;
+    @apply tw:text-[#0f172a];
+    @apply tw:leading-[1.2];
+}
+
+.staff-action-sub {
+    @apply tw:text-[11.5px];
+    @apply tw:text-[#64748b];
+    @apply tw:mt-[2px];
+}
+
+/* Schedule Timeline */
+.staff-schedule-list {
+    @apply tw:flex;
+    @apply tw:flex-col;
+    @apply tw:gap-[12px];
+}
+
+.staff-schedule-item {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+    padding: 14px 16px;
+    @apply tw:rounded-[10px];
+    border: 1px solid #f1f5f9;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.staff-schedule-item:hover {
+    background: #f8fafc;
+    @apply tw:border-[#e2e8f0];
+}
+
+.staff-schedule-item.in-progress {
+    border-left: 4px solid #f59e0b;
+    background: #fffbeb;
+}
+
+.staff-schedule-item.completed {
+    border-left: 4px solid #10b981;
+    @apply tw:opacity-[0.85];
+}
+
+.staff-schedule-item.upcoming {
+    border-left: 4px solid #3b82f6;
+}
+
+.sched-time {
+    font-family: 'JetBrains Mono', monospace;
+    @apply tw:text-[12px];
+    @apply tw:font-bold;
+    @apply tw:text-[#475569];
+    @apply tw:w-[80px];
+    @apply tw:shrink-0;
+}
+
+.sched-content {
+    flex: 1;
+    margin: 0 16px;
+}
+
+.sched-title {
+    @apply tw:text-[13px];
+    @apply tw:font-bold;
+    @apply tw:text-[#0f172a];
+}
+
+.sched-detail {
+    @apply tw:text-[11.5px];
+    @apply tw:text-[#64748b];
+    @apply tw:mt-[2px];
+}
+
+.sched-status-badge {
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    padding: 3px 9px;
+    @apply tw:rounded-[12px];
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.4px];
+}
+
+.sched-status-badge.done { background: rgba(16, 185, 129, 0.15); @apply tw:text-[#059669]; }
+.sched-status-badge.progress { background: rgba(245, 158, 11, 0.15); @apply tw:text-[#d97706]; }
+.sched-status-badge.pending { background: #f1f5f9; @apply tw:text-[#475569]; }
+
+/* Ward Child Care Cards */
+.staff-ward-grid {
+    @apply tw:grid;
+    grid-template-columns: repeat(2, 1fr);
+    @apply tw:gap-[14px];
+}
+
+.staff-ward-card {
+    border: 1px solid #e2e8f0;
+    @apply tw:rounded-[12px];
+    padding: 14px 16px;
+    background: #ffffff;
+    @apply tw:flex;
+    @apply tw:flex-col;
+    @apply tw:justify-between;
+    transition: all 0.2s ease;
+}
+
+.staff-ward-card:hover {
+    @apply tw:border-[#cbd5e1];
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.ward-card-header {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[12px];
+    @apply tw:mb-[10px];
+}
+
+.ward-avatar {
+    @apply tw:w-[40px];
+    @apply tw:h-[40px];
+    @apply tw:rounded-[50%];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:font-bold;
+    @apply tw:text-[14px];
+    @apply tw:text-[#fff];
+    @apply tw:shrink-0;
+}
+
+.ward-name {
+    @apply tw:text-[13.5px];
+    @apply tw:font-bold;
+    @apply tw:text-[#0f172a];
+}
+
+.ward-room {
+    @apply tw:text-[11px];
+    @apply tw:text-[#64748b];
+}
+
+.ward-tag {
+    @apply tw:text-[11px];
+    padding: 2px 7px;
+    @apply tw:rounded-[4px];
+    background: #f1f5f9;
+    @apply tw:text-[#475569];
+    @apply tw:inline-block;
+    @apply tw:mt-[4px];
+    @apply tw:font-medium;
+}
+
+.ward-tag.alert-tag {
+    background: #fef2f2;
+    @apply tw:text-[#dc2626];
+    border: 1px solid #fecaca;
+    @apply tw:font-semibold;
+}
+
+.ward-tag.good-tag {
+    background: #ecfdf5;
+    @apply tw:text-[#059669];
+    border: 1px solid #a7f3d0;
+}
+
+/* Handover Bulletin & Incident Notes */
+.handover-box {
+    background: #fafbfc;
+    border: 1px solid #e2e8f0;
+    @apply tw:rounded-[10px];
+    @apply tw:p-[16px];
+    @apply tw:mb-[16px];
+}
+
+.handover-author {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+    @apply tw:mb-[8px];
+}
+
+.handover-author-name {
+    @apply tw:text-[12.5px];
+    @apply tw:font-bold;
+    @apply tw:text-[#0f172a];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[8px];
+}
+
+.handover-time {
+    @apply tw:text-[11px];
+    @apply tw:text-[#64748b];
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.handover-text {
+    @apply tw:text-[12.5px];
+    @apply tw:text-[#334155];
+    @apply tw:leading-[1.5];
+}
+
+/* ==========================================================================
+   Duty Alerts & Shift Notifications Widget (Staff Dashboard)
+   ========================================================================== */
+.staff-duty-notifications {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    @apply tw:rounded-[14px];
+    padding: 20px 24px;
+    @apply tw:mb-[28px];
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.duty-notif-header {
+    @apply tw:flex;
+    @apply tw:justify-between;
+    @apply tw:items-center;
+    @apply tw:mb-[16px];
+    @apply tw:flex-wrap;
+    @apply tw:gap-[12px];
+}
+
+.duty-notif-title-wrap {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[10px];
+}
+
+.duty-notif-icon-bell {
+    @apply tw:w-[36px];
+    @apply tw:h-[36px];
+    @apply tw:rounded-[10px];
+    background: rgba(16, 185, 129, 0.12);
+    @apply tw:text-[#059669];
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:text-[16px];
+}
+
+.duty-notif-title {
+    @apply tw:text-[16px];
+    @apply tw:font-extrabold;
+    @apply tw:text-[#0f172a];
+    @apply tw:tracking-[-0.3px];
+}
+
+.duty-notif-badge {
+    background: #fef2f2;
+    @apply tw:text-[#dc2626];
+    border: 1px solid #fecaca;
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    padding: 2px 8px;
+    @apply tw:rounded-[12px];
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[4px];
+}
+
+.duty-notif-filter-pills {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+}
+
+.duty-filter-btn {
+    padding: 4px 12px;
+    @apply tw:rounded-[20px];
+    @apply tw:text-[11.5px];
+    @apply tw:font-semibold;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    @apply tw:text-[#64748b];
+    @apply tw:cursor-pointer;
+    transition: all 0.2s ease;
+}
+
+.duty-filter-btn:hover {
+    background: #f8fafc;
+    color: var(--dark);
+}
+
+.duty-filter-btn.active {
+    background: #0f172a;
+    @apply tw:text-[#ffffff];
+    @apply tw:border-[#0f172a];
+}
+
+/* Duty Alert Cards Grid */
+.duty-cards-grid {
+    @apply tw:grid;
+    grid-template-columns: repeat(3, 1fr);
+    @apply tw:gap-[16px];
+}
+
+.duty-alert-card {
+    @apply tw:rounded-[12px];
+    @apply tw:p-[16px];
+    border: 1.5px solid transparent;
+    @apply tw:flex;
+    @apply tw:flex-col;
+    @apply tw:justify-between;
+    transition: all 0.25s ease;
+    @apply tw:relative;
+    @apply tw:overflow-hidden;
+}
+
+.duty-alert-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.duty-alert-card.alert-clinical {
+    background: linear-gradient(145deg, #fff1f2, #ffffff);
+    @apply tw:border-[#fecdd3];
+}
+
+.duty-alert-card.alert-medication {
+    background: linear-gradient(145deg, #fffbeb, #ffffff);
+    @apply tw:border-[#fef08a];
+}
+
+.duty-alert-card.alert-supplies {
+    background: linear-gradient(145deg, #f0fdf4, #ffffff);
+    @apply tw:border-[#bbf7d0];
+}
+
+.duty-card-top {
+    @apply tw:flex;
+    @apply tw:items-start;
+    @apply tw:gap-[12px];
+    @apply tw:mb-[12px];
+}
+
+.duty-badge-tag {
+    @apply tw:text-[10.5px];
+    @apply tw:font-bold;
+    padding: 2px 7px;
+    @apply tw:rounded-[4px];
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.4px];
+    @apply tw:inline-block;
+    @apply tw:mb-[4px];
+}
+
+.alert-clinical .duty-badge-tag { background: #ffe4e6; @apply tw:text-[#e11d48]; }
+.alert-medication .duty-badge-tag { background: #fef3c7; @apply tw:text-[#b45309]; }
+.alert-supplies .duty-badge-tag { background: #dcfce7; @apply tw:text-[#15803d]; }
+
+.duty-alert-title {
+    @apply tw:text-[13.5px];
+    @apply tw:font-bold;
+    @apply tw:text-[#0f172a];
+    @apply tw:leading-[1.3];
+}
+
+.duty-alert-desc {
+    @apply tw:text-[12px];
+    @apply tw:text-[#475569];
+    @apply tw:leading-[1.45];
+    @apply tw:mt-[3px];
+}
+
+.duty-card-footer {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-between;
+    @apply tw:pt-[10px];
+    border-top: 1px dashed rgba(0, 0, 0, 0.08);
+    @apply tw:text-[11px];
+}
+
+.duty-alert-time {
+    @apply tw:text-[#64748b];
+    font-family: 'JetBrains Mono', monospace;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[4px];
+}
+
+.duty-action-btn-sm {
+    padding: 4px 10px;
+    @apply tw:rounded-[6px];
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    border: none;
+    @apply tw:cursor-pointer;
+    transition: all 0.15s ease;
+}
+
+.alert-clinical .duty-action-btn-sm { background: #e11d48; @apply tw:text-[#fff]; }
+.alert-clinical .duty-action-btn-sm:hover { background: #be123c; }
+
+.alert-medication .duty-action-btn-sm { background: #d97706; @apply tw:text-[#fff]; }
+.alert-medication .duty-action-btn-sm:hover { background: #b45309; }
+
+.alert-supplies .duty-action-btn-sm { background: #059669; @apply tw:text-[#fff]; }
+.alert-supplies .duty-action-btn-sm:hover { background: #047857; }
+
+/* ==========================================================================
+   Premium Staff Modals (Vitals, Handover, Supplies)
+   ========================================================================== */
+.staff-duty-modal-backdrop {
+    @apply tw:hidden;
+    @apply tw:fixed;
+    @apply tw:top-[0];
+    @apply tw:left-[0];
+    @apply tw:right-[0];
+    @apply tw:bottom-[0];
+    background: rgba(15, 23, 42, 0.68);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    @apply tw:z-[9999];
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:p-[20px];
+}
+
+.staff-duty-modal-card {
+    background: #ffffff;
+    @apply tw:rounded-[18px];
+    @apply tw:w-full;
+    @apply tw:max-w-[520px];
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05);
+    @apply tw:overflow-hidden;
+    animation: staffModalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    @apply tw:relative;
+}
+
+@keyframes staffModalPop {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.staff-modal-header {
+    padding: 24px 28px;
+    @apply tw:relative;
+    color: #ffffff !important;
+}
+
+.staff-modal-header.clinical {
+    background: linear-gradient(135deg, #059669 0%, #047857 60%, #064e3b 100%) !important;
+    border-bottom: 3px solid #10b981;
+}
+
+.staff-modal-header.handover {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 60%, #4c1d95 100%) !important;
+    border-bottom: 3px solid #8b5cf6;
+}
+
+.staff-modal-header.supplies {
+    background: linear-gradient(135deg, #d97706 0%, #b45309 60%, #78350f 100%) !important;
+    border-bottom: 3px solid #f59e0b;
+}
+
+.staff-modal-header.academic {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 60%, #1e3a8a 100%) !important;
+    border-bottom: 3px solid #3b82f6;
+}
+
+.staff-modal-header.intake {
+    background: linear-gradient(135deg, #0d9488 0%, #0f766e 60%, #115e59 100%) !important;
+    border-bottom: 3px solid #14b8a6;
+}
+
+.staff-modal-badge {
+    @apply tw:inline-flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff !important;
+    @apply tw:text-[11px];
+    @apply tw:font-bold;
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.5px];
+    padding: 4px 12px;
+    @apply tw:rounded-[20px];
+    @apply tw:mb-[10px];
+}
+
+.staff-modal-title {
+    @apply tw:text-[21px];
+    @apply tw:font-extrabold;
+    color: #ffffff !important;
+    @apply tw:tracking-[-0.4px];
+    margin: 0 0 6px 0;
+    @apply tw:leading-[1.25];
+}
+
+.staff-modal-sub {
+    @apply tw:text-[12.5px];
+    color: rgba(255, 255, 255, 0.88) !important;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    @apply tw:m-[0];
+}
+
+.staff-modal-close-btn {
+    @apply tw:absolute;
+    @apply tw:top-[20px];
+    @apply tw:right-[20px];
+    @apply tw:w-[32px];
+    @apply tw:h-[32px];
+    @apply tw:rounded-[50%];
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--dark, #42513e);
+    @apply tw:text-[26px];
+    @apply tw:cursor-pointer;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    transition: all 0.2s ease;
+    @apply tw:leading-[1];
+}
+
+.staff-modal-close-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: rotate(90deg);
+}
+
+.staff-modal-body {
+    padding: 26px 28px;
+    background: #ffffff;
+}
+
+.staff-field-group {
+    @apply tw:mb-[18px];
+}
+
+.staff-field-group:last-of-type {
+    @apply tw:mb-[22px];
+}
+
+.staff-field-label {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[6px];
+    @apply tw:text-[11.5px];
+    @apply tw:font-bold;
+    @apply tw:uppercase;
+    @apply tw:tracking-[0.6px];
+    @apply tw:text-[#334155];
+    @apply tw:mb-[7px];
+}
+
+.staff-field-label i {
+    @apply tw:text-[#059669];
+    @apply tw:text-[13px];
+}
+
+.staff-modal-header.handover ~ .staff-modal-body .staff-field-label i {
+    @apply tw:text-[#7c3aed];
+}
+
+.staff-modal-header.supplies ~ .staff-modal-body .staff-field-label i {
+    @apply tw:text-[#d97706];
+}
+
+.staff-input-control {
+    @apply tw:w-full;
+    @apply tw:h-[44px];
+    border: 1.5px solid #e2e8f0;
+    @apply tw:rounded-[10px];
+    padding: 0 14px;
+    @apply tw:font-[inherit];
+    @apply tw:text-[13.5px];
+    @apply tw:text-[#0f172a];
+    background: #f8fafc;
+    transition: all 0.2s ease;
+}
+
+.staff-input-control:focus {
+    outline: none;
+    background: #ffffff;
+    @apply tw:border-[#059669];
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.staff-modal-header.handover ~ .staff-modal-body .staff-input-control:focus {
+    @apply tw:border-[#7c3aed];
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+.staff-modal-header.supplies ~ .staff-modal-body .staff-input-control:focus {
+    @apply tw:border-[#d97706];
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+}
+
+.staff-input-suffix-wrap {
+    @apply tw:relative;
+    @apply tw:flex;
+    @apply tw:items-center;
+}
+
+.staff-input-suffix-wrap .staff-input-control {
+    @apply tw:pr-[48px];
+    font-family: 'JetBrains Mono', monospace;
+    @apply tw:font-semibold;
+}
+
+.staff-input-suffix {
+    @apply tw:absolute;
+    @apply tw:right-[12px];
+    @apply tw:text-[11.5px];
+    @apply tw:font-bold;
+    @apply tw:text-[#64748b];
+    background: #e2e8f0;
+    padding: 2px 8px;
+    @apply tw:rounded-[6px];
+    @apply tw:pointer-events-none;
+}
+
+.staff-textarea-control {
+    @apply tw:w-full;
+    @apply tw:h-[80px];
+    border: 1.5px solid #e2e8f0;
+    @apply tw:rounded-[10px];
+    padding: 12px 14px;
+    @apply tw:font-[inherit];
+    @apply tw:text-[13px];
+    @apply tw:text-[#0f172a];
+    background: #f8fafc;
+    transition: all 0.2s ease;
+    resize: vertical;
+}
+
+.staff-textarea-control:focus {
+    outline: none;
+    background: #ffffff;
+    @apply tw:border-[#059669];
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.staff-modal-footer-btns {
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:gap-[12px];
+    @apply tw:mt-[24px];
+}
+
+.staff-btn-save {
+    flex: 1;
+    @apply tw:h-[44px];
+    @apply tw:rounded-[10px];
+    background: #059669;
+    @apply tw:text-[#ffffff];
+    @apply tw:text-[13.5px];
+    @apply tw:font-bold;
+    border: none;
+    @apply tw:cursor-pointer;
+    @apply tw:flex;
+    @apply tw:items-center;
+    @apply tw:justify-center;
+    @apply tw:gap-[8px];
+    box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3);
+    transition: all 0.2s ease;
+}
+
+.staff-btn-save:hover {
+    background: #047857;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(5, 150, 105, 0.4);
+}
+
+.staff-btn-save.handover {
+    background: #7c3aed;
+    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
+}
+
+.staff-btn-save.handover:hover {
+    background: #6d28d9;
+    box-shadow: 0 6px 18px rgba(124, 58, 237, 0.4);
+}
+
+.staff-btn-save.supplies {
+    background: #d97706;
+    box-shadow: 0 4px 14px rgba(217, 119, 6, 0.3);
+}
+
+.staff-btn-save.supplies:hover {
+    background: #b45309;
+    box-shadow: 0 6px 18px rgba(217, 119, 6, 0.4);
+}
+
+.staff-btn-cancel {
+    @apply tw:h-[44px];
+    padding: 0 20px;
+    @apply tw:rounded-[10px];
+    background: #f1f5f9;
+    @apply tw:text-[#475569];
+    @apply tw:text-[13px];
+    @apply tw:font-semibold;
+    border: 1px solid #cbd5e1;
+    @apply tw:cursor-pointer;
+    transition: all 0.2s ease;
+}
+
+.staff-btn-cancel:hover {
+    background: #e2e8f0;
+    @apply tw:text-[#0f172a];
+}
+
+@media (max-width: 1200px) {
+    .staff-quick-actions-bar {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .staff-ward-grid {
+        grid-template-columns: 1fr;
+    }
+    .duty-cards-grid {
+        grid-template-columns: 1fr;
+    }
+    .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .subsystems-admin-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .col-6, .col-8, .col-4 {
+        grid-column: span 12;
+    }
+}
+
+@media (max-width: 768px) {
+    .kpi-grid {
+        grid-template-columns: 1fr;
+    }
+    .subsystems-admin-grid {
+        grid-template-columns: 1fr;
+    }
+    .monthly-strip {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .sv-radials-row {
+        grid-template-columns: 1fr;
+        @apply tw:gap-[20px];
+    }
+    .wx-week-forecast {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

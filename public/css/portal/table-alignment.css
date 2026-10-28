@@ -1,26 +1,12 @@
-/* Share a column edge between each data-table heading and its row values.
-   Existing inline right alignment on amount/action columns remains intact. */
-.portal-content :is(
-    .portal-table,
-    .adminator-table,
-    .admin-table,
-    .sickness-table,
-    .donor-table,
-    .edu-table,
-    .dir-don-table,
-    .inv-table,
-    .med-table,
-    .dir-staff-table,
-    .scorecard-table
-) > :is(thead,tbody,tfoot) > tr > :is(th,td) {
-    text-align: left;
-    vertical-align: top;
-    padding-left: 18px;
-    padding-right: 18px;
+/*! tailwindcss v4.3.3 | MIT License | https://tailwindcss.com */
+.portal-content :is( .portal-table, .adminator-table, .admin-table, .sickness-table, .donor-table, .edu-table, .dir-don-table, .inv-table, .med-table, .dir-staff-table, .scorecard-table ) > :is(thead,tbody,tfoot) > tr > :is(th,td) {
+  text-align: left;
+  vertical-align: top;
+  padding-left: 18px;
+  padding-right: 18px;
 }
-/* Inset action headings and buttons together from the right edge. */
 .portal-content table:has(> thead > tr > th.action-column) > :is(thead,tbody,tfoot) > tr > :last-child {
-    text-align: right;
-    padding-left: 24px;
-    padding-right: 60px;
+  text-align: right;
+  padding-left: 24px;
+  padding-right: 60px;
 }

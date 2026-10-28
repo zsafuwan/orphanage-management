@@ -1,0 +1,29 @@
+@import "tailwindcss/theme.css" reference prefix(tw);
+
+/* Tailwind component source. Build with npm run build:design. */
+/* Share a column edge between each data-table heading and its row values.
+   Existing inline right alignment on amount/action columns remains intact. */
+.portal-content :is(
+    .portal-table,
+    .adminator-table,
+    .admin-table,
+    .sickness-table,
+    .donor-table,
+    .edu-table,
+    .dir-don-table,
+    .inv-table,
+    .med-table,
+    .dir-staff-table,
+    .scorecard-table
+) > :is(thead,tbody,tfoot) > tr > :is(th,td) {
+    @apply tw:text-left;
+    vertical-align: top;
+    @apply tw:pl-[18px];
+    @apply tw:pr-[18px];
+}
+/* Inset action headings and buttons together from the right edge. */
+.portal-content table:has(> thead > tr > th.action-column) > :is(thead,tbody,tfoot) > tr > :last-child {
+    @apply tw:text-right;
+    @apply tw:pl-[24px];
+    @apply tw:pr-[60px];
+}

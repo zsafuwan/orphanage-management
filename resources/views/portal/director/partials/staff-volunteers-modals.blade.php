@@ -34,7 +34,7 @@
         <div class="director-modal-foot">
             <button type="button" class="btn-tab" style="background:#f1f5f9; border:none; padding:8px 16px; border-radius:6px; cursor:pointer;" onclick="closeDirectorModal('modal_staff_safeguarding_dossier')">Close</button>
             <button type="button" class="btn-sign" onclick="endorseCaregiverCredentials()">
-                <i class="fas fa-stamp"></i> Renew Directorate Endorsement
+                <i class="fas fa-stamp"></i> Renew Director Endorsement
             </button>
         </div>
     </div>

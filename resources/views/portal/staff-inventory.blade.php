@@ -1,167 +1,12 @@
 @extends('layouts.portal')
 
-@section('title', 'Staff Ward Inventory & Supply Dispensation')
-@section('breadcrumb', 'Workspace | Staff Inventory')
+@section('title', 'Inventory & Supplies')
+@section('breadcrumb', 'Inventory & Supplies')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/portal/inventory.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/portal/dashboard.css') }}">
-    <style>
-        /* Staff Inventory Specific Styles */
-        .staff-inv-hero {
-            background: linear-gradient(135deg, #064e3b 0%, #065f46 60%, #047857 100%);
-            color: #ffffff;
-            border-radius: var(--radius-md);
-            padding: 24px 28px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 18px rgba(6, 78, 59, 0.18);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .staff-inv-hero::after {
-            content: '';
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            width: 220px;
-            height: 220px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .staff-inv-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.18);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            padding: 3px 12px;
-            border-radius: 20px;
-            font-size: 11.5px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .staff-inv-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-            gap: 18px;
-            margin-bottom: 24px;
-        }
-
-        .ward-inv-card {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 20px;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .ward-inv-card:hover {
-            border-color: #cbd5e1;
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
-        }
-
-        .ward-inv-card.low-stock {
-            border-left: 4px solid #ef4444;
-            background: linear-gradient(180deg, #fff 0%, #fef2f2 100%);
-        }
-
-        .ward-inv-card.good-stock {
-            border-left: 4px solid #10b981;
-        }
-
-        .qty-badge {
-            font-size: 20px;
-            font-weight: 800;
-            color: #0f172a;
-            display: flex;
-            align-items: baseline;
-            gap: 4px;
-        }
-
-        .qty-badge small {
-            font-size: 12px;
-            font-weight: 600;
-            color: #64748b;
-        }
-
-        .cabinet-loc-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 11px;
-            color: #475569;
-            background: #f1f5f9;
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-weight: 600;
-        }
-
-        .action-icon-btn {
-            border: 1px solid #e2e8f0;
-            background: #ffffff;
-            color: #475569;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .action-icon-btn:hover {
-            background: #f8fafc;
-            border-color: #cbd5e1;
-            color: #0f172a;
-        }
-
-        .action-icon-btn.primary {
-            background: #10b981;
-            color: #ffffff;
-            border-color: #10b981;
-        }
-
-        .action-icon-btn.primary:hover {
-            background: #059669;
-        }
-
-        .action-icon-btn.req {
-            background: #f59e0b;
-            color: #ffffff;
-            border-color: #f59e0b;
-        }
-
-        .action-icon-btn.req:hover {
-            background: #d97706;
-        }
-
-        .req-status-pill {
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .req-pending { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
-        .req-dispatched { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
-        .req-received { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/portal/inventory.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/inventory.css')), 0, 12) }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/dashboard.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/dashboard.css')), 0, 12) }}">
+    <link rel="stylesheet" href="{{ asset('css/embedded/portal-staff-inventory-1.css') }}?v={{ substr(hash_file('sha256', public_path('css/embedded/portal-staff-inventory-1.css')), 0, 12) }}">
 @endpush
 
 @section('content')
@@ -174,23 +19,21 @@
                 <i class="fas fa-boxes"></i> Subsystem 2 · Staff Duty Ward Inventory
             </div>
             <h1 style="font-size: 24px; font-weight: 800; margin: 0 0 8px 0; letter-spacing: -0.5px;">
-                Ward Inventory & Child Supply Dispensation
+                Inventory & Supplies
             </h1>
             <p style="font-size: 13.5px; opacity: 0.92; margin: 0; line-height: 1.5;">
-                Caregiver workspace for Residential Ward Alpha & Beta. Check cupboard stock balances, dispense care essentials directly to resident children, log storeroom supply orders, and verify safe stock levels.
+                Add stock items, update current counts, and request more supplies for director approval. Stock and request updates appear automatically in both views.
             </p>
         </div>
 
         <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+            <button type="button" class="btn-primary" onclick="openStaffInvModal('modal_staff_add_stock')"><i class="fas fa-plus" aria-hidden="true"></i> Add Stock Item</button>
             <button class="btn-primary" style="background: #ffffff; color: #065f46; border-color: #ffffff; font-weight: 700;" onclick="openStaffInvModal('modal_dispense_to_child')">
-                <i class="fas fa-hand-holding-heart"></i> Dispense to Child
+                <i class="fas fa-hand-holding-heart"></i> Give Supplies to Child
             </button>
             <button class="btn-outline" style="background: rgba(255, 255, 255, 0.15); color: #ffffff; border-color: rgba(255, 255, 255, 0.35); font-weight: 700;" onclick="openStaffInvModal('modal_staff_request_supplies')">
-                <i class="fas fa-cart-plus"></i> Request Storeroom Supplies
+                <i class="fas fa-cart-plus"></i> Request Supplies
             </button>
-            <a href="{{ route('inventory') }}" class="btn-outline" style="background: rgba(255, 255, 255, 0.1); color: #ffffff; border-color: rgba(255, 255, 255, 0.25);" title="Switch to Admin Central Inventory Catalog">
-                <i class="fas fa-warehouse"></i> Admin Catalog
-            </a>
         </div>
     </div>
 </div>
@@ -200,13 +43,13 @@
     <div style="display: flex; align-items: center; gap: 10px;">
         <i class="fas fa-user-nurse" style="color: #10b981; font-size: 18px;"></i>
         <div>
-            <span style="font-size: 12px; font-weight: 700; color: var(--dark); text-transform: uppercase;">Staff Ward Custodian:</span>
-            <span style="font-size: 12px; color: var(--dark-muted); margin-left: 4px;">Duty Caregiver: <strong style="color: #10b981;">Nurse Mary</strong> · Morning Shift (Ward Alpha & Beta Nursery)</span>
+            <span style="font-size: 12px; font-weight: 700; color: var(--dark); text-transform: uppercase;">Staff in Charge:</span>
+            <span style="font-size: 12px; color: var(--dark-muted); margin-left: 4px;">Caregiver on Duty: <strong style="color: #10b981;">Nurse Mary</strong> · Morning Shift (Ward Alpha & Beta Nursery)</span>
         </div>
     </div>
     <div style="font-size: 12px; color: #64748b; display: flex; align-items: center; gap: 8px;">
         <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span>
-        Storeroom Dispatch Window: <strong>11:00 AM & 15:00 PM Daily</strong>
+        Storeroom Dispatch Window: <strong>11:00 AM & 15:00 Daily</strong>
     </div>
 </div>
 
@@ -236,7 +79,7 @@
 
     <div class="metric-card">
         <div class="metric-header">
-            <span class="metric-label">Dispensed Today</span>
+            <span class="metric-label">Given Today</span>
             <div class="metric-icon" style="background: rgba(59, 130, 246, 0.12); color: #3b82f6;">
                 <i class="fas fa-hand-holding-heart"></i>
             </div>
@@ -247,13 +90,13 @@
 
     <div class="metric-card">
         <div class="metric-header">
-            <span class="metric-label">Storeroom Requisitions</span>
+            <span class="metric-label">Supply Requests</span>
             <div class="metric-icon" style="background: rgba(245, 158, 11, 0.12); color: #f59e0b;">
                 <i class="fas fa-dolly"></i>
             </div>
         </div>
         <div class="metric-val" style="color: #d97706;" id="metric_active_reqs">2 En Route</div>
-        <div class="metric-sub">Submitted to Storeroom Steward</div>
+        <div class="metric-sub">Sent to the director for approval</div>
     </div>
 </div>
 
@@ -263,10 +106,10 @@
         <i class="fas fa-boxes"></i> Ward Cabinet Balances (<span id="tab_count_balances">12</span>)
     </button>
     <button class="tab-btn" data-tab="tab_child_dispensations">
-        <i class="fas fa-history"></i> Child Dispensation Ledger (<span id="tab_count_dispensations">6</span>)
+        <i class="fas fa-history"></i> Supplies Given to Children (<span id="tab_count_dispensations">6</span>)
     </button>
     <button class="tab-btn" data-tab="tab_storeroom_orders">
-        <i class="fas fa-truck-loading"></i> Storeroom Requisitions & Tracking (<span id="tab_count_orders">3</span>)
+        <i class="fas fa-truck-loading"></i> Supply Requests & Tracking (<span id="tab_count_orders">3</span>)
     </button>
     <button class="tab-btn" data-tab="tab_first_aid_checklist">
         <i class="fas fa-medkit"></i> Daily First Aid & Safety Checklist
@@ -274,7 +117,7 @@
 </div>
 
 <!-- Search & Category Filters -->
-<div class="filter-bar" style="margin-bottom: 20px;">
+<div class="filter-bar staff-record-filters" style="margin-bottom: 20px;">
     <div class="search-box-wrapper">
         <i class="fas fa-search search-icon"></i>
         <input type="text" id="staff_inv_search" class="search-input" placeholder="Search ward items by name, SKU, or cupboard location..." oninput="filterStaffInventory()">
@@ -303,11 +146,11 @@
     </div>
 
     <!-- Toggle View Mode: Cards vs Table -->
-    <div class="view-mode-toggle" style="margin-left: auto;">
-        <button type="button" class="view-mode-btn active" id="btn_view_inv_cards" onclick="toggleStaffInvView('cards')">
+    <div class="view-mode-toggle staff-inventory-view-toggle" role="group" aria-label="Inventory display">
+        <button type="button" class="view-mode-btn active" aria-pressed="true" id="btn_view_inv_cards" onclick="toggleStaffInvView('cards')">
             <i class="fas fa-th-large"></i> Cards
         </button>
-        <button type="button" class="view-mode-btn" id="btn_view_inv_table" onclick="toggleStaffInvView('table')">
+        <button type="button" class="view-mode-btn" aria-pressed="false" id="btn_view_inv_table" onclick="toggleStaffInvView('table')">
             <i class="fas fa-list-ul"></i> Table
         </button>
     </div>
@@ -352,13 +195,13 @@
     <div class="portal-card" style="padding: 24px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 12px;">
             <div>
-                <h3 style="font-size: 16px; font-weight: 800; color: var(--dark); margin: 0;">Child Supply Dispensation History</h3>
+                <h3 style="font-size: 16px; font-weight: 800; color: var(--dark); margin: 0;">Child Supply History</h3>
                 <p style="font-size: 12.5px; color: #64748b; margin: 2px 0 0 0;">
                     Log of medicine, hygiene items, and educational materials allocated directly to resident children by shift staff.
                 </p>
             </div>
             <button class="btn-primary btn-sm" onclick="openStaffInvModal('modal_dispense_to_child')">
-                <i class="fas fa-plus"></i> New Child Dispensation
+                <i class="fas fa-plus"></i> New Child Supply Distribution
             </button>
         </div>
 
@@ -370,7 +213,7 @@
                         <th>Supply Item & Quantity</th>
                         <th>Category</th>
                         <th>Care Reason / Dosage Note</th>
-                        <th>Dispensed By</th>
+                        <th>Given By</th>
                         <th>Date & Time</th>
                     </tr>
                 </thead>
@@ -389,13 +232,13 @@
     <div class="portal-card" style="padding: 24px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 12px;">
             <div>
-                <h3 style="font-size: 16px; font-weight: 800; color: var(--dark); margin: 0;">Staff Caregiver Requisitions to Storeroom</h3>
+                <h3 style="font-size: 16px; font-weight: 800; color: var(--dark); margin: 0;">Staff Caregiver Requests to Storeroom</h3>
                 <p style="font-size: 12.5px; color: #64748b; margin: 2px 0 0 0;">
-                    Track batches requested from central inventory steward Sister Grace. Click "Confirm Received" once items arrive in the ward.
+                    Track supply requests sent to the director. Click "Confirm Received" once approved items arrive to update stock.
                 </p>
             </div>
             <button class="btn-primary btn-sm" style="background: #f59e0b; border-color: #f59e0b;" onclick="openStaffInvModal('modal_staff_request_supplies')">
-                <i class="fas fa-paper-plane"></i> Submit Requisition
+                <i class="fas fa-paper-plane"></i> Submit Request
             </button>
         </div>
 
@@ -470,9 +313,9 @@
             </div>
 
             <div style="font-size: 12.5px; color: #334155; line-height: 1.8;">
-                <div><strong>Storeroom Steward (Brother Leo):</strong><br><code>Ext 104 · +60 12-449 8123</code></div>
+                <div><strong>Storeroom Manager (Brother Leo):</strong><br><code>Ext 104 · +60 12-449 8123</code></div>
                 <div style="margin-top: 8px;"><strong>Lead Administrator (Sister Grace):</strong><br><code>Ext 101 · +60 19-204 1188</code></div>
-                <div style="margin-top: 8px;"><strong>Sanctuary Dispensary Pharmacy:</strong><br><code>03-2615 5555 (Klinik Kesihatan)</code></div>
+                <div style="margin-top: 8px;"><strong>Orphanage Pharmacy:</strong><br><code>03-2615 5555 (Klinik Kesihatan)</code></div>
             </div>
 
             <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid #e2e8f0; font-size: 11.5px; color: #64748b; font-style: italic;">
@@ -489,8 +332,8 @@
     <div class="portal-modal" style="max-width: 580px;">
         <div class="modal-header">
             <div>
-                <h3 class="modal-title">Submit Ward Supply Requisition</h3>
-                <p class="modal-sub">Request bulk restocking from central storeroom steward Sister Grace.</p>
+                <h3 class="modal-title">Request More Supplies</h3>
+                <p class="modal-sub">Send a supply request to the director for approval.</p>
             </div>
             <button class="modal-close-btn" onclick="closeStaffInvModal('modal_staff_request_supplies')">&times;</button>
         </div>
@@ -498,7 +341,7 @@
         <form onsubmit="handleStaffRequisitionSubmit(event)">
             <div class="form-group">
                 <label class="form-label">Supply Category *</label>
-                <select id="req_category_select" class="form-control" onchange="updateRequisitionItemDropdown()" required>
+                <select id="req_category_select" class="form-control" required>
                     <option value="Medical">Pediatric Medical & First Aid</option>
                     <option value="Hygiene">Baby & Nursery Hygiene</option>
                     <option value="Nutrition">Nutritional Food & Milk Formula</option>
@@ -509,25 +352,17 @@
 
             <div class="form-group">
                 <label class="form-label">Item Needed *</label>
-                <select id="req_item_select" class="form-control" required>
-                    <!-- Populated dynamically -->
-                </select>
+                <input type="text" id="req_item_input" class="form-control" placeholder="Enter the supply item needed" required>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label">Quantity Needed *</label>
-                    <input type="number" id="req_qty_input" class="form-control" value="2" min="1" max="100" required>
+                    <input type="number" id="req_qty_input" class="form-control" value="2" min="1"  required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Delivery Destination Ward *</label>
-                    <select id="req_destination_select" class="form-control" required>
-                        <option value="Ward Alpha Medicine Cabinet">Ward Alpha Medicine Cabinet</option>
-                        <option value="Ward Alpha Nursery Shelf">Ward Alpha Nursery Shelf</option>
-                        <option value="Ward Beta Care Cupboard">Ward Beta Care Cupboard</option>
-                        <option value="Dispensary Refrigerator">Dispensary Refrigerator</option>
-                        <option value="Common Study Locker">Common Study Locker</option>
-                    </select>
+                    <input type="text" id="req_destination_input" class="form-control" placeholder="Enter the delivery ward or storage location" required>
                 </div>
             </div>
 
@@ -541,14 +376,14 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">Staff Duty Caregiver Remarks</label>
+                <label class="form-label">Staff Caregiver on Duty Remarks</label>
                 <textarea id="req_notes_input" class="form-control" rows="2" placeholder="e.g. 2 children with mild cough; nursery diaper stock down to last pack..."></textarea>
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn-outline" onclick="closeStaffInvModal('modal_staff_request_supplies')">Cancel</button>
                 <button type="submit" class="btn-primary" style="background: #f59e0b; border-color: #f59e0b;">
-                    <i class="fas fa-paper-plane"></i> Dispatch Requisition
+                    <i class="fas fa-paper-plane"></i> Send Request for Approval
                 </button>
             </div>
         </form>
@@ -562,7 +397,7 @@
     <div class="portal-modal" style="max-width: 580px;">
         <div class="modal-header">
             <div>
-                <h3 class="modal-title">Dispense Supply to Resident Child</h3>
+                <h3 class="modal-title">Give Supplies to a Child</h3>
                 <p class="modal-sub">Log supplies, medicine, or hygiene essentials given to a ward.</p>
             </div>
             <button class="modal-close-btn" onclick="closeStaffInvModal('modal_dispense_to_child')">&times;</button>
@@ -579,12 +414,10 @@
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label">Ward Supply Item *</label>
-                    <select id="dispense_item_select" class="form-control" onchange="updateDispenseAvailablePreview()" required>
-                        <!-- Populated dynamically from Ward Inventory -->
-                    </select>
+                    <input type="text" id="dispense_item_input" class="form-control" placeholder="Enter an inventory item name or ID" oninput="updateDispenseAvailablePreview()" autocomplete="off" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Quantity Dispensed *</label>
+                    <label class="form-label">Quantity Given *</label>
                     <input type="number" id="dispense_qty_input" class="form-control" value="1" min="1" max="20" required>
                 </div>
             </div>
@@ -601,7 +434,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn-outline" onclick="closeStaffInvModal('modal_dispense_to_child')">Cancel</button>
                 <button type="submit" class="btn-primary" style="background: #10b981; border-color: #10b981;">
-                    <i class="fas fa-check"></i> Confirm Dispensation
+                    <i class="fas fa-check"></i> Confirm Supplies Given
                 </button>
             </div>
         </form>
@@ -636,7 +469,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Actual Physical Count *</label>
-                    <input type="number" id="count_new_qty" class="form-control" min="0" max="500" required>
+                    <input type="number" id="count_new_qty" class="form-control" min="0"  required>
                 </div>
             </div>
 
@@ -644,7 +477,7 @@
                 <label class="form-label">Adjustment Reason *</label>
                 <select id="count_reason_select" class="form-control" required>
                     <option value="Routine Shift Physical Verification">Routine Shift Physical Verification</option>
-                    <option value="Restocked from Earlier Requisition">Restocked from Earlier Requisition</option>
+                    <option value="Restocked from Earlier Requisition">Restocked from Earlier Request</option>
                     <option value="Damaged / Expired Container Discarded">Damaged / Expired Container Discarded</option>
                     <option value="Transferred to Other Ward">Transferred to Other Ward</option>
                 </select>
@@ -658,302 +491,28 @@
     </div>
 </div>
 
+@include('portal.partials.stock-item-modal')
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/portal/child-welfare.js') }}"></script>
 <script>
     // Staff Ward Inventory Engine
-    const STAFF_INV_STORAGE_KEY = 'hopehaven_staff_inventory_v1';
-    const STAFF_DISPENSE_STORAGE_KEY = 'hopehaven_staff_dispensations_v1';
-    const STAFF_REQ_STORAGE_KEY = 'hopehaven_staff_requisitions_v1';
-
-    // Seed Data
-    const DEFAULT_WARD_ITEMS = [
-        {
-            id: 'WINV-001',
-            name: 'Pediatric Paracetamol Syrup (120mg/5ml)',
-            category: 'Medical',
-            location: 'Ward Alpha Medicine Cabinet',
-            onHand: 4,
-            minThreshold: 3,
-            unit: 'bottles (100ml)',
-            batchNo: 'BAT-2026-MED9',
-            expiry: '2027-04-30'
-        },
-        {
-            id: 'WINV-002',
-            name: 'Antiseptic Wet Wipes (Alcohol-Free)',
-            category: 'Hygiene',
-            location: 'Ward Alpha Nursery Shelf',
-            onHand: 2,
-            minThreshold: 5,
-            unit: 'packs (80 sheets)',
-            batchNo: 'WIP-8821',
-            expiry: '2027-08-15'
-        },
-        {
-            id: 'WINV-003',
-            name: 'Enfamil Stage 2 Baby Formula Powder',
-            category: 'Nutrition',
-            location: 'Ward Alpha Nursery Shelf',
-            onHand: 3,
-            minThreshold: 2,
-            unit: 'cans (900g)',
-            batchNo: 'ENF-9092',
-            expiry: '2027-02-10'
-        },
-        {
-            id: 'WINV-004',
-            name: 'Sterile Adhesive Gauze & Plasters (Assorted)',
-            category: 'Medical',
-            location: 'Ward Alpha Medicine Cabinet',
-            onHand: 14,
-            minThreshold: 10,
-            unit: 'strips/patches',
-            batchNo: 'GAU-4102',
-            expiry: '2028-01-01'
-        },
-        {
-            id: 'WINV-005',
-            name: 'Salbutamol Metered Dose Inhaler (100mcg)',
-            category: 'Medical',
-            location: 'Dispensary Refrigerator',
-            onHand: 1,
-            minThreshold: 2,
-            unit: 'inhaler canisters',
-            batchNo: 'SAL-1029',
-            expiry: '2026-12-31'
-        },
-        {
-            id: 'WINV-006',
-            name: 'Comfort Baby Diapers (Size L · 9-14kg)',
-            category: 'Hygiene',
-            location: 'Ward Alpha Nursery Shelf',
-            onHand: 6,
-            minThreshold: 10,
-            unit: 'packs (44 pcs)',
-            batchNo: 'DIA-7721',
-            expiry: '2028-06-01'
-        },
-        {
-            id: 'WINV-007',
-            name: 'Pediatric Oral Rehydration Salts (ORS Sachet)',
-            category: 'Medical',
-            location: 'Ward Alpha Medicine Cabinet',
-            onHand: 18,
-            minThreshold: 12,
-            unit: 'sachets',
-            batchNo: 'ORS-6612',
-            expiry: '2027-10-20'
-        },
-        {
-            id: 'WINV-008',
-            name: 'Single Line Exercise Books (A4 80pg)',
-            category: 'Education',
-            location: 'Common Study Locker',
-            onHand: 24,
-            minThreshold: 15,
-            unit: 'books',
-            batchNo: 'ED-BK-009',
-            expiry: 'N/A'
-        },
-        {
-            id: 'WINV-009',
-            name: 'Color Pencils & Drawing Pads Set',
-            category: 'Education',
-            location: 'Common Study Locker',
-            onHand: 8,
-            minThreshold: 5,
-            unit: 'sets',
-            batchNo: 'ART-3320',
-            expiry: 'N/A'
-        },
-        {
-            id: 'WINV-010',
-            name: 'Baby Body Wash & Tear-Free Shampoo (500ml)',
-            category: 'Hygiene',
-            location: 'Ward Beta Care Cupboard',
-            onHand: 5,
-            minThreshold: 3,
-            unit: 'bottles',
-            batchNo: 'HYG-5002',
-            expiry: '2027-09-10'
-        },
-        {
-            id: 'WINV-011',
-            name: 'Fitted Single Bed Linens & Pillowcases',
-            category: 'Linen',
-            location: 'Ward Beta Care Cupboard',
-            onHand: 12,
-            minThreshold: 8,
-            unit: 'sets',
-            batchNo: 'LIN-2201',
-            expiry: 'N/A'
-        },
-        {
-            id: 'WINV-012',
-            name: 'Dettol Hospital-Grade Disinfectant (1L)',
-            category: 'Hygiene',
-            location: 'Ward Beta Care Cupboard',
-            onHand: 3,
-            minThreshold: 2,
-            unit: 'bottles',
-            batchNo: 'DET-9921',
-            expiry: '2027-11-01'
-        }
-    ];
-
-    const DEFAULT_DISPENSATIONS = [
-        {
-            id: 'DSP-2026-001',
-            childName: 'Ahmad Razak (CH-2023-014)',
-            itemName: 'Pediatric Paracetamol Syrup (120mg/5ml)',
-            qty: '1 bottle (5ml dose)',
-            category: 'Medical',
-            reason: 'Mild evening fever (37.9°C); temperature reduced to 36.8°C within 1 hour.',
-            dispensedBy: 'Nurse Mary',
-            timestamp: 'Today · 08:45 AM'
-        },
-        {
-            id: 'DSP-2026-002',
-            childName: 'Maya Cruz (CH-2024-001)',
-            itemName: 'Color Pencils & Drawing Pads Set',
-            qty: '1 set',
-            category: 'Education',
-            reason: 'Grade 3 Visual Arts project preparation; mentoring session with Sister Teresa.',
-            dispensedBy: 'Nurse Mary',
-            timestamp: 'Today · 09:15 AM'
-        },
-        {
-            id: 'DSP-2026-003',
-            childName: 'Hannah Grace Morales (CH-2025-032)',
-            itemName: 'Comfort Baby Diapers (Size L · 9-14kg)',
-            qty: '2 pcs',
-            category: 'Hygiene',
-            reason: 'Routine nursery morning change in St. Clare Cottage.',
-            dispensedBy: 'Nurse Mary',
-            timestamp: 'Today · 10:00 AM'
-        },
-        {
-            id: 'DSP-2026-004',
-            childName: 'Kenji Sato (CH-2025-019)',
-            itemName: 'Single Line Exercise Books (A4 80pg)',
-            qty: '2 books',
-            category: 'Education',
-            reason: 'School mathematics and Bahasa Melayu class note-taking replenishment.',
-            dispensedBy: 'Nurse Mary',
-            timestamp: 'Today · 10:30 AM'
-        },
-        {
-            id: 'DSP-2026-005',
-            childName: 'Maya Cruz (CH-2024-001)',
-            itemName: 'Salbutamol Metered Dose Inhaler (100mcg)',
-            qty: '1 canister',
-            category: 'Medical',
-            reason: 'Routine morning pulmonary check; inhaler replaced for school sports bag.',
-            dispensedBy: 'Nurse Mary',
-            timestamp: 'Today · 11:00 AM'
-        },
-        {
-            id: 'DSP-2026-006',
-            childName: 'Elijah Liam Ramos (CH-2022-008)',
-            itemName: 'Sterile Adhesive Gauze & Plasters (Assorted)',
-            qty: '2 patches',
-            category: 'Medical',
-            reason: 'Minor scrape dressing on left knee from basketball playground playtime.',
-            dispensedBy: 'Nurse Mary',
-            timestamp: 'Today · 11:30 AM'
-        }
-    ];
-
-    const DEFAULT_REQUISITIONS = [
-        {
-            id: 'REQ-2026-104',
-            item: 'Antiseptic Wet Wipes (Alcohol-Free)',
-            qty: 5,
-            category: 'Hygiene',
-            destination: 'Ward Alpha Nursery Shelf',
-            priority: 'Urgent',
-            notes: 'Critical nursery stock depleted; required before evening feed.',
-            status: 'Dispatched',
-            statusLabel: 'En Route with Steward',
-            time: 'Today 10:15 AM'
-        },
-        {
-            id: 'REQ-2026-105',
-            item: 'Salbutamol Metered Dose Inhaler (100mcg)',
-            qty: 2,
-            category: 'Medical',
-            destination: 'Dispensary Refrigerator',
-            priority: 'Urgent',
-            notes: 'Down to single backup unit; multiple asthmatic wards.',
-            status: 'Approved',
-            statusLabel: 'Packed in Storeroom',
-            time: 'Today 11:05 AM'
-        },
-        {
-            id: 'REQ-2026-102',
-            item: 'Enfamil Stage 2 Baby Formula Powder',
-            qty: 4,
-            category: 'Nutrition',
-            destination: 'Ward Alpha Nursery Shelf',
-            priority: 'Normal',
-            notes: 'Weekly buffer replenishment for toddlers.',
-            status: 'Received',
-            statusLabel: 'Received by Nurse Mary',
-            time: 'Yesterday 15:30 PM'
-        }
-    ];
-
-    // Data Access Store
-    const StaffInvStore = {
-        getItems: function() {
-            try {
-                const data = localStorage.getItem(STAFF_INV_STORAGE_KEY);
-                return data ? JSON.parse(data) : DEFAULT_WARD_ITEMS;
-            } catch (e) {
-                return DEFAULT_WARD_ITEMS;
-            }
-        },
-        saveItems: function(items) {
-            localStorage.setItem(STAFF_INV_STORAGE_KEY, JSON.stringify(items));
-        },
-        getDispensations: function() {
-            try {
-                const data = localStorage.getItem(STAFF_DISPENSE_STORAGE_KEY);
-                return data ? JSON.parse(data) : DEFAULT_DISPENSATIONS;
-            } catch (e) {
-                return DEFAULT_DISPENSATIONS;
-            }
-        },
-        saveDispensations: function(list) {
-            localStorage.setItem(STAFF_DISPENSE_STORAGE_KEY, JSON.stringify(list));
-        },
-        getRequisitions: function() {
-            try {
-                const data = localStorage.getItem(STAFF_REQ_STORAGE_KEY);
-                return data ? JSON.parse(data) : DEFAULT_REQUISITIONS;
-            } catch (e) {
-                return DEFAULT_REQUISITIONS;
-            }
-        },
-        saveRequisitions: function(reqs) {
-            localStorage.setItem(STAFF_REQ_STORAGE_KEY, JSON.stringify(reqs));
-        }
-    };
+    const STAFF_INV_STORAGE_KEY = window.HopeHavenInventory.keys.items;
+    const STAFF_DISPENSE_STORAGE_KEY = window.HopeHavenInventory.keys.dispensations;
+    const STAFF_REQ_STORAGE_KEY = window.HopeHavenInventory.keys.requests;
+    const StaffInvStore = window.HopeHavenInventory;
 
     let currentViewMode = 'cards';
 
     function toggleStaffInvView(mode) {
         currentViewMode = mode;
-        $('.view-mode-btn').removeClass('active');
+        $('.view-mode-btn').removeClass('active').attr('aria-pressed', 'false');
         if (mode === 'cards') {
-            $('#btn_view_inv_cards').addClass('active');
+            $('#btn_view_inv_cards').addClass('active').attr('aria-pressed', 'true');
             $('#staff_inv_cards_container').show();
             $('#staff_inv_table_container').hide();
         } else {
-            $('#btn_view_inv_table').addClass('active');
+            $('#btn_view_inv_table').addClass('active').attr('aria-pressed', 'true');
             $('#staff_inv_cards_container').hide();
             $('#staff_inv_table_container').show();
         }
@@ -978,6 +537,9 @@
 
     function renderWardInventoryItems() {
         const items = StaffInvStore.getItems();
+        const previousLocation = $('#staff_inv_loc_filter').val() || 'all';
+        const locations = [...new Set(items.map(item => item.location))];
+        $('#staff_inv_loc_filter').html('<option value="all">All Storage Locations</option>' + locations.map(location => '<option value="' + escapeHtml(location) + '">' + escapeHtml(location) + '</option>').join('')).val(locations.includes(previousLocation) ? previousLocation : 'all');
         const search = ($('#staff_inv_search').val() || '').toLowerCase().trim();
         const catFilter = $('#staff_inv_cat_filter').val() || 'all';
         const locFilter = $('#staff_inv_loc_filter').val() || 'all';
@@ -1043,13 +605,13 @@
                     </div>
 
                     <div style="display: flex; gap: 8px; border-top: 1px solid #f1f5f9; padding-top: 12px;">
-                        <button class="action-icon-btn primary" style="flex: 1;" onclick="openDispenseModalForItem('${item.id}')" title="Dispense to Child">
-                            <i class="fas fa-hand-holding-heart"></i> Dispense
+                        <button class="action-icon-btn primary" style="flex: 1;" onclick="openDispenseModalForItem('${item.id}')" title="Give Supplies to Child">
+                            <i class="fas fa-hand-holding-heart"></i> Give Supplies
                         </button>
                         <button class="action-icon-btn req" onclick="openRequisitionModalForItem('${item.id}')" title="Request Reorder from Storeroom">
                             <i class="fas fa-cart-plus"></i> Reorder
                         </button>
-                        <button class="action-icon-btn" onclick="openCountModalForItem('${item.id}')" title="Adjust Physical Count">
+                        <button class="action-icon-btn" onclick="openCountModalForItem('${item.id}')" title="Update Stock Count" aria-label="Update stock count">
                             <i class="fas fa-edit"></i>
                         </button>
                     </div>
@@ -1079,7 +641,7 @@
                     </td>
                     <td style="text-align: right; white-space: nowrap;">
                         <button class="action-icon-btn primary" onclick="openDispenseModalForItem('${item.id}')" style="padding: 4px 8px; font-size: 11px;">
-                            <i class="fas fa-hand-holding-heart"></i> Dispense
+                            <i class="fas fa-hand-holding-heart"></i> Give Supplies
                         </button>
                         <button class="action-icon-btn req" onclick="openRequisitionModalForItem('${item.id}')" style="padding: 4px 8px; font-size: 11px;">
                             <i class="fas fa-cart-plus"></i> Reorder
@@ -1137,7 +699,7 @@
                     <div>
                         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
                             <span class="req-status-pill ${statusClass}">
-                                <i class="fas ${icon}"></i> ${r.statusLabel || r.status}
+                                <i class="fas ${icon}"></i> ${escapeHtml(({Pending: 'Awaiting Director Approval', Approved: 'Approved by Director', Rejected: 'Returned by Director', Dispatched: 'Ready to Receive', Received: 'Stock Received'})[r.status] || r.status)}
                             </span>
                             <span style="font-size: 11.5px; font-family: monospace; font-weight: 700; color: #64748b;">${r.id}</span>
                             <span class="badge ${r.priority === 'Urgent' ? 'badge-danger' : 'badge-secondary'}" style="font-size: 10px;">${r.priority}</span>
@@ -1146,22 +708,23 @@
                             ${escapeHtml(r.item)} &bull; ${r.qty} Units
                         </h4>
                         <div style="font-size: 11.5px; color: #64748b;">
-                            Destination: <strong>${escapeHtml(r.destination)}</strong> &bull; Ordered: ${r.time}
+                            Destination: <strong>${escapeHtml(r.destination)}</strong> &bull; Ordered: ${escapeHtml(r.time)}
                         </div>
                         <div style="font-size: 11.5px; color: #475569; font-style: italic; margin-top: 4px;">
                             "${escapeHtml(r.notes || 'Routine restock')}"
+                            ${r.directorRemarks ? '<br><strong>Director feedback:</strong> ' + escapeHtml(r.directorRemarks) : ''}
                         </div>
                     </div>
 
                     <div>
-                        ${r.status === 'Dispatched' ? `
+                        ${['Approved', 'Dispatched'].includes(r.status) ? `
                             <button class="btn-primary btn-sm" onclick="markRequisitionReceived(${idx})">
                                 <i class="fas fa-box-open"></i> Confirm Stock Received
                             </button>
                         ` : (r.status === 'Received' ? `
                             <span style="font-size: 12px; color: #059669; font-weight: 700;"><i class="fas fa-check"></i> Stock Added to Cupboard</span>
                         ` : `
-                            <span style="font-size: 12px; color: #b45309; font-style: italic;"><i class="fas fa-hourglass-half"></i> Awaiting Steward Packing</span>
+                            <span style="font-size: 12px; color: #b45309; font-style: italic;"><i class="fas fa-hourglass-half"></i> ${r.status === 'Rejected' ? 'Please review the director’s feedback.' : 'Waiting for the director’s approval.'}</span>
                         `)}
                     </div>
                 </div>
@@ -1175,7 +738,7 @@
         const items = StaffInvStore.getItems();
         const low = items.filter(i => i.onHand <= i.minThreshold).length;
         const dispensations = StaffInvStore.getDispensations().length;
-        const reqs = StaffInvStore.getRequisitions().filter(r => r.status !== 'Received').length;
+        const reqs = StaffInvStore.getRequisitions().filter(r => ['Pending', 'Approved', 'Dispatched'].includes(r.status)).length;
 
         $('#metric_total_items').text(items.length + ' Lines');
         $('#metric_low_stock').text(low + ' Items');
@@ -1189,14 +752,7 @@
     }
 
     function populateItemSelectDropdowns() {
-        const items = StaffInvStore.getItems();
-        let dispenseOpts = '';
-        items.forEach(i => {
-            dispenseOpts += `<option value="${i.id}" data-unit="${i.unit}" data-onhand="${i.onHand}">${i.name} (${i.onHand} in ${i.location.split(' ')[0]})</option>`;
-        });
-        $('#dispense_item_select').html(dispenseOpts);
         updateDispenseAvailablePreview();
-        updateRequisitionItemDropdown();
     }
 
     function populateChildSelectDropdown() {
@@ -1217,28 +773,28 @@
         $('#dispense_child_select').html(childOpts);
     }
 
-    function updateDispenseAvailablePreview() {
-        const selectedId = $('#dispense_item_select').val();
+    function findDispenseItem() {
+        const value = $('#dispense_item_input').val().trim().toLowerCase();
         const items = StaffInvStore.getItems();
-        const item = items.find(i => i.id === selectedId);
+        return items.find(item => item.id.toLowerCase() === value)
+            || items.find(item => item.name.toLowerCase() === value);
+    }
+
+    function updateDispenseAvailablePreview() {
+        document.getElementById('dispense_item_input').setCustomValidity('');
+        const item = findDispenseItem();
         if (item) {
-            $('#dispense_avail_qty').text(`${item.onHand} ${item.unit} (${item.location})`);
+            $('#dispense_avail_qty').text(item.onHand + ' ' + item.unit + ' (' + item.location + ')');
             $('#dispense_qty_input').attr('max', item.onHand > 0 ? item.onHand : 1);
+        } else {
+            $('#dispense_avail_qty').text('Enter an existing item name or inventory ID to check stock');
+            $('#dispense_qty_input').removeAttr('max');
         }
     }
 
-    function updateRequisitionItemDropdown() {
-        const cat = $('#req_category_select').val();
-        const items = StaffInvStore.getItems().filter(i => !cat || i.category === cat);
-        let html = '';
-        items.forEach(i => {
-            html += `<option value="${i.name}">${i.name} [Current Ward Bal: ${i.onHand} ${i.unit}]</option>`;
-        });
-        $('#req_item_select').html(html);
-    }
-
     function openDispenseModalForItem(itemId) {
-        $('#dispense_item_select').val(itemId);
+        const item = StaffInvStore.getItems().find(item => item.id === itemId);
+        $('#dispense_item_input').val(item ? item.name : '');
         updateDispenseAvailablePreview();
         openStaffInvModal('modal_dispense_to_child');
     }
@@ -1248,16 +804,14 @@
         const item = items.find(i => i.id === itemId);
         if (item) {
             $('#req_category_select').val(item.category);
-            updateRequisitionItemDropdown();
-            $('#req_item_select').val(item.name);
-            $('#req_destination_select').val(item.location);
+            $('#req_item_input').val(item.name);
+            $('#req_destination_input').val(item.location);
         }
         openStaffInvModal('modal_staff_request_supplies');
     }
 
     function openCountModalForItem(itemId) {
-        const items = StaffInvStore.getItems();
-        const item = items.find(i => i.id === itemId);
+        const item = StaffInvStore.getItems().find(item => item.id === itemId);
         if (!item) return;
 
         $('#count_item_id').val(item.id);
@@ -1268,54 +822,46 @@
     }
 
     // Form Handlers
+    function handleAddStockItem(e) {
+        e.preventDefault();
+        try {
+            const item = StaffInvStore.addItem({name: $('#stock_item_name').val(), category: $('#stock_item_category').val(),
+                unit: $('#stock_item_unit').val(), onHand: $('#stock_item_qty').val(), minThreshold: $('#stock_item_min').val(),
+                location: $('#stock_item_location').val(), batchNo: $('#stock_item_batch').val(), expiry: $('#stock_item_expiry').val()});
+            closeStaffInvModal('modal_staff_add_stock');
+            e.target.reset();
+            renderAllStaffInventory();
+            showPortalToast(item.name + ' added to inventory.', true);
+        } catch (error) { showPortalToast(error.message, false); }
+    }
+
     function handleStaffRequisitionSubmit(e) {
         e.preventDefault();
-        const itemName = $('#req_item_select').val();
-        const qty = parseInt($('#req_qty_input').val()) || 1;
-        const category = $('#req_category_select').val();
-        const destination = $('#req_destination_select').val();
-        const priority = $('#req_priority_select').val();
-        const notes = $('#req_notes_input').val().trim();
-
-        const reqs = StaffInvStore.getRequisitions();
-        const newReq = {
-            id: `REQ-2026-${Math.floor(110 + Math.random() * 900)}`,
-            item: itemName,
-            qty: qty,
-            category: category,
-            destination: destination,
-            priority: priority,
-            notes: notes || 'Caregiver routine requisition',
-            status: 'Pending',
-            statusLabel: 'Pending Steward Approval',
-            time: 'Just now'
-        };
-
-        reqs.unshift(newReq);
-        StaffInvStore.saveRequisitions(reqs);
-
-        closeStaffInvModal('modal_staff_request_supplies');
-        e.target.reset();
-        renderAllStaffInventory();
-
-        showPortalToast(
-            `Requisition for ${qty}x ${itemName} dispatched to Storeroom Steward Brother Leo!`,
-            true,
-            'Storeroom Requisition Dispatched',
-            'Ward Alpha & Beta'
-        );
+        try {
+            const request = StaffInvStore.createRequest({item: $('#req_item_input').val(), qty: $('#req_qty_input').val(),
+                category: $('#req_category_select').val(), destination: $('#req_destination_input').val(),
+                priority: $('#req_priority_select').val(), notes: $('#req_notes_input').val(), requestedBy: 'Nurse Mary'});
+            closeStaffInvModal('modal_staff_request_supplies');
+            e.target.reset();
+            renderAllStaffInventory();
+            showPortalToast('Request ' + request.id + ' sent to the director for approval.', true);
+        } catch (error) { showPortalToast(error.message, false); }
     }
 
     function handleChildDispenseSubmit(e) {
         e.preventDefault();
         const childName = $('#dispense_child_select').val();
-        const itemId = $('#dispense_item_select').val();
-        const qty = parseInt($('#dispense_qty_input').val()) || 1;
+        const selectedItem = findDispenseItem();
+        const qty = Number($('#dispense_qty_input').val());
         const reason = $('#dispense_reason_input').val().trim();
+        if (!Number.isInteger(qty) || qty < 1) {
+            showPortalToast('Enter a positive whole quantity.', false);
+            return;
+        }
 
         const items = StaffInvStore.getItems();
-        const item = items.find(i => i.id === itemId);
-        if (!item) return;
+        const item = selectedItem && items.find(i => i.id === selectedItem.id);
+        if (!item) { showPortalToast('Enter an existing inventory item name or ID.', false); return; }
 
         if (item.onHand < qty) {
             alert(`Insufficient stock on hand in ${item.location}. Current quantity is ${item.onHand}.`);
@@ -1329,7 +875,7 @@
         // Record dispensation
         const dispensations = StaffInvStore.getDispensations();
         dispensations.unshift({
-            id: `DSP-2026-${String(dispensations.length + 1).padStart(3, '0')}`,
+            id: window.HopeHavenSync.nextId(dispensations, 'DSP'),
             childName: childName,
             itemName: item.name,
             qty: `${qty} ${item.unit}`,
@@ -1345,61 +891,31 @@
         renderAllStaffInventory();
 
         showPortalToast(
-            `Dispensed ${qty}x ${item.name} directly to ${childName}. Ward stock updated!`,
+            `Given ${qty}x ${item.name} directly to ${childName}. Ward stock updated!`,
             true,
-            'Supply Dispensed to Child',
+            'Supply Given to Child',
             'Duty Log Entry'
         );
     }
 
     function handleQuickCountSubmit(e) {
         e.preventDefault();
-        const itemId = $('#count_item_id').val();
-        const newQty = parseInt($('#count_new_qty').val());
-        const reason = $('#count_reason_select').val();
-
-        const items = StaffInvStore.getItems();
-        const item = items.find(i => i.id === itemId);
-        if (!item) return;
-
-        item.onHand = Math.max(0, newQty);
-        StaffInvStore.saveItems(items);
-
-        closeStaffInvModal('modal_quick_count');
-        renderAllStaffInventory();
-
-        showPortalToast(
-            `Stock count for ${item.name} adjusted to ${item.onHand} (${reason}).`,
-            true,
-            'Physical Count Certified',
-            'Ward Cupboard Audit'
-        );
+        try {
+            const item = StaffInvStore.updateCount($('#count_item_id').val(), $('#count_new_qty').val(), $('#count_reason_select').val());
+            closeStaffInvModal('modal_quick_count');
+            renderAllStaffInventory();
+            showPortalToast('Stock count updated for ' + item.name + '.', true);
+        } catch (error) { showPortalToast(error.message, false); }
     }
 
     function markRequisitionReceived(index) {
-        const reqs = StaffInvStore.getRequisitions();
-        const req = reqs[index];
-        if (!req) return;
-
-        req.status = 'Received';
-        req.statusLabel = 'Received by Nurse Mary';
-        StaffInvStore.saveRequisitions(reqs);
-
-        // Replenish item in ward stock
-        const items = StaffInvStore.getItems();
-        const matchedItem = items.find(i => i.name.toLowerCase() === req.item.toLowerCase());
-        if (matchedItem) {
-            matchedItem.onHand += req.qty;
-            StaffInvStore.saveItems(items);
-        }
-
-        renderAllStaffInventory();
-        showPortalToast(
-            `Received ${req.qty}x ${req.item}! Added to ${req.destination}.`,
-            true,
-            'Supplies Received & Stocked',
-            'Ward Restock Complete'
-        );
+        const request = StaffInvStore.getRequisitions()[index];
+        if (!request) return;
+        try {
+            StaffInvStore.receiveRequest(request.id);
+            renderAllStaffInventory();
+            showPortalToast('Received ' + request.qty + ' × ' + request.item + '. Inventory updated.', true);
+        } catch (error) { showPortalToast(error.message, false); }
     }
 
     function escapeHtml(str) {
@@ -1423,6 +939,9 @@
         });
 
         renderAllStaffInventory();
+        window.HopeHavenSync.subscribe([STAFF_INV_STORAGE_KEY, STAFF_DISPENSE_STORAGE_KEY, STAFF_REQ_STORAGE_KEY, 'hopehaven_children_registry_v2'], function() {
+            window.HopeHavenSync.refreshView(renderAllStaffInventory);
+        });
     });
 </script>
 @endpush

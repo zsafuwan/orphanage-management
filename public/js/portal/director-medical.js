@@ -1,5 +1,5 @@
 /**
- * Director Children Medical Records JavaScript
+ * Director Children’s Medical Records JavaScript
  * Handles patient filtering, PDF previews, clinical notes, and health exports
  */
 
@@ -52,9 +52,11 @@ function filterMedicalTable(wardFilter, statusFilter) {
         const rowStatus = row.getAttribute('data-health-status');
 
         let matchesWard = (currentWard === 'all') || (rowWard === currentWard);
-        let matchesStatus = (currentStatus === 'all') || (rowStatus === currentStatus);
+        let matchesStatus = (currentStatus === 'all') || (rowStatus === currentStatus)
+            || (currentStatus === 'allergy' && row.dataset.hasAllergy === 'true')
+            || (currentStatus === 'meds' && row.dataset.hasMeds === 'true');
 
-        if (matchesWard && matchesStatus) {
+        if (matchesWard && matchesStatus && row.textContent.toLowerCase().includes((document.getElementById('med_search_input')?.value || '').toLowerCase().trim())) {
             row.style.display = '';
         } else {
             row.style.display = 'none';
@@ -67,21 +69,7 @@ function filterMedicalTable(wardFilter, statusFilter) {
  */
 function initMedicalSearch() {
     const searchInput = document.getElementById('med_search_input');
-    if (!searchInput) return;
-
-    searchInput.addEventListener('input', function () {
-        const query = this.value.toLowerCase().trim();
-        const rows = document.querySelectorAll('.med-table tbody tr');
-
-        rows.forEach(row => {
-            const text = row.innerText.toLowerCase();
-            if (query === '' || text.includes(query)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-    });
+    if (searchInput) searchInput.addEventListener('input', function () { filterMedicalTable(null, null); });
 }
 
 /**
@@ -144,11 +132,20 @@ function saveClinicalNote() {
 
     const noteType = document.getElementById('clinical_note_type').options[document.getElementById('clinical_note_type').selectedIndex].text;
     const child = document.getElementById('note_child_name').value;
+    const record = window.HopeHavenChildStore?.getById(window.HopeHavenSelectedChildId);
+    if (record) {
+        const timeline = record.timeline || [];
+        timeline.unshift({date:new Date().toISOString().slice(0,10),title:noteType,category:'medical',detail:noteText});
+        window.HopeHavenChildStore.update(record.id, {
+            basicMedical:{...record.basicMedical,medicalNotes:noteText},
+            timeline:timeline
+        });
+    }
 
     closeDirectorModal('modal_add_clinical_note');
 
     if (typeof showPortalToast === 'function') {
-        showPortalToast(`Clinical note saved to ${child}'s PDF: [${noteType}] "${noteText}"`, 'success');
+        showPortalToast(`Clinical note recorded for ${child}: [${noteType}] "${noteText}"`, 'success');
     } else {
         alert(`Clinical note recorded for ${child}.`);
     }
