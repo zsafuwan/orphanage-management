@@ -28,7 +28,7 @@
             const button=task.querySelector('.sched-status-badge');
             if(button){button.classList.remove('progress','pending');button.classList.add('done');button.textContent='Completed';button.removeAttribute('onclick');button.disabled=true;}
         });
-        const categories={all:'All',clinical:'Clinical & Dental',medication:'Meds',supplies:'Supplies'};
+        const categories={all:'All',clinical:'Health',medication:'Meds',supplies:'Supplies'};
         document.querySelectorAll('[data-alert-filter]').forEach(button=>{const category=button.dataset.alertFilter;const count=cardBox.querySelectorAll(category==='all'?'.duty-alert-card':`[data-category="${category}"]`).length;button.textContent=`${categories[category]} (${count})`;});
         const active=document.querySelector('[data-alert-filter].active');
         cardBox.querySelectorAll('.duty-alert-card').forEach(card=>{card.style.display=!active||active.dataset.alertFilter==='all'||card.dataset.category===active.dataset.alertFilter?'':'none';});

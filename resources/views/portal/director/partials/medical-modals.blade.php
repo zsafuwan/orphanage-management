@@ -2,7 +2,7 @@
 <div class="director-modal-overlay" id="modal_child_medical_dossier">
     <div class="director-modal" style="max-width: 680px;">
         <div class="director-modal-head" style="background: #f0fdf4; border-bottom: 1px solid #bbf7d0;">
-            <h3><i class="fas fa-notes-medical" style="color: #059669;"></i> Official Child Clinical PDF</h3>
+            <h3><i class="fas fa-notes-medical" style="color: #059669;"></i> Child Medical Record</h3>
             <button type="button" class="director-modal-close" onclick="closeDirectorModal('modal_child_medical_dossier')">&times;</button>
         </div>
         <div class="director-modal-body">

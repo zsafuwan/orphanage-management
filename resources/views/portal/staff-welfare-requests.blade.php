@@ -15,14 +15,12 @@
 <div class="staff-welfare-hero">
     <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
         <div style="max-width: 680px;">
-            <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.18); border: 1px solid rgba(255, 255, 255, 0.25); padding: 3px 12px; border-radius: 20px; font-size: 11.5px; font-weight: 700; margin-bottom: 10px; letter-spacing: 0.5px; text-transform: uppercase;">
-                <i class="fas fa-hand-holding-heart"></i> Staff Caregiver Request Portal · Subsystem 3
-            </div>
+            
             <h1 style="font-size: 24px; font-weight: 800; margin: 0 0 8px 0; letter-spacing: -0.5px;">
                 Child Support Requests
             </h1>
             <p style="font-size: 13.5px; opacity: 0.92; margin: 0; line-height: 1.5;">
-                Caregiver workspace to submit specialized medical, dental, schooling, and clothing aid requests for resident children. All submissions are automatically routed to Sister Grace for administrative approval.
+                Request support for children’s medical, education and daily needs.
             </p>
         </div>
 
@@ -215,7 +213,7 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">Caregiver Justification & Clinical Rationale *</label>
+                <label class="form-label">Reason for Request *</label>
                 <textarea id="req_justification_input" class="form-control" rows="3" placeholder="Provide background circumstances, caregiver observation, and why this expenditure cannot be deferred..." required></textarea>
             </div>
 
@@ -316,21 +314,14 @@
         } else {
             filtered.forEach(r => {
                 let statusBadge = '';
-                let borderHighlight = '';
                 let decisionBanner = '';
 
                 if (r.status === 'Pending Admin Approval') {
-                    statusBadge = `<span class="req-status-pill status-pending-admin"><i class="fas fa-hourglass-half"></i> Pending Sister Grace Approval</span>`;
-                    borderHighlight = 'border-left: 4px solid #f59e0b;';
-                    decisionBanner = `
-                        <div style="background: #fffbeb; border: 1px dashed #fcd34d; border-radius: 8px; padding: 10px 14px; margin-top: 14px; font-size: 12px; color: #92400e; display: flex; align-items: center; justify-content: space-between;">
-                            <span><i class="fas fa-info-circle"></i> In Admin Review Queue. <strong>Staff cannot approve</strong> &mdash; awaiting Sister Grace's approval.</span>
-                            <span style="font-weight: 700;">Est. Decision: Today</span>
-                        </div>
-                    `;
+                    statusBadge = `<span class="req-status-pill status-pending-admin"><i class="fas fa-hourglass-half"></i> Pending Approval</span>`;
+                    decisionBanner = '';
+
                 } else if (r.status === 'Approved') {
-                    statusBadge = `<span class="req-status-pill status-approved-admin"><i class="fas fa-check-circle"></i> Approved by Admin</span>`;
-                    borderHighlight = 'border-left: 4px solid #10b981;';
+                    statusBadge = `<span class="req-status-pill status-approved-admin"><i class="fas fa-check-circle"></i> Approved</span>`;
                     const dec = r.adminDecision || {};
                     decisionBanner = `
                         <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px 14px; margin-top: 14px; font-size: 12px; color: #166534;">
@@ -343,8 +334,7 @@
                         </div>
                     `;
                 } else if (r.status === 'Rejected') {
-                    statusBadge = `<span class="req-status-pill status-rejected-admin"><i class="fas fa-times-circle"></i> Request Denied</span>`;
-                    borderHighlight = 'border-left: 4px solid #ef4444;';
+                    statusBadge = `<span class="req-status-pill status-rejected-admin"><i class="fas fa-times-circle"></i> Declined</span>`;
                     const dec = r.adminDecision || {};
                     decisionBanner = `
                         <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 12px 14px; margin-top: 14px; font-size: 12px; color: #991b1b;">
@@ -365,7 +355,7 @@
                 }
 
                 html += `
-                    <div class="ticket-item-row" style="${borderHighlight}">
+                    <div class="ticket-item-row">
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; flex-wrap: wrap;">
                             <div style="flex: 1; min-width: 280px;">
                                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap;">
@@ -374,7 +364,7 @@
                                         <i class="fas ${r.urgency === 'Emergency' ? 'fa-bolt' : 'fa-clock'}"></i> ${r.urgency}
                                     </span>
                                     ${statusBadge}
-                                    <span style="font-size: 11.5px; color: #64748b;">Submitted ${r.requestedDate} by ${escapeHtml(r.requestedBy)}</span>
+                                    <span style="font-size: 11.5px; color: #64748b;">${r.requestedDate} · ${escapeHtml(r.requestedBy)}</span>
                                 </div>
 
                                 <h3 style="font-size: 16.5px; font-weight: 800; color: #0f172a; margin: 4px 0 6px 0;">
@@ -382,14 +372,14 @@
                                 </h3>
 
                                 <div style="display: flex; gap: 18px; font-size: 12.5px; margin-bottom: 8px; flex-wrap: wrap;">
-                                    <div><span style="color: #64748b;">Beneficiary Child:</span> <strong style="color: #0f172a;">${escapeHtml(r.beneficiaryName)} (${r.beneficiaryId})</strong></div>
+                                    <div><span style="color: #64748b;">Child:</span> <strong style="color: #0f172a;">${escapeHtml(r.beneficiaryName)} (${r.beneficiaryId})</strong></div>
                                     <div><span style="color: #64748b;">Category:</span> <strong>${escapeHtml(r.category)}</strong></div>
                                     <div><span style="color: #64748b;">Dorm:</span> <strong>${escapeHtml(r.dorm)}</strong></div>
-                                    <div><span style="color: #64748b;">Total Budget:</span> <strong style="color: #2563eb; font-size: 14px;">$${parseFloat(r.cost).toFixed(2)} USD</strong></div>
+                                    <div><span style="color: #64748b;">Amount:</span> <strong style="color: #2563eb; font-size: 14px;">$${parseFloat(r.cost).toFixed(2)} USD</strong></div>
                                 </div>
 
                                 <div style="font-size: 12.5px; color: #475569; background: #f8fafc; padding: 10px 14px; border-radius: 6px; border: 1px solid #e2e8f0; margin-top: 6px;">
-                                    <strong>Caregiver Justification:</strong> "${escapeHtml(r.justification)}"
+                                    <strong>Reason:</strong> "${escapeHtml(r.justification)}"
                                 </div>
 
                                 ${linesPreview}

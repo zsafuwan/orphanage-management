@@ -2,7 +2,7 @@
 <div class="director-modal-overlay" id="modal_student_academic_portfolio">
     <div class="director-modal" style="max-width: 680px;">
         <div class="director-modal-head" style="background: #f5f3ff; border-bottom: 1px solid #ddd6fe;">
-            <h3><i class="fas fa-graduation-cap" style="color: #7c3aed;"></i> Student Academic Portfolio & Transcript</h3>
+            <h3><i class="fas fa-graduation-cap" style="color: #7c3aed;"></i> Student Results</h3>
             <button type="button" class="director-modal-close" onclick="closeDirectorModal('modal_student_academic_portfolio')">&times;</button>
         </div>
         <div class="director-modal-body">
@@ -84,7 +84,7 @@
 <div class="director-modal-overlay" id="modal_update_student_grades">
     <div class="director-modal">
         <div class="director-modal-head">
-            <h3><i class="fas fa-file-pen" style="color: #7c3aed;"></i> Update Term Evaluation & Remarks</h3>
+            <h3><i class="fas fa-file-pen" style="color: #7c3aed;"></i> Update Term Notes</h3>
             <button type="button" class="director-modal-close" onclick="closeDirectorModal('modal_update_student_grades')">&times;</button>
         </div>
         <div class="director-modal-body">

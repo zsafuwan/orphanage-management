@@ -9,3 +9,7 @@
 .care-workspace :is(.kpi-card,.director-kpi-card,.med-kpi-card,.stat-card)::after, .care-home .program-card::before {
   display: none;
 }
+.care-workspace .ticket-item-row {
+  border: 0 !important;
+  box-shadow: var(--card-floating-shadow) !important;
+}

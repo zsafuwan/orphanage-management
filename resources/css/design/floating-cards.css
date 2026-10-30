@@ -71,3 +71,9 @@
 .care-home .program-card::before {
     @apply tw:hidden;
 }
+
+/* Request cards use the same borderless elevation as other cards. */
+.care-workspace .ticket-item-row {
+    border: 0 !important;
+    box-shadow: var(--card-floating-shadow) !important;
+}

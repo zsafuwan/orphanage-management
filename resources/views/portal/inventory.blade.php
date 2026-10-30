@@ -11,9 +11,7 @@
 <!-- Subsystem Header -->
 <div class="page-header-card">
     <div>
-        <div class="subsystem-pill" style="background: #f59e0b;">
-            <i class="fas fa-boxes"></i> Subsystem 2
-        </div>
+        
         <h1 class="page-title">Inventory Balances, Suppliers & Welfare Distribution</h1>
         <p class="page-desc">
             Monitor storeroom inventory levels and minimum reorder thresholds, record delivery receipts & issues, manage certified suppliers, and trace supplies distributed to approved welfare requests.

@@ -28,9 +28,6 @@
         <h1 class="hero-title">
             Welcome back, <span class="accent-name">Sister Grace</span> 👋
         </h1>
-        <p class="hero-sub">
-            Every detail is a little act of care. Here's your orphanage at a glance, from children's wellbeing to the people and supplies that support them.
-        </p>
     </div>
     <div class="hero-actions">
         <a href="{{ route('register') }}" class="btn-outline btn-sm" title="Create a new admin account">
@@ -119,7 +116,6 @@
     <div class="subsystems-admin-grid">
         <a href="{{ route('child-welfare') }}" class="subsystem-admin-card s-welfare">
             <div>
-                <div class="s-num">Subsystem 01</div>
                 <div class="s-title">Child Care & Education</div>
             </div>
             <div class="s-meta"><i class="fas fa-user-graduate"></i> 4 Active Profiles</div>
@@ -128,7 +124,6 @@
 
         <a href="{{ route('welfare-requests') }}" class="subsystem-admin-card s-requests">
             <div>
-                <div class="s-num">Subsystem 03</div>
                 <div class="s-title">Welfare Requests</div>
             </div>
             <div class="s-meta"><i class="fas fa-clipboard-check"></i> 1 Pending Review</div>
@@ -136,7 +131,6 @@
 
         <a href="{{ route('staff-volunteers') }}" class="subsystem-admin-card s-staff">
             <div>
-                <div class="s-num">Subsystem 04</div>
                 <div class="s-title">Staff & Volunteers</div>
             </div>
             <div class="s-meta"><i class="fas fa-user-clock"></i> 5 Staff & Volunteers</div>
@@ -144,7 +138,6 @@
 
         <a href="{{ route('donations') }}" class="subsystem-admin-card s-donations">
             <div>
-                <div class="s-num">Subsystem 05</div>
                 <div class="s-title">Donations & Funds</div>
             </div>
             <div class="s-meta"><i class="fas fa-donate"></i> $10.2k Inflows</div>
@@ -230,7 +223,7 @@
         <div class="admin-card-head">
             <div class="card-title-wrap">
                 <span class="eyebrow">Donations & Support Trends</span>
-                <h2 class="card-title">Monthly Donations & Support Spending</h2>
+                <h2 class="card-title">Donations & Spending</h2>
             </div>
             <span style="font-size: 11.5px; font-weight: 700; color: #64748b; background: #f1f5f9; padding: 4px 10px; border-radius: 8px;">
                 2026 Financial Year
@@ -278,7 +271,7 @@
         <div class="admin-card-head">
             <div class="card-title-wrap">
                 <span class="eyebrow">Priority Tasks</span>
-                <h2 class="card-title">Orphanage Operations Todo List</h2>
+                <h2 class="card-title">Tasks</h2>
             </div>
             <button class="btn-outline btn-sm" onclick="addNewTodoPrompt()" style="font-size: 11.5px; padding: 4px 10px;">
                 <i class="fas fa-plus"></i> Add Task
@@ -513,7 +506,7 @@
                     labels: ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'],
                     datasets: [
                         {
-                            label: 'Philanthropic Inflows ($)',
+                            label: 'Donations ($)',
                             data: [4200, 6800, 5100, 7400, 8900, 10280],
                             borderColor: '#3b82f6',
                             backgroundColor: 'rgba(59, 130, 246, 0.08)',
@@ -597,7 +590,7 @@
 
     // Add new Task prompt simulation
     function addNewTodoPrompt() {
-        var taskText = prompt("Enter a new orphanage operational task:");
+        var taskText = prompt("Enter a task:");
         if (taskText && taskText.trim() !== "") {
             var newId = "td_" + Date.now();
             var newItemHtml = `

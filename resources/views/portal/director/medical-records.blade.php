@@ -1,6 +1,6 @@
 @extends('layouts.portal')
 
-@section('title', 'Children’s Medical Records & Clinical PDFs')
+@section('title', 'Children’s Medical Records')
 @section('breadcrumb', 'Children’s Medical Records')
 
 @push('styles')
@@ -12,8 +12,8 @@
     <!-- Page Header -->
     <div class="med-header">
         <div class="med-header-title">
-            <h1><i class="fas fa-heartbeat" style="color: #059669;"></i> Children’s Medical Records & Clinical PDFs</h1>
-            <p>Comprehensive health oversight, allergy warnings, chronic illness management, and immunization tracking for all 48 children in Care.</p>
+            <h1><i class="fas fa-heartbeat" style="color: #059669;"></i> Children’s Medical Records</h1>
+            <p>Review health records and appointments.</p>
         </div>
         <div>
             <button type="button" class="btn-dossier" onclick="showPortalToast('Orphanage Medical Report (KKM Form 12) downloaded.', 'info')">

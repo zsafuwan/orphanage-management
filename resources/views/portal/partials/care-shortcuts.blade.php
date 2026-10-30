@@ -1,5 +1,5 @@
 <nav class="care-shortcuts" aria-label="Workspace shortcuts">
-    <div class="care-shortcuts-intro"><span class="care-eyebrow">A LITTLE CARE, EVERY DAY</span><strong>What would you like to do?</strong></div>
+    <div class="care-shortcuts-intro"><strong>Quick links</strong></div>
     @if(request()->routeIs('director.*'))
         <a href="{{ route('director.medical-records') }}"><span class="care-shortcut-icon peach"><i class="fas fa-heart-pulse" aria-hidden="true"></i></span><span><strong>Children's wellbeing</strong><small>Health records & appointments</small></span><i class="fas fa-arrow-right" aria-hidden="true"></i></a>
         <a href="{{ route('director.inventory-requests') }}"><span class="care-shortcut-icon sage"><i class="fas fa-box-open" aria-hidden="true"></i></span><span><strong>Review requests</strong><small>Keep essential care moving</small></span><i class="fas fa-arrow-right" aria-hidden="true"></i></a>

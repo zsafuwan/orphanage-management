@@ -2,7 +2,7 @@
 <div class="director-modal-overlay" id="modal_staff_safeguarding_dossier">
     <div class="director-modal" style="max-width: 580px;">
         <div class="director-modal-head" style="background: #eef2ff; border-bottom: 1px solid #c7d2fe;">
-            <h3><i class="fas fa-user-shield" style="color: #4f46e5;"></i> Caregiver Safeguarding & Vetting PDF</h3>
+            <h3><i class="fas fa-user-shield" style="color: #4f46e5;"></i> Staff Background Checks</h3>
             <button type="button" class="director-modal-close" onclick="closeDirectorModal('modal_staff_safeguarding_dossier')">&times;</button>
         </div>
         <div class="director-modal-body">

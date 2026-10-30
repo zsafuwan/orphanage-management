@@ -15,9 +15,7 @@
 <div class="admin-welfare-hero">
     <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
         <div style="max-width: 680px;">
-            <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.18); border: 1px solid rgba(255, 255, 255, 0.25); padding: 3px 12px; border-radius: 20px; font-size: 11.5px; font-weight: 700; margin-bottom: 10px; letter-spacing: 0.5px; text-transform: uppercase;">
-                <i class="fas fa-clipboard-check"></i> Subsystem 3 · Request Approvals
-            </div>
+            
             <h1 style="font-size: 24px; font-weight: 800; margin: 0 0 8px 0; letter-spacing: -0.5px;">
                 Welfare Requests & Request Approvals
             </h1>

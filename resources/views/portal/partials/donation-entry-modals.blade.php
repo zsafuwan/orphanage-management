@@ -2,7 +2,7 @@
     <div class="portal-modal" style="max-width: 540px;">
         <div class="modal-header">
             <div>
-                <h3 class="modal-title">Record Received Donation</h3>
+                <h3 class="modal-title">Record Donation</h3>
                 <p class="modal-sub">Log cash, bank transfer, or in-kind supplies received by staff.</p>
             </div>
             <button class="modal-close-btn" onclick="closeStaffDonationModal('modal_staff_record_donation')">&times;</button>
@@ -10,7 +10,7 @@
 
         <form onsubmit="handleStaffDonationSubmit(event)">
             <div class="form-group">
-                <label class="form-label">Donor / Contributor Name *</label>
+                <label class="form-label">Donor Name *</label>
                 <input type="text" id="staff_don_name" class="form-control" placeholder="e.g. Mr. Robert Chen / Al-Barakah Community Trust" required>
             </div>
 
@@ -30,7 +30,7 @@
 
             <div class="form-row">
                 <div class="form-group">
-                    <label class="form-label">Payment Channel / Receipt Method *</label>
+                    <label class="form-label">Payment Method *</label>
                     <select id="staff_don_channel" class="form-control" required>
                         <option value="Cash at Front Desk">Cash at Front Desk</option>
                         <option value="Direct Bank Wire">Direct Bank Wire</option>
@@ -47,14 +47,14 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">Staff Duty Notes & Acknowledgement Remarks</label>
+                <label class="form-label">Notes</label>
                 <textarea id="staff_don_notes" class="form-control" rows="2" placeholder="e.g. Received at morning shift gate. Official paper receipt # handed to donor..."></textarea>
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn-outline" onclick="closeStaffDonationModal('modal_staff_record_donation')">Cancel</button>
                 <button type="submit" class="btn-primary" style="background: #10b981; border-color: #10b981;">
-                    <i class="fas fa-check"></i> Record & Issue Official E-Receipt
+                    <i class="fas fa-check"></i> Save & Create Receipt
                 </button>
             </div>
         </form>

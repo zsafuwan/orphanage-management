@@ -7,7 +7,7 @@
 @section('content')
 <div class="portal-container inventory-director-page">
     <div class="page-header-card">
-        <div><span class="subsystem-pill"><i class="fas fa-boxes-stacked" aria-hidden="true"></i> INVENTORY & SUPPLIES</span><h1 class="page-title">Stock & Staff Requests</h1><p class="page-desc">See current stock recorded by staff and approve requests for more supplies. Changes appear automatically in both views.</p></div>
+        <div><span class="subsystem-pill"><i class="fas fa-boxes-stacked" aria-hidden="true"></i> INVENTORY & SUPPLIES</span><h1 class="page-title">Stock & Staff Requests</h1><p class="page-desc">Review supply requests and current stock.</p></div>
         <button type="button" class="btn-outline" onclick="exportRequisitionsAudit()"><i class="fas fa-download" aria-hidden="true"></i> Download Requests</button>
     </div>
     <div class="inv-stats-row">

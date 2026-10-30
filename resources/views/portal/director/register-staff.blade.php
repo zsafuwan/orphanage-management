@@ -15,7 +15,7 @@
             <div class="dir-reg-hero-badge">
                 <i class="fas fa-crown"></i> Director of Staff & Volunteers Management · Statutory Onboarding
             </div>
-            <h1 class="dir-reg-hero-title">Staff & Caregiver Registration Portal</h1>
+            <h1 class="dir-reg-hero-title">Register Staff</h1>
             <p class="dir-reg-hero-sub">
                 Official employee and caregiver registration under the Child Act 2001 (Act 611). Only the Executive Director possesses the authority to issue permanent orphanage credentials and assign ward custody duties.
             </p>
@@ -78,14 +78,14 @@
         <!-- Left: Registration Form -->
         <div class="dir-reg-card">
             <div class="dir-reg-card-head">
-                <h2><i class="fas fa-user-plus" style="color: #4f46e5;"></i> New Staff Onboarding PDF</h2>
+                <h2><i class="fas fa-user-plus" style="color: #4f46e5;"></i> Staff Registration</h2>
                 <span style="font-size: 12px; color: #64748b;">All fields mandatory for JKM audit</span>
             </div>
             <form class="dir-reg-form" onsubmit="submitStaffRegistration(event)">
                 <!-- Personal & Legal Identity -->
                 <div class="form-group-grid">
                     <div class="dir-input-group">
-                        <label for="staff_name_input">Full Legal Name (as per NRIC / Passport) *</label>
+                        <label for="staff_name_input">Full Name (as per NRIC / Passport) *</label>
                         <input type="text" id="staff_name_input" class="dir-input" placeholder="e.g. Nurul Huda Binti Ahmad" required>
                     </div>
                     <div class="dir-input-group">
@@ -205,7 +205,7 @@
             <!-- Recently Registered Staff by Director -->
             <div class="dir-reg-card">
                 <div class="dir-reg-card-head">
-                    <h2><i class="fas fa-clock-rotate-left"></i> Recently Registered Staff & Volunteers</h2>
+                    <h2><i class="fas fa-clock-rotate-left"></i> New Staff & Volunteers</h2>
                     <span style="font-size: 11px; color: #64748b;">Active Payroll</span>
                 </div>
                 <div id="recent_staff_list">

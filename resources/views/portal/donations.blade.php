@@ -17,14 +17,12 @@
 <div class="admin-donations-hero">
     <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
         <div style="max-width: 720px;">
-            <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); padding: 3px 12px; border-radius: 20px; font-size: 11.5px; font-weight: 700; margin-bottom: 10px; letter-spacing: 0.5px; text-transform: uppercase;">
-                <i class="fas fa-hand-holding-usd"></i> Subsystem 5 · Philanthropy & Executive Cash Flow Benchmark
-            </div>
+            
             <h1 style="font-size: 25px; font-weight: 800; margin: 0 0 8px 0; letter-spacing: -0.5px;">
-                Top Cash Flow Benchmark of Regional Orphanages & Philanthropy Ledger
+                Donations Across Orphanages
             </h1>
             <p style="font-size: 13.5px; opacity: 0.92; margin: 0; line-height: 1.5;">
-                Comparative liquidity tracking across accredited child sanctuaries, donor contributions registry, fund deployment verification, and 501(c)(3) tax exemption receipt generation.
+                Compare donations and funds across orphanages.
             </p>
         </div>
 
@@ -38,7 +36,7 @@
     <div style="display: flex; align-items: center; gap: 10px;">
         <i class="fas fa-shield-alt" style="color: #0f766e; font-size: 18px;"></i>
         <div>
-            <span style="font-size: 12px; font-weight: 700; color: var(--dark); text-transform: uppercase;">Executive Admin Clearance:</span>
+            <span style="font-size: 12px; font-weight: 700; color: var(--dark); text-transform: uppercase;">Admin Access:</span>
             <span style="font-size: 12px; color: var(--dark-muted); margin-left: 4px;">Viewing As: <strong style="color: #0f766e;">Sister Grace (Administrator)</strong> · Regional Multi-Orphanage Solvency Feed Active</span>
         </div>
     </div>
@@ -138,7 +136,7 @@
                     Top Cash Flow Comparison Across Different Orphanages
                 </h3>
                 <p style="font-size: 13px; color: #64748b; margin: 0;">
-                    Visualizing Total Monetary Inflow (Donations & Grants), Operational Outflow (Care, Food & Facilities), and Net Cash Surplus for 6 regional child care centers.
+                    Visualizing Total Monetary Inflow (Donations & Grants), Spending (Care, Food & Facilities), and Net Cash Surplus for 6 regional child care centers.
                 </p>
             </div>
 
@@ -186,7 +184,7 @@
                 </span>
                 <span style="display: inline-flex; align-items: center; gap: 6px;">
                     <span style="width: 12px; height: 12px; background: #f43f5e; border-radius: 3px; display: inline-block;"></span>
-                    <strong style="color: #0f172a;">Operational Outflow (Care/Exp)</strong>
+                    <strong style="color: #0f172a;">Care Spending</strong>
                 </span>
                 <span style="display: inline-flex; align-items: center; gap: 6px;">
                     <span style="width: 12px; height: 12px; background: #10b981; border-radius: 3px; display: inline-block;"></span>
@@ -390,7 +388,7 @@
         <div style="padding: 20px 24px 14px 24px; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
             <div>
                 <h4 style="font-size: 16px; font-weight: 800; margin: 0; color: #0f172a;">
-                    Accredited Orphanages Comparative Cash Flow Ledger
+                    Orphanage Funds
                 </h4>
                 <p style="font-size: 12px; color: #64748b; margin: 2px 0 0 0;">
                     Official audit data reconciled against state welfare and non-profit regulatory submissions.
@@ -410,7 +408,7 @@
                         <th style="width: 70px;">Rank</th>
                         <th>Orphanage & Jurisdiction</th>
                         <th>Cash Inflow (Receipts)</th>
-                        <th>Operational Outflow</th>
+                        <th>Spending</th>
                         <th>Net Cash Flow</th>
                         <th>Solvency Reserve</th>
                         <th>Operating Margin</th>
@@ -540,7 +538,7 @@
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
         <div class="portal-card" style="padding: 24px;">
             <h4 style="font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 4px;">
-                Sector-Wide Philanthropic Inflow Channels
+                Donation Sources
             </h4>
             <p style="font-size: 12px; color: #64748b; margin-bottom: 20px;">
                 Where cash flow originates across the 6 regional orphanages.
@@ -591,7 +589,7 @@
 
         <div class="portal-card" style="padding: 24px;">
             <h4 style="font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 4px;">
-                Executive Treasury & Solvency Guidelines
+                Fund Guidelines
             </h4>
             <p style="font-size: 12px; color: #64748b; margin-bottom: 16px;">
                 orphanage regulatory board policies for HopeHaven Administration.
@@ -912,7 +910,7 @@
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
         <div class="portal-card" style="padding: 26px;">
             <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">HopeHaven Allocation by Orphanage Need</h3>
-            <p style="font-size: 12px; color: #64748b; margin-bottom: 20px;">Transparent deployment of philanthropic gifts.</p>
+            <p style="font-size: 12px; color: #64748b; margin-bottom: 20px;">How donations are used.</p>
 
             <div style="display: flex; flex-direction: column; gap: 16px; font-size: 12px;">
                 <div>
@@ -958,7 +956,7 @@
         </div>
 
         <div class="portal-card" style="padding: 26px;">
-            <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">Top Philanthropic Benefactors</h3>
+            <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">Top Donors</h3>
             <p style="font-size: 12px; color: #64748b; margin-bottom: 20px;">Cumulative lifetime patrons.</p>
 
             <div style="display: flex; flex-direction: column; gap: 12px; font-size: 12.5px;">
@@ -1044,7 +1042,7 @@
     <div class="portal-modal" style="max-width: 480px;">
         <div class="modal-header">
             <div>
-                <h3 class="modal-title">Register Donor Profile</h3>
+                <h3 class="modal-title">Register Donor</h3>
                 <p class="modal-sub">Add individual, corporate or foundation patron.</p>
             </div>
             <button class="modal-close-btn" onclick="closeModal('modal_register_donor')">&times;</button>
@@ -1216,7 +1214,7 @@
                             categoryPercentage: 0.8
                         },
                         {
-                            label: 'Operational Outflow (Care, Food & Ward)',
+                            label: 'Care Spending',
                             data: dataset.outflows,
                             backgroundColor: 'rgba(244, 63, 94, 0.78)',
                             borderColor: '#f43f5e',
@@ -1354,7 +1352,7 @@
                             pointHoverRadius: 8
                         },
                         {
-                            label: 'Operational Outflow Trend',
+                            label: 'Spending Trend',
                             data: dataset.outflows,
                             borderColor: '#f43f5e',
                             backgroundColor: 'rgba(244, 63, 94, 0.08)',

@@ -1,6 +1,6 @@
 @extends('layouts.portal')
 
-@section('title', 'Children’s Education & Academic Management')
+@section('title', 'Children’s Education')
 @section('breadcrumb', 'Children Education')
 
 @push('styles')
@@ -12,7 +12,7 @@
     <!-- Page Header -->
     <div class="edu-page-header">
         <div class="edu-header-title">
-            <h1><i class="fas fa-graduation-cap" style="color: #7c3aed;"></i> Children’s Education & Academic Management</h1>
+            <h1><i class="fas fa-graduation-cap" style="color: #7c3aed;"></i> Children’s Education</h1>
             <p>School enrollment oversight, term examination performance, scholarship sponsorship grants, and volunteer tutoring interventions.</p>
         </div>
         <div>

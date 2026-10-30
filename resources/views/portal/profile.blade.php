@@ -86,7 +86,7 @@
             </span>
         </div>
         <div class="hero-stat-item">
-            <span class="hero-stat-label">Security Clearance</span>
+            <span class="hero-stat-label">Access Level</span>
             <span class="hero-stat-val" style="color: #10b981;">
                 <i class="fas fa-certificate"></i> Tier 1 (Master)
             </span>

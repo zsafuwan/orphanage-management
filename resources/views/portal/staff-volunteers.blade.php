@@ -15,9 +15,7 @@
 <!-- Subsystem Header -->
 <div class="page-header-card">
     <div>
-        <div class="subsystem-pill" style="background: {{ $isStaff ? '#10b981' : '#8b5cf6' }};">
-            <i class="fas fa-users-cog"></i> {{ $isStaff ? 'Caregiver Operations · Duty Coordination' : 'Subsystem 4' }}
-        </div>
+        
         <h1 class="page-title">{{ $isStaff ? 'Staff Schedules & Volunteers' : 'Staff, Volunteers & Work Schedules' }}</h1>
         <p class="page-desc">
             {{ $isStaff 
@@ -622,7 +620,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const details = document.createElement('details');
         details.className = 'personnel-details';
         const summary = document.createElement('summary');
-        summary.textContent = 'Contact & credentials';
+        summary.textContent = 'Contact & Qualifications';
         summary.setAttribute('aria-label', 'Contact and credentials for ' + name);
         details.appendChild(summary);
         const body = document.createElement('div');

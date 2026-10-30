@@ -15,12 +15,10 @@
 <!-- Subsystem Header -->
 <div class="page-header-card">
     <div>
-        <div class="subsystem-pill" style="background: #10b981;">
-            <i class="fas fa-graduation-cap"></i> Subsystem 1 · Child Welfare & Staff Care
-        </div>
-        <h1 class="page-title">Child Welfare, Education & Healthcare Registry</h1>
+        
+        <h1 class="page-title">Child Care & Education</h1>
         <p class="page-desc">
-            Staff workspace to register residential children, manage active child lists, key in examination paper results, and document basic medical conditions and healthcare follow-ups.
+            View child profiles, exam results and medical records.
         </p>
     </div>
 </div>
@@ -30,7 +28,7 @@
     <div style="display: flex; align-items: center; gap: 10px;">
         <i class="fas fa-user-shield" style="color: #10b981; font-size: 18px;"></i>
         <div>
-            <span style="font-size: 12px; font-weight: 700; color: var(--dark); text-transform: uppercase;">Staff Clearance Level:</span>
+            <span style="font-size: 12px; font-weight: 700; color: var(--dark); text-transform: uppercase;">Access Level:</span>
             <span style="font-size: 12px; color: var(--dark-muted); margin-left: 4px;">Viewing As: <strong id="current_role_badge" style="color: #10b981;">{{ $isStaff ? 'Staff Caregiver (Nurse Mary)' : 'Administrator' }}</strong></span>
         </div>
     </div>
@@ -181,7 +179,7 @@
             <div>
                 <h3 style="font-size: 16px; font-weight: 800; color: var(--dark);">Academic Performance & Exam Paper Records</h3>
                 <p style="font-size: 12px; color: var(--dark-muted);">
-                    Track institutional placement, school attendance %, cumulative GPA, and key in subject marks for term examination papers.
+                    View schools, attendance and exam results.
                 </p>
             </div>
             <button class="btn-primary btn-sm" onclick="ChildWelfareUI.openKeyPaperModal()">
@@ -215,7 +213,7 @@
 <div id="tab_health" class="tab-pane" style="display: none;">
     <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
         <div>
-            <h3 style="font-size: 16px; font-weight: 800; color: var(--dark);">Children Basic Medical Conditions & Clinical Follow-ups</h3>
+            <h3 style="font-size: 16px; font-weight: 800; color: var(--dark);">Health Records & Follow-ups</h3>
             <p style="font-size: 12px; color: var(--dark-muted);">
                 Blood group baselines, chronic conditions, drug/food allergies, daily medications, and scheduled clinic examinations.
             </p>
@@ -255,7 +253,7 @@
         <!-- Role Access Notice -->
         <div class="confidential-dossier" style="margin-bottom: 20px;">
             <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid #86efac; padding: 12px; border-radius: 8px; color: #166534; font-size: 12px;">
-                <i class="fas fa-shield-alt"></i> <strong>Full Case Clearance:</strong> Intake trauma baselines, court guardianship certificates, paper results, and medical condition notes visible.
+                <i class="fas fa-shield-alt"></i> <strong>Full Record Access:</strong> Intake trauma baselines, court guardianship certificates, paper results, and medical condition notes visible.
             </div>
         </div>
 
@@ -285,11 +283,11 @@
             @include('portal.partials.child-photo-upload')
             <div class="form-row">
                 <div class="form-group">
-                    <label class="form-label">Full Legal Name *</label>
+                    <label class="form-label">Full Name *</label>
                     <input type="text" id="reg_child_name" class="form-control" placeholder="e.g. Gabriel Joseph Santos" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Preferred Call Name</label>
+                    <label class="form-label">Preferred Name</label>
                     <input type="text" id="reg_child_callname" class="form-control" placeholder="e.g. Gabe">
                 </div>
             </div>
@@ -418,7 +416,7 @@
             <div style="margin: 16px 0;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                     <label class="form-label" style="margin: 0;">
-                        <i class="fas fa-list-ol"></i> Subject Scores & Marks Breakdown
+                        <i class="fas fa-list-ol"></i> Subject Scores
                     </label>
                     <button type="button" class="btn-outline btn-sm" onclick="ChildWelfareUI.addSubjectRow()">
                         <i class="fas fa-plus"></i> Add Subject
@@ -462,8 +460,8 @@
     <div class="portal-modal" style="max-width: 620px;">
         <div class="modal-header">
             <div>
-                <h3 class="modal-title">Record / Update Child Basic Medical Condition</h3>
-                <p class="modal-sub">Maintain clinical baselines, allergy records, prescriptions, and follow-up reviews.</p>
+                <h3 class="modal-title">Update Medical Record</h3>
+                <p class="modal-sub">Update conditions, allergies, medicines and follow-ups.</p>
             </div>
             <button class="modal-close-btn" onclick="closeModal('modal_record_medical')">&times;</button>
         </div>
@@ -502,32 +500,32 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">Primary Medical Condition / Diagnosis</label>
+                <label class="form-label">Medical Condition</label>
                 <input type="text" id="med_condition_input" class="form-control" placeholder="e.g. Bronchial Asthma, Eczema, Type 1 Diabetes, Healthy" required>
             </div>
 
             <div class="form-group">
-                <label class="form-label">Known Allergies (Drugs, Food, Environmental)</label>
+                <label class="form-label">Known Allergies</label>
                 <input type="text" id="med_allergies_input" class="form-control" placeholder="e.g. Penicillin, Peanuts, Dust mites, Shellfish, None known">
             </div>
 
             <div class="form-group">
-                <label class="form-label">Daily Prescriptions & Dosage Instructions</label>
+                <label class="form-label">Medicines & Dosage</label>
                 <input type="text" id="med_prescriptions_input" class="form-control" placeholder="e.g. Salbutamol inhaler 100mcg as needed, Daily multivitamins 5ml">
             </div>
 
             <div class="form-group">
-                <label class="form-label">Next Scheduled Clinic Review Date</label>
+                <label class="form-label">Next Clinic Visit</label>
                 <input type="date" id="med_next_clinic_date" class="form-control" value="2026-11-20" data-open-picker>
             </div>
 
             <div class="form-group">
-                <label class="form-label">Attending Doctor / Clinic Facility</label>
+                <label class="form-label">Doctor / Clinic</label>
                 <input type="text" id="med_doctor_input" class="form-control" placeholder="e.g. Dr. Angela Reyes (Klinik Kesihatan Titiwangsa)" value="Dr. Angela Reyes">
             </div>
 
             <div class="form-group">
-                <label class="form-label">Caregiver & Nurse Duty Instructions</label>
+                <label class="form-label">Care Instructions</label>
                 <textarea id="med_notes_input" class="form-control" rows="2" placeholder="Document special dietary instructions, physical sports precautions, emergency protocol..."></textarea>
             </div>
 
@@ -549,7 +547,7 @@
         <div class="modal-header">
             <div>
                 <h3 class="modal-title">Schedule Health Screening</h3>
-                <p class="modal-sub">Book dental, vision, pediatric checkup or clinical review.</p>
+                <p class="modal-sub">Book a health appointment.</p>
             </div>
             <button class="modal-close-btn" onclick="closeModal('modal_health_appointment')">&times;</button>
         </div>

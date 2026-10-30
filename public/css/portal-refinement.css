@@ -1126,6 +1126,36 @@
     margin-left: 75px;
   }
 }
+.care-workspace #profiles_grid .med-condition-pill.caution {
+  display: inline-grid;
+  align-items: center;
+  gap: 8px;
+  border-radius: 11px;
+  font-size: 11px;
+  --tw-font-weight: var(--tw-font-weight-medium, 500);
+  font-weight: var(--tw-font-weight-medium, 500);
+  grid-template-columns: 22px minmax(0, 1fr);
+  max-width: 100%;
+  padding: 7px 10px;
+  background: #fff3e4;
+  color: #936039;
+  border: 0;
+  box-shadow: 0 3px 8px -5px rgb(154 105 47 / 24%);
+  white-space: normal;
+  text-align: left;
+  line-height: 1.5;
+}
+.care-workspace #profiles_grid .med-condition-pill.caution > i {
+  display: inline-flex;
+  height: 22px;
+  width: 22px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  background: #f8dfbd;
+  color: #a5723f;
+  font-size: 11px;
+}
 @property --tw-font-weight {
   syntax: "*";
   inherits: false;

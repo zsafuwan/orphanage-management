@@ -2,7 +2,7 @@
     <div class="portal-modal" style="max-width: 480px;">
         <div class="modal-header">
             <div>
-                <h3 class="modal-title">Register Donor Profile</h3>
+                <h3 class="modal-title">Register Donor</h3>
                 <p class="modal-sub">Add individual, corporate or foundation patron.</p>
             </div>
             <button class="modal-close-btn" onclick="closeStaffDonationModal('modal_register_donor')">&times;</button>

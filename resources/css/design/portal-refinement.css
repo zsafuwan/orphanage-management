@@ -302,3 +302,19 @@
     .care-workspace .child-photo-preview { @apply tw:w-[62px]; @apply tw:h-[62px]; flex-basis: 62px; @apply tw:rounded-[16px]; }
     .care-workspace .child-photo-remove { @apply tw:ml-[75px]; }
 }
+
+
+
+/* Softer condition badge on child profile cards. */
+.care-workspace #profiles_grid .med-condition-pill.caution {
+    @apply tw:inline-grid tw:items-center tw:gap-[8px] tw:rounded-[11px] tw:text-[11px] tw:font-medium;
+    grid-template-columns: 22px minmax(0, 1fr);
+    max-width: 100%; padding: 7px 10px;
+    background: #fff3e4; color: #936039; border: 0;
+    box-shadow: 0 3px 8px -5px rgb(154 105 47 / 24%);
+    white-space: normal; text-align: left; line-height: 1.5;
+}
+.care-workspace #profiles_grid .med-condition-pill.caution > i {
+    @apply tw:inline-flex tw:items-center tw:justify-center tw:w-[22px] tw:h-[22px] tw:rounded-[7px];
+    background: #f8dfbd; color: #a5723f; font-size: 11px;
+}

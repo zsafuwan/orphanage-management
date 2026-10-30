@@ -12,7 +12,7 @@
     <!-- Header -->
     <div class="dir-staff-header">
         <div>
-            <h1><i class="fas fa-users-cog" style="color: #4f46e5;"></i> Staff & Volunteers, Safeguarding & Duty Management</h1>
+            <h1><i class="fas fa-users-cog" style="color: #4f46e5;"></i> Staff & Volunteers</h1>
             <p>Director Overview of orphanage staff, background vetting, safeguarding certifications, and volunteer deployment.</p>
         </div>
         <div style="display: flex; gap: 10px;">

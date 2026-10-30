@@ -31,7 +31,7 @@
             Welcome on duty, <span class="accent-name" style="color: #059669;">Nurse Mary</span> 👋
         </h1>
         <p class="hero-sub">
-            Assigned to <strong>Morning Shift (08:00 - 16:00)</strong> covering <strong>Alpha & Beta Rooms</strong>. <span data-child-count>4</span> children in the shared care registry. Your updates appear across the workspace automatically.
+            <strong>Morning Shift (08:00–16:00)</strong> · <strong>Alpha & Beta Rooms</strong> · <span data-child-count>4</span> children
         </p>
     </div>
     <div class="hero-actions">
@@ -57,20 +57,20 @@
             </div>
             <div>
                 <div style="display: flex; align-items: center; gap: 8px;">
-                    <span class="duty-notif-title">Duty Alerts & Priority Care Notifications</span>
+                    <span class="duty-notif-title">Duty Alerts</span>
                     <span class="duty-notif-badge" id="duty_active_count_badge">
                         <i class="fas fa-circle" style="font-size: 7px;"></i> <span id="duty_badge_num">3</span> Active
                     </span>
                 </div>
                 <div style="font-size: 12px; color: #64748b; margin-top: 2px;">
-                    Real-time operational alerts for Morning Shift caregivers in Ward Alpha & Beta
+                    Morning shift · Alpha & Beta
                 </div>
             </div>
         </div>
 
         <div class="duty-notif-filter-pills">
             <button class="duty-filter-btn active" data-alert-filter="all" onclick="filterDutyAlerts('all', this)">All (3)</button>
-            <button class="duty-filter-btn" data-alert-filter="clinical" onclick="filterDutyAlerts('clinical', this)">Clinical & Dental (1)</button>
+            <button class="duty-filter-btn" data-alert-filter="clinical" onclick="filterDutyAlerts('clinical', this)">Health (1)</button>
             <button class="duty-filter-btn" data-alert-filter="medication" onclick="filterDutyAlerts('medication', this)">Meds (1)</button>
             <button class="duty-filter-btn" data-alert-filter="supplies" onclick="filterDutyAlerts('supplies', this)">Supplies (1)</button>
         </div>
@@ -85,16 +85,16 @@
                         <i class="fas fa-tooth"></i>
                     </div>
                     <div>
-                        <span class="duty-badge-tag">Clinical Escort Required</span>
-                        <div class="duty-alert-title">Dental Review for Aminah (7 yrs)</div>
-                        <div class="duty-alert-desc">Scheduled extraction follow-up at Klinik Kesihatan Titiwangsa. Escorted by Volunteer Sarah. orphanage van departure 10:15 AM.</div>
+                        <span class="duty-badge-tag">Escort Needed</span>
+                        <div class="duty-alert-title">Aminah: Dental Follow-up</div>
+                        <div class="duty-alert-desc">Klinik Kesihatan Titiwangsa · Escort: Sarah · Van: 10:15 AM.</div>
                     </div>
                 </div>
             </div>
             <div class="duty-card-footer">
                 <span class="duty-alert-time"><i class="fas fa-clock"></i> 10:30 AM Today</span>
                 <button class="duty-action-btn-sm" onclick="handleDutyCardAction('duty_card_clinical', 'Aminah dental escort checklist verified!')">
-                    <i class="fas fa-check"></i> Verify Transport
+                    <i class="fas fa-check"></i> Check Transport
                 </button>
             </div>
         </div>
@@ -107,16 +107,16 @@
                         <i class="fas fa-lungs"></i>
                     </div>
                     <div>
-                        <span class="duty-badge-tag">Medication Schedule</span>
-                        <div class="duty-alert-title">Ahmad Daniel: Inhaler Protocol</div>
-                        <div class="duty-alert-desc">Pre-sports peak-flow inspection required at 14:00. Inhaler canister stored in Clinic Cabinet #2. Check spacer clean.</div>
+                        <span class="duty-badge-tag">Medicine Check</span>
+                        <div class="duty-alert-title">Ahmad: Inhaler Check</div>
+                        <div class="duty-alert-desc">Check peak flow before sports. Inhaler: Clinic Cabinet #2. Check spacer is clean.</div>
                     </div>
                 </div>
             </div>
             <div class="duty-card-footer">
                 <span class="duty-alert-time"><i class="fas fa-clock"></i> 02:00 PM Today</span>
                 <button class="duty-action-btn-sm" onclick="handleDutyCardAction('duty_card_meds', 'Inhaler protocol confirmed for Ahmad Daniel!')">
-                    <i class="fas fa-check"></i> Acknowledge
+                    <i class="fas fa-check"></i> Confirm
                 </button>
             </div>
         </div>
@@ -129,14 +129,14 @@
                         <i class="fas fa-box-open"></i>
                     </div>
                     <div>
-                        <span class="duty-badge-tag">Storeroom Dispatch</span>
-                        <div class="duty-alert-title">Ward Alpha Restock Ready</div>
-                        <div class="duty-alert-desc">Package of baby wipes, Dettol antiseptic, and formula milk prepped by Storeroom Manager. Ready for collection at Bay 2.</div>
+                        <span class="duty-badge-tag">Stock Ready</span>
+                        <div class="duty-alert-title">Alpha Supplies</div>
+                        <div class="duty-alert-desc">Wipes, Dettol & formula · Collect at Bay 2.</div>
                     </div>
                 </div>
             </div>
             <div class="duty-card-footer">
-                <span class="duty-alert-time"><i class="fas fa-clock"></i> Prepared 20m ago</span>
+                <span class="duty-alert-time"><i class="fas fa-clock"></i> Ready 20m ago</span>
                 <button class="duty-action-btn-sm" onclick="handleDutyCardAction('duty_card_supplies', 'Supplies marked as received in Ward Alpha!')">
                     <i class="fas fa-check"></i> Collect Stock
                 </button>
@@ -285,8 +285,8 @@
         <section class="admin-card" style="margin-bottom: 24px;">
             <div class="admin-card-head">
                 <div class="card-title-wrap">
-                    <span class="eyebrow" style="color: #059669;">Daily Shift Execution</span>
-                    <h2 class="card-title">Caregiving Routine & Timetable (Today)</h2>
+                    <span class="eyebrow" style="color: #059669;">Today’s Tasks</span>
+                    <h2 class="card-title">Today’s Tasks</h2>
                 </div>
                 <button type="button" class="staff-routine-add-btn" onclick="addNewRoutineTask()">
                     <span class="staff-routine-add-icon" aria-hidden="true"><i class="fas fa-plus"></i></span> Add Routine Task
@@ -388,8 +388,8 @@
         <section class="admin-card residential-actions-panel">
             <div class="admin-card-head" style="flex-wrap: wrap; gap: 12px;">
                 <div class="card-title-wrap">
-                    <span class="eyebrow" style="color: #059669;">Staff Caregiver Operations & Records</span>
-                    <h2 class="card-title">Children & Care Records (<span id="staff_wards_count">4</span> Profiles)</h2>
+                    <span class="eyebrow" style="color: #059669;">Child Records</span>
+                    <h2 class="card-title">Child Records (<span id="staff_wards_count">4</span> Profiles)</h2>
                     <p style="font-size: 12px; color: #64748b; margin-top: 2px;">
                         Insert new children, key in examination paper results, and record basic medical conditions directly on duty.
                     </p>
@@ -604,7 +604,7 @@
 
                 <div class="staff-field-group">
                     <label class="staff-field-label">
-                        <i class="fas fa-exclamation-circle"></i> Priority Level
+                        <i class="fas fa-exclamation-circle"></i> Priority
                     </label>
                     <select class="staff-input-control">
                         <option>Normal (Deliver during regular 15:00 dispatch)</option>
@@ -647,11 +647,11 @@
                 @include('portal.partials.child-photo-upload')
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
                     <div class="staff-field-group">
-                        <label class="staff-field-label">Full Legal Name *</label>
+                        <label class="staff-field-label">Full Name *</label>
                         <input type="text" id="staff_add_name" class="staff-input-control" placeholder="e.g. Gabriel Joseph Santos" required>
                     </div>
                     <div class="staff-field-group">
-                        <label class="staff-field-label">Preferred Call Name</label>
+                        <label class="staff-field-label">Preferred Name</label>
                         <input type="text" id="staff_add_callname" class="staff-input-control" placeholder="e.g. Gabe">
                     </div>
                 </div>
@@ -712,7 +712,7 @@
                 </div>
 
                 <div class="staff-field-group">
-                    <label class="staff-field-label">Known Allergies (Food / Drugs)</label>
+                    <label class="staff-field-label">Known Allergies</label>
                     <input type="text" id="staff_add_allergies" class="staff-input-control" placeholder="e.g. Peanut allergy, Penicillin, None">
                 </div>
 
@@ -742,7 +742,7 @@
             <span class="staff-modal-badge">
                 <i class="fas fa-graduation-cap"></i> Staff Academic Entry
             </span>
-            <h3 class="staff-modal-title">Key in Examination Paper Results</h3>
+            <h3 class="staff-modal-title">Enter Exam Results</h3>
             <p class="staff-modal-sub">
                 <i class="fas fa-user-edit"></i> Keyed in by Nurse Mary · Staff Educational Care
             </p>
@@ -787,7 +787,7 @@
                 <div style="margin: 16px 0;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <label class="staff-field-label" style="margin: 0;">
-                            <i class="fas fa-list-ol"></i> Subject Scores & Marks Breakdown
+                            <i class="fas fa-list-ol"></i> Subject Scores
                         </label>
                         <button type="button" class="staff-add-subject-btn" onclick="addStaffSubjectRow()">
                             <span class="staff-add-subject-icon" aria-hidden="true"><i class="fas fa-plus"></i></span> Add Subject
@@ -875,7 +875,7 @@
                 </div>
 
                 <div class="staff-field-group">
-                    <label class="staff-field-label">Primary Medical Condition / Diagnosis *</label>
+                    <label class="staff-field-label">Medical Condition *</label>
                     <input type="text" id="staff_med_condition" class="staff-input-control" placeholder="e.g. Bronchial Asthma, Eczema, Fit & Healthy" required>
                 </div>
 
@@ -1028,7 +1028,7 @@
             });
         }, 300);
 
-        notifyStaff('Duty Task Acknowledged', feedbackMsg, 'success', 'fas fa-check-double');
+        notifyStaff('Duty Task Confirmd', feedbackMsg, 'success', 'fas fa-check-double');
     }
 
     function updateDutyActiveCount() {
@@ -1043,7 +1043,7 @@
             $('#duty_cards_container').html(`
                 <div style="grid-column: span 3; text-align: center; padding: 24px; background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 12px; color: #64748b;">
                     <i class="fas fa-check-circle" style="color: #10b981; font-size: 28px; margin-bottom: 8px; display: inline-block;"></i>
-                    <div style="font-size: 13.5px; font-weight: 700; color: #0f172a;">All Duty Alerts Resolved</div>
+                    <div style="font-size: 13.5px; font-weight: 700; color: #0f172a;">All Alerts Done</div>
                     <div style="font-size: 12px; margin-top: 2px;">No urgent medical or logistical alerts pending for this shift.</div>
                 </div>
             `);

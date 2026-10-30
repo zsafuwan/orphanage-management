@@ -563,8 +563,10 @@
                 const acad = c.academic || {};
                 const latestPaper = (acad.paperResults && acad.paperResults.length) ? acad.paperResults[0] : null;
 
+                const conditionSummary = (med.condition || '').replace(/\b(?:Mild|Pediatric|Seasonal|Bronchial)\s+/gi, '').replace(/\s*\([^)]*\)/g, '').replace(/^Healthy\s*\/\s*/i, '').trim();
+                const shortCondition = conditionSummary.length > 36 ? conditionSummary.slice(0, 33).trimEnd() + '…' : conditionSummary;
                 const medConditionBadge = med.condition 
-                    ? `<span class="med-condition-pill caution" title="${med.allergies || 'No allergies'}"><i class="fas fa-heartbeat"></i> ${this.escape(med.condition)}</span>`
+                    ? `<span class="med-condition-pill caution" title="${this.escape(med.condition)} · Allergies: ${this.escape(med.allergies || 'None known')}"><i class="fas fa-heart-pulse" aria-hidden="true"></i><span>${this.escape(shortCondition)}</span></span>`
                     : `<span class="med-condition-pill normal"><i class="fas fa-check-circle"></i> Fit & Healthy</span>`;
 
                 const paperResultBadge = latestPaper
@@ -838,7 +840,7 @@
             const child = window.HopeHavenChildStore.getById(childId);
             if (!child) return;
 
-            $('#history_child_title').text(`${child.name} — Institutional Lifecycle & Historical PDF`);
+            $('#history_child_title').text(`${child.name} — Child History`);
             $('#history_child_id_badge').text(child.id);
 
             const $timeline = $('#history_timeline_container');

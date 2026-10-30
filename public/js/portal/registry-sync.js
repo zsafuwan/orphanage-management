@@ -69,10 +69,10 @@
         const counts={all:children.length,sickness,scheduled,attended};
         const labels={all:'All Records',sickness:'Active Conditions',scheduled:'Upcoming',attended:'Attended'};
         document.querySelectorAll('[data-sickness-filter]').forEach(button=>{button.textContent=`${labels[button.dataset.sicknessFilter]} (${counts[button.dataset.sicknessFilter]})`;});
-        text('.sickness-table-caption','Children’s Wellbeing & Clinic Appointments');
+        text('.sickness-table-caption','Health & Appointments');
         const metrics=document.querySelectorAll('.director-kpi-card');
-        if(metrics[0]) { metrics[0].querySelector('.kpi-value').textContent=sickness+' Children'; metrics[0].querySelector('.kpi-title').textContent='Recorded Health Conditions'; metrics[0].querySelector('.kpi-footer-note').textContent='Shared caregiver health registry'; }
-        if(metrics[1]) { metrics[1].querySelector('.kpi-value').textContent=scheduled+' Upcoming'; metrics[1].querySelector('.kpi-title').textContent='Scheduled Clinic Visits'; metrics[1].querySelector('.kpi-badge').textContent=children.filter(child=>child.basicMedical?.nextClinicDate).length+' Recorded visits'; metrics[1].querySelector('.kpi-footer-note').textContent=attended+' marked attended'; }
+        if(metrics[0]) { metrics[0].querySelector('.kpi-value').textContent=sickness+' Children'; metrics[0].querySelector('.kpi-title').textContent='Health Conditions'; metrics[0].querySelector('.kpi-footer-note').textContent='Shared caregiver health registry'; }
+        if(metrics[1]) { metrics[1].querySelector('.kpi-value').textContent=scheduled+' Upcoming'; metrics[1].querySelector('.kpi-title').textContent='Upcoming Visits'; metrics[1].querySelector('.kpi-badge').textContent=children.filter(child=>child.basicMedical?.nextClinicDate).length+' Recorded visits'; metrics[1].querySelector('.kpi-footer-note').textContent=attended+' marked attended'; }
         const filter=document.querySelector('.sickness-tab-btn.active')?.dataset.sicknessFilter||'all';
         window.filterSicknessRows?.(filter);
     }

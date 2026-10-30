@@ -15,14 +15,12 @@
 <div class="staff-inv-hero">
     <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
         <div style="max-width: 680px;">
-            <div class="staff-inv-badge">
-                <i class="fas fa-boxes"></i> Subsystem 2 · Staff Duty Ward Inventory
-            </div>
+            
             <h1 style="font-size: 24px; font-weight: 800; margin: 0 0 8px 0; letter-spacing: -0.5px;">
                 Inventory & Supplies
             </h1>
             <p style="font-size: 13.5px; opacity: 0.92; margin: 0; line-height: 1.5;">
-                Add stock items, update current counts, and request more supplies for director approval. Stock and request updates appear automatically in both views.
+                Update stock and request supplies.
             </p>
         </div>
 
@@ -103,10 +101,10 @@
 <!-- Tabs Navigation -->
 <div class="tabs-container" style="margin-bottom: 20px;">
     <button class="tab-btn active" data-tab="tab_ward_balances">
-        <i class="fas fa-boxes"></i> Ward Cabinet Balances (<span id="tab_count_balances">12</span>)
+        <i class="fas fa-boxes"></i> Stock Levels (<span id="tab_count_balances">12</span>)
     </button>
     <button class="tab-btn" data-tab="tab_child_dispensations">
-        <i class="fas fa-history"></i> Supplies Given to Children (<span id="tab_count_dispensations">6</span>)
+        <i class="fas fa-history"></i> Supplies Given (<span id="tab_count_dispensations">6</span>)
     </button>
     <button class="tab-btn" data-tab="tab_storeroom_orders">
         <i class="fas fa-truck-loading"></i> Supply Requests & Tracking (<span id="tab_count_orders">3</span>)
@@ -361,13 +359,13 @@
                     <input type="number" id="req_qty_input" class="form-control" value="2" min="1"  required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Delivery Destination Ward *</label>
+                    <label class="form-label">Delivery Location *</label>
                     <input type="text" id="req_destination_input" class="form-control" placeholder="Enter the delivery ward or storage location" required>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="form-label">Priority Level *</label>
+                <label class="form-label">Priority *</label>
                 <select id="req_priority_select" class="form-control" required>
                     <option value="Normal">Normal (Deliver during 15:00 dispatch)</option>
                     <option value="Urgent">Urgent (Required within 1 hour)</option>
@@ -376,7 +374,7 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">Staff Caregiver on Duty Remarks</label>
+                <label class="form-label">Staff Notes</label>
                 <textarea id="req_notes_input" class="form-control" rows="2" placeholder="e.g. 2 children with mild cough; nursery diaper stock down to last pack..."></textarea>
             </div>
 
@@ -405,7 +403,7 @@
 
         <form onsubmit="handleChildDispenseSubmit(event)">
             <div class="form-group">
-                <label class="form-label">Select Resident Child Recipient *</label>
+                <label class="form-label">Select Child *</label>
                 <select id="dispense_child_select" class="form-control" required>
                     <!-- Populated dynamically from HopeHavenChildStore -->
                 </select>
@@ -427,7 +425,7 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">Care Purpose / Dosage Note *</label>
+                <label class="form-label">Purpose / Dosage *</label>
                 <input type="text" id="dispense_reason_input" class="form-control" placeholder="e.g. Prescribed bedtime dose, morning diaper change, school art class" required>
             </div>
 

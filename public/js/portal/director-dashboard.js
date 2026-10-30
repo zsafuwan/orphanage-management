@@ -253,7 +253,7 @@ function openDonationProofModal(donorName, amount, bank, txRef, date, purpose, s
         stampBadge.style.background = '#ecfdf5';
         stampBadge.style.color = '#047857';
         statusText.innerHTML = '<span style="color: #059669; font-weight: 800;"><i class="fas fa-check-circle"></i> Authenticated by Director</span>';
-        if (actionBtn) actionBtn.innerText = 'Resend Director Acknowledgment';
+        if (actionBtn) actionBtn.innerText = 'Resend Confirmation';
     } else {
         stampBadge.innerHTML = '<i class="fas fa-clock"></i> Pending Verification Slip';
         stampBadge.style.background = '#fef3c7';

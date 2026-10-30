@@ -15,14 +15,12 @@
 <div class="staff-donations-hero">
     <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
         <div style="max-width: 680px;">
-            <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.18); border: 1px solid rgba(255, 255, 255, 0.25); padding: 3px 12px; border-radius: 20px; font-size: 11.5px; font-weight: 700; margin-bottom: 10px; letter-spacing: 0.5px; text-transform: uppercase;">
-                <i class="fas fa-hand-holding-usd"></i> Staff Front Desk & Ward Fund Operations · Subsystem 5
-            </div>
+            
             <h1 style="font-size: 24px; font-weight: 800; margin: 0 0 8px 0; letter-spacing: -0.5px;">
-                Donations Received, Total Funds Owned & Donor Roster
+                Donations & Donors
             </h1>
             <p style="font-size: 13.5px; opacity: 0.92; margin: 0; line-height: 1.5;">
-                Staff caregiver overview of incoming monetary contributions, current available cash balances owned for ward child care, and active philanthropic supporters.
+                Record contributions and manage donor details.
             </p>
         </div>
 
@@ -174,7 +172,7 @@
         <i class="fas fa-list-alt"></i> List of Donations Received (<span id="tab_donations_count">8</span>)
     </button>
     <button class="tab-btn" data-tab="tab_donors_roster">
-        <i class="fas fa-users"></i> Registered Donors Roster (<span id="tab_donors_count">6</span>)
+        <i class="fas fa-users"></i> Donors (<span id="tab_donors_count">6</span>)
     </button>
     <button class="tab-btn" data-tab="tab_cash_log">
         <i class="fas fa-money-bill-wave"></i> Front Desk Cash Inflow Log
@@ -252,7 +250,7 @@
     <div class="portal-card" style="padding: 24px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
             <div>
-                <h3 style="font-size: 16px; font-weight: 800; color: var(--dark); margin: 0;">Registered Benefactors & Supporters</h3>
+                <h3 style="font-size: 16px; font-weight: 800; color: var(--dark); margin: 0;">Donors</h3>
                 <p style="font-size: 12.5px; color: #64748b; margin: 2px 0 0 0;">
                     Patrons and organizations who regularly contribute to child welfare.
                 </p>

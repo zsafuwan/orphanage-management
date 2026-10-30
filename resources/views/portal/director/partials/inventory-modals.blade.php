@@ -78,7 +78,7 @@
             </div>
 
             <div style="margin-bottom: 14px;">
-                <label for="director_reject_reason" style="font-size: 12px; font-weight: 700; color: #475569; display: block; margin-bottom: 4px;">Feedback / Rejection Reason</label>
+                <label for="director_reject_reason" style="font-size: 12px; font-weight: 700; color: #475569; display: block; margin-bottom: 4px;">Reason / Feedback</label>
                 <textarea id="director_reject_reason" rows="3" style="width: 100%; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; font-size: 13px; font-family: inherit; outline: none;" placeholder="e.g. Please check the quantity and submit an updated request."></textarea>
             </div>
         </div>

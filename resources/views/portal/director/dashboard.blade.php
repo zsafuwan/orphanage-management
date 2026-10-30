@@ -18,9 +18,6 @@
                 <i class="fas fa-crown"></i> Orphanage Management · Q4 2026
             </div>
             <h1 class="director-hero-title">Welcome, Sister Sarah</h1>
-            <p class="director-hero-subtitle">
-                A clearer view of the care that matters. Follow children's wellbeing, support your team, and keep our orphanage moving forward.
-            </p>
         </div>
         <div class="director-hero-actions">
             <button type="button" class="director-btn-light" onclick="directEmergencyNotice()">
@@ -204,7 +201,7 @@
         <div class="director-card-head">
             <div class="director-card-title">
                 <i class="fas fa-hospital-user" style="color: #e11d48;"></i>
-                <span class="sickness-table-caption">Children’s Wellbeing & Clinic Appointments</span>
+                <span class="sickness-table-caption">Health & Appointments</span>
             </div>
             <div class="chart-toggle-group">
                 <button type="button" class="chart-toggle-btn sickness-tab-btn active" data-sickness-filter="all">

@@ -67,7 +67,7 @@
             <i class="fas fa-network-wired"></i>
         </div>
         <div class="prov-metric-info">
-            <div class="m-label">RBAC Subsystems</div>
+            <div class="m-label">Access Areas</div>
             <div class="m-val">5 Modules Live</div>
         </div>
     </div>
@@ -104,7 +104,7 @@
                     <!-- 1. Full Name -->
                     <div class="form-group">
                         <label class="form-label" for="admin_full_name">
-                            Full Legal Name <span style="color: var(--primary);">*</span>
+                            Full Name <span style="color: var(--primary);">*</span>
                         </label>
                         <div class="input-with-icon">
                             <i class="fas fa-user input-icon-left"></i>
@@ -276,7 +276,7 @@
 
                 <!-- Section: Subsystems Permissions Checklist -->
                 <div class="form-section-divider">
-                    <i class="fas fa-key"></i> 3. Subsystem Access Approval
+                    <i class="fas fa-key"></i> 3. Page Access
                 </div>
 
                 <div class="perms-checkbox-list">
@@ -402,7 +402,7 @@
                 <span class="badge-count" id="admin_count_badge">4 Registered</span>
             </h3>
             <p style="font-size: 12.5px; color: var(--dark-muted); margin-top: 3px;">
-                Directory of staff & Volunteers authorized with administrative clearance across HopeHaven subsystems.
+                Directory of staff & Volunteers authorized with administrative clearance across the system.
             </p>
         </div>
 
@@ -605,7 +605,7 @@
 
                 <!-- Full Name Field -->
                 <div class="voucher-field">
-                    <div class="voucher-field-label">Full Legal Name</div>
+                    <div class="voucher-field-label">Full Name</div>
                     <div class="voucher-field-value" id="voucher_modal_name">David Kim</div>
                 </div>
 

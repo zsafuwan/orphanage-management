@@ -126,7 +126,7 @@ function closeDirectorModal(modalId) {
 function saveClinicalNote() {
     const noteText = document.getElementById('clinical_note_text').value.trim();
     if (!noteText) {
-        alert('Please enter clinical observation or doctor directive details.');
+        alert('Enter the health note.');
         return;
     }
 
@@ -145,9 +145,9 @@ function saveClinicalNote() {
     closeDirectorModal('modal_add_clinical_note');
 
     if (typeof showPortalToast === 'function') {
-        showPortalToast(`Clinical note recorded for ${child}: [${noteType}] "${noteText}"`, 'success');
+        showPortalToast(`Health note saved for ${child}: [${noteType}] "${noteText}"`, 'success');
     } else {
-        alert(`Clinical note recorded for ${child}.`);
+        alert(`Health note saved for ${child}.`);
     }
 }
 

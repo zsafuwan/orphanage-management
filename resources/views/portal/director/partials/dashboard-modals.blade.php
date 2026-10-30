@@ -2,7 +2,7 @@
 <div class="director-modal-overlay" id="modal_donation_proof">
     <div class="director-modal" style="max-width: 580px;">
         <div class="director-modal-head" style="background: #f0fdf4; border-bottom: 1px solid #bbf7d0;">
-            <h3><i class="fas fa-file-invoice-dollar" style="color: #059669;"></i> Verified Proof of Donation</h3>
+            <h3><i class="fas fa-file-invoice-dollar" style="color: #059669;"></i> Donation Receipt</h3>
             <button type="button" class="director-modal-close" onclick="closeDirectorModal('modal_donation_proof')">&times;</button>
         </div>
         <div class="director-modal-body">

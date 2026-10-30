@@ -12,8 +12,8 @@
     <!-- Header -->
     <div class="dir-don-header">
         <div>
-            <h1><i class="fas fa-hand-holding-usd" style="color: #059669;"></i> Orphanage Endowments, Grants & Financial Management</h1>
-            <p>Executive management of institutional grants, corporate CSR partnerships, and audited Section 44(6) tax-exempt funds.</p>
+            <h1><i class="fas fa-hand-holding-usd" style="color: #059669;"></i> Donations & Grants</h1>
+            <p>Manage contributions, donors and grants.</p>
         </div>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
             <button type="button" class="btn-primary" onclick="openStaffDonationModal('modal_staff_record_donation')"><i class="fas fa-plus-circle"></i> Record Contribution</button>
@@ -72,10 +72,10 @@
         <div class="director-card-head">
             <div class="director-card-title">
                 <i class="fas fa-landmark"></i>
-                <span>Institutional Foundation Grants & Designated Endowments</span>
+                <span>Grants & Funding</span>
             </div>
             <span class="badge" style="background:#ecfdf5; color:#047857; font-weight:700; padding:4px 10px; border-radius:20px;">
-                <i class="fas fa-check-double"></i> All Tranches Fully Reconciled
+                <i class="fas fa-check-double"></i> All Payments Checked
             </span>
         </div>
         <table class="dir-don-table">
@@ -85,7 +85,7 @@
                     <th>Grant Type & Purpose</th>
                     <th>Committed Grant</th>
                     <th>Disbursed to Date</th>
-                    <th>Next Tranche (Q4)</th>
+                    <th>Next Payment (Q4)</th>
                     <th>Audit Status</th>
                     <th class="action-column" style="text-align: right;">Director Action</th>
                 </tr>
@@ -104,7 +104,7 @@
                     <td><span class="status-pill" style="background:#ecfdf5; color:#047857; font-size:11px; font-weight:700;"><i class="fas fa-check-circle"></i> Milestone Audited</span></td>
                     <td style="text-align: right;">
                         <button type="button" class="btn-director-review" onclick="openGrantReleaseModal('Yayasan Hasanah', 'RM 50,000.00', 'RM 12,500.00')">
-                            <i class="fas fa-stamp"></i> Release Tranche
+                            <i class="fas fa-stamp"></i> Release Payment
                         </button>
                     </td>
                 </tr>
@@ -122,7 +122,7 @@
                     <td><span class="status-pill" style="background:#ecfdf5; color:#047857; font-size:11px; font-weight:700;"><i class="fas fa-check-circle"></i> Verified</span></td>
                     <td style="text-align: right;">
                         <button type="button" class="btn-director-review" onclick="openGrantReleaseModal('Maybank Islamic Berhad', 'RM 40,000.00', 'RM 10,000.00')">
-                            <i class="fas fa-stamp"></i> Release Tranche
+                            <i class="fas fa-stamp"></i> Release Payment
                         </button>
                     </td>
                 </tr>
@@ -140,7 +140,7 @@
                     <td><span class="status-pill" style="background:#ecfdf5; color:#047857; font-size:11px; font-weight:700;"><i class="fas fa-check-circle"></i> Verified</span></td>
                     <td style="text-align: right;">
                         <button type="button" class="btn-director-review" onclick="openGrantReleaseModal('Sunway Group (Jeffrey Cheah Fdn)', 'RM 30,000.00', 'RM 10,000.00')">
-                            <i class="fas fa-stamp"></i> Release Tranche
+                            <i class="fas fa-stamp"></i> Release Payment
                         </button>
                     </td>
                 </tr>

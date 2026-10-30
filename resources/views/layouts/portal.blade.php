@@ -153,12 +153,10 @@
             <div class="sidebar-footer">
                 <div class="care-sidebar-note">
                     <span class="care-note-icon"><i class="fas fa-seedling" aria-hidden="true"></i></span>
-                    <strong>Small acts. Brighter futures.</strong>
-                    <p>A little care makes a lasting difference.</p>
                     <a href="{{ route('home') }}">Our orphanage <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                 </div>
                 @if($isDirector)
-                    <a href="{{ route('director.profile') }}" class="user-profile-badge" style="text-decoration: none; color: inherit; display: flex; width: 100%; transition: opacity 0.2s;" title="View Executive Credentials">
+                    <a href="{{ route('director.profile') }}" class="user-profile-badge" style="text-decoration: none; color: inherit; display: flex; width: 100%; transition: opacity 0.2s;" title="View Profile">
                         <div class="user-avatar" style="background: linear-gradient(135deg, #6366f1, #4338ca);">
                             SS
                         </div>
@@ -300,7 +298,7 @@
                     </div>
 
                     @if($isDirector)
-                        <a href="{{ route('director.profile') }}" class="topbar-user-link {{ request()->routeIs('director.profile*') ? 'active' : '' }}" title="Director Portal & Executive Profile">
+                        <a href="{{ route('director.profile') }}" class="topbar-user-link {{ request()->routeIs('director.profile*') ? 'active' : '' }}" title="Director Profile">
                             <span class="topbar-avatar" style="background: linear-gradient(135deg, #6366f1, #4338ca);">SS</span>
                             <span class="topbar-username">Sister Sarah</span>
                             <span class="topbar-role-badge" style="background: rgba(99, 102, 241, 0.12); color: #4338ca; border-color: rgba(99, 102, 241, 0.25);">Director</span>
@@ -325,7 +323,7 @@
             <div class="portal-content">
                 @yield('content')
                 @unless ($__env->hasSection('hide-workspace-footer'))
-                    <footer class="care-workspace-footer"><span>HopeHaven <span aria-hidden="true">/</span> A place to belong.</span><span>Made for the people who care <i class="fas fa-heart" aria-hidden="true"></i></span></footer>
+                    <footer class="care-workspace-footer"><span>HopeHaven</span></footer>
                 @endunless
             </div>
         </main>
