@@ -61,3 +61,24 @@
 @media (prefers-reduced-motion: reduce) {
     .care-home *, .care-home *::before, .care-home *::after { animation-duration: .01ms !important; animation-delay: 0ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+
+/* Public event card */
+.care-home .home-events { width: 88vw; margin: 64px auto 0; scroll-margin-top: 115px; }
+.care-home .home-event-card { display: flex; align-items: center; gap: 36px; padding: 32px; border: 0; border-radius: 28px; background: #fff; box-shadow: 0 16px 32px -20px rgb(62 53 85 / 30%); }
+.care-home .home-event-art { position: relative; display: grid; place-items: center; width: 220px; min-height: 190px; flex: 0 0 220px; overflow: hidden; border-radius: 20px; background: #efeafa; color: #78639d; }
+.care-home .home-event-calendar { display: grid; justify-items: center; gap: 18px; transform: rotate(-6deg); background: #fff; border-radius: 18px; padding: 25px 17px; box-shadow: 0 12px 24px -12px #b5a5d0; }
+.care-home .home-event-calendar i { font-size: 42px; }
+.care-home .home-event-calendar span { font-size: 8px; font-weight: 800; letter-spacing: 1px; }
+.care-home .home-event-spark { position: absolute; top: 14px; left: 18px; font-size: 40px; }
+.care-home .home-event-heart { position: absolute; bottom: 18px; right: 17px; display: grid; place-items: center; width: 41px; height: 41px; border-radius: 50%; background: #f7d9cc; color: #9c624e; transform: rotate(12deg); }
+.care-home .home-event-copy { flex: 1; min-width: 0; }
+.care-home .home-event-eyebrow { color: #78639d; font-size: 11px; font-weight: 800; letter-spacing: 2px; }
+.care-home .home-event-copy h2 { margin: 12px 0; color: #343743; font-size: clamp(26px, 2.5vw, 38px); line-height: 1.2; letter-spacing: -1.3px; }
+.care-home .home-event-copy p { margin: 0 0 20px; color: #697461; font-size: 15px; line-height: 1.6; }
+.care-home .home-event-status { display: inline-flex; align-items: center; gap: 9px; border-radius: 100px; background: #f3f5ed; padding: 9px 13px; color: #657356; font-size: 12px; }
+.care-home .home-event-status > span { width: 7px; height: 7px; border-radius: 50%; background: #92a279; }
+.care-home .home-event-link { display: inline-flex; align-items: center; justify-content: center; gap: 18px; flex-shrink: 0; padding: 17px 22px; border-radius: 14px; background: #e9e1f5; color: #594879; text-decoration: none; font-size: 14px; font-weight: 700; transition: transform .2s, background .2s; }
+.care-home .home-event-link:hover { background: #ded2ef; transform: translateY(-2px); }
+@media(max-width: 1050px) { .care-home .home-event-card { flex-wrap: wrap; gap: 24px; } .care-home .home-event-link { margin-left: 244px; } }
+@media(max-width: 600px) { .care-home .home-events { width: calc(100% - 28px); margin-top: 32px; } .care-home .home-event-card { padding: 22px; gap: 24px; } .care-home .home-event-art { width: 100%; flex-basis: 100%; min-height: 165px; } .care-home .home-event-link { margin-left: 0; width: 100%; } }
+@media(prefers-reduced-motion: reduce) { .care-home .home-event-link { transition: none; } }

@@ -60,6 +60,7 @@
                 </td>
                 <td id="navigation">
                     <a href="#programs">programs</a>
+                    <a href="#events">events</a>
                     <a href="#work">gallery</a>
                     <a href="#bio">our story</a>
                     <a href="#contact">contact</a>
@@ -125,6 +126,22 @@
             </div>
         </div>
     </div>
+    <section id="events" class="home-events" aria-labelledby="events-heading">
+        <div class="home-event-card">
+            <div class="home-event-art" aria-hidden="true">
+                <span class="home-event-spark">✳</span>
+                <div class="home-event-calendar"><i class="fa-regular fa-calendar-days"></i><span>LET’S GET TOGETHER</span></div>
+                <span class="home-event-heart"><i class="fa-solid fa-heart"></i></span>
+            </div>
+            <div class="home-event-copy">
+                <span class="home-event-eyebrow">EVENTS</span>
+                <h2 id="events-heading">Good days, together.</h2>
+                <p>Visits, activities and ways to give back.</p>
+                <div class="home-event-status"><span aria-hidden="true"></span> No upcoming events yet</div>
+            </div>
+            <a href="#contact" class="home-event-link">Ask about events <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+    </section>
     <section id="rightMap" aria-labelledby="care-locations-heading">
             <div class="care-locations-intro">
                 <span class="hero-tag"><i class="fas fa-location-dot" aria-hidden="true"></i> A COMMUNITY OF CARE</span>
