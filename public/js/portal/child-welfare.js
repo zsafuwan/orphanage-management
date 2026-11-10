@@ -1111,9 +1111,6 @@
             $('#paper_avg_score_preview').text(`${avg}%`);
             $('#paper_avg_score_hidden').val(avg);
 
-            // Suggested GPA
-            const gpa = ((avg / 100) * 4.0).toFixed(2);
-            $('#paper_gpa_input').val(gpa);
 
             // Suggested standing
             if (avg >= 90) {
@@ -1211,7 +1208,6 @@
         const examName = $('#paper_exam_name').val().trim() || 'Term Paper Examination';
         const term = $('#paper_term').val().trim() || 'Term 2 · 2026';
         const examDate = $('#paper_exam_date').val() || new Date().toISOString().split('T')[0];
-        const gpa = $('#paper_gpa_input').val() || '3.50';
         const status = $('#paper_standing_select').val();
         const remarks = $('#paper_remarks_input').val().trim();
 
@@ -1238,7 +1234,7 @@
             date: examDate,
             subjects: subjects,
             overallScore: overall,
-            gpa: parseFloat(gpa).toFixed(2),
+            gpa: ((overall / 100) * 4).toFixed(2),
             status: status,
             remarks: remarks || `Keyed in by staff. Completed ${count} subject examination papers.`
         };

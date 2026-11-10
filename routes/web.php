@@ -8,6 +8,7 @@ if (app()->environment('local')) {
 }
 
 Route::view('/', 'home')->name('home');
+Route::view('/volunteer/register', 'volunteer-register')->name('volunteer.register');
 
 Route::view('/dashboard', 'portal.dashboard')->name('dashboard');
 Route::view('/dashboard/admin', 'portal.dashboard')->name('dashboard.admin');

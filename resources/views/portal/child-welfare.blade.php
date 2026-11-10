@@ -433,10 +433,6 @@
                         <strong id="paper_avg_score_preview" style="font-size: 16px; color: #0284c7; margin-left: 6px;">88%</strong>
                         <input type="hidden" id="paper_avg_score_hidden" value="88">
                     </div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 12px; font-weight: 600; color: #0369a1;">Suggested GPA:</span>
-                        <input type="number" step="0.01" min="0" max="4.0" id="paper_gpa_input" class="form-control" style="width: 75px; height: 32px; padding: 2px 8px; font-weight: 700;" value="3.52">
-                    </div>
                 </div>
             </div>
 

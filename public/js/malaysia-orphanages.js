@@ -69,7 +69,8 @@
             const {AdvancedMarkerElement} = await google.maps.importLibrary('marker');
             const {Place} = await google.maps.importLibrary('places');
             map = new GoogleMap(canvas, {center: {lat: 4.2, lng: 109.5}, zoom: 5,
-                mapId: 'DEMO_MAP_ID', streetViewControl: false, mapTypeControl: false});
+                mapId: 'DEMO_MAP_ID', gestureHandling: 'greedy', scrollwheel: true,
+                streetViewControl: false, mapTypeControl: false});
             popup = new InfoWindow();
             overview();
             allButton.addEventListener('click', overview);

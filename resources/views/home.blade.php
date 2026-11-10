@@ -48,7 +48,7 @@
         <table id="header_table">
             <tr>
                 <td id="logo">
-                    <a href="#top_part" style="color: inherit; text-decoration: none;">
+                    <a href="{{ route('volunteer.register') }}" aria-label="HopeHaven — register as a volunteer" style="color: inherit; text-decoration: none;">
                         HopeHaven<span class="logo-dot">.</span>
                         <span class="logo-sub">Orphanage & Child Care</span>
                     </a>

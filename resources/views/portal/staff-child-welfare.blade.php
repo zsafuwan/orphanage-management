@@ -803,10 +803,6 @@
                             <span style="font-size: 12px; font-weight: 700; color: #1e40af;">Calculated Average:</span>
                             <strong id="staff_paper_avg_preview" style="font-size: 16px; color: #2563eb; margin-left: 6px;">87%</strong>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span style="font-size: 12px; font-weight: 600; color: #1e40af;">GPA:</span>
-                            <input type="number" step="0.01" min="0" max="4.0" id="staff_paper_gpa" class="staff-input-control" style="width: 75px; height: 32px; padding: 2px 8px; font-weight: 700;" value="3.48">
-                        </div>
                     </div>
                 </div>
 
@@ -1389,8 +1385,6 @@
 
         var avg = count > 0 ? Math.round(total / count) : 85;
         $('#staff_paper_avg_preview').text(avg + '%');
-        var gpa = ((avg / 100) * 4.0).toFixed(2);
-        $('#staff_paper_gpa').val(gpa);
 
         if (avg >= 90) {
             $('#staff_paper_standing').val('Distinction');
@@ -1420,7 +1414,6 @@
         var examName = $('#staff_paper_exam_name').val().trim();
         var term = $('#staff_paper_term').val().trim();
         var examDate = $('#staff_paper_date').val();
-        var gpa = $('#staff_paper_gpa').val();
         var status = $('#staff_paper_standing').val();
         var remarks = $('#staff_paper_remarks').val().trim() || 'Keyed in by Nurse Mary during Morning Duty Shift.';
 
@@ -1449,7 +1442,7 @@
             date: examDate,
             subjects: subjects,
             overallScore: overall,
-            gpa: parseFloat(gpa).toFixed(2),
+            gpa: ((overall / 100) * 4).toFixed(2),
             status: status,
             remarks: remarks
         };
