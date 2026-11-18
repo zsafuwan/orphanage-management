@@ -1,4 +1,4 @@
-/* Admission photos share the existing browser-local child registry. */
+/* Admission photo previews; original files are uploaded privately on save. */
 (function () {
     'use strict';
     const states = new WeakMap();
@@ -10,6 +10,7 @@
         const state = stateFor(widget);
         state.version++;
         state.image = '';
+        state.file = null;
         state.pending = false;
         const input = widget.querySelector('input');
         input.value = '';
@@ -70,6 +71,7 @@
             const result = await prepare(file);
             if (state.version !== version) return;
             state.image = result;
+            state.file = file;
             const preview = widget.querySelector('img');
             preview.src = result;
             preview.hidden = false;
@@ -92,6 +94,10 @@
         event.target.querySelectorAll('[data-child-photo]').forEach(reset);
     });
     window.HopeHavenChildPhoto = {
+        getFile(form) {
+            const widget = form.querySelector('[data-child-photo]');
+            return widget ? stateFor(widget).file || null : null;
+        },
         get(form) {
             const widget = form.querySelector('[data-child-photo]');
             return widget ? stateFor(widget).image : '';

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @env('local')
         <meta name="development-revision" content="{{ route('development.revision') }}">
     @endenv
@@ -337,6 +338,7 @@
     <script src="{{ asset('js/portal.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal.js')), 0, 12) }}"></script>
     <script src="{{ asset('js/portal/child-photo-upload.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/child-photo-upload.js')), 0, 12) }}"></script>
     <script src="{{ asset('js/portal/child-welfare.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/child-welfare.js')), 0, 12) }}"></script>
+    <script src="{{ asset('js/portal/database.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/database.js')), 0, 12) }}"></script>
     <script src="{{ asset('js/portal/welfare-store.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/welfare-store.js')), 0, 12) }}"></script>
     <script src="{{ asset('js/portal/inventory-store.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/inventory-store.js')), 0, 12) }}"></script>
     @stack('scripts')

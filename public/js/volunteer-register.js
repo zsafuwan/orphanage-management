@@ -2,6 +2,7 @@
     'use strict';
     const form = document.getElementById('volunteer-form');
     const message = document.getElementById('registration-message');
+    message.textContent = 'Browser-only demo: volunteer details are saved on this browser, not in PostgreSQL.';
     form.addEventListener('submit', function (event) {
         event.preventDefault();
         const data = new FormData(form);

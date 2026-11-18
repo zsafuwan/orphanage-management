@@ -43,7 +43,7 @@
         table.innerHTML = children.map(child => {
             const academic = child.academic || {};
             const paper = latest(child);
-            return `<tr data-level="${level(child)}" data-standing="${standing(child)}">${profile(child)}${cell(`${child.school} · ${child.grade}`)}${cell(academic.gpa ?? 'Not recorded')}${cell(paper?.subjects?.map(subject=>`${subject.name}: ${subject.score}%`).join(' · ') || 'No paper recorded')}${cell(academic.attendance === undefined ? 'Not recorded' : academic.attendance+'%')}${cell(academic.cocurriculum)}${cell(academic.sponsor)}${action(child,'education','View record')}</tr>`;
+            return `<tr data-level="${level(child)}" data-standing="${standing(child)}">${profile(child)}${cell(`${child.school} · ${child.grade}`)}${cell(academic.gpa ?? 'Not recorded')}${cell(paper?.subjects?.map(subject=>`${subject.name}: ${subject.score}%`).join(' · ') || 'No paper recorded')}${cell(academic.attendance === undefined ? 'Not recorded' : academic.attendance+' days')}${cell(academic.cocurriculum)}${cell(academic.sponsor)}${action(child,'education','View record')}</tr>`;
         }).join('') || '<tr><td colspan="8">No children registered yet.</td></tr>';
         document.querySelectorAll('.edu-tab-btn').forEach(tab => { const badge=tab.querySelector('.edu-tab-badge'); if(badge) badge.textContent=children.filter(child=>tab.dataset.level==='all'||level(child)===tab.dataset.level).length; });
         const graded = children.filter(child=>score(child)!==undefined);
@@ -122,7 +122,7 @@
         } else {
             const subjects=latest(child)?.subjects||[];
             const scores=subjects.map(subject=>`<tr>${cell(subject.name)}${cell(subject.score+'%')}${cell(subject.grade||'—')}${cell(subject.remarks||'Not recorded')}</tr>`).join('')||'<tr><td colspan="4">No subject results recorded.</td></tr>';
-            window.openStudentAcademicPortfolio(child.name,`${child.school} · ${child.grade}`,academic.sponsor||'Not recorded',score(child)===undefined?'No paper recorded':score(child)+'%',academic.attendance===undefined?'Not recorded':academic.attendance+'%',academic.academicStanding||'Not recorded',academic.cocurriculum||'Not recorded',scores,academic.tutoring||'Not recorded');
+            window.openStudentAcademicPortfolio(child.name,`${child.school} · ${child.grade}`,academic.sponsor||'Not recorded',score(child)===undefined?'No paper recorded':score(child)+'%',academic.attendance===undefined?'Not recorded':academic.attendance+' days',academic.academicStanding||'Not recorded',academic.cocurriculum||'Not recorded',scores,academic.tutoring||'Not recorded');
         }
     });
     document.addEventListener('DOMContentLoaded',()=>{
@@ -135,4 +135,5 @@
             if(selected) [...document.querySelectorAll('[data-registry-action="medical"]')].find(button=>button.dataset.childId===selected)?.click();
         }
     });
+    document.addEventListener('care-data-loaded', refresh);
 })();

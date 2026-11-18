@@ -40,6 +40,7 @@ test('admission photo is resized, previewed and available to save', async () => 
     assert.equal(s.canvas.height, 200);
     assert.equal(s.preview.hidden, false);
     assert.equal(s.api.get(s.form), 'data:image/jpeg;base64,preview');
+    assert.equal(s.api.getFile(s.form), s.input.files[0]);
     assert.equal(s.api.ready(s.form), true);
 });
 
@@ -51,6 +52,7 @@ test('unsupported and oversized files are rejected without reading them', async 
         assert.equal(s.readers.length, 0);
         assert.equal(s.api.ready(s.form), false);
         assert.equal(s.api.get(s.form), '');
+        assert.equal(s.api.getFile(s.form), null);
     }
 });
 
@@ -63,6 +65,7 @@ test('reset cancels an in-progress photo so it cannot leak into the next admissi
     s.readers[0].onload();
     await pending;
     assert.equal(s.api.get(s.form), '');
+    assert.equal(s.api.getFile(s.form), null);
     assert.equal(s.preview.hidden, true);
     assert.equal(s.api.ready(s.form), true);
     assert.equal(s.message.textContent, '');

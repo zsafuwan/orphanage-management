@@ -1232,6 +1232,7 @@
                     <div>
                         <div class="ward-card-header">
                             <img src="${c.avatar}" style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid #cbd5e1;" alt="${c.name}">
+                            <label style="font-size:11px;cursor:pointer;">Change photo<input type="file" class="saved-child-photo-input" data-child-id="${c.id}" accept="image/jpeg,image/png,image/webp" aria-label="Change photo for ${c.name}" style="display:block;max-width:155px;font-size:10px;"></label>
                             <div>
                                 <div class="ward-name">${c.name} (${c.age} yrs)</div>
                                 <div class="ward-room"><i class="fas fa-door-open"></i> ${c.dorm} · ${c.room || 'Main Ward'}</div>

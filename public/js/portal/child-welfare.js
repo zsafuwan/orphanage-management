@@ -529,7 +529,7 @@
                 totalAtt += Number(c.academic?.attendance ?? 0);
             });
             const avgAtt = children.length ? (totalAtt / children.length).toFixed(1) : '0.0';
-            $('#metric_school_attendance').text(`${avgAtt}%`);
+            $('#metric_school_attendance').text(`${avgAtt} days`);
 
             // 3. Health Screenings Due (within the next 45 calendar days)
             let upcomingCount = 0;
@@ -579,13 +579,14 @@
                             <div>
                                 <div class="card-top-info">
                                     <img src="${c.avatar}" class="avatar-large" alt="${this.escape(c.name)}" onerror="this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=150&auto=format&fit=crop&q=80'">
+                                    <label style="font-size:11px;cursor:pointer;">Change photo<input type="file" class="saved-child-photo-input" data-child-id="${c.id}" accept="image/jpeg,image/png,image/webp" aria-label="Change photo for ${this.escape(c.name)}" style="display:block;max-width:155px;font-size:10px;"></label>
                                     <div style="text-align: right;">
                                         <span class="badge badge-secondary" style="font-family: monospace;">${c.id}</span>
                                         <div style="margin-top: 4px;"><span class="badge badge-success">Active Ward</span></div>
                                     </div>
                                 </div>
                                 <div class="profile-name">${this.escape(c.name)}</div>
-                                <div class="profile-meta-line">"${this.escape(c.preferredName)}" &bull; ${c.age} yrs &bull; ${c.gender} &bull; Blood: <strong>${med.bloodType || 'O+'}</strong></div>
+                                <div class="profile-meta-line">"${this.escape(c.preferredName)}" &bull; ${c.age} yrs &bull; ${this.escape(c.gender)} &bull; Blood: <strong>${med.bloodType || 'O+'}</strong></div>
 
                                 <div class="info-rows">
                                     <div class="info-row">
@@ -654,7 +655,7 @@
                                 <img src="${c.avatar}" class="table-child-avatar" alt="${this.escape(c.name)}" onerror="this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=150&auto=format&fit=crop&q=80'">
                                 <div>
                                     <div class="table-child-name">${this.escape(c.name)}</div>
-                                    <div class="table-child-sub">"${this.escape(c.preferredName)}" &bull; ${c.age} yrs &bull; ${c.gender} &bull; <span style="font-family: monospace; font-weight: 700;">${c.id}</span></div>
+                                    <div class="table-child-sub">"${this.escape(c.preferredName)}" &bull; ${c.age} yrs &bull; ${this.escape(c.gender)} &bull; <span style="font-family: monospace; font-weight: 700;">${c.id}</span></div>
                                 </div>
                             </div>
                         </td>
@@ -722,7 +723,7 @@
                     subjectsHtml = '<span style="color: #94a3b8; font-size: 11px; font-style: italic;">No individual subject papers keyed in</span>';
                 }
 
-                const attendanceVal = acad.attendance || 95;
+                const attendanceVal = acad.attendance ?? 'Not recorded';
                 const gpaVal = acad.gpa || 3.50;
                 const standing = acad.academicStanding || 'Good';
 
@@ -745,10 +746,7 @@
                         </td>
                         <td><span class="badge badge-secondary">${this.escape(c.grade)}</span></td>
                         <td>
-                            <strong style="color: #10b981;">${attendanceVal}%</strong>
-                            <div style="height: 4px; background: #e2e8f0; border-radius: 4px; margin-top: 4px; width: 60px;">
-                                <div style="height: 100%; background: #10b981; width: ${attendanceVal}%;"></div>
-                            </div>
+                            <strong style="color: #10b981;">${attendanceVal}${typeof attendanceVal === 'number' ? ' days' : ''}</strong>
                         </td>
                         <td><strong style="font-size: 14px;">${gpaVal}</strong></td>
                         <td>
@@ -787,7 +785,7 @@
                                 <img src="${c.avatar}" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;" alt="${this.escape(c.name)}" onerror="this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=150&auto=format&fit=crop&q=80'">
                                 <div>
                                     <h4 style="font-size: 15px; font-weight: 800; color: var(--dark);">${this.escape(c.name)}</h4>
-                                    <span style="font-size: 11px; color: #64748b;">Blood Type: <strong>${med.bloodType || 'O+'}</strong> &bull; Age ${c.age} &bull; ${c.gender}</span>
+                                    <span style="font-size: 11px; color: #64748b;">Blood Type: <strong>${med.bloodType || 'O+'}</strong> &bull; Age ${c.age} &bull; ${this.escape(c.gender)}</span>
                                 </div>
                             </div>
                             <button class="btn-action-med" onclick="ChildWelfareUI.openRecordMedicalModal('${c.id}')" title="${this.isStaffEditor() ? 'Update medical record' : 'View medical record'}">
@@ -983,7 +981,7 @@
             $('#dossier_modal_school').text(child.school);
             $('#dossier_modal_grade').text(child.grade);
             $('#dossier_modal_gpa').text(`${acad.gpa || 3.50} (${acad.academicStanding || 'Good'})`);
-            $('#dossier_modal_attendance').text(`${acad.attendance || 95}%`);
+            $('#dossier_modal_attendance').text(acad.attendance === undefined ? 'Not recorded' : `${acad.attendance} days`);
 
             // Health Card
             $('#dossier_modal_condition').text(med.condition || 'Healthy');
@@ -1070,7 +1068,7 @@
             defaultSubjects.forEach(s => {
                 html += `
                     <div class="subject-score-row">
-                        <input type="text" class="form-control subject-name-input" value="${s.name}" placeholder="Subject Name">
+                        <input type="text" class="form-control subject-name-input" value="${this.escape(s.name)}" placeholder="Subject Name">
                         <input type="number" class="form-control subject-score-input" value="${s.score}" min="0" max="100" placeholder="Marks %">
                         <input type="text" class="form-control subject-grade-preview" value="${this.scoreToGrade(s.score)}" readonly style="background: #f1f5f9; text-align: center; font-weight: 700;">
                         <button type="button" class="subject-remove-btn" onclick="$(this).closest('.subject-score-row').remove(); ChildWelfareUI.calculatePaperResultAverages();" title="Remove Subject">&times;</button>

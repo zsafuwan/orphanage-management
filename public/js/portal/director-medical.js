@@ -123,7 +123,7 @@ function closeDirectorModal(modalId) {
 /**
  * Save Clinical Note
  */
-function saveClinicalNote() {
+async function saveClinicalNote() {
     const noteText = document.getElementById('clinical_note_text').value.trim();
     if (!noteText) {
         alert('Enter the health note.');
@@ -134,12 +134,12 @@ function saveClinicalNote() {
     const child = document.getElementById('note_child_name').value;
     const record = window.HopeHavenChildStore?.getById(window.HopeHavenSelectedChildId);
     if (record) {
-        const timeline = record.timeline || [];
-        timeline.unshift({date:new Date().toISOString().slice(0,10),title:noteType,category:'medical',detail:noteText});
-        window.HopeHavenChildStore.update(record.id, {
-            basicMedical:{...record.basicMedical,medicalNotes:noteText},
-            timeline:timeline
-        });
+        try {
+            await window.HopeHavenDatabase.save('followup', {Child_Id:record.id,Followup_Date:new Date().toLocaleDateString('en-CA'),Followup_Remarks:noteType + ': ' + noteText});
+            await window.HopeHavenDatabase.refresh();
+        } catch (error) { showPortalToast(error.message, false); return; }
+    } else {
+        showPortalToast('Choose a saved child record first.', false); return;
     }
 
     closeDirectorModal('modal_add_clinical_note');

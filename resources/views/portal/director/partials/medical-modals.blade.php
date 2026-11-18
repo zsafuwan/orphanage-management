@@ -93,7 +93,7 @@
 <div class="director-modal-overlay" id="modal_add_clinical_note">
     <div class="director-modal">
         <div class="director-modal-head">
-            <h3><i class="fas fa-stethoscope" style="color: #059669;"></i> Add Director Health Note</h3>
+            <h3><i class="fas fa-stethoscope" style="color: #059669;"></i> Add Follow-up Note</h3>
             <button type="button" class="director-modal-close" onclick="closeDirectorModal('modal_add_clinical_note')">&times;</button>
         </div>
         <div class="director-modal-body">

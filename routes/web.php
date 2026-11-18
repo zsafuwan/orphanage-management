@@ -1,9 +1,21 @@
 <?php
 
+use App\Http\Controllers\CareRecordController;
+use App\Http\Controllers\DevelopmentRevisionController;
+use App\Http\Middleware\CareAccess;
 use Illuminate\Support\Facades\Route;
 
+Route::middleware(CareAccess::class)->group(function () {
+    Route::get('/care-data', [CareRecordController::class, 'snapshot']);
+    Route::get('/care-data/child/{child}/photo', [CareRecordController::class, 'photo'])->whereNumber('child');
+    Route::post('/care-data/child/{child}/photo', [CareRecordController::class, 'updatePhoto'])->whereNumber('child');
+    Route::post('/care-data/paper', [CareRecordController::class, 'paper']);
+    Route::post('/care-data/intake', [CareRecordController::class, 'intake']);
+    Route::post('/care-data/{resource}', [CareRecordController::class, 'save']);
+});
+
 if (app()->environment('local')) {
-    Route::get('/__development/revision', \App\Http\Controllers\DevelopmentRevisionController::class)
+    Route::get('/__development/revision', DevelopmentRevisionController::class)
         ->name('development.revision');
 }
 
@@ -35,6 +47,7 @@ Route::get('/profile', function () {
     if (request('view') === 'staff' || request('role') === 'staff') {
         return view('portal.staff-profile');
     }
+
     return view('portal.profile');
 })->name('profile');
 Route::view('/staff/profile', 'portal.staff-profile')->name('staff.profile');

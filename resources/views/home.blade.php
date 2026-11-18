@@ -49,7 +49,7 @@
             <tr>
                 <td id="logo">
                     <a href="{{ route('volunteer.register') }}" aria-label="HopeHaven — register as a volunteer" style="color: inherit; text-decoration: none;">
-                        HopeHaven<span class="logo-dot">.</span>
+                        <span class="logo-name">HopeHaven</span><span class="logo-dot" aria-hidden="true">.</span>
                         <span class="logo-sub">Orphanage & Child Care</span>
                     </a>
                 </td>
@@ -418,6 +418,7 @@
     </div>
 
     <!-- Template 2 Interaction JS -->
+    <script src="{{ asset('js/home-motion.js') }}?v={{ substr(hash_file('sha256', public_path('js/home-motion.js')), 0, 12) }}" defer></script>
     <script src="{{ asset('js/template2.js') }}?v={{ substr(hash_file('sha256', public_path('js/template2.js')), 0, 12) }}" type="text/javascript"></script>
 
     <script>

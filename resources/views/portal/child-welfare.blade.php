@@ -61,8 +61,8 @@
                 <i class="fas fa-school"></i>
             </div>
         </div>
-        <div class="metric-val" id="metric_school_attendance">95.8%</div>
-        <div class="metric-sub">Average term attendance rate</div>
+        <div class="metric-val" id="metric_school_attendance">—</div>
+        <div class="metric-sub">Average days attended</div>
     </div>
 
     <div class="metric-card">
@@ -194,7 +194,7 @@
                         <th>Child / Student</th>
                         <th>School Name & ID</th>
                         <th>Grade Level</th>
-                        <th>Attendance %</th>
+                        <th>Attendance (days)</th>
                         <th>Cumulative GPA</th>
                         <th>Latest Paper & Subject Scores</th>
                         <th>Performance Standing</th>

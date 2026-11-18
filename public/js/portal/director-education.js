@@ -112,7 +112,7 @@ function closeDirectorModal(modalId) {
 /**
  * Save Student Grade Evaluation
  */
-function saveStudentGradeUpdate() {
+async function saveStudentGradeUpdate() {
     const student = document.getElementById('update_grade_student_name').value;
     const avg = document.getElementById('update_grade_average').value;
     const standing = document.getElementById('update_grade_standing').options[document.getElementById('update_grade_standing').selectedIndex].text;
@@ -123,16 +123,20 @@ function saveStudentGradeUpdate() {
     }
     const record = window.HopeHavenChildStore?.getById(window.HopeHavenSelectedChildId);
     if (record) {
-        window.HopeHavenChildStore.update(record.id, {
-            academic:{...record.academic,overallScore:Number(avg),academicStanding:standing,remarks:remark},
-            timeline:[{date:new Date().toISOString().slice(0,10),title:'Director academic review',category:'academic',detail:remark},...(record.timeline||[])]
-        });
+        const latest = window.HopeHavenDatabase.data.education.filter(row => String(row.Child_Id) === record.id).at(-1);
+        if (!latest) { showPortalToast('Add an education record before updating its overall result.', false); return; }
+        try {
+            await window.HopeHavenDatabase.save('education', {...latest,record_id:latest.Education_Id,Child_Result:Number(avg)});
+            await window.HopeHavenDatabase.refresh();
+        } catch (error) { showPortalToast(error.message, false); return; }
+    } else {
+        showPortalToast('Choose a saved child record first.', false); return;
     }
 
     closeDirectorModal('modal_update_student_grades');
 
     if (typeof showPortalToast === 'function') {
-        showPortalToast(`Academic record for ${student} updated: ${avg}% (${standing}). Remark logged: "${remark}"`, 'success');
+        showPortalToast(`Academic record for ${student} saved to PostgreSQL: ${avg}%.`, true);
     } else {
         alert(`Academic record for ${student} updated successfully.`);
     }
