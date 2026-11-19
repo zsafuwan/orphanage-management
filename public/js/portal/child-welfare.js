@@ -22,7 +22,6 @@
             grade: 'Grade 5',
             status: 'Active Ward',
             avatar: 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=150&auto=format&fit=crop&q=80',
-            caseWorker: 'Sister Teresa',
             admissionDate: '2022-03-15',
             basicMedical: {
                 bloodType: 'O+',
@@ -99,7 +98,6 @@
             grade: 'Grade 3',
             status: 'Active Ward',
             avatar: 'https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=150&auto=format&fit=crop&q=80',
-            caseWorker: 'Brother Luke',
             admissionDate: '2023-02-10',
             basicMedical: {
                 bloodType: 'A+',
@@ -169,7 +167,6 @@
             grade: 'Grade 9',
             status: 'Active Ward',
             avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80',
-            caseWorker: 'Sister Teresa',
             admissionDate: '2022-01-14',
             basicMedical: {
                 bloodType: 'B+',
@@ -239,7 +236,6 @@
             grade: 'Grade 1',
             status: 'Active Ward',
             avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80',
-            caseWorker: 'Sister Beatrice',
             admissionDate: '2025-04-10',
             basicMedical: {
                 bloodType: 'O+',
@@ -353,7 +349,6 @@
                 grade: childData.grade || 'Grade 3',
                 status: 'Active Ward',
                 avatar: childData.avatar || this.getDefaultAvatar(childData.gender),
-                caseWorker: childData.caseWorker || 'Sister Grace',
                 admissionDate: childData.admissionDate || new Date().toISOString().split('T')[0],
                 basicMedical: {
                     bloodType: childData.bloodType || 'O+',
@@ -590,7 +585,7 @@
 
                                 <div class="info-rows">
                                     <div class="info-row">
-                                        <span class="info-row-label"><i class="fas fa-home"></i> Dormitory:</span>
+                                        <span class="info-row-label"><i class="fas fa-home"></i> Orphanage:</span>
                                         <span class="info-row-val">${this.escape(c.dorm)}</span>
                                     </div>
                                     <div class="info-row">
@@ -661,7 +656,6 @@
                         </td>
                         <td>
                             <strong>${this.escape(c.dorm)}</strong>
-                            <div style="font-size: 11px; color: #64748b;">${this.escape(c.room || 'Main Ward')}</div>
                         </td>
                         <td>
                             <div>${this.escape(c.school)}</div>
@@ -971,11 +965,11 @@
             const papers = acad.paperResults || [];
 
             $('#dossier_modal_name').text(child.name);
-            $('#dossier_modal_meta').text(`Code: ${child.id} · Admitted: ${child.admissionDate} · Case Worker: ${child.caseWorker}`);
+            $('#dossier_modal_meta').text(`Code: ${child.id}`);
             $('#dossier_modal_avatar').attr('src', child.avatar);
             $('#dossier_modal_head_name').text(child.name);
             $('#dossier_modal_head_sub').html([`${child.age} years old`, child.gender, `Blood: ${med.bloodType || 'Not recorded'}`].map(value => `<span>${this.escape(value)}</span>`).join(''));
-            $('#dossier_modal_head_dorm').text(`${child.dorm} (${child.room || 'Main Ward'})`);
+            $('#dossier_modal_head_dorm').text(child.dorm || 'Not recorded');
 
             // Academic Card
             $('#dossier_modal_school').text(child.school);

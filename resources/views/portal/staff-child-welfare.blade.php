@@ -428,7 +428,7 @@
                     <thead>
                         <tr>
                             <th>Child Ward</th>
-                            <th>Dormitory</th>
+                            <th>Orphanage</th>
                             <th>School & Grade</th>
                             <th>Latest Paper Result</th>
                             <th>Basic Medical Condition</th>
@@ -672,7 +672,7 @@
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
                     <div class="staff-field-group">
-                        <label class="staff-field-label">Dormitory Placement</label>
+                        <label class="staff-field-label">Orphanage</label>
                         <select id="staff_add_dorm" class="staff-input-control">
                             <option value="Ward Alpha">Ward Alpha (Ground Floor)</option>
                             <option value="Ward Beta">Ward Beta (First Floor)</option>
@@ -1235,7 +1235,7 @@
                             <label style="font-size:11px;cursor:pointer;">Change photo<input type="file" class="saved-child-photo-input" data-child-id="${c.id}" accept="image/jpeg,image/png,image/webp" aria-label="Change photo for ${c.name}" style="display:block;max-width:155px;font-size:10px;"></label>
                             <div>
                                 <div class="ward-name">${c.name} (${c.age} yrs)</div>
-                                <div class="ward-room"><i class="fas fa-door-open"></i> ${c.dorm} · ${c.room || 'Main Ward'}</div>
+                                <div class="ward-room"><i class="fas fa-house"></i> ${window.ChildWelfareUI.escape(c.dorm || 'Not recorded')}</div>
                             </div>
                         </div>
                         <div style="font-size: 11.5px; color: #475569; margin-bottom: 8px;">
@@ -1542,9 +1542,7 @@
             condition: condition,
             allergies: allergies,
             medicalNotes: notes,
-            avatar: window.HopeHavenChildPhoto.get(e.target),
-            caseWorker: 'Nurse Mary (Staff)'
-        });
+            avatar: window.HopeHavenChildPhoto.get(e.target),        });
 
         closeStaffModal('modal_staff_add_child');
         e.target.reset();
@@ -1569,7 +1567,7 @@
         var papers = acad.paperResults || [];
 
         $('#staff_dossier_title').text('Resident Child PDF: ' + child.name);
-        $('#staff_dossier_sub').text('Code: ' + child.id + ' · Admitted: ' + child.admissionDate + ' · Case Worker: Nurse Mary');
+        $('#staff_dossier_sub').text('Code: ' + child.id);
         $('#staff_dossier_avatar').attr('src', child.avatar);
         $('#staff_dossier_name').text(child.name);
         $('#staff_dossier_meta').text(child.age + ' yrs · ' + child.gender + ' · Blood: ' + (med.bloodType || 'O+') + ' · ' + child.dorm);

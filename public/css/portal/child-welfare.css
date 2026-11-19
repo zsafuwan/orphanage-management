@@ -513,6 +513,24 @@
   --tw-font-weight: var(--tw-font-weight-bold, 700);
   font-weight: var(--tw-font-weight-bold, 700);
 }
+#modal_key_paper_result > .portal-modal {
+  padding: 0;
+}
+#modal_key_paper_result > .portal-modal > .modal-header {
+  margin: 0;
+  padding: 26px 30px 22px;
+}
+#modal_key_paper_result > .portal-modal > form {
+  padding: 24px 30px 30px;
+}
+@media (max-width: 600px) {
+  #modal_key_paper_result > .portal-modal > .modal-header {
+    padding: 22px 20px;
+  }
+  #modal_key_paper_result > .portal-modal > form {
+    padding: 20px;
+  }
+}
 @property --tw-font-weight {
   syntax: "*";
   inherits: false;

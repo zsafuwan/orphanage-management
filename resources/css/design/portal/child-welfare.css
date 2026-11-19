@@ -461,3 +461,12 @@
     @apply tw:text-[11px];
     @apply tw:font-bold;
 }
+
+/* Exam entry header reaches the modal edges; fields retain their inset. */
+#modal_key_paper_result > .portal-modal { padding: 0; }
+#modal_key_paper_result > .portal-modal > .modal-header { margin: 0; padding: 26px 30px 22px; }
+#modal_key_paper_result > .portal-modal > form { padding: 24px 30px 30px; }
+@media (max-width: 600px) {
+ #modal_key_paper_result > .portal-modal > .modal-header { padding: 22px 20px; }
+ #modal_key_paper_result > .portal-modal > form { padding: 20px; }
+}

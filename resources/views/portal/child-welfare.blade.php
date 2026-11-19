@@ -156,7 +156,7 @@
                 <thead>
                     <tr>
                         <th>Child Ward</th>
-                        <th>Dorm Placement</th>
+                        <th>Orphanage</th>
                         <th>School & Class</th>
                         <th>Latest Paper Result</th>
                         <th>Basic Medical Condition</th>
@@ -308,7 +308,7 @@
 
             <div class="form-row">
                 <div class="form-group">
-                    <label class="form-label">Dormitory Placement</label>
+                    <label class="form-label">Orphanage</label>
                     <select id="reg_child_dorm" class="form-control">
                         <option value="St. Clare Cottage">St. Clare Cottage (Girls)</option>
                         <option value="St. Francis Boys Hall">St. Francis Boys Hall</option>
@@ -351,7 +351,7 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">Intake Case Worker & Medical Baseline Notes</label>
+                <label class="form-label">Intake & Care Notes</label>
                 <textarea id="reg_child_notes" class="form-control" rows="2" placeholder="Document background, emotional adjustment notes, special care needs..."></textarea>
             </div>
 
