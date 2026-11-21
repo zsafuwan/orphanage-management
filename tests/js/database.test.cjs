@@ -39,3 +39,33 @@ test('database registry reloads persisted records without seeds, keeps zero scor
     assert.equal(requests[2].options.body,multipart);
     assert.equal(requests[2].options.headers['Content-Type'],undefined);
 });
+
+
+test('staff paper submission sends attendance days including zero and rejects fractional days', async () => {
+    const listeners = {}, requests = [], notices = [];
+    const fields = {
+        staff_paper_term:{value:'2026'}, staff_paper_child_select:{value:'42'}, staff_paper_attendance:{value:'0'}
+    };
+    const data = {child:[],orphanage:[],organization:[],education:[],medical:[],appointment:[],followup:[],subject:[],'subject-result':[]};
+    const window = {HopeHavenChildStore:{},ChildWelfareUI:{scoreToGrade:()=> 'A',renderAll:()=>{}},showPortalToast:message=>notices.push(message)};
+    const document = {readyState:'loading',querySelector:()=>({content:'test-token'}),getElementById:id=>fields[id]||null,
+        addEventListener:(type,handler)=>{listeners[type]=handler;},dispatchEvent:()=>{}};
+    vm.runInNewContext(fs.readFileSync('public/js/portal/database.js','utf8'), {
+        window,document,Event,Date,FormData,console,alert:()=>{},
+        fetch:async(url,options)=>{requests.push({url,options});return {ok:true,json:async()=>options.method==='POST'?{saved:true}:data};}
+    });
+    await window.HopeHavenDatabase.ready;
+    const modal={id:'modal_staff_key_paper',classList:{remove:()=>{}}};
+    const row={querySelector:selector=>({value:selector==='.staff-subj-name'?'Math':'90'})};
+    const form={dataset:{},closest:()=>modal,querySelectorAll:()=>[row],querySelector:()=>({disabled:false}),reset:()=>{}};
+    const event={target:form,preventDefault:()=>{},stopImmediatePropagation:()=>{}};
+    await listeners.submit(event);
+    const submitted=requests.find(request=>request.options.method==='POST');
+    assert.equal(JSON.parse(submitted.options.body).Child_Attendance,0);
+    assert.equal(submitted.url,'/care-data/paper');
+    const before=requests.filter(request=>request.options.method==='POST').length;
+    fields.staff_paper_attendance.value='3.5';
+    await listeners.submit(event);
+    assert.equal(requests.filter(request=>request.options.method==='POST').length,before);
+    assert.ok(notices.some(message=>message.includes('whole number')));
+});

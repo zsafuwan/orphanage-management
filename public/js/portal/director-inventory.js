@@ -28,13 +28,13 @@
         document.getElementById('director_requests_tbody').innerHTML = visible.map(r => {
             const item = stockFor(r);
             const state = ['Pending', 'Approved', 'Received', 'Rejected', 'Dispatched'].includes(r.status) ? r.status.toLowerCase() : 'pending';
-            return `<tr><td><strong>${escape(r.id)}</strong><small class="inventory-cell-sub">${escape(r.requestedBy || 'Staff')}</small><small class="inventory-cell-sub">${escape(r.time || '')}</small></td>
+            return `<tr><td><strong>${escape(r.requestedBy || 'Not recorded')}</strong><small class="inventory-cell-sub">${escape(r.time || '')}</small></td>
                 <td><strong>${escape(r.item)}</strong><small class="inventory-cell-sub">Requested: ${escape(r.qty)} ${escape(r.unit || item?.unit || 'units')}</small></td>
-                <td>${escape(r.destination)}</td><td><span class="inventory-priority">${escape(r.priority)}</span></td>
+                <td><span class="inventory-priority">${escape(r.priority)}</span></td>
                 <td><strong>${escape(item?.onHand ?? 0)}</strong> ${escape(item?.unit || r.unit || 'units')}</td>
                 <td><span class="inventory-status ${state}">${escape(statusLabels[r.status] || r.status)}</span>${r.directorRemarks ? `<small class="inventory-cell-sub">${escape(r.directorRemarks)}</small>` : ''}</td>
                 <td><div class="inventory-review-actions">${r.status === 'Pending' ? `<button type="button" class="btn-sign" data-inventory-action="approve" data-request-id="${escape(r.id)}">Review</button><button type="button" class="btn-outline btn-sm" data-inventory-action="reject" data-request-id="${escape(r.id)}">Return</button>` : `<span class="inventory-cell-sub">${escape(r.reviewedBy || (r.status === 'Received' ? 'Received by staff' : 'Reviewed'))}</span>`}</div></td></tr>`;
-        }).join('') || '<tr><td colspan="7" class="inventory-empty">No requests match these filters.</td></tr>';
+        }).join('') || '<tr><td colspan="6" class="inventory-empty">No requests match these filters.</td></tr>';
         setText('director_requests_summary', visible.length + ' of ' + requests.length + ' requests');
         const stockSearch = document.getElementById('director_stock_search').value.toLowerCase().trim();
         const lowOnly = document.getElementById('director_low_only').checked;

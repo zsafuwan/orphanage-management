@@ -70,8 +70,8 @@
                             <i class="fas fa-columns"></i> Dashboard
                         </a>
                     @else
-                        <a href="{{ route('dashboard') }}" class="nav-portal-link">
-                            <i class="fas fa-shield-alt"></i> Staff & Admin Portal
+                        <a href="{{ url('/login') }}" class="nav-portal-link">
+                            <i class="fas fa-shield-alt"></i> Log in
                         </a>
                     @endauth
 

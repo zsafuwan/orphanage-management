@@ -43,8 +43,8 @@
         table.innerHTML = children.map(child => {
             const academic = child.academic || {};
             const paper = latest(child);
-            return `<tr data-level="${level(child)}" data-standing="${standing(child)}">${profile(child)}${cell(`${child.school} · ${child.grade}`)}${cell(academic.gpa ?? 'Not recorded')}${cell(paper?.subjects?.map(subject=>`${subject.name}: ${subject.score}%`).join(' · ') || 'No paper recorded')}${cell(academic.attendance === undefined ? 'Not recorded' : academic.attendance+' days')}${cell(academic.cocurriculum)}${cell(academic.sponsor)}${action(child,'education','View record')}</tr>`;
-        }).join('') || '<tr><td colspan="8">No children registered yet.</td></tr>';
+            return `<tr data-level="${level(child)}" data-standing="${standing(child)}">${profile(child)}${cell(`${child.school} · ${child.grade}`)}${cell(paper?.subjects?.map(subject=>`${subject.name}: ${subject.score}%`).join(' · ') || 'No paper recorded')}${cell(academic.attendance === undefined ? 'Not recorded' : academic.attendance+' days')}${action(child,'education','View record')}</tr>`;
+        }).join('') || '<tr><td colspan="5">No children registered yet.</td></tr>';
         document.querySelectorAll('.edu-tab-btn').forEach(tab => { const badge=tab.querySelector('.edu-tab-badge'); if(badge) badge.textContent=children.filter(child=>tab.dataset.level==='all'||level(child)===tab.dataset.level).length; });
         const graded = children.filter(child=>score(child)!==undefined);
         const values=document.querySelectorAll('.edu-kpi-val');

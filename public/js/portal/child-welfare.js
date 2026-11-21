@@ -699,69 +699,33 @@
         },
 
         renderAcademicsTab: function(children) {
-            const $tbody = $('#academics_table_tbody');
-            if (!$tbody.length) return;
-
-            let html = '';
-            children.forEach(c => {
+            const $grid = $('#academic_cards_grid');
+            if (!$grid.length) return;
+            const editable = this.isStaffEditor();
+            $grid.html(children.map(c => {
                 const acad = c.academic || {};
-                const papers = acad.paperResults || [];
-                const latestPaper = papers.length > 0 ? papers[0] : null;
-
-                let subjectsHtml = '';
-                if (latestPaper && latestPaper.subjects && latestPaper.subjects.length > 0) {
-                    latestPaper.subjects.forEach(s => {
-                        subjectsHtml += `<span class="badge badge-info" style="margin-right: 4px; margin-bottom: 2px;">${this.escape(s.name)} (${s.score}%)</span>`;
-                    });
-                } else {
-                    subjectsHtml = '<span style="color: #94a3b8; font-size: 11px; font-style: italic;">No individual subject papers keyed in</span>';
-                }
-
-                const attendanceVal = acad.attendance ?? 'Not recorded';
-                const gpaVal = acad.gpa || 3.50;
-                const standing = acad.academicStanding || 'Good';
-
-                let statusBadgeClass = 'badge-success';
-                if (standing.toLowerCase().includes('support') || standing.toLowerCase().includes('need')) {
-                    statusBadgeClass = 'badge-warning';
-                } else if (standing.toLowerCase().includes('distinction') || standing.toLowerCase().includes('honor')) {
-                    statusBadgeClass = 'badge-success';
-                }
-
-                html += `
-                    <tr class="searchable-item">
-                        <td>
-                            <strong>${this.escape(c.name)}</strong>
-                            <div style="font-size: 11px; color: #64748b; font-family: monospace;">${c.id}</div>
-                        </td>
-                        <td>
-                            ${this.escape(c.school)}
-                            <div style="font-size: 11px; color: #64748b;">${c.schoolId || 'SCH-General'}</div>
-                        </td>
-                        <td><span class="badge badge-secondary">${this.escape(c.grade)}</span></td>
-                        <td>
-                            <strong style="color: #10b981;">${attendanceVal}${typeof attendanceVal === 'number' ? ' days' : ''}</strong>
-                        </td>
-                        <td><strong style="font-size: 14px;">${gpaVal}</strong></td>
-                        <td>
-                            <div style="font-weight: 700; font-size: 12px; margin-bottom: 4px; color: var(--dark);">
-                                ${latestPaper ? `${this.escape(latestPaper.examName)} (${latestPaper.overallScore}%)` : 'Baseline Record'}
-                            </div>
-                            <div>${subjectsHtml}</div>
-                        </td>
-                        <td>
-                            <span class="badge ${statusBadgeClass}">${this.escape(standing)}</span>
-                        </td>
-                        <td style="text-align: right;">
-                            <button class="btn-action-paper" onclick="ChildWelfareUI.openKeyPaperModal('${c.id}')" title="${this.isStaffEditor() ? 'Enter exam results' : 'View exam results'} for ${this.escape(c.name)}">
-                                <i class="fas ${this.isStaffEditor() ? 'fa-plus' : 'fa-file-lines'}"></i> ${this.isStaffEditor() ? 'Key Paper Result' : 'View Exam Results'}
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            });
-
-            $tbody.html(html);
+                const paper = acad.paperResults?.[0];
+                const attendance = acad.attendance;
+                const standing = acad.academicStanding || 'Not recorded';
+                const subjects = paper?.subjects || [];
+                const chips = subjects.length ? subjects.map(subject => {
+                    const mark = subject.score === null || subject.score === undefined ? '—' : this.escape(String(subject.score)) + '%';
+                    return `<span class="academic-subject">${this.escape(subject.name)} <strong>${mark}</strong></span>`;
+                }).join('') : '<p class="academic-empty">No subject results recorded.</p>';
+                return `<article class="academic-card searchable-item">
+                    <header class="academic-card-top">
+                        <div><span class="academic-eyebrow">STUDENT RECORD · ${this.escape(String(c.id))}</span><h4>${this.escape(c.name)}</h4></div>
+                    </header>
+                    <dl class="academic-details">
+                        <div class="academic-school"><dt><i class="fas fa-school" aria-hidden="true"></i> School Name</dt><dd>${this.escape(c.school || 'Not recorded')}</dd></div>
+                        <div><dt>Grade Level</dt><dd>${this.escape(c.grade || 'Not recorded')}</dd></div>
+                        <div><dt>Attendance</dt><dd class="academic-attendance">${attendance === null || attendance === undefined ? 'Not recorded' : this.escape(String(attendance)) + ' days'}</dd></div>
+                    </dl>
+                    <section class="academic-paper"><h5>${this.escape(paper?.examName || 'Latest Paper')}</h5><div class="academic-subjects">${chips}</div></section>
+                    <div class="academic-standing"><span>Performance Standing</span><strong>${this.escape(standing)}</strong></div>
+                    <button class="btn-action-paper academic-card-action" onclick="ChildWelfareUI.openKeyPaperModal('${this.escape(String(c.id))}')"><i class="fas ${editable ? 'fa-pen' : 'fa-file-lines'}" aria-hidden="true"></i> ${editable ? 'Key Paper Result' : 'View Exam Results'} <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+                </article>`;
+            }).join('') || '<p class="academic-empty">No student records yet.</p>');
         },
 
         renderHealthcareTab: function(children) {
@@ -782,15 +746,12 @@
                                     <span style="font-size: 11px; color: #64748b;">Blood Type: <strong>${med.bloodType || 'O+'}</strong> &bull; Age ${c.age} &bull; ${this.escape(c.gender)}</span>
                                 </div>
                             </div>
-                            <button class="btn-action-med" onclick="ChildWelfareUI.openRecordMedicalModal('${c.id}')" title="${this.isStaffEditor() ? 'Update medical record' : 'View medical record'}">
-                                <i class="fas ${this.isStaffEditor() ? 'fa-pencil-alt' : 'fa-notes-medical'}"></i> ${this.isStaffEditor() ? 'Update Medical' : 'View Medical Record'}
-                            </button>
                         </div>
 
                         <div style="background: #f8fafc; padding: 12px; border-radius: var(--radius-sm); margin: 12px 0; font-size: 12px;">
-                            <div><span style="color: #64748b;">Primary Medical Condition:</span> <strong style="color: var(--dark);">${this.escape(med.condition || 'Healthy')}</strong></div>
-                            <div style="margin-top: 4px;"><span style="color: #64748b;">Next Clinic Review:</span> <strong style="color: #ef4444;">${med.nextClinicDate || 'None'}</strong> &bull; ${this.escape(med.nextClinicSpecialty || 'General')}</div>
-                            <div style="margin-top: 4px; font-size: 11px; color: #64748b;">Doctor / Facility: <strong>${this.escape(med.clinicDoctor || 'Orphanage Clinic')}</strong> (${this.escape(med.clinicLocation || 'Titiwangsa')})</div>
+                            <div><span style="color: #64748b;">Medical Condition:</span> <strong style="color: var(--dark);">${this.escape((med.condition || 'Healthy').replace(/^demo:\s*/i, ''))}</strong></div>
+                            <div style="margin-top: 4px;"><span style="color: #64748b;">Next Appointment:</span> <strong style="color: #ef4444;">${med.nextClinicDate || 'None'}</strong></div>
+                            <div style="margin-top: 4px; font-size: 11px; color: #64748b;">Facility: <strong>${this.escape(med.clinicLocation || 'Not recorded')}</strong></div>
                         </div>
 
                         <div style="font-size: 12px; display: flex; flex-direction: column; gap: 6px;">
@@ -798,9 +759,10 @@
                             <div><strong>Prescriptions & Meds:</strong> ${this.escape(med.medications || 'None currently prescribed')}</div>
                             <div><strong>Immunization Status:</strong> <span class="badge badge-success">${this.escape(med.immunization || 'Up to Date')}</span></div>
                         </div>
-
-                        <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #f1f5f9; font-size: 12px; color: #64748b; font-style: italic;">
-                            "${this.escape(med.medicalNotes || 'Child is in good health and adhering to scheduled residential care routines.')}"
+                        <div style="display: flex; justify-content: center; margin-top: 22px;">
+                            <button class="btn-action-med" onclick="ChildWelfareUI.openRecordMedicalModal('${c.id}')" title="${this.isStaffEditor() ? 'Update medical record' : 'View medical record'}">
+                                <i class="fas ${this.isStaffEditor() ? 'fa-pencil-alt' : 'fa-notes-medical'}"></i> ${this.isStaffEditor() ? 'Update Medical' : 'View Medical Record'}
+                            </button>
                         </div>
                     </div>
                 `;
@@ -1103,15 +1065,6 @@
             $('#paper_avg_score_preview').text(`${avg}%`);
             $('#paper_avg_score_hidden').val(avg);
 
-
-            // Suggested standing
-            if (avg >= 90) {
-                $('#paper_standing_select').val('Distinction');
-            } else if (avg >= 75) {
-                $('#paper_standing_select').val('Good');
-            } else {
-                $('#paper_standing_select').val('Needs Math Support');
-            }
         },
 
         scoreToGrade: function(score) {
@@ -1200,7 +1153,7 @@
         const examName = $('#paper_exam_name').val().trim() || 'Term Paper Examination';
         const term = $('#paper_term').val().trim() || 'Term 2 · 2026';
         const examDate = $('#paper_exam_date').val() || new Date().toISOString().split('T')[0];
-        const status = $('#paper_standing_select').val();
+        const status = 'Recorded';
         const remarks = $('#paper_remarks_input').val().trim();
 
         const subjects = [];

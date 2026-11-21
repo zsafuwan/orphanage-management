@@ -327,6 +327,14 @@
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
+.care-staff .staff-hero-card .hero-stats-row {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 600px) {
+  .care-staff .staff-hero-card .hero-stats-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 @property --tw-font-weight {
   syntax: "*";
   inherits: false;

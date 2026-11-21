@@ -10,32 +10,10 @@
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid #e2e8f0;">
                 <div>
                     <h2 id="portfolio_student_name" style="font-size: 18px; font-weight: 800; color: #0f172a; margin-bottom: 3px;">Daniel Arif Bin Rosli</h2>
-                    <div style="font-size: 12px; color: #64748b; display: flex; gap: 8px;">
-                        <span id="portfolio_school_info">SMK Seri Titiwangsa · Tingkatan 2 Amanah</span>
-                        <span>·</span>
-                        <span id="portfolio_sponsor_info" style="color: #7c3aed; font-weight: 600;">Sponsor: Yayasan Hasanah</span>
-                    </div>
-                </div>
-                <div>
-                    <span id="portfolio_overall_grade" class="grade-pill distinction" style="font-size: 14px; padding: 5px 12px;">Grade A (86%)</span>
                 </div>
             </div>
 
-            <!-- Academic Highlights Metrics -->
-            <div class="dossier-grid" style="grid-template-columns: repeat(3, 1fr);">
-                <div class="dossier-box">
-                    <div class="dossier-box-label">School Attendance</div>
-                    <div class="dossier-box-value" id="portfolio_attendance" style="color: #059669;">98.8% (Exemplary)</div>
-                </div>
-                <div class="dossier-box">
-                    <div class="dossier-box-label">Class Position</div>
-                    <div class="dossier-box-value" id="portfolio_rank">3rd of 36 Students</div>
-                </div>
-                <div class="dossier-box">
-                    <div class="dossier-box-label">Co-Curriculum</div>
-                    <div class="dossier-box-value" id="portfolio_cocurriculum" style="font-size: 12px;">Debate & Football</div>
-                </div>
-            </div>
+            <p style="margin-bottom: 18px;">School Attendance: <span id="portfolio_attendance" style="color: #059669;">Not recorded</span></p>
 
             <!-- Subject Scorecard Table -->
             <label style="font-size: 12px; font-weight: 700; color: #475569; display: block; margin-bottom: 8px;">Term 2 Mid-Year Examination Results</label>
@@ -43,8 +21,8 @@
                 <thead>
                     <tr>
                         <th>Subject</th>
-                        <th style="text-align: center;">Marks (%)</th>
-                        <th style="text-align: center;">Grade</th>
+                        <th>Marks (%)</th>
+                        <th>Grade</th>
                         <th>Teacher Evaluation Note</th>
                     </tr>
                 </thead>
@@ -73,9 +51,6 @@
         </div>
         <div class="director-modal-foot">
             <button type="button" class="btn-tab" style="background:#f1f5f9; border:none; padding:8px 16px; border-radius:6px; cursor:pointer;" onclick="closeDirectorModal('modal_student_academic_portfolio')">Close</button>
-            <button type="button" class="btn-edu" onclick="openUpdateGradesModal()">
-                <i class="fas fa-edit"></i> Update Marks & Director Remark
-            </button>
         </div>
     </div>
 </div>

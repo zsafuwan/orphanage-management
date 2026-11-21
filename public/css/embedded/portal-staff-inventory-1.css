@@ -154,6 +154,139 @@
   color: #065f46;
   border: 1px solid #a7f3d0;
 }
+.care-workspace .metrics-grid.staff-inventory-summary {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media (max-width: 800px) {
+  .care-workspace .metrics-grid.staff-inventory-summary {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.supply-history-section {
+  padding-top: 8px;
+}
+.supply-history-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.supply-history-card {
+  background: #fff;
+  border: 0;
+  border-radius: 24px;
+  padding: 26px;
+  box-shadow: 0 15px 32px -24px rgb(36 64 35 / 35%);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.supply-history-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.supply-history-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #eaf2e2;
+  color: #67814c;
+  font-size: 18px;
+}
+.supply-history-category {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 11px;
+  border-radius: 8px;
+  background: #f1ecf8;
+  color: #7b6594;
+}
+.supply-history-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .3px;
+  color: #818a7b;
+  margin-bottom: 7px;
+}
+.supply-history-card h4 {
+  font-size: 17px;
+  line-height: 1.5;
+  margin: 0 0 20px;
+  color: var(--dark);
+  overflow-wrap: anywhere;
+}
+.supply-history-item {
+  background: #f6f8f0;
+  padding: 16px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+}
+.supply-history-item h5 {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 9px;
+  font-weight: 600;
+  color: var(--dark);
+  overflow-wrap: anywhere;
+}
+.supply-history-item > strong {
+  color: #00856a;
+  font-size: 13px;
+}
+.supply-history-reason {
+  margin-bottom: 22px;
+}
+.supply-history-reason p {
+  color: #000;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.supply-history-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #edf0e8;
+  margin-top: auto;
+  font-size: 12px;
+  color: #687960;
+  line-height: 1.6;
+}
+.supply-history-footer > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.supply-history-person {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #00886b;
+}
+.supply-history-empty {
+  padding: 24px;
+  color: #77856c;
+}
+@media (max-width: 1200px) {
+  .supply-history-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 700px) {
+  .supply-history-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+  .supply-history-card {
+    padding: 22px;
+  }
+}
 @property --tw-font-weight {
   syntax: "*";
   inherits: false;

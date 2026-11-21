@@ -487,6 +487,12 @@
     width: 100%;
   }
 }
+.care-workspace #director-requests .inventory-panel-toolbar {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
 @property --tw-font-weight {
   syntax: "*";
   inherits: false;

@@ -75,7 +75,7 @@
         modal_staff_key_paper: form => paper(form, true),
         modal_record_medical: form => medical(form, false),
         modal_staff_record_med: form => medical(form, true),
-        modal_health_appointment: form => db.save('appointment', {Child_Id:value('health_appointment_child_select'), Appointment_Date:form.querySelector('input[type="date"]').value, Appointment_Purpose:form.querySelectorAll('select')[1].value})
+        modal_health_appointment: form => db.save('appointment', {Child_Id:value('health_appointment_child_select'), Appointment_Date:form.querySelector('input[type="date"]').value, Appointment_Purpose:value('health_appointment_specialty')})
     };
     async function admission(form, prefix) {
         if (!window.HopeHavenChildPhoto.ready(form)) throw new Error('Please finish selecting a valid child photo.');
@@ -94,7 +94,12 @@
             return {name, score, grade:window.ChildWelfareUI.scoreToGrade(score)};
         });
         const year = value(staff ? 'staff_paper_term' : 'paper_term');
-        await db.save('paper', {Child_Id:value(staff ? 'staff_paper_child_select' : 'paper_child_select'), Academic_Year:year, subjects});
+        const attendance = value(staff ? 'staff_paper_attendance' : 'paper_attendance_input');
+        if (attendance !== '' && (!Number.isInteger(Number(attendance)) || Number(attendance) < 0 || Number(attendance) > 366)) {
+            throw new Error('School attendance must be a whole number from 0 to 366 days.');
+        }
+        await db.save('paper', {Child_Id:value(staff ? 'staff_paper_child_select' : 'paper_child_select'), Academic_Year:year, subjects,
+            ...(attendance !== '' ? {Child_Attendance:Number(attendance)} : {})});
     }
     async function medical(form, staff) {
         await db.save('medical', {
@@ -148,7 +153,7 @@
             const info = document.createElement('p'); info.textContent='Only enabled fields are saved. Additional details require matching database columns.'; info.style.cssText='padding:12px;color:#52613e';
             modal.querySelector('form')?.prepend(info);
         });
-        const unavailable = ['reg_child_callname','reg_child_school','reg_child_grade','reg_child_blood','reg_child_allergies','reg_child_notes','staff_add_callname','staff_add_school','staff_add_grade','staff_add_blood','staff_add_allergies','staff_add_notes','paper_exam_name','paper_exam_date','paper_standing_select','paper_remarks_input','staff_paper_exam_name','staff_paper_date','staff_paper_standing','staff_paper_remarks','med_blood_type','med_allergies_input','med_immunization_select','med_next_clinic_date','med_doctor_input','med_notes_input','staff_med_blood','staff_med_allergies','staff_med_immunization','staff_med_clinic_date','staff_med_doctor','staff_med_notes','update_grade_standing','director_edu_remark'];
+        const unavailable = ['reg_child_callname','reg_child_school','reg_child_grade','reg_child_blood','reg_child_allergies','reg_child_notes','staff_add_callname','staff_add_school','staff_add_grade','staff_add_blood','staff_add_allergies','staff_add_notes','paper_exam_name','paper_exam_date','paper_remarks_input','staff_paper_exam_name','staff_paper_date','staff_paper_remarks','med_blood_type','med_allergies_input','med_immunization_select','med_next_clinic_date','med_doctor_input','med_notes_input','staff_med_blood','staff_med_allergies','staff_med_immunization','staff_med_clinic_date','staff_med_doctor','staff_med_notes','update_grade_standing','director_edu_remark'];
         unavailable.forEach(id => {
             const field = document.getElementById(id); if (!field) return;
             field.disabled = true; field.required = false; field.title = 'Unavailable: no matching column in the existing database.';
@@ -159,8 +164,6 @@
             field.value=String(new Date().getFullYear());field.maxLength=9;
             const label=field.closest('.form-group,.staff-field-group')?.querySelector('label');if(label)label.textContent='Academic year *';
         });
-        const appointment=document.querySelector('#modal_health_appointment form');
-        appointment?.querySelectorAll('input[type="text"]').forEach(field=>{field.disabled=true;field.title='Doctor/clinic has no matching database column.';});
         const noteButton=document.querySelector('#modal_add_clinical_note .btn-dossier');
         if(noteButton)noteButton.innerHTML='<i class="fas fa-save"></i> Save follow-up note';
         // Deletion has no archive column and must not be simulated in browser storage.

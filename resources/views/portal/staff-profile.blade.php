@@ -9,30 +9,6 @@
 @endpush
 
 @section('content')
-<!-- Subsystem Header -->
-<div class="page-header-card">
-    <div>
-        <div class="staff-subsystem-pill">
-            <i class="fas fa-user-nurse"></i> Staff Caregiver PDF & Duty Status
-        </div>
-        <h1 class="page-title">Staff Profile & Qualifications</h1>
-        <p class="page-desc">
-            View and manage your staff & Volunteers identification, assigned wards, duty shift status, and child safeguarding clearances.
-        </p>
-    </div>
-    <div class="header-action-group">
-        <a href="{{ route('profile') }}" class="btn-outline" style="border-color: #8b5cf6; color: #7c3aed; font-weight: 600;" title="Switch to Orphanage Admin Profile">
-            <i class="fas fa-shield-alt"></i> Admin Profile View
-        </a>
-        <button type="button" class="btn-outline" id="btn_toggle_inline_edit" onclick="toggleInlineEdit()">
-            <i class="fas fa-edit"></i> <span id="inline_edit_btn_text">Inline Edit Mode</span>
-        </button>
-        <button type="button" class="btn-outline" onclick="openModal('modal_change_password')">
-            <i class="fas fa-key"></i> Change Password
-        </button>
-    </div>
-</div>
-
 <!-- Staff Profile Hero Identity Card -->
 <div class="staff-hero-card">
     <div class="profile-hero-content">
@@ -89,18 +65,8 @@
                 <i class="fas fa-id-badge"></i> Staff Caregiver (Tier 2)
             </span>
         </div>
-        <div class="hero-stat-item">
-            <span class="hero-stat-label">Assigned Ward</span>
-            <span class="hero-stat-val" id="kpi_ward" style="color: #0284c7;">
-                <i class="fas fa-baby"></i> Ward Alpha & Beta
-            </span>
-        </div>
-        <div class="hero-stat-item">
-            <span class="hero-stat-label">Safeguarding Level</span>
-            <span class="hero-stat-val" style="color: #10b981;">
-                <i class="fas fa-shield-alt"></i> Tier 2 (Pediatric Clear)
-            </span>
-        </div>
+
+
         <div class="hero-stat-item">
             <span class="hero-stat-label">Duty Shift Status</span>
             <span class="hero-stat-val" id="kpi_shift_status" style="color: #059669;">
@@ -140,6 +106,9 @@
                     <div class="profile-card-title">
                         <i class="fas fa-user-circle" style="color: #059669;"></i> Caregiver Identity & Ward Assignment
                     </div>
+                    <button type="button" class="btn-outline" onclick="openModal('modal_change_password')">
+            <i class="fas fa-key"></i> Change Password
+        </button>
                 </div>
 
                 <div class="profile-card-body">
@@ -252,7 +221,7 @@
             <div class="profile-card">
                 <div class="profile-card-header">
                     <div class="profile-card-title">
-                        <i class="fas fa-map-marker-alt" style="color: #059669;"></i> Contact Communications & Staff Residence
+                        <i class="fas fa-map-marker-alt" style="color: #059669;"></i> Contact Details
                     </div>
                 </div>
 
@@ -296,38 +265,6 @@
                             <input type="tel" id="inline_input_phone" class="edit-mode-item editable-input" style="display: none;" value="+60 12-345 6789" required>
                         </div>
 
-                        <!-- Residential Address -->
-                        <div class="detail-field-item full-width">
-                            <label class="field-label" for="inline_input_address">
-                                <i class="fas fa-home"></i> Staff Residential Address & Quarters
-                            </label>
-                            <div class="view-mode-item field-value-box multi-line">
-                                <span class="field-value-text" id="display_address">HopeHaven Orphanage Staff Quarters, Block B Room 204, St. Jude Valley, CA 94103, United States</span>
-                                <div class="field-actions-cluster">
-                                    <button type="button" class="field-action-btn edit-btn" onclick="openEditProfileModal('address')" title="Edit Address">
-                                        <i class="fas fa-pen"></i>
-                                    </button>
-                                    <button type="button" class="field-action-btn" onclick="copyText($('#display_address').text(), 'Address copied!')" title="Copy Address">
-                                        <i class="fas fa-copy"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <textarea id="inline_input_address" class="edit-mode-item editable-input" rows="2" style="display: none;" required>HopeHaven Orphanage Staff Quarters, Block B Room 204, St. Jude Valley, CA 94103, United States</textarea>
-                        </div>
-                    </div>
-
-                    <!-- Staff Residence GPS / Location Card Preview -->
-                    <div class="address-map-card" style="border-left-color: #10b981; margin-top: 20px;">
-                        <div class="address-map-icon" style="background: rgba(16, 185, 129, 0.1); color: #059669;">
-                            <i class="fas fa-compass"></i>
-                        </div>
-                        <div class="address-map-text">
-                            <h4>HopeHaven Orphanage – Staff Residential Quarters (Block B)</h4>
-                            <p>Sector: East Orphanage Wing • Room 204 • Direct Nursery Walkway & Emergency Intercom Line 4</p>
-                        </div>
-                        <button type="button" class="btn-pill-small" onclick="showPortalToast('Staff Quarters emergency coordinates copied!', true)">
-                            <i class="fas fa-location-arrow"></i> Locate Quarters
-                        </button>
                     </div>
 
                     <!-- Inline Actions Bar (Save / Cancel) -->

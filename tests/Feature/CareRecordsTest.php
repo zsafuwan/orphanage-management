@@ -85,8 +85,9 @@ class CareRecordsTest extends TestCase
         $child = $this->postJson('/care-data/child', ['Child_Name' => 'Test child', 'Child_Date_Of_Birth' => '2016-01-01', 'Child_Gender' => 'Female', 'Orphanage_Id' => $home])->assertOk()->json('record.Child_Id');
         $intake = $this->postJson('/care-data/intake', ['Child_Name' => 'Test intake', 'Child_Date_Of_Birth' => '2016-01-01', 'Child_Gender' => 'Male', 'Orphanage_Id' => $home, 'Medical_Diagnosis' => 'Initial review'])->assertOk()->json('record.Child_Id');
         $this->assertSame('Initial review', DB::table('Medical_Record')->where('Child_Id', $intake)->value('Medical_Diagnosis'));
-        $this->postJson('/care-data/paper', ['Child_Id' => $child, 'Academic_Year' => '2026', 'subjects' => [['name' => 'Test subject', 'score' => 85.5, 'grade' => 'A']]])->assertOk();
+        $this->postJson('/care-data/paper', ['Child_Id' => $child, 'Academic_Year' => '2026', 'Child_Attendance' => 0, 'subjects' => [['name' => 'Test subject', 'score' => 85.5, 'grade' => 'A']]])->assertOk();
         $education = DB::table('Education_Record')->where('Child_Id', $child)->first();
+        $this->assertSame(0, $education->Child_Attendance);
         $subject = DB::table('Subject_Result')->where('Education_Id', $education->Education_Id)->first();
         $this->assertSame(85.5, (float) $subject->Subject_Score);
         $this->postJson('/care-data/subject-result', ['Education_Id' => $education->Education_Id, 'Subject_Id' => $subject->Subject_Id, 'Subject_Score' => 90, 'Subject_Grade' => 'A'])->assertOk();

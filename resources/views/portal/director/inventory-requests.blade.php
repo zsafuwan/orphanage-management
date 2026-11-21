@@ -29,7 +29,7 @@
             </div>
             <div class="inv-search-wrap"><input type="search" class="inv-search-input" id="inv_search_input" aria-label="Search inventory requests" placeholder="Search item, staff, location or request ID…"></div>
         </div>
-        <div class="table-responsive" tabindex="0" role="region" aria-label="Staff supply requests"><table class="inv-table"><thead><tr><th>Request / Staff</th><th>Item / Quantity Requested</th><th>Destination</th><th>Priority</th><th>Current Stock</th><th>Status / Feedback</th><th>Action</th></tr></thead><tbody id="director_requests_tbody"></tbody></table></div>
+        <div class="table-responsive" tabindex="0" role="region" aria-label="Staff supply requests"><table class="inv-table"><thead><tr><th>Staff Name</th><th>Item / Quantity Requested</th><th>Priority</th><th>Current Stock</th><th>Status / Feedback</th><th>Action</th></tr></thead><tbody id="director_requests_tbody"></tbody></table></div>
         <p id="director_requests_summary" class="inventory-result-count" role="status"></p>
     </section>
     <section id="director-stock" class="director-card inventory-panel">

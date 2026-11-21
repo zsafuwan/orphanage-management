@@ -23,26 +23,8 @@
     </div>
 </div>
 
-<!-- Role-Based Access Control Simulation Banner -->
-<div class="rbac-banner">
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <i class="fas fa-user-shield" style="color: #10b981; font-size: 18px;"></i>
-        <div>
-            <span style="font-size: 12px; font-weight: 700; color: var(--dark); text-transform: uppercase;">Access Level:</span>
-            <span style="font-size: 12px; color: var(--dark-muted); margin-left: 4px;">Viewing As: <strong id="current_role_badge" style="color: #10b981;">{{ $isStaff ? 'Staff Caregiver (Nurse Mary)' : 'Administrator' }}</strong></span>
-        </div>
-    </div>
-    <div class="rbac-roles">
-        <button class="role-pill {{ !$isStaff ? 'active' : '' }}" onclick="simulateRole('Administrator', this)">Administrator</button>
-        <button class="role-pill {{ $isStaff ? 'active' : '' }}" onclick="simulateRole('Staff Caregiver', this)">Staff Caregiver</button>
-        <button class="role-pill" onclick="simulateRole('Social Worker', this)">Social Worker</button>
-        <button class="role-pill" onclick="simulateRole('Educator', this)">Educator</button>
-        <button class="role-pill" onclick="simulateRole('Clinic Nurse', this)">Clinic Nurse</button>
-    </div>
-</div>
-
 <!-- Metric KPI Cards -->
-<div class="metrics-grid">
+<div class="metrics-grid child-care-summary">
     <div class="metric-card">
         <div class="metric-header">
             <span class="metric-label">Enrolled Wards</span>
@@ -54,20 +36,11 @@
         <div class="metric-sub">Active residential children in registry</div>
     </div>
 
-    <div class="metric-card">
-        <div class="metric-header">
-            <span class="metric-label">School Attendance</span>
-            <div class="metric-icon" style="background: rgba(59, 130, 246, 0.12); color: #3b82f6;">
-                <i class="fas fa-school"></i>
-            </div>
-        </div>
-        <div class="metric-val" id="metric_school_attendance">—</div>
-        <div class="metric-sub">Average days attended</div>
-    </div>
+
 
     <div class="metric-card">
         <div class="metric-header">
-            <span class="metric-label">Health Screenings Due</span>
+            <span class="metric-label">Medical Appointment</span>
             <div class="metric-icon" style="background: rgba(239, 68, 68, 0.12); color: #ef4444;">
                 <i class="fas fa-stethoscope"></i>
             </div>
@@ -76,16 +49,7 @@
         <div class="metric-sub">Dental & pediatric reviews on roster</div>
     </div>
 
-    <div class="metric-card">
-        <div class="metric-header">
-            <span class="metric-label">Honor Roll</span>
-            <div class="metric-icon" style="background: rgba(245, 158, 11, 0.12); color: #f59e0b;">
-                <i class="fas fa-award"></i>
-            </div>
-        </div>
-        <div class="metric-val" id="metric_honor_roll" style="color: #f59e0b;">2 Scholars</div>
-        <div class="metric-sub">GPA &ge; 3.75 distinction standing</div>
-    </div>
+
 </div>
 
 <!-- Tabs Navigation -->
@@ -98,9 +62,6 @@
     </button>
     <button class="tab-btn" data-tab="tab_health">
         <i class="fas fa-heartbeat"></i> Healthcare & Basic Medical Records
-    </button>
-    <button class="tab-btn" data-tab="tab_history">
-        <i class="fas fa-history"></i> Role-Based Child History & PDF
     </button>
 </div>
 
@@ -174,39 +135,14 @@
 
 <!-- TAB 2: SCHOOL ENROLLMENT & PAPER RESULTS -->
 <div id="tab_education" class="tab-pane" style="display: none;">
-    <div class="portal-card">
-        <div style="padding: 20px 24px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-            <div>
-                <h3 style="font-size: 16px; font-weight: 800; color: var(--dark);">Academic Performance & Exam Paper Records</h3>
-                <p style="font-size: 12px; color: var(--dark-muted);">
-                    View schools, attendance and exam results.
-                </p>
-            </div>
-            <button class="btn-primary btn-sm" onclick="ChildWelfareUI.openKeyPaperModal()">
-                <i class="fas fa-plus"></i> Key in Paper Result
-            </button>
+    <div class="academic-section-header">
+        <div>
+            <h3>Academic Performance & Exam Paper Records</h3>
+            <p>View schools, attendance and exam results.</p>
         </div>
-
-        <div class="table-responsive">
-            <table class="portal-table">
-                <thead>
-                    <tr>
-                        <th>Child / Student</th>
-                        <th>School Name & ID</th>
-                        <th>Grade Level</th>
-                        <th>Attendance (days)</th>
-                        <th>Cumulative GPA</th>
-                        <th>Latest Paper & Subject Scores</th>
-                        <th>Performance Standing</th>
-                        <th class="action-column" style="text-align: right;">Action</th>
-                    </tr>
-                </thead>
-                <tbody id="academics_table_tbody">
-                    <!-- Rendered dynamically by ChildWelfareUI.renderAcademicsTab -->
-                </tbody>
-            </table>
-        </div>
+        <button class="btn-primary btn-sm" onclick="ChildWelfareUI.openKeyPaperModal()"><i class="fas fa-plus"></i> Key in Paper Result</button>
     </div>
+    <div id="academic_cards_grid" class="academic-cards-grid" aria-label="Student academic records"></div>
 </div>
 
 <!-- TAB 3: HEALTHCARE & BASIC MEDICAL RECORDS -->
@@ -230,37 +166,6 @@
 
     <div id="healthcare_cards_grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
         <!-- Rendered dynamically by ChildWelfareUI.renderHealthcareTab -->
-    </div>
-</div>
-
-<!-- TAB 4: ROLE-BASED CHILD HISTORY & OFFICIAL PDF -->
-<div id="tab_history" class="tab-pane" style="display: none;">
-    <div class="portal-card" style="padding: 28px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; flex-wrap: wrap; gap: 12px;">
-            <div>
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
-                    <span style="font-size: 12px; font-weight: 700; color: #64748b;">Select Resident Child:</span>
-                    <select id="history_child_select" class="portal-select" style="min-width: 220px; font-weight: 600;">
-                        <!-- Options populated dynamically -->
-                    </select>
-                </div>
-                <h3 style="font-size: 16px; font-weight: 800; color: var(--dark);" id="history_child_title">Child History</h3>
-                <p style="font-size: 12px; color: var(--dark-muted);">Subject to Role-Based Access Control (RBAC). Try switching roles at top of page.</p>
-            </div>
-            <span class="badge badge-secondary" style="font-family: monospace; font-size: 13px;" id="history_child_id_badge">CH-2024-001</span>
-        </div>
-
-        <!-- Role Access Notice -->
-        <div class="confidential-dossier" style="margin-bottom: 20px;">
-            <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid #86efac; padding: 12px; border-radius: 8px; color: #166534; font-size: 12px;">
-                <i class="fas fa-shield-alt"></i> <strong>Full Record Access:</strong> Intake trauma baselines, court guardianship certificates, paper results, and medical condition notes visible.
-            </div>
-        </div>
-
-        <!-- Timeline container -->
-        <div id="history_timeline_container" style="position: relative; padding-left: 30px; display: flex; flex-direction: column; gap: 24px; border-left: 2px solid #e2e8f0; margin-left: 10px;">
-            <!-- Populated dynamically by ChildWelfareUI.renderHistoryTimeline -->
-        </div>
     </div>
 </div>
 
@@ -401,14 +306,8 @@
                     <input type="date" id="paper_exam_date" class="form-control" value="{{ now()->format('Y-m-d') }}">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Performance Standing</label>
-                    <select id="paper_standing_select" class="form-control">
-                        <option value="Distinction">Distinction (Honors)</option>
-                        <option value="Good" selected>Good Academic Standing</option>
-                        <option value="Needs Math Support">Needs Math Support</option>
-                        <option value="Needs Reading Support">Needs Reading Support</option>
-                        <option value="Satisfactory">Satisfactory</option>
-                    </select>
+                    <label class="form-label" for="paper_attendance_input">School Attendance (days)</label>
+                    <input type="number" id="paper_attendance_input" class="form-control" min="0" max="366" step="1" placeholder="Days attended this academic year">
                 </div>
             </div>
 
@@ -557,14 +456,8 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">Examination Specialty</label>
-                <select class="form-control">
-                    <option>Pediatric Dental Screening</option>
-                    <option>General Growth & Pediatric Exam</option>
-                    <option>Optometry & Vision Screening</option>
-                    <option>Asthma Pulmonary Function Review</option>
-                    <option>Speech & Articulation Review</option>
-                </select>
+                <label class="form-label" for="health_appointment_specialty">Examination Specialty</label>
+                <input type="text" id="health_appointment_specialty" class="form-control" placeholder="Enter examination specialty" required>
             </div>
 
             <div class="form-row">
@@ -573,8 +466,9 @@
                     <input type="date" class="form-control" value="2026-11-15">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Doctor / Clinic</label>
-                    <input type="text" class="form-control" value="Dr. Angela Reyes">
+                    <label class="form-label" for="health_appointment_clinic">Clinic</label>
+                    <input type="text" id="health_appointment_clinic" class="form-control" placeholder="Enter clinic name" aria-describedby="appointment-clinic-note">
+                    <small id="appointment-clinic-note" style="display: block; margin-top: 6px; color: #64748b;">Clinic name is not saved yet.</small>
                 </div>
             </div>
 

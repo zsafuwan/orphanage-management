@@ -1,0 +1,36 @@
+# Local development only. Uses the existing PostgreSQL server on Windows.
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "127.0.0.1:8000:80"
+    env_file:
+      - .env
+    environment:
+      APP_ENV: local
+      APP_URL: http://localhost:8000
+      DB_CONNECTION: pgsql
+      DB_HOST: host.docker.internal
+      SESSION_DRIVER: file
+      SESSION_SECURE_COOKIE: "false"
+      CACHE_STORE: file
+      QUEUE_CONNECTION: sync
+      LOG_CHANNEL: stderr
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - .:/var/www/html:ro
+      - ./storage:/var/www/html/storage
+      - php_vendor:/var/www/html/vendor
+      - bootstrap_cache:/var/www/html/bootstrap/cache
+    healthcheck:
+      test: ["CMD", "php", "-r", "exit(@file_get_contents('http://127.0.0.1/up') === false ? 1 : 0);"]
+      interval: 15s
+      timeout: 5s
+      start_period: 30s
+      retries: 3
+
+volumes:
+  php_vendor:
+  bootstrap_cache:

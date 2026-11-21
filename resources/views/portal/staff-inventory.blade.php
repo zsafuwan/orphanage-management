@@ -36,33 +36,9 @@
     </div>
 </div>
 
-<!-- Clearance Level & Identity Ribbon -->
-<div class="rbac-banner" style="margin-bottom: 20px;">
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <i class="fas fa-user-nurse" style="color: #10b981; font-size: 18px;"></i>
-        <div>
-            <span style="font-size: 12px; font-weight: 700; color: var(--dark); text-transform: uppercase;">Staff in Charge:</span>
-            <span style="font-size: 12px; color: var(--dark-muted); margin-left: 4px;">Caregiver on Duty: <strong style="color: #10b981;">Nurse Mary</strong> · Morning Shift (Ward Alpha & Beta Nursery)</span>
-        </div>
-    </div>
-    <div style="font-size: 12px; color: #64748b; display: flex; align-items: center; gap: 8px;">
-        <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span>
-        Storeroom Dispatch Window: <strong>11:00 AM & 15:00 Daily</strong>
-    </div>
-</div>
-
 <!-- Metric KPI Cards -->
-<div class="metrics-grid" style="margin-bottom: 24px;">
-    <div class="metric-card">
-        <div class="metric-header">
-            <span class="metric-label">Ward Cupboard Items</span>
-            <div class="metric-icon" style="background: rgba(16, 185, 129, 0.12); color: #10b981;">
-                <i class="fas fa-cubes"></i>
-            </div>
-        </div>
-        <div class="metric-val" id="metric_total_items">12 Lines</div>
-        <div class="metric-sub">Across Ward Alpha & Beta cabinets</div>
-    </div>
+<div class="metrics-grid staff-inventory-summary" style="margin-bottom: 24px;">
+
 
     <div class="metric-card">
         <div class="metric-header">
@@ -109,9 +85,6 @@
     <button class="tab-btn" data-tab="tab_storeroom_orders">
         <i class="fas fa-truck-loading"></i> Supply Requests & Tracking (<span id="tab_count_orders">3</span>)
     </button>
-    <button class="tab-btn" data-tab="tab_first_aid_checklist">
-        <i class="fas fa-medkit"></i> Daily First Aid & Safety Checklist
-    </button>
 </div>
 
 <!-- Search & Category Filters -->
@@ -129,17 +102,6 @@
             <option value="Nutrition">Nutritional Food & Milk Formula</option>
             <option value="Education">Educational & Stationery</option>
             <option value="Linen">Bedding & Linens</option>
-        </select>
-    </div>
-
-    <div class="filter-select-wrapper">
-        <select id="staff_inv_loc_filter" class="filter-select" onchange="filterStaffInventory()">
-            <option value="all">All Ward Locations</option>
-            <option value="Ward Alpha Medicine Cabinet">Ward Alpha Medicine Cabinet</option>
-            <option value="Ward Alpha Nursery Shelf">Ward Alpha Nursery Shelf</option>
-            <option value="Ward Beta Care Cupboard">Ward Beta Care Cupboard</option>
-            <option value="Dispensary Refrigerator">Dispensary Refrigerator</option>
-            <option value="Common Study Locker">Common Study Locker</option>
         </select>
     </div>
 
@@ -190,7 +152,7 @@
      TAB 2: CHILD DISPENSATION LEDGER
      ========================================================================== -->
 <div class="tab-content-panel" id="tab_child_dispensations" style="display: none;">
-    <div class="portal-card" style="padding: 24px;">
+    <div class="supply-history-section">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 12px;">
             <div>
                 <h3 style="font-size: 16px; font-weight: 800; color: var(--dark); margin: 0;">Child Supply History</h3>
@@ -203,23 +165,7 @@
             </button>
         </div>
 
-        <div class="table-responsive">
-            <table class="portal-table">
-                <thead>
-                    <tr>
-                        <th>Child Ward Recipient</th>
-                        <th>Supply Item & Quantity</th>
-                        <th>Category</th>
-                        <th>Care Reason / Dosage Note</th>
-                        <th>Given By</th>
-                        <th>Date & Time</th>
-                    </tr>
-                </thead>
-                <tbody id="staff_dispensation_table_tbody">
-                    <!-- Rendered dynamically by JavaScript -->
-                </tbody>
-            </table>
-        </div>
+        <div id="staff_dispensation_cards" class="supply-history-grid" aria-label="Child supply history"></div>
     </div>
 </div>
 
@@ -242,83 +188,6 @@
 
         <div id="staff_requisitions_container">
             <!-- Rendered dynamically by JavaScript -->
-        </div>
-    </div>
-</div>
-
-<!-- ==========================================================================
-     TAB 4: EMERGENCY FIRST AID & CLINICAL DISPENSARY CHECKLIST
-     ========================================================================== -->
-<div class="tab-content-panel" id="tab_first_aid_checklist" style="display: none;">
-    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
-        <div class="portal-card" style="padding: 24px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                <div>
-                    <h3 style="font-size: 16px; font-weight: 800; color: var(--dark); margin: 0;">Morning Shift Safety & Clinical Readiness Checklist</h3>
-                    <p style="font-size: 12.5px; color: #64748b; margin: 2px 0 0 0;">Mandatory daily inspection completed by Nurse Mary</p>
-                </div>
-                <span class="badge badge-success" style="font-size: 11px;">Inspected: Today 08:30 AM</span>
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 12px;" id="shift_safety_checklist">
-                <label style="display: flex; align-items: center; gap: 12px; background: #f8fafc; padding: 12px 16px; border-radius: 8px; border: 1px solid #e2e8f0; cursor: pointer;">
-                    <input type="checkbox" checked style="width: 18px; height: 18px; accent-color: #10b981;">
-                    <div>
-                        <strong style="font-size: 13.5px; color: #0f172a;">Emergency Pediatric Asthma Nebulizer Machine</strong>
-                        <div style="font-size: 11.5px; color: #64748b;">Chambers sterilized, power cable intact, 6 Salbutamol nebules ready in Ward Alpha</div>
-                    </div>
-                </label>
-
-                <label style="display: flex; align-items: center; gap: 12px; background: #f8fafc; padding: 12px 16px; border-radius: 8px; border: 1px solid #e2e8f0; cursor: pointer;">
-                    <input type="checkbox" checked style="width: 18px; height: 18px; accent-color: #10b981;">
-                    <div>
-                        <strong style="font-size: 13.5px; color: #0f172a;">Digital Fever Infrared Thermometers (x2)</strong>
-                        <div style="font-size: 11.5px; color: #64748b;">Calibrated at 36.6°C reference baseline. Batteries tested above 80% charge.</div>
-                    </div>
-                </label>
-
-                <label style="display: flex; align-items: center; gap: 12px; background: #f8fafc; padding: 12px 16px; border-radius: 8px; border: 1px solid #e2e8f0; cursor: pointer;">
-                    <input type="checkbox" checked style="width: 18px; height: 18px; accent-color: #10b981;">
-                    <div>
-                        <strong style="font-size: 13.5px; color: #0f172a;">Sterile Wound Care & Antiseptic Bandage Kit</strong>
-                        <div style="font-size: 11.5px; color: #64748b;">Dettol antiseptic solution, micropore surgical tape, sterile gauze swabs verified.</div>
-                    </div>
-                </label>
-
-                <label style="display: flex; align-items: center; gap: 12px; background: #f8fafc; padding: 12px 16px; border-radius: 8px; border: 1px solid #e2e8f0; cursor: pointer;">
-                    <input type="checkbox" checked style="width: 18px; height: 18px; accent-color: #10b981;">
-                    <div>
-                        <strong style="font-size: 13.5px; color: #0f172a;">Pediatric EpiPen Auto-Injector (Emergency Allergic Anaphylaxis)</strong>
-                        <div style="font-size: 11.5px; color: #64748b;">Stored in secure dispensary lockbox. Expiry date valid: November 2026.</div>
-                    </div>
-                </label>
-            </div>
-
-            <button type="button" class="btn-outline btn-sm" style="margin-top: 14px;" onclick="showPortalToast('Shift clinical checklist certified & saved to log.', true, 'Checklist Verified');">
-                <i class="fas fa-check-double"></i> Save Checklist Certification
-            </button>
-        </div>
-
-        <div class="portal-card" style="padding: 24px; background: #f8fafc; border: 1px dashed #cbd5e1;">
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
-                <div style="width: 36px; height: 36px; border-radius: 50%; background: #fee2e2; color: #dc2626; display: flex; align-items: center; justify-content: center; font-size: 16px;">
-                    <i class="fas fa-phone-alt"></i>
-                </div>
-                <div>
-                    <h4 style="font-size: 14px; font-weight: 800; color: #0f172a; margin: 0;">Urgent Supply Contacts</h4>
-                    <span style="font-size: 11px; color: #64748b;">Emergency storeroom dispatch</span>
-                </div>
-            </div>
-
-            <div style="font-size: 12.5px; color: #334155; line-height: 1.8;">
-                <div><strong>Storeroom Manager (Brother Leo):</strong><br><code>Ext 104 · +60 12-449 8123</code></div>
-                <div style="margin-top: 8px;"><strong>Lead Administrator (Sister Grace):</strong><br><code>Ext 101 · +60 19-204 1188</code></div>
-                <div style="margin-top: 8px;"><strong>Orphanage Pharmacy:</strong><br><code>03-2615 5555 (Klinik Kesihatan)</code></div>
-            </div>
-
-            <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid #e2e8f0; font-size: 11.5px; color: #64748b; font-style: italic;">
-                "For life-threatening pediatric medical emergencies, dial 999 immediately before requesting replacement supplies."
-            </div>
         </div>
     </div>
 </div>
@@ -403,10 +272,8 @@
 
         <form onsubmit="handleChildDispenseSubmit(event)">
             <div class="form-group">
-                <label class="form-label">Select Child *</label>
-                <select id="dispense_child_select" class="form-control" required>
-                    <!-- Populated dynamically from HopeHavenChildStore -->
-                </select>
+                <label class="form-label" for="dispense_child_input">Child Name *</label>
+                <input type="text" id="dispense_child_input" class="form-control" placeholder="Enter the child’s full name" maxlength="150" required>
             </div>
 
             <div class="form-row">
@@ -526,27 +393,21 @@
 
     function renderAllStaffInventory() {
         renderWardInventoryItems();
-        renderDispensationsTable();
+        renderDispensationCards();
         renderRequisitionsList();
         updateStaffInvMetrics();
         populateItemSelectDropdowns();
-        populateChildSelectDropdown();
     }
 
     function renderWardInventoryItems() {
         const items = StaffInvStore.getItems();
-        const previousLocation = $('#staff_inv_loc_filter').val() || 'all';
-        const locations = [...new Set(items.map(item => item.location))];
-        $('#staff_inv_loc_filter').html('<option value="all">All Storage Locations</option>' + locations.map(location => '<option value="' + escapeHtml(location) + '">' + escapeHtml(location) + '</option>').join('')).val(locations.includes(previousLocation) ? previousLocation : 'all');
         const search = ($('#staff_inv_search').val() || '').toLowerCase().trim();
         const catFilter = $('#staff_inv_cat_filter').val() || 'all';
-        const locFilter = $('#staff_inv_loc_filter').val() || 'all';
 
         const filtered = items.filter(item => {
             const matchesSearch = !search || item.name.toLowerCase().includes(search) || item.id.toLowerCase().includes(search) || item.location.toLowerCase().includes(search);
             const matchesCat = catFilter === 'all' || item.category === catFilter;
-            const matchesLoc = locFilter === 'all' || item.location === locFilter;
-            return matchesSearch && matchesCat && matchesLoc;
+            return matchesSearch && matchesCat;
         });
 
         // 1. Render Cards
@@ -654,32 +515,19 @@
         $('#staff_inv_table_tbody').html(tableHtml);
     }
 
-    function renderDispensationsTable() {
+    function renderDispensationCards() {
         const list = StaffInvStore.getDispensations();
-        let html = '';
-        list.forEach(d => {
-            html += `
-                <tr>
-                    <td>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <div style="width: 28px; height: 28px; border-radius: 50%; background: #e0f2fe; color: #0284c7; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">
-                                <i class="fas fa-child"></i>
-                            </div>
-                            <strong style="color: #0f172a; font-size: 13px;">${escapeHtml(d.childName)}</strong>
-                        </div>
-                    </td>
-                    <td>
-                        <strong>${escapeHtml(d.itemName)}</strong>
-                        <div style="font-size: 11.5px; color: #2563eb; font-weight: 600;">Qty: ${escapeHtml(d.qty)}</div>
-                    </td>
-                    <td><span class="category-pill">${d.category || 'General'}</span></td>
-                    <td style="font-size: 12px; color: #475569; max-width: 260px;">"${escapeHtml(d.reason)}"</td>
-                    <td><span class="badge badge-success"><i class="fas fa-user-check"></i> ${escapeHtml(d.dispensedBy)}</span></td>
-                    <td style="font-size: 12px; color: #64748b; font-family: monospace;">${escapeHtml(d.timestamp)}</td>
-                </tr>
-            `;
-        });
-        $('#staff_dispensation_table_tbody').html(html);
+        const html = list.map(d => `
+            <article class="supply-history-card">
+                <div class="supply-history-top"><span class="supply-history-icon" aria-hidden="true"><i class="fas fa-hand-holding-heart"></i></span><span class="supply-history-category">${escapeHtml(d.category || 'General')}</span></div>
+                <span class="supply-history-label">Child Ward Recipient</span>
+                <h4>${escapeHtml((d.childName || 'Not recorded').replace(/\s*\(CH-[^)]+\)\s*$/i, ''))}</h4>
+                <div class="supply-history-item"><span class="supply-history-label">Supply Item & Quantity</span><h5>${escapeHtml(d.itemName || 'Not recorded')}</h5><strong>${escapeHtml(d.qty || 'Not recorded')}</strong></div>
+                <div class="supply-history-reason"><span class="supply-history-label">Care Reason / Dosage Note</span><p>${escapeHtml(d.reason || 'Not recorded')}</p></div>
+                <footer class="supply-history-footer"><div><span class="supply-history-label">Given By</span><span class="supply-history-person"><i class="fas fa-user-check" aria-hidden="true"></i> ${escapeHtml(d.dispensedBy || 'Not recorded')}</span></div><div><span class="supply-history-label">Date & Time</span><span>${escapeHtml(d.timestamp || 'Not recorded')}</span></div></footer>
+            </article>
+        `).join('');
+        $('#staff_dispensation_cards').html(html || '<p class="supply-history-empty">No supplies given yet.</p>');
         $('#tab_count_dispensations').text(list.length);
     }
 
@@ -738,7 +586,6 @@
         const dispensations = StaffInvStore.getDispensations().length;
         const reqs = StaffInvStore.getRequisitions().filter(r => ['Pending', 'Approved', 'Dispatched'].includes(r.status)).length;
 
-        $('#metric_total_items').text(items.length + ' Lines');
         $('#metric_low_stock').text(low + ' Items');
         $('#metric_dispensed_today').text(dispensations + ' Allocations');
         $('#metric_active_reqs').text(reqs + ' Active');
@@ -751,24 +598,6 @@
 
     function populateItemSelectDropdowns() {
         updateDispenseAvailablePreview();
-    }
-
-    function populateChildSelectDropdown() {
-        let childOpts = '';
-        if (window.HopeHavenChildStore) {
-            const children = window.HopeHavenChildStore.getAll();
-            children.forEach(c => {
-                childOpts += `<option value="${c.name} (${c.id})">${c.name} (${c.id} · ${c.dorm})</option>`;
-            });
-        } else {
-            childOpts = `
-                <option value="Maya Cruz (CH-2024-001)">Maya Cruz (CH-2024-001 · St. Clare Cottage)</option>
-                <option value="Ahmad Razak (CH-2023-014)">Ahmad Razak (CH-2023-014 · St. Francis Boys Hall)</option>
-                <option value="Elijah Liam Ramos (CH-2022-008)">Elijah Liam Ramos (CH-2022-008 · St. Francis Senior)</option>
-                <option value="Hannah Grace Morales (CH-2025-032)">Hannah Grace Morales (CH-2025-032 · St. Clare Nursery)</option>
-            `;
-        }
-        $('#dispense_child_select').html(childOpts);
     }
 
     function findDispenseItem() {
@@ -848,7 +677,8 @@
 
     function handleChildDispenseSubmit(e) {
         e.preventDefault();
-        const childName = $('#dispense_child_select').val();
+        const childName = $('#dispense_child_input').val().trim();
+        if (!childName) { showPortalToast('Enter the child’s name.', false); return; }
         const selectedItem = findDispenseItem();
         const qty = Number($('#dispense_qty_input').val());
         const reason = $('#dispense_reason_input').val().trim();

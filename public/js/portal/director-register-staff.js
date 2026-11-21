@@ -15,7 +15,15 @@ document.addEventListener('DOMContentLoaded', function () {
 function initLivePreview() {
     const nameInput = document.getElementById('staff_name_input');
     const roleSelect = document.getElementById('staff_role_select');
-    const wingSelect = document.getElementById('staff_wing_select');
+    const shiftSelect = document.getElementById('staff_shift_select');
+    if (shiftSelect) {
+        const updateShift = () => {
+            document.getElementById('preview_shift').innerText = shiftSelect.value ? shiftSelect.options[shiftSelect.selectedIndex].text : 'Shift not selected';
+        };
+        shiftSelect.addEventListener('change', updateShift);
+        shiftSelect.closest('form')?.addEventListener('reset', () => setTimeout(updateShift, 0));
+        updateShift();
+    }
 
     if (nameInput) {
         nameInput.addEventListener('input', function () {
@@ -43,12 +51,6 @@ function initLivePreview() {
         });
     }
 
-    if (wingSelect) {
-        wingSelect.addEventListener('change', function () {
-            const wing = this.options[this.selectedIndex].text;
-            document.getElementById('preview_wing').innerText = wing;
-        });
-    }
 }
 
 /**
@@ -58,17 +60,17 @@ function submitStaffRegistration(e) {
     e.preventDefault();
 
     const name = document.getElementById('staff_name_input').value.trim();
-    const nric = document.getElementById('staff_nric_input').value.trim();
     const email = document.getElementById('staff_email_input').value.trim();
     const phone = document.getElementById('staff_phone_input').value.trim();
     const role = document.getElementById('staff_role_select').options[document.getElementById('staff_role_select').selectedIndex].text;
-    const wing = document.getElementById('staff_wing_select').options[document.getElementById('staff_wing_select').selectedIndex].text;
+    const shiftSelect = document.getElementById('staff_shift_select');
+    const shift = shiftSelect.value ? shiftSelect.options[shiftSelect.selectedIndex].text : '';
     const staffId = document.getElementById('staff_id_input').value.trim() || 'HH-CARE-09';
     const password = document.getElementById('staff_password_input').value.trim() || 'Caregiver@2026';
     const authCheck = document.getElementById('director_authorizer_check');
 
-    if (!name || !nric || !email || !phone) {
-        alert('Please complete all mandatory staff contact and identity fields.');
+    if (!name || !email || !phone || !shift) {
+        alert('Please complete all required staff details.');
         return;
     }
 
@@ -79,16 +81,16 @@ function submitStaffRegistration(e) {
 
     // Prepare success modal
     document.getElementById('success_staff_name').innerText = name;
-    document.getElementById('success_staff_role').innerText = `${role} · ${wing}`;
+    document.getElementById('success_staff_role').innerText = role;
+    document.getElementById('success_staff_shift').innerText = shift;
     document.getElementById('success_staff_id').innerText = staffId;
-    document.getElementById('success_staff_wing').innerText = wing;
     document.getElementById('success_staff_password').innerText = password;
 
     lastRegisteredStaff = {
         name: name,
         id: staffId,
         role: role,
-        wing: wing,
+        shift: shift,
         password: password
     };
 
@@ -97,7 +99,7 @@ function submitStaffRegistration(e) {
     if (modal) modal.classList.add('active');
 
     // Add to recent list
-    appendRecentStaff(name, role, staffId, wing);
+    appendRecentStaff(name, role, staffId, shift);
 
     if (typeof showPortalToast === 'function') {
         showPortalToast(`Staff Caregiver ${name} (${staffId}) officially registered & accredited!`, 'success');
@@ -107,7 +109,7 @@ function submitStaffRegistration(e) {
 /**
  * Append newly registered staff to right column
  */
-function appendRecentStaff(name, role, id, wing) {
+function appendRecentStaff(name, role, id, shift) {
     const list = document.getElementById('recent_staff_list');
     if (!list) return;
 
@@ -122,7 +124,7 @@ function appendRecentStaff(name, role, id, wing) {
             <div class="user-cell-avatar" style="background:#10b981; color:#ffffff;">${initials}</div>
             <div>
                 <div class="user-cell-name">${window.HopeHavenSync.escape(name)}</div>
-                <div class="user-cell-dept">${window.HopeHavenSync.escape(role)} · ${window.HopeHavenSync.escape(id)}</div>
+                <div class="user-cell-dept">${window.HopeHavenSync.escape(role)} · ${window.HopeHavenSync.escape(id)}<br>${window.HopeHavenSync.escape(shift)}</div>
             </div>
         </div>
         <span class="vetted-badge" style="font-size: 11px;"><i class="fas fa-check-circle"></i> Just Onboarded</span>
@@ -136,7 +138,7 @@ function appendRecentStaff(name, role, id, wing) {
  */
 function copyStaffCredentials() {
     if (!lastRegisteredStaff) return;
-    const text = `HopeHaven Orphanage Staff Credentials:\nName: ${lastRegisteredStaff.name}\nStaff ID: ${lastRegisteredStaff.id}\nWing: ${lastRegisteredStaff.wing}\nRole: ${lastRegisteredStaff.role}\nTemporary Password: ${lastRegisteredStaff.password}\nPortal URL: ${window.location.origin}/staff/child-welfare`;
+    const text = `HopeHaven Orphanage Staff Credentials:\nName: ${lastRegisteredStaff.name}\nStaff ID: ${lastRegisteredStaff.id}\nRole: ${lastRegisteredStaff.role}\nAssigned Shift: ${lastRegisteredStaff.shift}\nTemporary Password: ${lastRegisteredStaff.password}\nPortal URL: ${window.location.origin}/staff/child-welfare`;
 
     if (navigator.clipboard) {
         navigator.clipboard.writeText(text).then(() => {

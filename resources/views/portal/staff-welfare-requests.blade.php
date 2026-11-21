@@ -136,7 +136,7 @@
 </div>
 
 <!-- Staff Requests Cards Container -->
-<div id="staff_requests_container">
+<div id="staff_requests_container" class="staff-support-cards" aria-label="Staff support requests">
     <!-- Populated dynamically by JavaScript -->
 </div>
 
@@ -355,38 +355,21 @@
                 }
 
                 html += `
-                    <div class="ticket-item-row">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; flex-wrap: wrap;">
-                            <div style="flex: 1; min-width: 280px;">
-                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap;">
-                                    <span class="badge badge-secondary" style="font-family: monospace; font-size: 11px;">${r.id}</span>
-                                    <span class="badge ${r.urgency === 'Emergency' ? 'badge-danger' : (r.urgency === 'High' ? 'badge-warning' : 'badge-secondary')}">
-                                        <i class="fas ${r.urgency === 'Emergency' ? 'fa-bolt' : 'fa-clock'}"></i> ${r.urgency}
-                                    </span>
-                                    ${statusBadge}
-                                    <span style="font-size: 11.5px; color: #64748b;">${r.requestedDate} · ${escapeHtml(r.requestedBy)}</span>
-                                </div>
-
-                                <h3 style="font-size: 16.5px; font-weight: 800; color: #0f172a; margin: 4px 0 6px 0;">
-                                    ${escapeHtml(r.title)}
-                                </h3>
-
-                                <div style="display: flex; gap: 18px; font-size: 12.5px; margin-bottom: 8px; flex-wrap: wrap;">
-                                    <div><span style="color: #64748b;">Child:</span> <strong style="color: #0f172a;">${escapeHtml(r.beneficiaryName)} (${r.beneficiaryId})</strong></div>
-                                    <div><span style="color: #64748b;">Category:</span> <strong>${escapeHtml(r.category)}</strong></div>
-                                    <div><span style="color: #64748b;">Dorm:</span> <strong>${escapeHtml(r.dorm)}</strong></div>
-                                    <div><span style="color: #64748b;">Amount:</span> <strong style="color: #2563eb; font-size: 14px;">$${parseFloat(r.cost).toFixed(2)} USD</strong></div>
-                                </div>
-
-                                <div style="font-size: 12.5px; color: #475569; background: #f8fafc; padding: 10px 14px; border-radius: 6px; border: 1px solid #e2e8f0; margin-top: 6px;">
-                                    <strong>Reason:</strong> "${escapeHtml(r.justification)}"
-                                </div>
-
-                                ${linesPreview}
-                                ${decisionBanner}
-                            </div>
-                        </div>
-                    </div>
+                    <article class="staff-support-card">
+                        <div class="support-card-status"><span class="support-card-id">${escapeHtml(r.id)}</span>${statusBadge}</div>
+                        <div class="support-card-urgency"><i class="fas ${r.urgency === 'Emergency' ? 'fa-bolt' : 'fa-clock'}" aria-hidden="true"></i> ${escapeHtml(r.urgency)} urgency</div>
+                        <h3>${escapeHtml(r.title)}</h3>
+                        <dl class="support-card-details">
+                            <div class="support-card-child"><dt>Child</dt><dd>${escapeHtml(r.beneficiaryName)} <span>${escapeHtml(r.beneficiaryId)}</span></dd></div>
+                            <div><dt>Category</dt><dd>${escapeHtml(r.category)}</dd></div>
+                            <div><dt>Orphanage</dt><dd>${escapeHtml(r.dorm)}</dd></div>
+                        </dl>
+                        <div class="support-card-budget"><span>Requested Amount</span><strong>$${Number(r.cost || 0).toFixed(2)} <small>USD</small></strong></div>
+                        <div class="support-card-reason"><h4>Reason</h4><p>${escapeHtml(r.justification)}</p></div>
+                        <div class="support-card-items">${linesPreview}</div>
+                        <div class="support-card-decision">${decisionBanner}</div>
+                        <footer class="support-card-footer"><span><i class="fas fa-user" aria-hidden="true"></i> ${escapeHtml(r.requestedBy)}</span><span><i class="fas fa-calendar-day" aria-hidden="true"></i> ${escapeHtml(r.requestedDate)}</span></footer>
+                    </article>
                 `;
             });
         }

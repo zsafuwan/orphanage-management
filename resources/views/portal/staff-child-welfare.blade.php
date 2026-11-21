@@ -773,13 +773,8 @@
                         <input type="date" id="staff_paper_date" class="staff-input-control" value="{{ now()->format('Y-m-d') }}">
                     </div>
                     <div class="staff-field-group">
-                        <label class="staff-field-label">Standing Status</label>
-                        <select id="staff_paper_standing" class="staff-input-control">
-                            <option value="Distinction">Distinction (Honors)</option>
-                            <option value="Good" selected>Good Academic Standing</option>
-                            <option value="Needs Math Support">Needs Math Support</option>
-                            <option value="Needs Reading Support">Needs Reading Support</option>
-                        </select>
+                        <label class="staff-field-label" for="staff_paper_attendance">School Attendance (days)</label>
+                        <input type="number" id="staff_paper_attendance" class="staff-input-control" min="0" max="366" step="1" placeholder="Days attended this academic year">
                     </div>
                 </div>
 
@@ -1386,14 +1381,6 @@
 
         var avg = count > 0 ? Math.round(total / count) : 85;
         $('#staff_paper_avg_preview').text(avg + '%');
-
-        if (avg >= 90) {
-            $('#staff_paper_standing').val('Distinction');
-        } else if (avg >= 75) {
-            $('#staff_paper_standing').val('Good');
-        } else {
-            $('#staff_paper_standing').val('Needs Math Support');
-        }
     }
 
     function staffScoreToGrade(score) {
@@ -1415,7 +1402,7 @@
         var examName = $('#staff_paper_exam_name').val().trim();
         var term = $('#staff_paper_term').val().trim();
         var examDate = $('#staff_paper_date').val();
-        var status = $('#staff_paper_standing').val();
+        var status = 'Recorded';
         var remarks = $('#staff_paper_remarks').val().trim() || 'Keyed in by Nurse Mary during Morning Duty Shift.';
 
         var subjects = [];

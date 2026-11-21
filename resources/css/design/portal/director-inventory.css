@@ -546,3 +546,11 @@
         @apply tw:w-full;
     }
 }
+
+/* Status filters and search sit directly inside the request panel. */
+.care-workspace #director-requests .inventory-panel-toolbar {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+}

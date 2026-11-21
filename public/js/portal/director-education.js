@@ -77,12 +77,7 @@ function openStudentAcademicPortfolio(name, school, sponsor, grade, attendance, 
     activePortfolioStudent = name;
 
     document.getElementById('portfolio_student_name').innerText = name;
-    document.getElementById('portfolio_school_info').innerText = school;
-    document.getElementById('portfolio_sponsor_info').innerText = `Sponsor: ${sponsor}`;
-    document.getElementById('portfolio_overall_grade').innerText = grade;
     document.getElementById('portfolio_attendance').innerText = attendance;
-    document.getElementById('portfolio_rank').innerText = rank;
-    document.getElementById('portfolio_cocurriculum').innerText = cocurriculum;
     document.getElementById('portfolio_scorecard_body').innerHTML = scores;
     document.getElementById('portfolio_tutoring_notes').innerText = tutoring;
 

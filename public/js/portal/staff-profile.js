@@ -119,7 +119,7 @@ function handleSaveInlineProfile(e) {
     var newWard = $('#inline_input_ward').val().trim();
     var newEmail = $('#inline_input_email').val().trim();
     var newPhone = $('#inline_input_phone').val().trim();
-    var newAddress = $('#inline_input_address').val().trim();
+    var newAddress = ($('#inline_input_address').val() ?? profileData.address).trim();
 
     if (!newFullname || !newUsername || !newAffiliation || !newWard || !newEmail || !newPhone || !newAddress) {
         showPortalToast('Please complete all required fields.', false);

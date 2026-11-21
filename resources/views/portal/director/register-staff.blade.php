@@ -79,22 +79,18 @@
         <div class="dir-reg-card">
             <div class="dir-reg-card-head">
                 <h2><i class="fas fa-user-plus" style="color: #4f46e5;"></i> Staff Registration</h2>
-                <span style="font-size: 12px; color: #64748b;">All fields mandatory for JKM audit</span>
+                <span style="font-size: 12px; color: #64748b;">Required fields are marked *</span>
             </div>
             <form class="dir-reg-form" onsubmit="submitStaffRegistration(event)">
-                <!-- Personal & Legal Identity -->
-                <div class="form-group-grid">
+                <!-- Staff details -->
+                <div class="form-group-grid" style="grid-template-columns: minmax(0, 1fr);">
                     <div class="dir-input-group">
-                        <label for="staff_name_input">Full Name (as per NRIC / Passport) *</label>
+                        <label for="staff_name_input">Full Name *</label>
                         <input type="text" id="staff_name_input" class="dir-input" placeholder="e.g. Nurul Huda Binti Ahmad" required>
-                    </div>
-                    <div class="dir-input-group">
-                        <label for="staff_nric_input">NRIC Number / Identification *</label>
-                        <input type="text" id="staff_nric_input" class="dir-input" placeholder="e.g. 940512-14-5824" required>
                     </div>
                 </div>
 
-                <!-- Role & Assignment -->
+                <!-- Role and shift -->
                 <div class="form-group-grid">
                     <div class="dir-input-group">
                         <label for="staff_role_select">Designation & Responsibilities *</label>
@@ -108,13 +104,12 @@
                         </select>
                     </div>
                     <div class="dir-input-group">
-                        <label for="staff_wing_select">Assigned Orphanage Wing / Ward *</label>
-                        <select id="staff_wing_select" class="dir-select" required>
-                            <option value="ward_alpha">Ward Alpha (Nursery & Toddlers)</option>
-                            <option value="ward_beta">Ward Beta (Boys Dormitory)</option>
-                            <option value="ward_gamma">Ward Gamma (Girls Dormitory)</option>
-                            <option value="study_hall">Study Hall & Tuition Center</option>
-                            <option value="kitchen">Orphanage Dining & Kitchen</option>
+                        <label for="staff_shift_select">Assigned Shift *</label>
+                        <select id="staff_shift_select" class="dir-select" required>
+                            <option value="" disabled selected>Choose a shift</option>
+                            <option value="morning">Morning (08:00–16:00)</option>
+                            <option value="evening">Evening (16:00–00:00)</option>
+                            <option value="night">Night (00:00–08:00)</option>
                         </select>
                     </div>
                 </div>
@@ -142,28 +137,12 @@
                     </div>
                 </div>
 
-                <!-- Safeguarding Compliance Section -->
-                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px;">
-                    <div style="font-size: 12px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 12px;">
-                        <i class="fas fa-shield-alt" style="color: #059669;"></i> Child Safeguarding & Police Vetting Declaration
-                    </div>
-                    <div class="form-group-grid" style="margin-bottom: 0;">
-                        <div class="dir-input-group" style="margin-bottom: 0;">
-                            <label>PDRM Clearance Reference No.</label>
-                            <input type="text" class="dir-input" value="PDRM/D11/VET-2026-8819" placeholder="Police Clearance Ref">
-                        </div>
-                        <div class="dir-input-group" style="margin-bottom: 0;">
-                            <label>Pediatric CPR & First Aid Valid Until</label>
-                            <input type="text" class="dir-input" value="Dec 2027" placeholder="CPR Validity Date">
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Director Authorization Seal Checkbox -->
                 <div style="background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 8px; padding: 14px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px;">
                     <input type="checkbox" id="director_authorizer_check" checked style="width: 20px; height: 20px; accent-color: #4f46e5; cursor: pointer;">
                     <label for="director_authorizer_check" style="font-size: 12px; color: #312e81; font-weight: 600; cursor: pointer; line-height: 1.5;">
-                        I, <strong>Sister Sarah (Orphanage Director & Sole Signatory)</strong>, hereby certify that this applicant has passed child protection vetting and is officially authorized to join orphanage operations.
+                        I, <strong>Sister Sarah (Orphanage Director & Sole Signatory)</strong>, authorize this staff member to join orphanage operations.
                     </label>
                 </div>
 
@@ -193,7 +172,8 @@
                     <div>
                         <div class="staff-badge-name" id="preview_name">New Caregiver</div>
                         <div class="staff-badge-role" id="preview_role">Lead Clinical Caregiver</div>
-                        <div style="font-size: 11px; color: #93c5fd; margin-top: 2px;" id="preview_wing">Ward Alpha (Nursery & Toddlers)</div>
+                        <div id="preview_shift" style="font-size: 12px; margin-top: 6px; color: #dbeafe;">Shift not selected</div>
+
                     </div>
                 </div>
                 <div class="staff-badge-footer">

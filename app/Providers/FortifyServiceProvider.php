@@ -7,6 +7,12 @@ namespace App\Providers;
 use App\Actions\Fortify\CreateNewUser;
 /* @end-chisel-registration */
 use App\Actions\Fortify\ResetUserPassword;
+use App\Services\LoginAccounts;
+use App\Models\User;
+use App\Http\Responses\RoleLoginResponse;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+use Laravel\Fortify\Contracts\LoginResponse;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -24,7 +30,7 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(LoginResponse::class, RoleLoginResponse::class);
     }
 
     /**
@@ -35,6 +41,18 @@ class FortifyServiceProvider extends ServiceProvider
         $this->configureActions();
         $this->configureViews();
         $this->configureRateLimiting();
+        Fortify::authenticateUsing(function (Request $request) {
+            $accounts = app(LoginAccounts::class);
+            if (! $accounts->ready()) {
+                throw ValidationException::withMessages(['email' => 'Account sign-in is not available yet. Please contact your administrator.']);
+            }
+            $user = User::where('email', $request->input('email'))->first();
+            if ($user && Hash::check($request->input('password'), $user->password) && $accounts->destination($user->role)) {
+                return $user;
+            }
+
+            return null;
+        });
     }
 
     /**
@@ -53,9 +71,8 @@ class FortifyServiceProvider extends ServiceProvider
      */
     private function configureViews(): void
     {
-        Fortify::loginView(fn (Request $request) => Inertia::render('auth/Login', [
-            'canResetPassword' => Features::enabled(Features::resetPasswords()),
-            'status' => $request->session()->get('status'),
+        Fortify::loginView(fn () => view('auth.login', [
+            'accountsReady' => app(LoginAccounts::class)->ready(),
         ]));
 
         Fortify::resetPasswordView(fn (Request $request) => Inertia::render('auth/ResetPassword', [

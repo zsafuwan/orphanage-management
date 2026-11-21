@@ -15,11 +15,6 @@
             <h1><i class="fas fa-graduation-cap" style="color: #7c3aed;"></i> Children’s Education</h1>
             <p>School enrollment oversight, term examination performance, scholarship sponsorship grants, and volunteer tutoring interventions.</p>
         </div>
-        <div>
-            <button type="button" class="btn-edu" onclick="showPortalToast('Orphanage School Report (Term 2) exported.', 'info')">
-                <i class="fas fa-file-invoice"></i> Export Academic Report
-            </button>
-        </div>
     </div>
 
     <!-- Academic KPI Metrics Row -->
@@ -100,16 +95,13 @@
                 <tr>
                     <th>Student Name</th>
                     <th>School & Class</th>
-                    <th>Term GPA</th>
                     <th>Core Subject Grades</th>
                     <th>Attendance</th>
-                    <th>Co-Curricular & Talents</th>
-                    <th>Scholarship Sponsor</th>
                     <th style="text-align: right;">Academic Record</th>
                 </tr>
             </thead>
             <tbody>
-                    <tr><td colspan="8">Loading shared child registry…</td></tr>
+                    <tr><td colspan="5">Loading shared child registry…</td></tr>
                 </tbody>
         </table>
     </div>

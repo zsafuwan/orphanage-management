@@ -376,3 +376,30 @@
         @apply tw:w-full;
     }
 }
+
+/* Keep result values centered beneath their matching column headings. */
+#modal_student_academic_portfolio .scorecard-table > :is(thead, tbody) > tr > :is(th, td) {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Academic standing filter matches the director controls. */
+.care-workspace #edu_standing_filter {
+    appearance: none;
+    min-height: 44px;
+    max-width: 100%;
+    padding: 8px 30px 8px 10px;
+    border: 1px solid #e2dcef;
+    border-radius: 12px;
+    background: #faf8ff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237c6a9f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center;
+    color: #514367;
+    font-size: 12px; font-weight: 500; line-height: 1.5;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color .2s, box-shadow .2s;
+}
+.care-workspace #edu_standing_filter:is(:hover, :focus-visible) {
+    border-color: #a995ce;
+    box-shadow: 0 0 0 3px #a995ce1a;
+    outline: none;
+}

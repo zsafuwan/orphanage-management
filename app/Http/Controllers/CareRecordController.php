@@ -44,6 +44,7 @@ class CareRecordController extends Controller
         $data = $request->validate([
             'Child_Id' => $records->rules('education')['Child_Id'],
             'Academic_Year' => 'required|string|max:9',
+            'Child_Attendance' => 'nullable|integer|between:0,366',
             'subjects' => 'required|array|min:1',
             'subjects.*.name' => 'required|string|max:100|distinct',
             'subjects.*.score' => 'required|numeric|between:0,100',
@@ -53,6 +54,7 @@ class CareRecordController extends Controller
             $education = DB::table('Education_Record')->insertGetId([
                 'Child_Id' => $data['Child_Id'], 'Academic_Year' => $data['Academic_Year'],
                 'Child_Result' => round(collect($data['subjects'])->avg('score'), 2),
+                'Child_Attendance' => $data['Child_Attendance'] ?? null,
             ], 'Education_Id');
             foreach ($data['subjects'] as $subject) {
                 $id = DB::table('Subject')->where('Subject_Name', $subject['name'])->value('Subject_Id');
