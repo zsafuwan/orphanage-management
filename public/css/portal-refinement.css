@@ -360,10 +360,6 @@
   --tw-leading: 1.5;
   line-height: 1.5;
 }
-.care-workspace .care-shortcuts {
-  gap: 12px;
-  margin-bottom: 25px;
-}
 .care-workspace .care-shortcuts-intro strong {
   color: #354735;
   font-size: 13px;
@@ -378,7 +374,7 @@
   border: 1px solid var(--panel-line);
   background: #fff;
   border-radius: 15px;
-  padding: 17px 16px;
+  padding: 10px 12px;
   box-shadow: none;
 }
 .care-workspace .care-shortcuts > a:hover {

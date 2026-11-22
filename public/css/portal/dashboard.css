@@ -709,10 +709,9 @@
   background: var(--primary-hover);
 }
 .subsystems-admin-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-bottom: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 .subsystem-admin-card {
   background: #ffffff;
@@ -770,10 +769,10 @@
   font-weight: var(--tw-font-weight-semibold, 600);
 }
 .staff-quick-actions-bar {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-bottom: 28px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 .staff-action-card {
   background: #ffffff;
@@ -910,11 +909,14 @@
   color: #475569;
 }
 .staff-ward-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 14px;
 }
 .staff-ward-card {
+  width: fit-content;
+  max-width: 100%;
+  min-width: 0;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   padding: 14px 16px;
@@ -948,7 +950,9 @@
   flex-shrink: 0;
 }
 .ward-name {
-  font-size: 13.5px;
+  font-size: 16px;
+  --tw-leading: 1.25;
+  line-height: 1.25;
   --tw-font-weight: var(--tw-font-weight-bold, 700);
   font-weight: var(--tw-font-weight-bold, 700);
   color: #0f172a;
@@ -1500,19 +1504,10 @@
   color: #0f172a;
 }
 @media (max-width: 1200px) {
-  .staff-quick-actions-bar {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .staff-ward-grid {
-    grid-template-columns: 1fr;
-  }
   .duty-cards-grid {
     grid-template-columns: 1fr;
   }
   .kpi-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .subsystems-admin-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .col-6, .col-8, .col-4 {
@@ -1521,9 +1516,6 @@
 }
 @media (max-width: 768px) {
   .kpi-grid {
-    grid-template-columns: 1fr;
-  }
-  .subsystems-admin-grid {
     grid-template-columns: 1fr;
   }
   .monthly-strip {

@@ -1227,21 +1227,18 @@
                     <div>
                         <div class="ward-card-header">
                             <img src="${c.avatar}" style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid #cbd5e1;" alt="${c.name}">
-                            <label style="font-size:11px;cursor:pointer;">Change photo<input type="file" class="saved-child-photo-input" data-child-id="${c.id}" accept="image/jpeg,image/png,image/webp" aria-label="Change photo for ${c.name}" style="display:block;max-width:155px;font-size:10px;"></label>
-                            <div>
-                                <div class="ward-name">${c.name} (${c.age} yrs)</div>
-                                <div class="ward-room"><i class="fas fa-house"></i> ${window.ChildWelfareUI.escape(c.dorm || 'Not recorded')}</div>
-                            </div>
+                            <label style="font-size:11px;cursor:pointer;">Change photo<input type="file" class="saved-child-photo-input" data-child-id="${c.id}" accept="image/jpeg,image/png,image/webp" aria-label="Change photo for ${c.name}" style="display:block;margin-top:4px;max-width:155px;font-size:10px;"></label>
                         </div>
-                        <div style="font-size: 11.5px; color: #475569; margin-bottom: 8px;">
+                        <div class="ward-name">${c.name} (${c.age} yrs)</div>
+                        <div style="font-size: 12.5px; color: #475569; margin-top: 4px; margin-bottom: 8px;">
                             <div><strong>School:</strong> ${c.school} (${c.grade})</div>
                             <div style="margin-top: 3px;"><strong>Latest Paper:</strong> ${paperBadge}</div>
                         </div>
                     </div>
                     <div>
                         ${medTag}
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 8px; border-top: 1px dashed #e2e8f0; gap: 4px; flex-wrap: wrap;">
-                            <span style="font-size: 11px; color: #64748b;">Blood: <strong>${med.bloodType || 'O+'}</strong></span>
+                        <div style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 10px; padding-top: 8px; border-top: 1px dashed #e2e8f0; gap: 4px;">
+                            <span style="font-size: 12px; color: #64748b;">Blood: <strong>${med.bloodType || 'O+'}</strong></span>
                             <div class="care-record-actions">
                                 <button class="table-action-btn" onclick="openStaffKeyPaperModal('${c.id}')" title="Key in Paper Result" style="color: #2563eb;">
                                     <i class="fas fa-pen-nib"></i> Key Paper

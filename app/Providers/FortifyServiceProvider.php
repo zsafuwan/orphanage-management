@@ -71,9 +71,15 @@ class FortifyServiceProvider extends ServiceProvider
      */
     private function configureViews(): void
     {
-        Fortify::loginView(fn () => view('auth.login', [
-            'accountsReady' => app(LoginAccounts::class)->ready(),
-        ]));
+        Fortify::loginView(function () {
+            if (! config('fortify.login_page_enabled')) {
+                return redirect('/');
+            }
+
+            return view('auth.login', [
+                'accountsReady' => app(LoginAccounts::class)->ready(),
+            ]);
+        });
 
         Fortify::resetPasswordView(fn (Request $request) => Inertia::render('auth/ResetPassword', [
             'email' => $request->email,

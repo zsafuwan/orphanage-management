@@ -154,8 +154,7 @@
 .care-workspace-footer span span { margin: 0 9px; @apply tw:text-[#c0c8b8]; }
 .care-workspace-footer i { @apply tw:text-[#9caa83]; @apply tw:ml-[5px]; @apply tw:text-[9px]; }
 .care-workspace .mobile-menu-btn { @apply tw:text-[#33533b]; background: #eaf0e1; border: 1px solid #dbe5d0; @apply tw:rounded-[9px]; @apply tw:w-[36px]; @apply tw:h-[36px]; }
-.care-shortcuts { @apply tw:grid; grid-template-columns: 1.05fr repeat(3,1fr); @apply tw:gap-[14px]; @apply tw:mb-[26px]; @apply tw:items-stretch; }
-.care-shortcuts-intro { @apply tw:flex; @apply tw:flex-col; @apply tw:justify-center; padding: 10px 0; }
+.care-shortcuts { @apply tw:flex tw:flex-wrap tw:items-center tw:gap-[10px] tw:mb-[16px]; }
 .care-eyebrow { @apply tw:text-[#8b997a]; @apply tw:text-[8px]; @apply tw:tracking-[1.4px]; @apply tw:font-semibold; @apply tw:mb-[7px]; }
 .care-shortcuts-intro strong { @apply tw:text-[#45573e]; font-family: 'Manrope', sans-serif; @apply tw:text-[14px]; @apply tw:tracking-[-.4px]; }
 .care-shortcuts > a { @apply tw:flex; @apply tw:items-center; @apply tw:gap-[11px]; background: #fff; padding: 17px 14px; border: 1px solid #e2e8d9; @apply tw:rounded-[13px]; @apply tw:no-underline; @apply tw:text-[#40573c]; transition: border-color 160ms, transform 160ms; }
@@ -163,7 +162,7 @@
 .care-shortcuts > a > span:nth-child(2) { @apply tw:min-w-0; }
 .care-shortcuts > a strong { @apply tw:text-[11px]; @apply tw:font-semibold; @apply tw:block; }
 .care-shortcuts > a small { @apply tw:block; @apply tw:text-[9px]; @apply tw:text-[#8a9580]; @apply tw:mt-[5px]; @apply tw:leading-[1.5]; }
-.care-shortcuts > a > i { @apply tw:text-[10px]; @apply tw:text-[#a3b295]; @apply tw:ml-[auto]; }
+.care-shortcuts > a > i { @apply tw:text-[10px] tw:text-[#a3b295] tw:shrink-0; }
 .care-shortcut-icon { @apply tw:grid; place-items: center; @apply tw:w-[33px]; @apply tw:h-[36px]; @apply tw:rounded-[10px]; @apply tw:text-[14px]; @apply tw:shrink-0; }
 .care-shortcut-icon.peach { background: #faeee4; @apply tw:text-[#be8c65]; }
 .care-shortcut-icon.sage { background: #eaf1df; @apply tw:text-[#749754]; }
@@ -211,8 +210,6 @@
 @media (max-height: 820px) { .care-sidebar-note { @apply tw:hidden; } }
 @media (max-width: 1200px) {
     .care-sync-status { @apply tw:hidden; }
-    .care-shortcuts { grid-template-columns: repeat(3,minmax(0,1fr)); }
-    .care-shortcuts-intro { grid-column: 1 / -1; @apply tw:p-[0]; }
     .care-workspace .portal-topbar { padding: 17px 24px; @apply tw:flex-wrap; }
     .care-workspace .portal-content { @apply tw:p-[24px]; }
     .care-workspace .topbar-username { @apply tw:hidden; }
@@ -238,9 +235,7 @@
     .care-workspace .field-value-text { @apply tw:whitespace-normal; overflow-wrap: anywhere; }
     .care-workspace .field-value-box { @apply tw:gap-[8px]; }
     .care-workspace .profile-card-header { @apply tw:flex-wrap; @apply tw:gap-[12px]; }
-    .care-shortcuts { grid-template-columns: 1fr; @apply tw:gap-[8px]; }
-    .care-shortcuts > a { padding: 13px 15px; }
-    .care-shortcuts-intro { padding: 4px 0 8px; }
+    .care-shortcuts-intro { flex-basis: 100%; }
     .care-shortcuts > a small { @apply tw:text-[10px]; }
     .care-workspace .treasury-overview-card { grid-template-columns: 1fr; padding: 24px 20px; }
     .care-workspace .treasury-main-balance { border-right: 0; border-bottom: 1px solid #42634b; padding: 0 0 19px; }

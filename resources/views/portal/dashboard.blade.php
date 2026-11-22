@@ -105,8 +105,8 @@
 </section>
 
 <!-- 5 Integrated Subsystems Quick Bar (Adminator Quick Launcher) -->
-<div style="margin-bottom: 28px;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+<div style="margin-bottom: 16px;">
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
         <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #64748b;">
             <i class="fas fa-th-large"></i> Quick Links
         </span>

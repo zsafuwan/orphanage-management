@@ -564,9 +564,14 @@
                     ? `<span class="med-condition-pill caution" title="${this.escape(med.condition)} · Allergies: ${this.escape(med.allergies || 'None known')}"><i class="fas fa-heart-pulse" aria-hidden="true"></i><span>${this.escape(shortCondition)}</span></span>`
                     : `<span class="med-condition-pill normal"><i class="fas fa-check-circle"></i> Fit & Healthy</span>`;
 
-                const paperResultBadge = latestPaper
-                    ? `<span class="badge badge-info" title="${latestPaper.examName}"><i class="fas fa-file-alt"></i> ${latestPaper.overallScore}% (${latestPaper.status})</span>`
-                    : `<span class="badge badge-secondary"><i class="fas fa-pencil-alt"></i> No paper results</span>`;
+                const subjectScores = (latestPaper?.subjects || [])
+                    .map(subject => subject.score)
+                    .filter(score => score != null && String(score).trim() !== '')
+                    .map(Number)
+                    .filter(score => Number.isFinite(score) && score >= 0 && score <= 100);
+                const paperResultBadge = subjectScores.length
+                    ? `<span class="badge badge-info" title="${this.escape(latestPaper.examName)} · Highest subject score"><i class="fas fa-file-alt"></i> ${Math.max(...subjectScores)}% (${this.escape(latestPaper.status)})</span>`
+                    : `<span class="badge badge-secondary"><i class="fas fa-pencil-alt"></i> ${latestPaper ? 'No subject scores' : 'No paper results'}</span>`;
 
                 html += `
                     <div class="child-card-wrapper searchable-item" data-category="${this.escape(c.dorm)}">
@@ -574,10 +579,9 @@
                             <div>
                                 <div class="card-top-info">
                                     <img src="${c.avatar}" class="avatar-large" alt="${this.escape(c.name)}" onerror="this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=150&auto=format&fit=crop&q=80'">
-                                    <label style="font-size:11px;cursor:pointer;">Change photo<input type="file" class="saved-child-photo-input" data-child-id="${c.id}" accept="image/jpeg,image/png,image/webp" aria-label="Change photo for ${this.escape(c.name)}" style="display:block;max-width:155px;font-size:10px;"></label>
+                                    <label style="font-size:11px;cursor:pointer;">Change photo<input type="file" class="saved-child-photo-input" data-child-id="${c.id}" accept="image/jpeg,image/png,image/webp" aria-label="Change photo for ${this.escape(c.name)}" style="display:block;margin-top:4px;max-width:155px;font-size:10px;"></label>
                                     <div style="text-align: right;">
                                         <span class="badge badge-secondary" style="font-family: monospace;">${c.id}</span>
-                                        <div style="margin-top: 4px;"><span class="badge badge-success">Active Ward</span></div>
                                     </div>
                                 </div>
                                 <div class="profile-name">${this.escape(c.name)}</div>

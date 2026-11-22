@@ -9,6 +9,14 @@ use Tests\TestCase;
 
 class SharedLoginTest extends TestCase
 {
+    public function test_disabled_login_page_redirects_to_the_homepage(): void
+    {
+        config(['fortify.login_page_enabled' => false]);
+
+        $this->get('/login')->assertRedirect('/');
+        $this->get('/')->assertOk()->assertSee('Staff & Admin Portal')->assertDontSee('Log in');
+    }
+
     private function accounts(bool $ready): void
     {
         $this->app->instance(LoginAccounts::class, new class($ready) extends LoginAccounts
@@ -20,6 +28,7 @@ class SharedLoginTest extends TestCase
 
     public function test_shared_login_renders_without_an_accounts_table(): void
     {
+        config(['fortify.login_page_enabled' => true]);
         $this->accounts(false);
         $this->get('/login')->assertOk()->assertSee('Welcome back')->assertSee('Volunteer')->assertSee('Director')
             ->assertSee('Account sign-in is not available yet.')->assertSee('disabled', false);
@@ -27,6 +36,7 @@ class SharedLoginTest extends TestCase
 
     public function test_login_is_enabled_when_account_storage_is_ready(): void
     {
+        config(['fortify.login_page_enabled' => true]);
         $this->accounts(true);
         $this->get('/login')->assertOk()->assertDontSee('Account sign-in is not available yet.')
             ->assertSee('autocomplete="current-password"', false)->assertSee('name="_token"', false);

@@ -717,10 +717,7 @@
 
 /* 5 Subsystem Quick Cards Carousel */
 .subsystems-admin-grid {
-    @apply tw:grid;
-    grid-template-columns: repeat(4, 1fr);
-    @apply tw:gap-[14px];
-    @apply tw:mb-[28px];
+    @apply tw:flex tw:flex-wrap tw:gap-[10px];
 }
 
 .subsystem-admin-card {
@@ -774,10 +771,7 @@
    Staff & Caregiver Dashboard Additions
    ========================================================================== */
 .staff-quick-actions-bar {
-    @apply tw:grid;
-    grid-template-columns: repeat(4, 1fr);
-    @apply tw:gap-[14px];
-    @apply tw:mb-[28px];
+    @apply tw:flex tw:flex-wrap tw:gap-[10px] tw:mb-[16px];
 }
 
 .staff-action-card {
@@ -908,12 +902,14 @@
 
 /* Ward Child Care Cards */
 .staff-ward-grid {
-    @apply tw:grid;
-    grid-template-columns: repeat(2, 1fr);
+    @apply tw:flex tw:flex-wrap;
     @apply tw:gap-[14px];
 }
 
 .staff-ward-card {
+    width: fit-content;
+    max-width: 100%;
+    min-width: 0;
     border: 1px solid #e2e8f0;
     @apply tw:rounded-[12px];
     padding: 14px 16px;
@@ -950,7 +946,7 @@
 }
 
 .ward-name {
-    @apply tw:text-[13.5px];
+    @apply tw:text-[16px] tw:leading-[1.25];
     @apply tw:font-bold;
     @apply tw:text-[#0f172a];
 }
@@ -1535,19 +1531,10 @@
 }
 
 @media (max-width: 1200px) {
-    .staff-quick-actions-bar {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .staff-ward-grid {
-        grid-template-columns: 1fr;
-    }
     .duty-cards-grid {
         grid-template-columns: 1fr;
     }
     .kpi-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .subsystems-admin-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     .col-6, .col-8, .col-4 {
@@ -1557,9 +1544,6 @@
 
 @media (max-width: 768px) {
     .kpi-grid {
-        grid-template-columns: 1fr;
-    }
-    .subsystems-admin-grid {
         grid-template-columns: 1fr;
     }
     .monthly-strip {

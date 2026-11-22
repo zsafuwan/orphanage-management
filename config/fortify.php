@@ -3,6 +3,7 @@
 use Laravel\Fortify\Features;
 
 return [
+    'login_page_enabled' => env('LOGIN_PAGE_ENABLED', false),
 
     /*
     |--------------------------------------------------------------------------

@@ -736,17 +736,11 @@
   height: 36px;
 }
 .care-shortcuts {
-  display: grid;
-  grid-template-columns: 1.05fr repeat(3,1fr);
-  gap: 14px;
-  margin-bottom: 26px;
-  align-items: stretch;
-}
-.care-shortcuts-intro {
+  margin-bottom: 16px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 10px 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
 }
 .care-eyebrow {
   color: #8b997a;
@@ -798,9 +792,9 @@
   line-height: 1.5;
 }
 .care-shortcuts > a > i {
+  flex-shrink: 0;
   font-size: 10px;
   color: #a3b295;
-  margin-left: auto;
 }
 .care-shortcut-icon {
   display: grid;
@@ -1057,13 +1051,6 @@
   .care-sync-status {
     display: none;
   }
-  .care-shortcuts {
-    grid-template-columns: repeat(3,minmax(0,1fr));
-  }
-  .care-shortcuts-intro {
-    grid-column: 1 / -1;
-    padding: 0;
-  }
   .care-workspace .portal-topbar {
     padding: 17px 24px;
     flex-wrap: wrap;
@@ -1145,15 +1132,8 @@
     flex-wrap: wrap;
     gap: 12px;
   }
-  .care-shortcuts {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-  .care-shortcuts > a {
-    padding: 13px 15px;
-  }
   .care-shortcuts-intro {
-    padding: 4px 0 8px;
+    flex-basis: 100%;
   }
   .care-shortcuts > a small {
     font-size: 10px;
