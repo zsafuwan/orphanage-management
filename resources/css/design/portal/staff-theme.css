@@ -104,15 +104,16 @@
 .care-staff .staff-dossier-tabs .dossier-tab-btn.active { background: #fff; color: var(--primary); @apply tw:border-[#d5e2c9]; box-shadow: 0 2px 6px rgb(37 99 78 / 7%); }
 .care-staff .dossier-tab-btn.active .staff-dossier-tab-icon { background: var(--primary); @apply tw:text-[#fff]; }
 .care-staff.care-workspace .portal-content table > :is(thead,tbody) > tr > .staff-receipt-column:last-child { @apply tw:text-center; @apply tw:pl-[24px]; @apply tw:pr-[24px]; }
-.care-staff .staff-record-filters { @apply tw:flex; @apply tw:items-center; @apply tw:flex-wrap; @apply tw:gap-[14px]; }
-.care-staff .staff-record-filters .search-box-wrapper { @apply tw:relative; flex: 1 1 280px; @apply tw:min-w-0; }
-.care-staff .staff-record-filters .search-icon { @apply tw:absolute; @apply tw:left-[15px]; @apply tw:top-[50%]; transform: translateY(-50%); @apply tw:text-[#859579]; @apply tw:pointer-events-none; }
-.care-staff .staff-record-filters .search-input { @apply tw:block; @apply tw:w-full; @apply tw:min-h-[44px]; padding: 11px 15px 11px 42px; @apply tw:text-[12px]; }
-.care-staff .staff-record-filters .filter-select-wrapper { @apply tw:relative; flex: 0 1 240px; @apply tw:min-w-0; }
-.care-staff .staff-record-filters .filter-select-wrapper::after { content: ''; @apply tw:absolute; @apply tw:right-[17px]; top: calc(50% - 5px); @apply tw:w-[7px]; @apply tw:h-[7px]; border-right: 1.5px solid var(--primary); border-bottom: 1.5px solid var(--primary); transform: rotate(45deg); @apply tw:pointer-events-none; }
-.care-staff .staff-record-filters .filter-select { appearance: none; @apply tw:block; @apply tw:w-full; @apply tw:min-h-[44px]; padding: 11px 34px; @apply tw:text-center; text-align-last: center; @apply tw:text-[12px]; @apply tw:cursor-pointer; }
+.care-workspace :is(.staff-record-filters,.admin-welfare-filters) :is(.search-input,.filter-select) { @apply tw:box-border tw:font-[inherit] tw:bg-white tw:rounded-[10px]; color: var(--dark); border: 1px solid var(--border-color, #dfe6d7); }
+.care-workspace :is(.staff-record-filters,.admin-welfare-filters) { @apply tw:flex; @apply tw:items-center; @apply tw:flex-wrap; @apply tw:gap-[14px]; }
+.care-workspace :is(.staff-record-filters,.admin-welfare-filters) .search-box-wrapper { @apply tw:relative; flex: 1 1 280px; @apply tw:min-w-0; }
+.care-workspace :is(.staff-record-filters,.admin-welfare-filters) .search-icon { @apply tw:absolute; @apply tw:left-[15px]; @apply tw:top-[50%]; transform: translateY(-50%); @apply tw:text-[#859579]; @apply tw:pointer-events-none; }
+.care-workspace :is(.staff-record-filters,.admin-welfare-filters) .search-input { @apply tw:block; @apply tw:w-full; @apply tw:min-h-[44px]; padding: 11px 15px 11px 42px; @apply tw:text-[12px]; }
+.care-workspace :is(.staff-record-filters,.admin-welfare-filters) .filter-select-wrapper { @apply tw:relative; flex: 0 1 240px; @apply tw:min-w-0; }
+.care-workspace :is(.staff-record-filters,.admin-welfare-filters) .filter-select-wrapper::after { content: ''; @apply tw:absolute; @apply tw:right-[17px]; top: calc(50% - 5px); @apply tw:w-[7px]; @apply tw:h-[7px]; border-right: 1.5px solid var(--primary); border-bottom: 1.5px solid var(--primary); transform: rotate(45deg); @apply tw:pointer-events-none; }
+.care-workspace :is(.staff-record-filters,.admin-welfare-filters) .filter-select { appearance: none; @apply tw:block; @apply tw:w-full; @apply tw:min-h-[44px]; padding: 11px 34px; @apply tw:text-center; text-align-last: center; @apply tw:text-[12px]; @apply tw:cursor-pointer; }
 @media(max-width:600px) {
-    .care-staff .staff-record-filters .filter-select-wrapper { flex: 1 1 200px; }
+    .care-workspace :is(.staff-record-filters,.admin-welfare-filters) .filter-select-wrapper { flex: 1 1 200px; }
     .care-staff :is(.staff-inv-hero,.staff-welfare-hero,.staff-donations-hero,.staff-hero-card) { padding: 24px 20px; @apply tw:rounded-[17px]; }
     .care-staff .staff-inv-grid { grid-template-columns: minmax(0,1fr); }
     .care-staff .staff-modal-header { padding: 22px 20px; }

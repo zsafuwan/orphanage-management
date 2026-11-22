@@ -442,18 +442,26 @@
   padding-left: 24px;
   padding-right: 24px;
 }
-.care-staff .staff-record-filters {
+.care-workspace :is(.staff-record-filters,.admin-welfare-filters) :is(.search-input,.filter-select) {
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-color: var(--tw-color-white, #fff);
+  font-family: inherit;
+  color: var(--dark);
+  border: 1px solid var(--border-color, #dfe6d7);
+}
+.care-workspace :is(.staff-record-filters,.admin-welfare-filters) {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 14px;
 }
-.care-staff .staff-record-filters .search-box-wrapper {
+.care-workspace :is(.staff-record-filters,.admin-welfare-filters) .search-box-wrapper {
   position: relative;
   flex: 1 1 280px;
   min-width: 0px;
 }
-.care-staff .staff-record-filters .search-icon {
+.care-workspace :is(.staff-record-filters,.admin-welfare-filters) .search-icon {
   position: absolute;
   left: 15px;
   top: 50%;
@@ -461,19 +469,19 @@
   color: #859579;
   pointer-events: none;
 }
-.care-staff .staff-record-filters .search-input {
+.care-workspace :is(.staff-record-filters,.admin-welfare-filters) .search-input {
   display: block;
   width: 100%;
   min-height: 44px;
   padding: 11px 15px 11px 42px;
   font-size: 12px;
 }
-.care-staff .staff-record-filters .filter-select-wrapper {
+.care-workspace :is(.staff-record-filters,.admin-welfare-filters) .filter-select-wrapper {
   position: relative;
   flex: 0 1 240px;
   min-width: 0px;
 }
-.care-staff .staff-record-filters .filter-select-wrapper::after {
+.care-workspace :is(.staff-record-filters,.admin-welfare-filters) .filter-select-wrapper::after {
   content: '';
   position: absolute;
   right: 17px;
@@ -485,7 +493,7 @@
   transform: rotate(45deg);
   pointer-events: none;
 }
-.care-staff .staff-record-filters .filter-select {
+.care-workspace :is(.staff-record-filters,.admin-welfare-filters) .filter-select {
   appearance: none;
   display: block;
   width: 100%;
@@ -497,7 +505,7 @@
   cursor: pointer;
 }
 @media (max-width:600px) {
-  .care-staff .staff-record-filters .filter-select-wrapper {
+  .care-workspace :is(.staff-record-filters,.admin-welfare-filters) .filter-select-wrapper {
     flex: 1 1 200px;
   }
   .care-staff :is(.staff-inv-hero,.staff-welfare-hero,.staff-donations-hero,.staff-hero-card) {

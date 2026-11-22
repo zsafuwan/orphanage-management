@@ -114,15 +114,13 @@
         const med=child.basicMedical||{}, academic=child.academic||{};
         if(button.dataset.registryAction==='clinic') { location.href='/director/medical-records?child='+encodeURIComponent(child.id); return; }
         if(button.dataset.registryAction==='medical') {
-            window.openChildMedicalDossier(child.name,`${child.dorm} · ${child.age} years`,child.id,med.bloodType||'Not recorded',hasValue(med.allergies)?med.allergies:'None',med.vitals||'Not recorded',med.bmi||'Not recorded',escape(med.medications||'None recorded'),med.clinicDoctor||'Not assigned');
-            text('#dossier_child_mykid','Registry ID: '+child.id);
-            text('#dossier_immunization',med.immunization||'Not recorded');
+            window.openChildMedicalDossier(child, hasValue(med.allergies));
             const timeline=document.querySelector('.dossier-timeline');
             if(timeline)timeline.innerHTML=(child.timeline||[]).filter(item=>item.category==='medical').map(item=>`<div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-title">${escape(item.title)}</div><div class="timeline-desc">${escape(item.date)} · ${escape(item.detail)}</div></div>`).join('')||'<p>No clinical milestones recorded.</p>';
         } else {
             const subjects=latest(child)?.subjects||[];
             const scores=subjects.map(subject=>`<tr>${cell(subject.name)}${cell(subject.score+'%')}${cell(subject.grade||'—')}${cell(subject.remarks||'Not recorded')}</tr>`).join('')||'<tr><td colspan="4">No subject results recorded.</td></tr>';
-            window.openStudentAcademicPortfolio(child.name,`${child.school} · ${child.grade}`,academic.sponsor||'Not recorded',score(child)===undefined?'No paper recorded':score(child)+'%',academic.attendance===undefined?'Not recorded':academic.attendance+' days',academic.academicStanding||'Not recorded',academic.cocurriculum||'Not recorded',scores,academic.tutoring||'Not recorded');
+            window.openStudentAcademicPortfolio(child.name,child.school,academic.sponsor||'Not recorded',score(child)===undefined?'No paper recorded':score(child)+'%',academic.attendance===undefined?'Not recorded':academic.attendance+' days',academic.academicStanding||'Not recorded',academic.cocurriculum||'Not recorded',scores,academic.tutoring||'Not recorded');
         }
     });
     document.addEventListener('DOMContentLoaded',()=>{

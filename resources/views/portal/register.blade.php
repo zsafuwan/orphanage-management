@@ -97,7 +97,7 @@
 
                 <!-- Section: Mandatory Core Credentials -->
                 <div class="form-section-divider">
-                    <i class="fas fa-id-card"></i> 1. Administrator Identity & Credentials
+                    <i class="fas fa-id-card"></i> Administrator Identity & Credentials
                 </div>
 
                 <div class="form-grid-2">
@@ -235,87 +235,6 @@
                     </div>
                 </div>
 
-                <!-- Section: Admin Scope & Role Tier -->
-                <div class="form-section-divider">
-                    <i class="fas fa-shield-alt"></i> 2. Administrative Role & Scope
-                </div>
-
-                <div class="admin-tier-grid">
-                    <label class="admin-tier-option active" onclick="selectAdminTier(this, 'System Administrator', 'Systems & IT Infrastructure')">
-                        <input type="radio" name="admin_tier" value="system_admin" checked>
-                        <div>
-                            <div class="tier-label-name">System Administrator</div>
-                            <div class="tier-label-desc">Full portal infrastructure, security policies, backup audits & RBAC management.</div>
-                        </div>
-                    </label>
-
-                    <label class="admin-tier-option" onclick="selectAdminTier(this, 'Welfare Operations Admin', 'Child Welfare & Family Services')">
-                        <input type="radio" name="admin_tier" value="welfare_admin">
-                        <div>
-                            <div class="tier-label-name">Welfare Operations Admin</div>
-                            <div class="tier-label-desc">Oversees child admissions, educational records & approval of urgent welfare requests.</div>
-                        </div>
-                    </label>
-
-                    <label class="admin-tier-option" onclick="selectAdminTier(this, 'Financial Oversight Admin', 'Treasury & Grants Management')">
-                        <input type="radio" name="admin_tier" value="finance_admin">
-                        <div>
-                            <div class="tier-label-name">Financial Oversight Admin</div>
-                            <div class="tier-label-desc">Audits donation receipts, tax-deductible contributions, and payment tracking.</div>
-                        </div>
-                    </label>
-
-                    <label class="admin-tier-option" onclick="selectAdminTier(this, 'Orphanage Co-Director', 'Orphanage Management')">
-                        <input type="radio" name="admin_tier" value="co_director">
-                        <div>
-                            <div class="tier-label-name">Orphanage Co-Director</div>
-                            <div class="tier-label-desc">Executive sign-off authority across both operations, staffing, and external regulatory bodies.</div>
-                        </div>
-                    </label>
-                </div>
-
-                <!-- Section: Subsystems Permissions Checklist -->
-                <div class="form-section-divider">
-                    <i class="fas fa-key"></i> 3. Page Access
-                </div>
-
-                <div class="perms-checkbox-list">
-                    <label class="perm-checkbox-item">
-                        <input type="checkbox" name="permissions[]" value="child_welfare" checked>
-                        <span><i class="fas fa-graduation-cap" style="color: #3b82f6; width: 16px;"></i> Child Care & Education</span>
-                    </label>
-                    <label class="perm-checkbox-item">
-                        <input type="checkbox" name="permissions[]" value="welfare_requests" checked>
-                        <span><i class="fas fa-clipboard-check" style="color: #f59e0b; width: 16px;"></i> Welfare Requests</span>
-                    </label>
-                    <label class="perm-checkbox-item">
-                        <input type="checkbox" name="permissions[]" value="staff_volunteers" checked>
-                        <span><i class="fas fa-users-cog" style="color: #8b5cf6; width: 16px;"></i> Staff & Volunteer Rosters</span>
-                    </label>
-                    <label class="perm-checkbox-item">
-                        <input type="checkbox" name="permissions[]" value="donations" checked>
-                        <span><i class="fas fa-hand-holding-usd" style="color: #ec4899; width: 16px;"></i> Donations & Receipts</span>
-                    </label>
-                    <label class="perm-checkbox-item">
-                        <input type="checkbox" name="permissions[]" value="admin_provision" checked>
-                        <span><i class="fas fa-user-shield" style="color: var(--primary); width: 16px;"></i> Admin Onboarding</span>
-                    </label>
-                </div>
-
-                <!-- Section: Security Directives -->
-                <div class="security-directives-box">
-                    <div class="security-directives-title">
-                        <i class="fas fa-exclamation-triangle"></i> Mandatory Security Enforcements
-                    </div>
-                    <label>
-                        <input type="checkbox" id="enforce_pw_reset" checked>
-                        <span>Require password reset upon first administrator login</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" id="enforce_2fa" checked>
-                        <span>Enforce Hardware Key / Authenticator App (2FA) verification</span>
-                    </label>
-                </div>
 
                 <!-- Submit Button -->
                 <button type="submit" id="btn_provision_submit" class="auth-submit-action">
@@ -664,8 +583,8 @@
 <script>
     // State tracking for sequential ID generation
     var nextIdNumber = 5;
-    var selectedTierTitle = 'System Administrator';
-    var selectedDepartment = 'Systems & IT Infrastructure';
+    const selectedTierTitle = 'System Administrator';
+    const selectedDepartment = 'Systems & IT Infrastructure';
 
     // Auto-increment Next Admin ID
     function generateNextAdminId() {
@@ -674,14 +593,6 @@
         var generatedId = "ADM-" + year + "-" + seqFormatted;
         $('#admin_id').val(generatedId);
         showToast("Generated Next Admin ID: " + generatedId, true);
-    }
-
-    // Tier selection handler
-    function selectAdminTier(element, title, dept) {
-        $('.admin-tier-option').removeClass('active');
-        $(element).addClass('active');
-        selectedTierTitle = title;
-        selectedDepartment = dept;
     }
 
     // Toggle Password Visibility

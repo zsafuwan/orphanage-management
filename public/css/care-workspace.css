@@ -1230,32 +1230,6 @@
     scroll-behavior: auto !important;
   }
 }
-.care-workspace .admin-welfare-filters {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 14px;
-}
-.care-workspace .admin-welfare-filters .search-box-wrapper {
-  position: relative;
-  flex: 1 1 280px;
-  min-width: 0px;
-}
-.care-workspace .admin-welfare-filters .search-icon {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: #859579;
-}
-.care-workspace .admin-welfare-filters .search-input {
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 44px;
-  padding: 11px 15px 11px 42px;
-}
 @property --tw-tracking {
   syntax: "*";
   inherits: false;

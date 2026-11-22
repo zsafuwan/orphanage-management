@@ -58,7 +58,6 @@ function syncInputsFromData() {
     $('#inline_input_fullname').val(profileData.fullname);
     $('#inline_input_username').val(profileData.username);
     $('#inline_input_affiliation').val(profileData.affiliation);
-    $('#inline_input_ward').val(profileData.ward);
     $('#inline_input_email').val(profileData.email);
     $('#inline_input_phone').val(profileData.phone);
     $('#inline_input_address').val(profileData.address);
@@ -116,7 +115,7 @@ function handleSaveInlineProfile(e) {
     var newFullname = $('#inline_input_fullname').val().trim();
     var newUsername = $('#inline_input_username').val().trim();
     var newAffiliation = $('#inline_input_affiliation').val().trim();
-    var newWard = $('#inline_input_ward').val().trim();
+    var newWard = profileData.ward;
     var newEmail = $('#inline_input_email').val().trim();
     var newPhone = $('#inline_input_phone').val().trim();
     var newAddress = ($('#inline_input_address').val() ?? profileData.address).trim();
@@ -160,7 +159,6 @@ function updateProfileDOM(fullname, username, affiliation, ward, email, phone, a
     $('#hero_affiliation_text').text(affiliation);
 
     // 4. Ward
-    $('#display_ward').text(ward);
     $('#kpi_ward').html('<i class="fas fa-baby"></i> ' + ward);
 
     // 5. Email
@@ -212,6 +210,19 @@ function saveShiftNote() {
 }
 
 // 10. Password reveal toggle
+function toggleIdentityPassword(button) {
+    const visible = button.getAttribute('aria-pressed') !== 'true';
+    const sample = document.getElementById('identity_password_sample');
+    sample.textContent = visible ? document.getElementById('password_clear_text').textContent : '';
+    sample.hidden = !visible;
+    document.getElementById('identity_password_mask').hidden = visible;
+    button.setAttribute('aria-pressed', String(visible));
+    button.setAttribute('aria-label', visible ? 'Hide demo password' : 'Show demo password');
+    button.querySelector('i').classList.toggle('fa-eye', !visible);
+    button.querySelector('i').classList.toggle('fa-eye-slash', visible);
+    button.querySelector('span').textContent = visible ? 'Hide' : 'Show';
+}
+
 function togglePasswordVisibility() {
     isPasswordRevealed = !isPasswordRevealed;
     if (isPasswordRevealed) {
@@ -290,7 +301,6 @@ function handleChangePassword(e) {
 
     setTimeout(function() {
         btn.prop('disabled', false).html(origHtml);
-        $('#password_clear_text').text(newPass);
         closeModal('modal_change_password');
         $('#change_password_form')[0].reset();
         evaluateNewPasswordStrength('');

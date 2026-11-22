@@ -76,7 +76,7 @@
   text-transform: uppercase;
   --tw-tracking: 0.5px;
   letter-spacing: 0.5px;
-  color: #38bdf8;
+  color: var(--tw-color-black, #000);
   --tw-font-weight: var(--tw-font-weight-semibold, 600);
   font-weight: var(--tw-font-weight-semibold, 600);
   display: flex;
@@ -87,12 +87,12 @@
   font-size: 15px;
   --tw-font-weight: var(--tw-font-weight-bold, 700);
   font-weight: var(--tw-font-weight-bold, 700);
-  color: #ffffff;
+  color: var(--tw-color-black, #000);
 }
 .hero-auth-meta .meta-id {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11.5px;
-  color: #cbd5e1;
+  color: var(--tw-color-black, #000);
 }
 .provision-metrics-row {
   display: grid;

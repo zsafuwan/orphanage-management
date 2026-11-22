@@ -75,27 +75,39 @@ function initMedicalSearch() {
 /**
  * Open Child Clinical PDF Modal
  */
-function openChildMedicalDossier(name, meta, mykid, blood, allergy, vitals, bmi, meds, doctor) {
-    activeDossierChild = name;
+function openChildMedicalDossier(child, hasRecordedAllergies) {
+    const med = child.basicMedical || {};
+    activeDossierChild = child.name;
 
-    document.getElementById('dossier_child_name').innerText = name;
-    document.getElementById('dossier_child_meta').innerText = meta;
-    document.getElementById('dossier_child_mykid').innerText = `MyKid: ${mykid}`;
-    document.getElementById('dossier_blood_badge').innerText = `Blood Type: ${blood}`;
+    document.getElementById('dossier_child_name').textContent = child.name;
+    document.getElementById('dossier_child_meta').textContent = `${child.dorm} · ${child.age} years`;
+    document.getElementById('dossier_child_mykid').textContent = `Registry ID: ${child.id}`;
 
     const allergyBanner = document.getElementById('dossier_allergy_banner');
     const allergyText = document.getElementById('dossier_allergy_text');
-    if (allergy && allergy.toLowerCase() !== 'none' && allergy.toLowerCase() !== 'none known') {
+    if (hasRecordedAllergies) {
         allergyBanner.style.display = 'flex';
-        allergyText.innerText = `Active Allergy Warning: ${allergy}. Strictly avoid allergen triggers.`;
+        allergyText.textContent = med.allergies;
     } else {
         allergyBanner.style.display = 'none';
     }
 
-    document.getElementById('dossier_vitals').innerText = vitals;
-    document.getElementById('dossier_bmi').innerText = bmi;
-    document.getElementById('dossier_medications').innerHTML = meds;
-    document.getElementById('dossier_doctor').innerText = doctor;
+    document.getElementById('dossier_vitals').textContent = med.vitals || 'Not recorded';
+    document.getElementById('dossier_bmi').textContent = med.bmi || 'Not recorded';
+    const details = {
+        immunization: med.immunization,
+        blood: med.bloodType,
+        clinic: med.clinicLocation,
+        doctor: med.clinicDoctor,
+        condition: med.condition,
+        allergies: med.allergies,
+        medications: med.medications,
+        review: med.nextClinicDate,
+        notes: med.medicalNotes,
+    };
+    Object.entries(details).forEach(([field, value]) => {
+        document.getElementById(`dossier_medical_${field}`).textContent = value || 'Not recorded';
+    });
 
     const modal = document.getElementById('modal_child_medical_dossier');
     if (modal) modal.classList.add('active');

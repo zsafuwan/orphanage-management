@@ -10,6 +10,7 @@
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid #e2e8f0;">
                 <div>
                     <h2 id="portfolio_student_name" style="font-size: 18px; font-weight: 800; color: #0f172a; margin-bottom: 3px;">Daniel Arif Bin Rosli</h2>
+                    <p style="margin: 0;">School Name: <span id="portfolio_school_name">Not recorded</span></p>
                 </div>
             </div>
 

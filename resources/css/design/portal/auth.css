@@ -86,7 +86,7 @@
     @apply tw:text-[11px];
     @apply tw:uppercase;
     @apply tw:tracking-[0.5px];
-    @apply tw:text-[#38bdf8];
+    @apply tw:text-black;
     @apply tw:font-semibold;
     @apply tw:flex;
     @apply tw:items-center;
@@ -96,13 +96,13 @@
 .hero-auth-meta .meta-name {
     @apply tw:text-[15px];
     @apply tw:font-bold;
-    @apply tw:text-[#ffffff];
+    @apply tw:text-black;
 }
 
 .hero-auth-meta .meta-id {
     font-family: 'JetBrains Mono', monospace;
     @apply tw:text-[11.5px];
-    @apply tw:text-[#cbd5e1];
+    @apply tw:text-black;
 }
 
 /* Quick Metrics Row */

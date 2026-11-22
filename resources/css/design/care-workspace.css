@@ -264,9 +264,3 @@
 @media (prefers-reduced-motion: reduce) {
     .care-workspace *, .care-workspace *::before, .care-workspace *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
-
-/* Keep welfare approval search text clear of its leading icon. */
-.care-workspace .admin-welfare-filters { @apply tw:flex; @apply tw:items-center; @apply tw:flex-wrap; @apply tw:gap-[14px]; }
-.care-workspace .admin-welfare-filters .search-box-wrapper { @apply tw:relative; flex: 1 1 280px; @apply tw:min-w-0; }
-.care-workspace .admin-welfare-filters .search-icon { @apply tw:absolute; @apply tw:left-[15px]; @apply tw:top-[50%]; transform: translateY(-50%); @apply tw:pointer-events-none; @apply tw:text-[#859579]; }
-.care-workspace .admin-welfare-filters .search-input { @apply tw:block; @apply tw:box-border; @apply tw:w-full; @apply tw:min-h-[44px]; padding: 11px 15px 11px 42px; }

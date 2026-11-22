@@ -16,9 +16,6 @@
                         <span id="dossier_child_mykid">MyKid: 160412-14-5582</span>
                     </div>
                 </div>
-                <div>
-                    <span id="dossier_blood_badge" class="blood-badge" style="font-size: 13px; padding: 4px 10px;">Blood Type: O+</span>
-                </div>
             </div>
 
             <!-- Allergy Alert Banner -->
@@ -30,8 +27,10 @@
                 </div>
             </div>
 
+            @include('portal.partials.child-health-details', ['showHealthHeading' => false])
+
             <!-- Vitals Grid -->
-            <div class="dossier-grid">
+            <div class="dossier-grid" style="margin-top: 18px;">
                 <div class="dossier-box">
                     <div class="dossier-box-label">Height & Weight</div>
                     <div class="dossier-box-value" id="dossier_vitals">124 cm · 24.5 kg</div>
@@ -39,18 +38,6 @@
                 <div class="dossier-box">
                     <div class="dossier-box-label">BMI & Growth Status</div>
                     <div class="dossier-box-value" id="dossier_bmi" style="color: #059669;">16.0 (Healthy Normal)</div>
-                </div>
-                <div class="dossier-box">
-                    <div class="dossier-box-label">Immunization Index</div>
-                    <div class="dossier-box-value" id="dossier_immunization" style="color: #059669;">Not recorded</div>
-                </div>
-            </div>
-
-            <!-- Active Prescriptions -->
-            <div style="margin-bottom: 18px;">
-                <label style="font-size: 12px; font-weight: 700; color: #475569; display: block; margin-bottom: 6px;">Active Medication & Caregiver Instructions</label>
-                <div id="dossier_medications" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; font-size: 13px; color: #334155;">
-                    <!-- Dynamically populated -->
                 </div>
             </div>
 
@@ -69,18 +56,11 @@
                 </div>
             </div>
 
-            <!-- Attending Doctor & Clinic -->
-            <div style="background: #f1f5f9; border-radius: 8px; padding: 12px 16px; font-size: 12px; color: #475569; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <strong>Attending Physician:</strong> <span id="dossier_doctor">Dr. Raymond Lee (Pediatrician, Reg #42981)</span><br>
-                    <strong>Emergency Clinic:</strong> Hospital Kuala Lumpur (HKL) Pediatric Wing
-                </div>
-                <button type="button" class="btn-dossier" style="background: #4f46e5;" onclick="printHealthPassport()">
-                    <i class="fas fa-print"></i> Health Passport
-                </button>
-            </div>
         </div>
         <div class="director-modal-foot">
+            <button type="button" class="btn-dossier" style="background: #4f46e5;" onclick="printHealthPassport()">
+                <i class="fas fa-print"></i> Health Passport
+            </button>
             <button type="button" class="btn-tab" style="background:#f1f5f9; border:none; padding:8px 16px; border-radius:6px; cursor:pointer;" onclick="closeDirectorModal('modal_child_medical_dossier')">Close</button>
             <button type="button" class="btn-dossier" onclick="openAddClinicalNoteModal()">
                 <i class="fas fa-plus"></i> Add Clinical Observation

@@ -87,9 +87,6 @@
     <button type="button" class="staff-tab-btn" data-tab="tab_clearance" onclick="switchStaffProfileTab('tab_clearance', this)">
         <i class="fas fa-certificate"></i> Accreditations & Logs <span class="badge-pill">3</span>
     </button>
-    <button type="button" class="staff-tab-btn" data-tab="tab_security" onclick="switchStaffProfileTab('tab_security', this)">
-        <i class="fas fa-shield-alt"></i> Security & Access
-    </button>
 </div>
 
 <!-- Main Form Wrapper for Inline Editing -->
@@ -100,15 +97,12 @@
     <!-- ========================================================================= -->
     <div class="staff-tab-pane active" id="tab_identity">
         <div class="tab-two-column-grid">
-            <!-- Card 1: Core Caregiver Identity & Ward Assignment -->
+            <!-- Card 1: Caregiver Identity & Password -->
             <div class="profile-card">
                 <div class="profile-card-header">
                     <div class="profile-card-title">
-                        <i class="fas fa-user-circle" style="color: #059669;"></i> Caregiver Identity & Ward Assignment
+                        <i class="fas fa-user-circle" style="color: #059669;"></i> Caregiver Identity & Password
                     </div>
-                    <button type="button" class="btn-outline" onclick="openModal('modal_change_password')">
-            <i class="fas fa-key"></i> Change Password
-        </button>
                 </div>
 
                 <div class="profile-card-body">
@@ -195,23 +189,25 @@
                             <input type="text" id="inline_input_affiliation" class="edit-mode-item editable-input" style="display: none;" value="HopeHaven Orphanage – Pediatric Ward & Child Welfare Unit" required>
                         </div>
 
-                        <!-- Assigned Wards -->
+                        <!-- Password -->
                         <div class="detail-field-item full-width">
-                            <label class="field-label" for="inline_input_ward">
-                                <i class="fas fa-baby"></i> Assigned Wards / Dormitories
-                            </label>
-                            <div class="view-mode-item field-value-box">
-                                <span class="field-value-text" id="display_ward">Ward Alpha (Infants) & Ward Beta Nursery</span>
-                                <div class="field-actions-cluster">
-                                    <button type="button" class="field-action-btn edit-btn" onclick="openEditProfileModal('ward')" title="Edit Ward Assignment">
-                                        <i class="fas fa-pen"></i>
-                                    </button>
-                                    <button type="button" class="field-action-btn" onclick="copyText($('#display_ward').text(), 'Ward copied!')" title="Copy Ward">
-                                        <i class="fas fa-copy"></i>
-                                    </button>
+                            <span class="field-label"><i class="fas fa-key" aria-hidden="true"></i> Current Account Password</span>
+                            <div class="password-display-wrapper">
+                                <div class="password-row-main">
+                                    <span>
+                                        <span class="password-hidden-dots" id="identity_password_mask" aria-label="Password hidden">••••••••••••••••</span>
+                                        <span id="identity_password_sample" hidden></span>
+                                    </span>
+                                    <div class="password-actions-group">
+                                        <button type="button" class="btn-pill-small" aria-controls="identity_password_sample" aria-label="Show demo password" aria-pressed="false" onclick="toggleIdentityPassword(this)">
+                                            <i class="fas fa-eye" aria-hidden="true"></i> <span>Show</span>
+                                        </button>
+                                        <button type="button" class="btn-pill-small btn-primary-pill" style="background: #059669;" onclick="openModal('modal_change_password')">
+                                            <i class="fas fa-edit" aria-hidden="true"></i> Change Password
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                            <input type="text" id="inline_input_ward" class="edit-mode-item editable-input" style="display: none;" value="Ward Alpha (Infants) & Ward Beta Nursery" required>
                         </div>
                     </div>
                 </div>

@@ -155,7 +155,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
+                <div class="personnel-skill-tags" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
                     <span class="badge badge-secondary">Trauma Counseling</span>
                     <span class="badge badge-secondary">Adoption</span>
                 </div>
@@ -194,7 +194,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
+                <div class="personnel-skill-tags" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
                     <span class="badge badge-secondary">Youth Guidance</span>
                     <span class="badge badge-secondary">Residential Safety</span>
                 </div>
@@ -233,7 +233,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
+                <div class="personnel-skill-tags" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
                     <span class="badge badge-secondary">STEM Curriculum</span>
                     <span class="badge badge-secondary">Remedial Reading</span>
                 </div>
@@ -269,7 +269,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
+                <div class="personnel-skill-tags" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
                     <span class="badge badge-secondary">High School Algebra</span>
                     <span class="badge badge-secondary">Watercolor Arts</span>
                 </div>
@@ -305,7 +305,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
+                <div class="personnel-skill-tags" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
                     <span class="badge badge-secondary">Pediatric Dentistry</span>
                     <span class="badge badge-secondary">Oral Screenings</span>
                 </div>

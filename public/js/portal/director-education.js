@@ -77,6 +77,7 @@ function openStudentAcademicPortfolio(name, school, sponsor, grade, attendance, 
     activePortfolioStudent = name;
 
     document.getElementById('portfolio_student_name').innerText = name;
+    document.getElementById('portfolio_school_name').textContent = school?.trim() || 'Not recorded';
     document.getElementById('portfolio_attendance').innerText = attendance;
     document.getElementById('portfolio_scorecard_body').innerHTML = scores;
     document.getElementById('portfolio_tutoring_notes').innerText = tutoring;

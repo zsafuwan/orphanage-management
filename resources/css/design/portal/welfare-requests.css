@@ -6,6 +6,31 @@
    File: public/css/portal/welfare-requests.css
    ========================================================================== */
 
+.care-workspace .filter-bar.admin-welfare-filters {
+    margin-bottom: 20px;
+    padding: 0;
+    gap: 10px;
+}
+
+.care-workspace .filter-bar.admin-welfare-filters .filter-select-wrapper {
+    flex-basis: 210px;
+}
+
+.care-workspace .admin-welfare-filters :is(.search-input, .filter-select):focus-visible {
+    outline: 2px solid #71915f;
+    outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+    .care-workspace .filter-bar.admin-welfare-filters .search-box-wrapper {
+        flex-basis: 100%;
+    }
+
+    .care-workspace .filter-bar.admin-welfare-filters .filter-select-wrapper {
+        flex-basis: 170px;
+    }
+}
+
 /* Urgent Notice Callout Banner */
 .urgent-notice-banner {
     background: rgba(239, 68, 68, 0.08);

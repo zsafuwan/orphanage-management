@@ -383,34 +383,34 @@
   grid-template-columns: repeat(2,minmax(0,1fr));
   gap: 14px;
 }
-.care-workspace #modal_child_dossier .record-summary-panel {
+.care-workspace :is(#modal_child_dossier, #modal_child_medical_dossier) .record-summary-panel {
   border: 1px solid #e6eadf;
   padding: 20px;
   border-radius: 16px;
   background: #fafbf7;
 }
-.care-workspace #modal_child_dossier .record-summary-panel h4 {
+.care-workspace :is(#modal_child_dossier, #modal_child_medical_dossier) .record-summary-panel h4 {
   color: #63774d;
   font-size: 17px;
   margin: 0 0 17px;
   --tw-tracking: -.3px;
   letter-spacing: -.3px;
 }
-.care-workspace #modal_child_dossier .record-summary-panel h4 i {
+.care-workspace :is(#modal_child_dossier, #modal_child_medical_dossier) .record-summary-panel h4 i {
   margin-right: 6px;
   color: #a5b58e;
 }
-.care-workspace #modal_child_dossier .record-facts {
+.care-workspace :is(#modal_child_dossier, #modal_child_medical_dossier) .record-facts {
   display: grid;
   gap: 13px;
   margin: 0;
 }
-.care-workspace #modal_child_dossier .record-facts dt {
+.care-workspace :is(#modal_child_dossier, #modal_child_medical_dossier) .record-facts dt {
   color: #6d795f;
   font-size: 12px;
   margin-bottom: 5px;
 }
-.care-workspace #modal_child_dossier .record-facts dd {
+.care-workspace :is(#modal_child_dossier, #modal_child_medical_dossier) .record-facts dd {
   margin: 0;
   color: #5a6a4c;
   font-size: 15px;
@@ -418,11 +418,17 @@
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
-.care-workspace #modal_child_dossier .record-health-facts {
+.care-workspace #modal_child_medical_dossier .record-health-facts :is(dt, dd) {
+  color: #000;
+}
+.care-workspace #modal_child_dossier :is(.record-overview-grid, .record-health-panel) :is(h4, dt, dd) {
+  color: #000;
+}
+.care-workspace :is(#modal_child_dossier, #modal_child_medical_dossier) .record-health-facts {
   grid-template-columns: repeat(2,minmax(0,1fr));
   gap: 16px 24px;
 }
-.care-workspace #modal_child_dossier .record-care-notes {
+.care-workspace :is(#modal_child_dossier, #modal_child_medical_dossier) .record-care-notes {
   grid-column: 1 / -1;
   border-top: 1px solid #e5e9dd;
   padding-top: 16px;
@@ -547,7 +553,7 @@
   }
 }
 @media (max-width: 390px) {
-  .care-workspace #modal_child_dossier .record-subjects,.care-workspace #modal_child_dossier .record-health-facts {
+  .care-workspace #modal_child_dossier .record-subjects, .care-workspace :is(#modal_child_dossier, #modal_child_medical_dossier) .record-health-facts {
     grid-template-columns: minmax(0,1fr);
   }
 }

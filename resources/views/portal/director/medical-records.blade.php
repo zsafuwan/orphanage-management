@@ -5,6 +5,7 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/portal/director-medical.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/director-medical.css')), 0, 12) }}">
+    <link rel="stylesheet" href="{{ asset('css/portal/child-record-viewer.css') }}?v={{ substr(hash_file('sha256', public_path('css/portal/child-record-viewer.css')), 0, 12) }}">
 @endpush
 
 @section('content')

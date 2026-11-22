@@ -32,20 +32,6 @@
     </div>
 </div>
 
-<!-- Separation of Duties Ribbon -->
-<div class="rbac-banner" style="margin-bottom: 20px;">
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <i class="fas fa-user-shield" style="color: #3b82f6; font-size: 18px;"></i>
-        <div>
-            <span style="font-size: 12px; font-weight: 700; color: var(--dark); text-transform: uppercase;">Clearance Level:</span>
-            <span style="font-size: 12px; color: var(--dark-muted); margin-left: 4px;">Authorizing Official: <strong style="color: #2563eb;">Sister Grace (Executive Director)</strong></span>
-        </div>
-    </div>
-    <div style="font-size: 12px; color: #64748b;">
-        <i class="fas fa-info-circle" style="color: #3b82f6;"></i>
-        <strong>Who Can Approve:</strong> Staff members submit child welfare requests; only administrators approve financial & inventory payment.
-    </div>
-</div>
 
 <!-- Metric KPI Cards -->
 <div class="metrics-grid" style="margin-bottom: 24px;">
@@ -111,14 +97,14 @@
 </div>
 
 <!-- Search & Category Filters -->
-<div class="filter-bar admin-welfare-filters" style="margin-bottom: 20px;">
+<div class="filter-bar admin-welfare-filters" role="search" aria-label="Welfare requests">
     <div class="search-box-wrapper">
-        <i class="fas fa-search search-icon"></i>
-        <input type="text" id="admin_req_search" class="search-input" placeholder="Search by ticket #, child recipient, or staff originator..." oninput="renderAdminRequests()">
+        <i class="fas fa-search search-icon" aria-hidden="true"></i>
+        <input type="text" id="admin_req_search" class="search-input" aria-label="Search welfare requests" placeholder="Search by ticket #, child recipient, or staff originator..." oninput="renderAdminRequests()">
     </div>
 
     <div class="filter-select-wrapper">
-        <select id="admin_req_urgency_filter" class="filter-select" onchange="renderAdminRequests()">
+        <select id="admin_req_urgency_filter" class="filter-select" aria-label="Filter by urgency" onchange="renderAdminRequests()">
             <option value="all">All Urgency Tiers</option>
             <option value="Emergency">Emergency (Immediate 24h)</option>
             <option value="High">High Urgency</option>
@@ -127,7 +113,7 @@
     </div>
 
     <div class="filter-select-wrapper">
-        <select id="admin_req_cat_filter" class="filter-select" onchange="renderAdminRequests()">
+        <select id="admin_req_cat_filter" class="filter-select" aria-label="Filter by aid category" onchange="renderAdminRequests()">
             <option value="all">All Aid Categories</option>
             <option value="Medical / Surgical">Medical / Surgical</option>
             <option value="Education & Tuition">Education & Tuition</option>
