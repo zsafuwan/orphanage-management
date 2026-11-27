@@ -41,6 +41,17 @@
                 </div>
             </div>
 
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Allocated Item / Purpose *</label>
+                    <input type="text" id="staff_don_item_name" class="form-control" value="Child Medical & Dental Care" placeholder="e.g. Rice Sacks, Medical Fund" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Item / Unit Quantity *</label>
+                    <input type="number" id="staff_don_item_qty" class="form-control" value="1" min="1" step="1" required>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label class="form-label">Donor Contact (Email or Phone)</label>
                 <input type="text" id="staff_don_contact" class="form-control" placeholder="e.g. robert.chen@mail.com / +60 12-388 9911">

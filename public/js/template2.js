@@ -139,19 +139,79 @@ $(document).ready(function() {
         }
     });
 
-    // Contact / Inquiry Form (Pure UI Simulation - No database table required)
+    // Load upcoming events from MySQL onto the homepage event card
+    fetch('/staff-volunteer-data', { headers: { 'Accept': 'application/json' }, cache: 'no-store' })
+        .then(function(res) { return res.ok ? res.json() : null; })
+        .then(function(data) {
+            if (!data || !Array.isArray(data.event) || !data.event.length) return;
+            var statusEl = document.querySelector('#events .home-event-status');
+            if (statusEl) {
+                var latest = data.event[0];
+                statusEl.innerHTML = '<span aria-hidden="true" style="background:#10b981;"></span> ' +
+                    data.event.length + (data.event.length === 1 ? ' upcoming event: ' : ' upcoming events · Next: ') +
+                    $('<div>').text(latest.Title + (latest.Location ? ' (' + latest.Location + ')' : '')).html();
+            }
+        })
+        .catch(function() {});
+
+    // Contact / Inquiry Form (Saves Volunteer inquiries directly to MySQL)
     $("#inquiry_form").on("submit", function(e) {
         e.preventDefault();
         var form = $(this);
         var submitBtn = form.find("button[type='submit']");
         var originalBtnText = submitBtn.html();
+        var name = form.find("input[name='name']").val().trim();
+        var email = form.find("input[name='email']").val().trim();
+        var phone = form.find("input[name='phone']").val().trim();
+        var inquiryType = form.find("select[name='inquiry_type']").val();
 
         submitBtn.prop("disabled", true).html('<i class="fas fa-spinner fa-spin"></i> Submitting...');
 
-        setTimeout(function() {
+        var csrf = $('meta[name="csrf-token"]').attr('content') || '';
+        var requestPromise = Promise.resolve();
+        if (inquiryType === 'volunteer') {
+            requestPromise = fetch('/staff-volunteer-data/personnel', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrf
+                },
+                body: JSON.stringify({
+                    type: 'volunteer',
+                    Name: name,
+                    Email: email || null,
+                    Contact_Number: phone || null
+                })
+            });
+        } else if (inquiryType === 'donation' || inquiryType === 'sponsor') {
+            var msgText = form.find("textarea[name='message']").val().trim();
+            requestPromise = fetch('/donation-data/contribution', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrf
+                },
+                body: JSON.stringify({
+                    Donor_name: name,
+                    Contact_number: phone || null,
+                    Email: email || null,
+                    Donation_Type: inquiryType === 'sponsor' ? 'Child Sponsorship' : 'In-Kind / Material',
+                    Amount: 0,
+                    Item_name: (msgText || 'Public Donation Inquiry').slice(0, 100),
+                    Quantity: 1,
+                    Orphanage_Id: 1
+                })
+            });
+        }
+
+        requestPromise.finally(function() {
             submitBtn.prop("disabled", false).html(originalBtnText);
             showToast("Thank you for reaching out! Your message has been received.", true);
             form[0].reset();
-        }, 700);
+        });
     });
 });

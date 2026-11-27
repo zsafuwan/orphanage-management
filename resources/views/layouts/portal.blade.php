@@ -339,8 +339,12 @@
     <script src="{{ asset('js/portal/child-photo-upload.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/child-photo-upload.js')), 0, 12) }}"></script>
     <script src="{{ asset('js/portal/child-welfare.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/child-welfare.js')), 0, 12) }}"></script>
     <script src="{{ asset('js/portal/database.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/database.js')), 0, 12) }}"></script>
+    <script src="{{ asset('js/portal/mysql-staff-volunteer.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/mysql-staff-volunteer.js')), 0, 12) }}"></script>
+    <script src="{{ asset('js/portal/mariadb-donations.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/mariadb-donations.js')), 0, 12) }}"></script>
     <script src="{{ asset('js/portal/welfare-store.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/welfare-store.js')), 0, 12) }}"></script>
+    <script src="{{ asset('js/portal/sqlsrv-welfare.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/sqlsrv-welfare.js')), 0, 12) }}"></script>
     <script src="{{ asset('js/portal/inventory-store.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/inventory-store.js')), 0, 12) }}"></script>
+    <script src="{{ asset('js/portal/pgsql-inventory.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/pgsql-inventory.js')), 0, 12) }}"></script>
     @stack('scripts')
     <script src="{{ asset('js/portal/form-controls.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/form-controls.js')), 0, 12) }}"></script>
     <script src="{{ asset('js/portal/registry-sync.js') }}?v={{ substr(hash_file('sha256', public_path('js/portal/registry-sync.js')), 0, 12) }}"></script>

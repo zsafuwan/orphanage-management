@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\CareRecordController;
 use App\Http\Controllers\DevelopmentRevisionController;
+use App\Http\Controllers\DonationRecordController;
+use App\Http\Controllers\InventoryRecordController;
+use App\Http\Controllers\StaffVolunteerRecordController;
+use App\Http\Controllers\WelfareRequestRecordController;
 use App\Http\Middleware\CareAccess;
 use Illuminate\Support\Facades\Route;
 
@@ -12,6 +16,43 @@ Route::middleware(CareAccess::class)->group(function () {
     Route::post('/care-data/paper', [CareRecordController::class, 'paper']);
     Route::post('/care-data/intake', [CareRecordController::class, 'intake']);
     Route::post('/care-data/{resource}', [CareRecordController::class, 'save']);
+});
+
+Route::prefix('staff-volunteer-data')->group(function () {
+    Route::get('/', [StaffVolunteerRecordController::class, 'snapshot']);
+    Route::post('/personnel', [StaffVolunteerRecordController::class, 'personnel']);
+    Route::post('/shift', [StaffVolunteerRecordController::class, 'shift']);
+    Route::post('/attendance', [StaffVolunteerRecordController::class, 'attendance']);
+    Route::post('/credential', [StaffVolunteerRecordController::class, 'credential']);
+    Route::post('/event', [StaffVolunteerRecordController::class, 'event']);
+    Route::post('/{resource}', [StaffVolunteerRecordController::class, 'save']);
+});
+
+Route::prefix('donation-data')->group(function () {
+    Route::get('/', [DonationRecordController::class, 'snapshot']);
+    Route::post('/donor', [DonationRecordController::class, 'registerDonor']);
+    Route::post('/contribution', [DonationRecordController::class, 'recordContribution']);
+    Route::post('/{resource}', [DonationRecordController::class, 'save']);
+});
+
+Route::prefix('inventory-data')->group(function () {
+    Route::get('/', [InventoryRecordController::class, 'snapshot']);
+    Route::post('/item', [InventoryRecordController::class, 'addItem']);
+    Route::post('/adjust', [InventoryRecordController::class, 'adjustCount']);
+    Route::post('/receipt', [InventoryRecordController::class, 'receiveStock']);
+    Route::post('/issue', [InventoryRecordController::class, 'issueStock']);
+    Route::post('/supplier', [InventoryRecordController::class, 'registerSupplier']);
+    Route::post('/{resource}', [InventoryRecordController::class, 'save']);
+});
+
+Route::prefix('welfare-data')->group(function () {
+    Route::get('/', [WelfareRequestRecordController::class, 'snapshot']);
+    Route::post('/request', [WelfareRequestRecordController::class, 'submitRequest']);
+    Route::post('/decision', [WelfareRequestRecordController::class, 'decideRequest']);
+    Route::post('/receive', [WelfareRequestRecordController::class, 'receiveRequest']);
+    Route::post('/user', [WelfareRequestRecordController::class, 'registerUser']);
+    Route::post('/notifications/read', [WelfareRequestRecordController::class, 'markNotificationsRead']);
+    Route::post('/{resource}', [WelfareRequestRecordController::class, 'save']);
 });
 
 if (app()->environment('local')) {

@@ -511,6 +511,17 @@
                 </div>
             </div>
 
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Qualification / License</label>
+                    <input type="text" id="reg_pers_qualification" class="form-control" placeholder="e.g. LCSW License, B.Ed STEM">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Training Completed</label>
+                    <input type="text" id="reg_pers_training" class="form-control" placeholder="e.g. Pediatric CPR & First Aid">
+                </div>
+            </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn-outline" onclick="closeModal('modal_register_personnel')">Cancel</button>
                 <button type="submit" class="btn-primary">Save Staff Member</button>
@@ -542,6 +553,11 @@
             <div class="form-group">
                 <label class="form-label">Activity Performed</label>
                 <input type="text" id="vol_activity_input" class="form-control" value="Weekend Math Tutoring Session" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Event / Program (Optional)</label>
+                <input type="text" id="vol_event_input" class="form-control" placeholder="e.g. Weekend Study Camp">
             </div>
 
             <div class="form-row">

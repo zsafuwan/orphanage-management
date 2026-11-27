@@ -27,6 +27,12 @@
         </div>
 
         <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+            <button type="button" class="btn-primary" onclick="openModal('modal_record_donation')">
+                <i class="fas fa-plus-circle"></i> Record Contribution
+            </button>
+            <button type="button" class="btn-outline" onclick="openModal('modal_register_donor')">
+                <i class="fas fa-user-plus"></i> Register Donor
+            </button>
         </div>
     </div>
 </div>

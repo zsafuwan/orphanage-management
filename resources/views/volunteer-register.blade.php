@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Volunteer Registration | HopeHaven</title>
     <link rel="stylesheet" href="{{ asset('css/volunteer-register.css') }}?v={{ substr(hash_file('sha256', public_path('css/volunteer-register.css')), 0, 12) }}">
 </head>
